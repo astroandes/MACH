@@ -22,5 +22,5 @@ def logmass(logr,rho0,rs):
     return np.log10(4*np.pi)+3*np.log10(rs)+np.log10(np.log(1+10.0**(logr-np.log10(rs)))+(1+10.0**(logr-np.log10(rs)))**(-1))
 
 # mass profile in logarithmic scale with logarithmic parameters
-def logmass(logr,rho0,rs):
+def loglogmass(logr,rho0,rs):
     return np.log10(4*np.pi)+3*logrs+np.log10(np.log(1+10.0**(logr-logrs))+(1+10.0**(logr-logrs))**(-1))
