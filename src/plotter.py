@@ -151,3 +151,27 @@ def rainbow_likelihood(a_walk,b_walk,chi2):
     pylab.colorbar()
     pylab.savefig('likelihood.png',format='png',dpi=600)
     pylab.close()
+
+# Makes a contour plot of the likelihood in logarithmic scale
+# Requires:
+#     a_walk: array with the random walk of the first parameter
+#     b_walk: array with the random walk of the second parameter
+#     chi2: array with the chi squared estimate for each step in the random walk
+# Returns:
+#     A file with a contour plot of the likelihood in logarithmic scale in function of both parameters
+    
+def rainbow_loglikelihood(a_walk,b_walk,chi2):
+    
+    N = 2000j
+    extent = (a_walk[np.argmin(a_walk)],a_walk[np.argmax(a_walk)],b_walk[np.argmin(b_walk)],b_walk[np.argmax(b_walk)])
+
+    my_xs,my_ys = np.mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
+
+    my_resampled = griddata(a_walk, b_walk, chi2, my_xs, my_ys)
+    pylab.imshow(my_resampled.T,extent=extent,origin='lower',interpolation='bicubic',cmap='spectral',aspect='auto')
+    pylab.title(r'$\ln(\cal{L})$')
+    pylab.xlabel(r'$\ln(R_s)$')
+    pylab.ylabel(r'$\ln(\rho_{0})$')
+    pylab.colorbar()
+    pylab.savefig('loglikelihood.png',format='png',dpi=600)
+    pylab.close()
