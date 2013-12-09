@@ -104,6 +104,30 @@ def logdensity(r_density, density, parameters):
     pylab.savefig('log_density.png',format='png',dpi=600)
     pylab.close()
 
+# Makes a contour plot of the chi squared 
+# Requires:
+#     a_walk: array with the random walk of the first parameter
+#     b_walk: array with the random walk of the second parameter
+#     chi2: array with the chi squared estimate for each step in the random walk
+# Returns:
+#     A file with a contour plot of the chi squared in function of both parameters
+    
+def rainbow_chi2(a_walk,b_walk,chi2):
+    
+    N = 2000j
+    extent = (a_walk[np.argmin(a_walk)],a_walk[np.argmax(a_walk)],b_walk[np.argmin(b_walk)],b_walk[np.argmax(b_walk)])
+
+    my_xs,my_ys = np.mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
+
+    my_resampled = griddata(a_walk, b_walk, -2*(chi2), my_xs, my_ys)
+    pylab.imshow(my_resampled.T,extent=extent,origin='lower',interpolation='bicubic',cmap='spectral',aspect='auto')
+    pylab.title(r'$\cal{L}$')
+    pylab.xlabel(r'$\ln(R_s)$')
+    pylab.ylabel(r'$\ln(\rho_{0})$')
+    pylab.colorbar()
+    pylab.savefig('chi2.png',format='png',dpi=600)
+    pylab.close()
+
 # Makes a contour plot of the likelihood 
 # Requires:
 #     a_walk: array with the random walk of the first parameter
@@ -125,5 +149,5 @@ def rainbow_likelihood(a_walk,b_walk,chi2):
     pylab.xlabel(r'$\ln(R_s)$')
     pylab.ylabel(r'$\ln(\rho_{0})$')
     pylab.colorbar()
-    pylab.savefig('rainbow.png',format='png',dpi=600)
+    pylab.savefig('likelihood.png',format='png',dpi=600)
     pylab.close()
