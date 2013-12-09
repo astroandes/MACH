@@ -54,7 +54,6 @@ for (i = 0; i < n_points; i ++){
 //    filename: a string with the name of the file
 // Returns:
 //    number of lines in the file
-
 int count_lines(char *filename){
   FILE *in;
   int n_lines;

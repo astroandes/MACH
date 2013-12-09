@@ -44,6 +44,10 @@ int main(int argc, char** argv)
   a_file = fopen("a_walk.dat", "w");
   b_file = fopen("b_walk.dat", "w");
   chi2_file = fopen("chi2.dat", "w");
+
+  logR = malloc(n_points*sizeof(double));
+  logM = malloc(n_points*sizeof(double));
+
   
   for(i=0;i<n_points;i++)
   {
