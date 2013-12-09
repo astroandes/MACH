@@ -27,6 +27,7 @@ except:
     plt = 1
 
 os.system('mkdir results_'+now)
+os.system('cc potential.c -lm -o  potential.out')
 
 count = 1
 for filename in os.listdir('./'+str(sys.argv[1])):
@@ -48,36 +49,27 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     
     results_folder ='./results_'+now+'/'+str(filename)
 
-    if (plt == 1):
-        os.system('mkdir '+results_folder)
-
     mass_element = 1.7
 
-    open('Data.dat', "w").write('\n'.join('%lf,%lf,%lf' % (x[i],y[i],z[i]) for i in range(n_points)))
+    open('positions.dat', "w").write('\n'.join('%lf,%lf,%lf' % (x[i],y[i],z[i]) for i in range(n_points)))
 
     sys.stdout.write('\rRunning c script for potential... ')
     sys.stdout.flush()
-    os.system('gcc potential.c -lm && ./a.out Data.dat')
+    os.system('./potential.out positions.dat')
     sys.stdout.write('Done\n')
 
     sys.stdout.write('\rCalculating the halo center... ')
     sys.stdout.flush()
     potential = np.loadtxt(open('potential.dat', 'r'))
     maximum = np.argmax(potential)
-    x_center=x[maximum]
-    y_center=y[maximum]
-    z_center=z[maximum]
-    os.system('rm potential.dat Data.dat a.out')
+
+    x_center,y_center,z_center=x[maximum],y[maximum],z[maximum]
+   
+    os.system('rm potential.dat positions.dat')
     sys.stdout.write('Done\n')
 
     r_values = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
     center_difference = np.sqrt((np.average(x)-x_center)**2+(np.average(y)-y_center)**2+(np.average(z)-z_center)**2)
-
-    if (plt == 1):
-        os.chdir(results_folder)
-        plotter.halo(x,y,z,x_center,y_center,z_center)
-    else:
-        os.chdir('./results_'+now+'/')
 
     mass = np.array([i*mass_element for i in np.array(range(1,n_points))])
     radius = np.array([r_values[i] for i in range(1,n_points)])
@@ -89,18 +81,24 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     a,b,a_walk,b_walk,chi2 = fit.metropolis(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations)
     scale_rad = np.exp(a)
     dens = np.exp(b)
-    
     parameters = np.array([scale_rad,dens])
-
+    
     if (plt == 1):
+
+        os.system('mkdir '+results_folder)
+        os.chdir(results_folder)
+        plotter.halo(x,y,z,x_center,y_center,z_center)
         sys.stdout.write('\rPlotting results... ')
         sys.stdout.flush()
         plotter.mass(radius, mass, parameters)
         plotter.logmass(radius, mass, parameters)
         plotter.logdensity(r_density, density, parameters)
-        plotter.rainbow_likelihood(a_walk,b_walk,chi2)
+        plotter.rainbow_loglikelihood(a_walk,b_walk,chi2)
         sys.stdout.write('Done\n')
         os.chdir('../')
+
+    else:
+        os.chdir('./results_'+now+'/')
 
     avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
     if np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3))) != len(avg_density)-1:
@@ -118,4 +116,4 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     
 print ''
 print 'Total time: ' + str(int(totaltime/60.0))+' min. '+ str(int(totaltime%60.0))+' sec. '
-os.system('rm *.pyc')
+os.system('rm *.pyc *.out *.dat')
