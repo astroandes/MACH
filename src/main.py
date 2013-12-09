@@ -85,9 +85,9 @@ for filename in os.listdir('./'+str(sys.argv[1])):
 
     n_iterations = 10000
     a,b,a_walk,b_walk,chi2 = fit.c_metropolis(np.log(radius),np.log(mass),n_iterations)
-    scale_rad = np.exp(a)
-    dens = np.exp(b)
-    parameters = np.array([scale_rad,dens])
+    mean_density = np.exp(a)
+    scale_radius = np.exp(b)
+    parameters = np.array([mean_density,scale_radius])
     
     if (plt == 1):
 
