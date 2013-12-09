@@ -149,3 +149,28 @@ def emcee_sampler(data,obs,mod,n_iterations):
     sys.stdout.write('Done\n')
     
     return best_a,best_b,a_walk,b_walk,chisq
+
+def error_bars(walk,opt):
+
+    n_iterations = len(walk)
+    n_bins = int(n_iterations/100)
+    if (opt=='log'):
+        freq,bins = np.histogram(np.exp(a_walk), bins=n_bins)
+    else:
+        freq,bins = np.histogram(a_walk, bins=n_bins)
+    bins = np.delete(bins,bins[-1])
+
+    max_c = [np.argmax(freq)+int(0.341*sum(freq)/n_bins),len(bins)-1]
+    min_c = [np.argmax(freq)-int(0.341*sum(a_freq)/n_bins),0]
+
+    M = max_c[numpy.argmin(max_c)]
+    m = min_c[numpy.argmax(min_c)]
+    
+    if (opt=='log'):
+        max = np.log(bins[M])
+        min = np.log(bins[m])
+    else:
+        max = bins[M]
+        min = bins[m]
+    
+    return max, min
