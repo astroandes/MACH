@@ -27,7 +27,13 @@ except:
     plt = 1
 
 os.system('mkdir results_'+now)
+
+sys.stdout.write('\rCompiling the code used to calculate the center of each halo... ')
+sys.stdout.flush()
 os.system('cc potential.c -lm -o  potential.out')
+sys.stdout.write('Done\n')
+
+fit.compile_c_metropolis()
 
 count = 1
 for filename in os.listdir('./'+str(sys.argv[1])):
@@ -78,7 +84,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     r_density = [radius[i] for i in range(1,len(mass)-1)]
 
     n_iterations = 10000
-    a,b,a_walk,b_walk,chi2 = fit.metropolis(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations)
+    a,b,a_walk,b_walk,chi2 = fit.c_metropolis(np.log(radius),np.log(mass),n_iterations)
     scale_rad = np.exp(a)
     dens = np.exp(b)
     parameters = np.array([scale_rad,dens])
