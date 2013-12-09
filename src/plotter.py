@@ -12,34 +12,34 @@ def halo(x,y,z,x_center,y_center,z_center):
     
     sys.stdout.write('\rPlotting halo... ')
     sys.stdout.flush()
-    pylab.plot(x , y, 'k,')
-    pylab.plot(x_center , y_center, 'r.', label="Potential Minumum")
-    pylab.plot(np.average(x) , np.average(y), 'c.', label="Center of Mass")
+    pylab.plot(x , y, 'k.')
+    pylab.plot(x_center , y_center, 'r+', label="Potential Minumum")
+    pylab.plot(np.average(x) , np.average(y), 'b+', label="Center of Mass")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('x (Mpc/H)')
     pylab.ylabel('y (Mpc/H)')
     pylab.title('Halo x-y')
-    pylab.savefig('halo_xy.png',format='png',dpi=600)
+    pylab.savefig('halo_xy.png',format='png',dpi=300)
     pylab.close()
 
-    pylab.plot(y , z, 'k,')
-    pylab.plot(y_center , z_center, 'r.', label="Potential Minumum")
-    pylab.plot(np.average(y) , np.average(z), 'c.',label="Center of Mass")
+    pylab.plot(y , z, 'k.')
+    pylab.plot(y_center , z_center, 'r+', label="Potential Minumum")
+    pylab.plot(np.average(y) , np.average(z), 'b+',label="Center of Mass")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('y (Mpc/H)')
     pylab.ylabel('z (Mpc/H)')
     pylab.title('Halo y-z')
-    pylab.savefig('halo_yz.png',format='png',dpi=600)
+    pylab.savefig('halo_yz.png',format='png',dpi=300)
     pylab.close()
 
-    pylab.plot(z , x, 'k,')
-    pylab.plot(z_center , x_center, 'r.', label="Potential Minumum")
-    pylab.plot(np.average(z) , np.average(x), 'c.',label="Center of Mass")
+    pylab.plot(z , x, 'k.')
+    pylab.plot(z_center , x_center, 'r+', label="Potential Minumum")
+    pylab.plot(np.average(z) , np.average(x), 'b+',label="Center of Mass")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('z (Mpc/H)')
     pylab.ylabel('x (Mpc/H)')
     pylab.title('Halo z-x')
-    pylab.savefig('halo_zx.png',format='png',dpi=600)
+    pylab.savefig('halo_zx.png',format='png',dpi=300)
     pylab.close()
     sys.stdout.write('Done\n')
 
@@ -53,8 +53,8 @@ def halo(x,y,z,x_center,y_center,z_center):
 
 def mass(radius, mass, parameters):
     
-    pylab.plot(radius , mass,'b',label="Real Mass")
-    pylab.plot(radius , nfw.mass(radius,parameters[0],parameters[1]),'r',label="NFW profile")
+    pylab.plot(radius , mass,'+r',label="Real Mass")
+    pylab.plot(radius , nfw.mass(radius,parameters[0],parameters[1]),'k',label="NFW profile")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('Radius (Mpc/H)')
     pylab.ylabel('Mass (10^11 Solar Masses)')
@@ -70,13 +70,13 @@ def mass(radius, mass, parameters):
 # Returns:
 #     A file with a graphic of the mass profile in logarithmic scale
     
-def logmass(logR, logM, parameters):
+def logmass(radius, mass, parameters):
     
-    log10R=np.log10(np.exp(logR))
-    log10M=np.log10(np.exp(logM))
-    pylab.plot(log10R , log10M,'.b',label="Real Mass")
-    pylab.plot(log10R , np.log10(np.exp(nfw.logmass(logR,parameters[0],parameters[1]))),'r',label="NFW profile")
+    pylab.plot(radius, mass,'+r',label="Real Mass")
+    pylab.plot(radius, nfw.mass(radius,parameters[0],parameters[1]),'k',label="NFW profile")
     pylab.legend(loc=4, borderaxespad=0.5)
+    pylab.xscale('log')
+    pylab.yscale('log')
     pylab.xlabel('Radius (Mpc/H)')
     pylab.ylabel('Mass (10^11 Solar Masses)')
     pylab.title('Mass (log-log)')
@@ -92,11 +92,12 @@ def logmass(logR, logM, parameters):
 # Returns:
 #     A file with a graphic of the density profile in logarithmic scale
     
-def logdensity(r_density, density, logR, parameters):
-    log10R=np.log10(np.exp(logR))
-    pylab.plot(np.log10(r_density) , np.log10(density),'.b',label="Real Density")
-    pylab.plot(log10R , np.log10(np.exp(nfw.logdensity(logR,parameters[0],parameters[1]))),'r',label="NFW profile")
+def logdensity(r_density, density, parameters):
+    pylab.plot(r_density , density,'+r',label="Real Density")
+    pylab.plot(r_density , nfw.density(r_density,parameters[0],parameters[1]),'k',label="NFW profile")
     pylab.legend(loc=4, borderaxespad=0.5)
+    pylab.xscale('log')
+    pylab.yscale('log')
     pylab.xlabel('Radius (Mpc/H)')
     pylab.ylabel('Density (10^11 Solar Masses/(Mpc/H)^3)')
     pylab.title('Density (log-log)')
@@ -113,17 +114,16 @@ def logdensity(r_density, density, logR, parameters):
     
 def rainbow_likelihood(a_walk,b_walk,chi2):
     
-    N = 1000j
+    N = 2000j
     extent = (a_walk[np.argmin(a_walk)],a_walk[np.argmax(a_walk)],b_walk[np.argmin(b_walk)],b_walk[np.argmax(b_walk)])
 
     my_xs,my_ys = np.mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
 
     my_resampled = griddata(a_walk, b_walk, np.exp(chi2), my_xs, my_ys)
     pylab.imshow(my_resampled.T,extent=extent,origin='lower',interpolation='bicubic',cmap='spectral',aspect='auto')
-
-    pylab.title('$\cal{L}$')
-    pylab.xlabel('$a$')
-    pylab.ylabel('$b$')
+    pylab.title(r'$\cal{L}$')
+    pylab.xlabel(r'$\ln(R_s)$')
+    pylab.ylabel(r'$\ln(\rho_{0})$')
     pylab.colorbar()
     pylab.savefig('rainbow.png',format='png',dpi=600)
     pylab.close()

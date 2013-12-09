@@ -9,7 +9,7 @@ import numpy as np
 #     a numpy array with the mass/density profile
 
 def mass(r,rho0,rs):
-    return 4*np.pi*(rs**3)*(np.log(1+(r/rs))+(1+(r/rs))**(-1))
+    return 4*np.pi*(rs**3)*rho0*(np.log(1+(r/rs))-(1+(rs/r))**(-1))
 
 def density(r,rho0,rs):
     return rho0*((r/rs)*(1+(r/rs))**2)**(-1)
@@ -23,10 +23,10 @@ def density(r,rho0,rs):
 #     a numpy array with the logarithm of the mass/density profile
 
 def logmass(logr,rho0,rs):
-    return np.log10(4*np.pi)+3*np.log10(rs)+np.log10(np.log(1+10.0**(logr-np.log10(rs)))+(1+10.0**(logr-np.log10(rs)))**(-1))
+    return np.log(4*np.pi)+3*np.log(rho0)+3*np.log(rs)+np.log(np.log(1+np.exp(logr)/rs)-(1+rs*np.exp(-logr))**(-1))
 
 def logdensity(logr,rho0,rs):
-    return np.log10(rho0)-np.log10(rs)+logr+2*np.log10(1+10.0**(logr-np.log10(rs)))
+    return np.log(rho0)-np.log(rs)+logr+2*np.log(1+np.exp(logr)/rs)
 
 # Profiles in logarithmic scale with logarithmic parameters
 # Parameters:
@@ -37,7 +37,7 @@ def logdensity(logr,rho0,rs):
 #     a numpy array with the logarithm of the mass/density profile
 
 def loglogmass(logr,logrho0,logrs):
-    return np.log10(4*np.pi)+3*logrs+np.log10(np.log(1+10.0**(logr-logrs))+(1+10.0**(logr-logrs))**(-1))
+    return np.log(4*np.pi)+3*logrs+logrho0+np.log(np.log(1+np.exp(logr-logrs))-(1+np.exp(logrs-logr))**(-1))
 
 def loglogdensity(logr,logrho0,logrs):
-    return logrho0-logrs+logr+2*np.log10(1+10.0**(logr-logrs))
+    return logrho0-logrs+logr+2*np.log(1+np.exp(logr-logrs))
