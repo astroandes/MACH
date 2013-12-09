@@ -1,4 +1,4 @@
-import numpy as np, emcee
+import numpy as np, emcee, sys, os
 from scipy.optimize import curve_fit
 from emcee.utils import sample_ball
 
@@ -24,6 +24,10 @@ def chi2(obs,mod):
 #     best parameters, the random walk for each parameter and the chi squared for each step
 
 def metropolis(data,obs,mod,n_iterations):
+
+    sys.stdout.write('\rRunning Metropolis-Hastings Algorithm... ')
+    sys.stdout.flush()
+
     guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
 
     a_walk = np.empty((0))
@@ -63,6 +67,8 @@ def metropolis(data,obs,mod,n_iterations):
     best_a = a_walk[max_pos]
     best_b = b_walk[max_pos]
 
+    sys.stdout.write('Done\n')
+
     return best_a,best_b,a_walk,b_walk,chisq
 
 # Does a maximum-likelihood estimate using the standard emcee sampler for a model with two parameters.
@@ -75,6 +81,10 @@ def metropolis(data,obs,mod,n_iterations):
 #     best parameters, the random walk for each parameter and the chi squared for each step
 
 def emcee_sampler(data,obs,mod,n_iterations):
+
+    sys.stdout.write('\rRunning Emcee Sampling Algorithm... ')
+    sys.stdout.flush()
+
     dim = 2
     walkers = 4
     guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
@@ -97,5 +107,7 @@ def emcee_sampler(data,obs,mod,n_iterations):
     max_pos = np.argmax(chisq)
     best_a = a_walk[max_pos]
     best_b = b_walk[max_pos]
+
+    sys.stdout.write('Done\n')
     
     return best_a,best_b,a_walk,b_walk,chisq
