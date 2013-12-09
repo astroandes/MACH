@@ -1,4 +1,5 @@
 import numpy as np, pylab,sys, nfw
+from matplotlib.mlab import griddata
 
 # Plots a halo
 # Requires:
