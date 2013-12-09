@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np, emcee
 
 # Returns the chi squared estimate given a prediction and the real data
 # Requires:
