@@ -1,5 +1,6 @@
 import numpy as np, emcee
 from scipy.optimize import curve_fit
+from emcee.utils import sample_ball
 
 # Returns the chi squared estimate given a prediction and the real data
 # Requires:
@@ -74,25 +75,24 @@ def metropolis(data,obs,mod,n_iterations):
 #     best parameters, the random walk for each parameter and the chi squared for each step
 
 def emcee_sampler(data,obs,mod,n_iterations):
-
+    dim = 2
+    walkers = 4
     guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
-    p0 = np.empty((0))
-
-    for i in range(4):
-        p0 = np.append(p0,guess[0])
-        p0 = np.append(p0,guess[1])
-
-    p0 = p0.reshape((4, 2))
-
+    print guess
+    p0 = sample_ball(guess, 100*np.ones(dim), walkers)
+    
+    
     def loglike(p):        
-	return -0.5*np.sum(((mod(data,p[0],p[1]))-obs)**2)
+	return -np.sum(((mod(data,p[0],p[1]))-obs)**2)/dim
 
-    sampler = emcee.EnsembleSampler(4, 2, loglike)
+    sampler = emcee.EnsembleSampler(walkers, dim, loglike)
     sampler.run_mcmc(p0, n_iterations)
     
     a_walk = sampler.flatchain[:,0]
     b_walk = sampler.flatchain[:,1]
     chisq = sampler.flatlnprobability
+    for l in chisq:
+        print l
 
     max_pos = np.argmax(chisq)
     best_a = a_walk[max_pos]
