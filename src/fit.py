@@ -1,4 +1,4 @@
-import numpy as np, emcee, sys, os
+import numpy as np, emcee, sys, os, nfw
 from scipy.optimize import curve_fit
 from emcee.utils import sample_ball
 
@@ -12,13 +12,11 @@ from emcee.utils import sample_ball
 def chi2(obs,mod):
     return np.sum(-0.5*(obs-mod)**2)
 
-# Does a maximum-likelihood estimate using metropolis algorithm for a model with two parameters.
+# Does a maximum-likelihood estimate using the Metropolis-Hastings algorithm for a model with two parameters.
 # Requires:
 #     data: free variable data
 #     obs: observed data
 #     mod: expected data from the model
-#     a_step: size of the step in the random walk for the first parameter
-#     b_step: size of the step in the random walk for the second parameter
 #     n_iterations: number of steps for the random walk
 # Returns:
 #     best parameters, the random walk for each parameter and the chi squared for each step
@@ -67,6 +65,46 @@ def metropolis(data,obs,mod,n_iterations):
     best_a = a_walk[max_pos]
     best_b = b_walk[max_pos]
 
+    sys.stdout.write('Done\n')
+
+    return best_a,best_b,a_walk,b_walk,chisq
+
+# Compiles the Metropolis-Hastings algorithm code in C for the loglogmass function in the nfw module.
+def compile_c_metropolis():
+
+    sys.stdout.write('\rCompiling Metropolis-Hastings Algorithm in C... ')
+    sys.stdout.flush()
+    os.system('cc metropolis.c -lm -o metropolis.out')
+    sys.stdout.write('Done\n')
+
+# Does a maximum-likelihood estimate using the Metropolis-Hastings algorithm in C for the loglogmass function in the nfw module.
+# Requires:
+#     data: free variable data
+#     obs: observed data
+#     mod: expected data from the model
+#     n_iterations: number of steps for the random walk
+#     Having excetuted the compile_c_metropolis function
+# Returns:
+#     best parameters, the random walk for each parameter and the chi squared for each step
+def c_metropolis(data,obs,n_iterations):
+
+    sys.stdout.write('\rRunning Metropolis-Hastings Algorithm in C... ')
+    sys.stdout.flush()
+
+    guess = curve_fit(nfw.loglogmass,data,obs,maxfev=n_iterations)[0]
+    
+    open('profile.dat', "w").write('\n'.join('%lf %lf' % (data[i],obs[i]) for i in range(len(data))))
+
+    os.system('./metropolis.out profile.dat '+str(guess[0])+' '+str(guess[1])+' '+str(n_iterations))
+    a_walk = np.loadtxt('a_walk.dat')
+    b_walk = np.loadtxt('b_walk.dat')
+    chisq = np.loadtxt('chi2.dat')
+
+    max_pos = np.argmax(chisq)
+    best_a = a_walk[max_pos]
+    best_b = b_walk[max_pos]
+
+    os.system('rm *.dat')
     sys.stdout.write('Done\n')
 
     return best_a,best_b,a_walk,b_walk,chisq
