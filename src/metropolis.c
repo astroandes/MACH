@@ -68,9 +68,9 @@ int main(int argc, char** argv)
     chi2_init = chisq(logM,loglogmass(logR,a_walk[i],b_walk[i],n_points),n_points);
     chi2_prime = chisq(logM,loglogmass(logR,a_prime,b_prime,n_points),n_points);
     
-    alpha =  exp(chi2_prime-chi2_init);
     ratio = chi2_init/chi2_prime;
-    
+    alpha =  exp(-ratio);
+
     if(ratio >= 1)
     {
       a_walk[i+1] = a_prime;
@@ -79,6 +79,7 @@ int main(int argc, char** argv)
     }
     else
     {
+//    printf("%lf,%lf\n",alpha,beta);
       beta = rand_generator(0,1);
       if(alpha >= beta)
       {
@@ -140,8 +141,12 @@ double rand_generator(double min, double max)
 
 double random_normal(double sigma, double mu)
 {
+  int i;
   double ans;
-  ans = rand_generator(mu-sigma,mu+sigma);
+  ans = 0;
+  for(i=0;i<16;i++)
+    ans += rand_generator(mu-sigma,mu+sigma);
+  ans = ans/16;
   return ans;
 }
 
