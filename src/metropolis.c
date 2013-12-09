@@ -6,7 +6,7 @@ int count_lines(char *filename);
 double rand_generator(double min, double max);
 double random_normal(double sigma, double mu);
 double chisq(double* obs, double* mod, int n_points);
-double loglogmass(double* logr, double logrho0, double logrs, int n_points);
+double* loglogmass(double* logr, double logrho0, double logrs, int n_points);
 
 int main(int argc, char** argv)
 {
@@ -45,7 +45,7 @@ int main(int argc, char** argv)
   b_file = fopen("b_walk.dat", "w");
   chi2_file = fopen("chi2.dat", "w");
   
-  for(i=0;i<n_points,i++)
+  for(i=0;i<n_points;i++)
   {
     fscanf(data,"%lf %lf\n",&(logR[i]),&(logM[i]));
   }
@@ -54,7 +54,7 @@ int main(int argc, char** argv)
   b_walk[0] = guess_b;
   chi2[0] = chisq(logM,loglogmass(logR,guess_a,guess_b,n_points),n_points);
 
-  for(i=0;i<n_iterations,i++)
+  for(i=0;i<n_iterations;i++)
   {
     double a_prime,b_prime,chi2_init,chi2_prime,alpha,ratio,beta;
     
@@ -75,7 +75,7 @@ int main(int argc, char** argv)
     }
     else
     {
-      beta = random(0,1);
+      beta = rand_generator(0,1);
       if(alpha >= beta)
       {
 	a_walk[i+1] = a_prime;
@@ -130,14 +130,14 @@ int count_lines(char *filename)
 double rand_generator(double min, double max)
 {
   double ans;
-  ans = min + drand48()*(max - min) 
+  ans = min + drand48()*(max - min); 
   return ans;
 }
 
 double random_normal(double sigma, double mu)
 {
   double ans;
-  ans = rand_generator(mu-sigma,mu+sigma)
+  ans = rand_generator(mu-sigma,mu+sigma);
   return ans;
 }
 
@@ -146,21 +146,21 @@ double chisq(double* obs, double* mod, int n_points)
   int i;
   double ans;
   ans = 0;
-  for(i=0;i<n_points,i++)
+  for(i=0;i<n_points;i++)
   {
     ans -= pow((mod[i]-obs[i]),2)/2;
   }
   return ans;
 }
 
-double loglogmass(double* logr, double logrho0, double logrs, int n_points)
+double* loglogmass(double* logr, double logrho0, double logrs, int n_points)
 {
   int i;
   double* ans;
   ans = malloc(n_points*sizeof(double));
-  for(i=0;i<n_points,i++)
+  for(i=0;i<n_points;i++)
   {
-    ans[i] = log(4*PI_M)+3*logrs+logrho0+log(log(1+exp(logr-logrs))-pow(1+exp(logrs-logr),-1));
+    ans[i] = log(4*M_PI)+3*logrs+logrho0+log(log(1+exp(logr[i]-logrs))-pow(1+exp(logrs-logr[i]),-1));
   }
   return ans;
 }
