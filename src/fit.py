@@ -74,7 +74,9 @@ def emcee_sampler(data,obs,mod,n_iterations):
 
     def loglike(p):        
 	return -0.5*np.sum(((mod(data,p[0],p[1]))-obs)**2)
-
+    
+    p0 = np.random.rand(4*2).reshape((4, 2))
+    
     sampler = emcee.EnsembleSampler(4, 2, loglike)
     sampler.run_mcmc(p0, n_iterations)
     
