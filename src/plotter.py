@@ -13,8 +13,8 @@ def halo(x,y,z,x_center,y_center,z_center):
     sys.stdout.write('\rPlotting halo... ')
     sys.stdout.flush()
     pylab.plot(x , y, 'k.')
-    pylab.plot(x_center , y_center, 'r+', label="Potential Minumum")
-    pylab.plot(np.average(x) , np.average(y), 'b+', label="Center of Mass")
+    pylab.plot(x_center , y_center, 'ro', label="Potential Minumum")
+    pylab.plot(np.average(x) , np.average(y), 'bo', label="Center of Mass")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('x (Mpc/H)')
     pylab.ylabel('y (Mpc/H)')
@@ -23,8 +23,8 @@ def halo(x,y,z,x_center,y_center,z_center):
     pylab.close()
 
     pylab.plot(y , z, 'k.')
-    pylab.plot(y_center , z_center, 'r+', label="Potential Minumum")
-    pylab.plot(np.average(y) , np.average(z), 'b+',label="Center of Mass")
+    pylab.plot(y_center , z_center, 'ro', label="Potential Minumum")
+    pylab.plot(np.average(y) , np.average(z), 'bo',label="Center of Mass")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('y (Mpc/H)')
     pylab.ylabel('z (Mpc/H)')
@@ -33,8 +33,8 @@ def halo(x,y,z,x_center,y_center,z_center):
     pylab.close()
 
     pylab.plot(z , x, 'k.')
-    pylab.plot(z_center , x_center, 'r+', label="Potential Minumum")
-    pylab.plot(np.average(z) , np.average(x), 'b+',label="Center of Mass")
+    pylab.plot(z_center , x_center, 'ro', label="Potential Minumum")
+    pylab.plot(np.average(z) , np.average(x), 'bo',label="Center of Mass")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('z (Mpc/H)')
     pylab.ylabel('x (Mpc/H)')
@@ -53,7 +53,7 @@ def halo(x,y,z,x_center,y_center,z_center):
 
 def mass(radius, mass, parameters):
     
-    pylab.plot(radius , mass,'+r',label="Real Mass")
+    pylab.plot(radius , mass,'.r',label="Real Mass")
     pylab.plot(radius , nfw.mass(radius,parameters[0],parameters[1]),'k',label="NFW profile")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('Radius (Mpc/H)')
@@ -72,7 +72,7 @@ def mass(radius, mass, parameters):
     
 def logmass(radius, mass, parameters):
     
-    pylab.plot(radius, mass,'+r',label="Real Mass")
+    pylab.plot(radius, mass,'.r',label="Real Mass")
     pylab.plot(radius, nfw.mass(radius,parameters[0],parameters[1]),'k',label="NFW profile")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xscale('log')
@@ -93,7 +93,7 @@ def logmass(radius, mass, parameters):
 #     A file with a graphic of the density profile in logarithmic scale
     
 def logdensity(r_density, density, parameters):
-    pylab.plot(r_density , density,'+r',label="Real Density")
+    pylab.plot(r_density , density,'.r',label="Real Density")
     pylab.plot(r_density , nfw.density(r_density,parameters[0],parameters[1]),'k',label="NFW profile")
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xscale('log')
