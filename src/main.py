@@ -107,11 +107,17 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         os.chdir('./results_'+now+'/')
 
     avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
+
     if np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3))) != len(avg_density)-1:
         r_vir = radius[np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3)))]
-        np.savetxt(open('results_'+now+'.dat', 'a'),[[int(filename.split('_')[1]),x_center,y_center,z_center,center_difference,dens,scale_rad,r_vir,r_vir/scale_rad]],fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
+        c = r_vir/scale_radius
     else:
-        np.savetxt(open('results_'+now+'.dat', 'a'),[[int(filename.split('_')[1]),x_center,y_center,z_center,center_difference,dens,scale_rad,-99.0,-99.0]],fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
+        r_vir = 0
+        c = 0
+
+    export = open('results_'+now+'.dat', 'a')
+    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,mean_density,scale_radius,r_vir,c]]
+    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
 
     stop = timeit.default_timer()
     time = stop - start
