@@ -59,7 +59,7 @@ def mass(radius, mass, parameters):
     pylab.xlabel('Radius (Mpc/H)')
     pylab.ylabel('Mass (10^11 Solar Masses)')
     pylab.title('Mass')
-    pylab.savefig('mass.png',format='png',dpi=600)
+    pylab.savefig('mass.png',format='png',dpi=300)
     pylab.close()
 
 # Plots the NFW mass profile in logarithmic scale 
@@ -80,7 +80,7 @@ def logmass(radius, mass, parameters):
     pylab.xlabel('Radius (Mpc/H)')
     pylab.ylabel('Mass (10^11 Solar Masses)')
     pylab.title('Mass (log-log)')
-    pylab.savefig('log_mass.png',format='png',dpi=600)
+    pylab.savefig('log_mass.png',format='png',dpi=300)
     pylab.close()
 
 # Plots the NFW density profile in logarithmic scale 
@@ -101,7 +101,7 @@ def logdensity(r_density, density, parameters):
     pylab.xlabel('Radius (Mpc/H)')
     pylab.ylabel('Density (10^11 Solar Masses/(Mpc/H)^3)')
     pylab.title('Density (log-log)')
-    pylab.savefig('log_density.png',format='png',dpi=600)
+    pylab.savefig('log_density.png',format='png',dpi=300)
     pylab.close()
 
 # Makes a contour plot of the chi squared 
@@ -125,7 +125,7 @@ def rainbow_chi2(a_walk,b_walk,chi2):
     pylab.xlabel(r'$\ln(R_s)$')
     pylab.ylabel(r'$\ln(\rho_{0})$')
     pylab.colorbar()
-    pylab.savefig('chi2.png',format='png',dpi=600)
+    pylab.savefig('chi2.png',format='png',dpi=300)
     pylab.close()
 
 # Makes a contour plot of the likelihood 
@@ -149,7 +149,7 @@ def rainbow_likelihood(a_walk,b_walk,chi2):
     pylab.xlabel(r'$\ln(R_s)$')
     pylab.ylabel(r'$\ln(\rho_{0})$')
     pylab.colorbar()
-    pylab.savefig('likelihood.png',format='png',dpi=600)
+    pylab.savefig('likelihood.png',format='png',dpi=300)
     pylab.close()
 
 # Makes a contour plot of the likelihood in logarithmic scale
@@ -173,5 +173,5 @@ def rainbow_loglikelihood(a_walk,b_walk,chi2):
     pylab.xlabel(r'$\ln(R_s)$')
     pylab.ylabel(r'$\ln(\rho_{0})$')
     pylab.colorbar()
-    pylab.savefig('loglikelihood.png',format='png',dpi=600)
+    pylab.savefig('loglikelihood.png',format='png',dpi=300)
     pylab.close()
