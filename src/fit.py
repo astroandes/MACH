@@ -160,10 +160,9 @@ def error_bars(walk,parameter,opt):
     else:
         freq,bins = np.histogram(walk, bins=n_bins)
 
-#    bins = np.delete(bins,bins[len(bins)-1])
-
-    max_c = [np.argmin(walk-parameter)+int(0.341*sum(freq)/n_bins),len(bins)-1]
-    min_c = [np.argmin(walk-parameter)-int(0.341*sum(freq)/n_bins),0]
+    index = np.argmin(np.abs(bins-np.exp(parameter)))
+    max_c = [index+int(0.341*sum(freq)/n_bins),len(bins)-1]
+    min_c = [index-int(0.341*sum(freq)/n_bins),0]
 
     M = max_c[np.argmin(max_c)]
     m = min_c[np.argmax(min_c)]
