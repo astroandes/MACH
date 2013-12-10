@@ -48,7 +48,6 @@ int main(int argc, char** argv)
   logR = malloc(n_points*sizeof(double));
   logM = malloc(n_points*sizeof(double));
 
-  
   for(i=0;i<n_points;i++)
   {
     fscanf(data,"%lf %lf\n",&(logR[i]),&(logM[i]));
@@ -62,8 +61,8 @@ int main(int argc, char** argv)
   {
     double a_prime,b_prime,chi2_init,chi2_prime,diff,beta;
     
-    a_prime = random_normal(a_walk[i],0.01);
-    b_prime = random_normal(b_walk[i],0.01);
+    a_prime = random_normal(a_walk[i],0.1);
+    b_prime = random_normal(b_walk[i],0.1);
     
     chi2_init = chisq(logM,loglogmass(logR,a_walk[i],b_walk[i],n_points),n_points);
     chi2_prime = chisq(logM,loglogmass(logR,a_prime,b_prime,n_points),n_points);
@@ -146,7 +145,7 @@ double random_normal(double mu, double sigma)
   for(i=0;i<16;i++)
     ans += rand_generator(mu-sigma,mu+sigma);
   ans = ans/16;
-  printf("%lf\n",ans);
+//  printf("%lf\n",ans);
   return ans;
 }
 
