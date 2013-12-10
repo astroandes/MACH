@@ -99,7 +99,9 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         plotter.mass(radius, mass, parameters)
         plotter.logmass(radius, mass, parameters)
         plotter.logdensity(r_density, density, parameters)
-        plotter.rainbow_loglikelihood(a_walk,b_walk,chi2)
+        plotter.random_walk(a_walk,b_walk)
+        plotter.rainbow_likelihood(a_walk,b_walk,chi2)
+
         sys.stdout.write('Done\n')
         os.chdir('../')
 
@@ -116,8 +118,10 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         c = 0
 
     export = open('results_'+now+'.dat', 'a')
-    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,mean_density,scale_radius,r_vir,c]]
-    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
+    rho_max, rho_min = np.exp(fit.error_bars(a_walk,a,'log'))
+    rs_max, rs_min = np.exp(fit.error_bars(b_walk,b,'log'))
+    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,mean_density,rho_max, rho_min,scale_radius,rs_max, rs_min,r_vir,c]]
+    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
 
     stop = timeit.default_timer()
     time = stop - start
