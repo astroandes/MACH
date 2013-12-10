@@ -60,18 +60,17 @@ int main(int argc, char** argv)
 
   for(i=0;i<n_iterations;i++)
   {
-    double a_prime,b_prime,chi2_init,chi2_prime,alpha,ratio,beta;
+    double a_prime,b_prime,chi2_init,chi2_prime,diff,beta;
     
-    a_prime = random_normal(a_walk[i],0.001);
-    b_prime = random_normal(b_walk[i],0.001);
+    a_prime = random_normal(a_walk[i],0.01);
+    b_prime = random_normal(b_walk[i],0.01);
     
     chi2_init = chisq(logM,loglogmass(logR,a_walk[i],b_walk[i],n_points),n_points);
     chi2_prime = chisq(logM,loglogmass(logR,a_prime,b_prime,n_points),n_points);
     
-    ratio = chi2_init/chi2_prime;
-    alpha =  exp(-ratio);
-
-    if(ratio >= 1)
+    diff = chi2_prime-chi2_init;
+    
+    if(diff >= 0)
     {
       a_walk[i+1] = a_prime;
       b_walk[i+1] = b_prime;
@@ -79,9 +78,9 @@ int main(int argc, char** argv)
     }
     else
     {
-//    printf("%lf,%lf\n",alpha,beta);
-      beta = rand_generator(0,1);
-      if(alpha >= beta)
+      //  printf("%lf %lf %lf\n",a_walk[i],diff,beta);
+      beta = log(rand_generator(0,1));
+      if(diff >= beta)
       {
 	a_walk[i+1] = a_prime;
 	b_walk[i+1] = b_prime;
@@ -139,7 +138,7 @@ double rand_generator(double min, double max)
   return ans;
 }
 
-double random_normal(double sigma, double mu)
+double random_normal(double mu, double sigma)
 {
   int i;
   double ans;
@@ -147,6 +146,7 @@ double random_normal(double sigma, double mu)
   for(i=0;i<16;i++)
     ans += rand_generator(mu-sigma,mu+sigma);
   ans = ans/16;
+  printf("%lf\n",ans);
   return ans;
 }
 
@@ -157,8 +157,9 @@ double chisq(double* obs, double* mod, int n_points)
   ans = 0;
   for(i=0;i<n_points;i++)
   {
-    ans -= pow((mod[i]-obs[i]),2)/2;
+    ans = pow((mod[i]-obs[i]),2);
   }
+  ans = -0.5*ans;
   return ans;
 }
 
