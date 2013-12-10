@@ -150,6 +150,14 @@ def emcee_sampler(data,obs,mod,n_iterations):
     
     return best_a,best_b,a_walk,b_walk,chisq
 
+# Gets the acceptance interval for a value of a parameter in a random walk
+# Requires:
+#     walk: array with the random walk
+#     parameter: value of the parameter
+#     opt: need to put 'log' if the random walk is in logarithmic scale
+# Returns:
+#     minimum and maximum boundary for the interval
+
 def error_bars(walk,parameter,opt):
 
     n_iterations = len(walk)
@@ -157,10 +165,12 @@ def error_bars(walk,parameter,opt):
 
     if (opt=='log'):
         freq,bins = np.histogram(np.exp(walk), bins=n_bins)
+        index = np.argmin(np.abs(bins-np.exp(parameter)))
+
     else:
         freq,bins = np.histogram(walk, bins=n_bins)
+        index = np.argmin(np.abs(bins-parameter))
 
-    index = np.argmin(np.abs(bins-np.exp(parameter)))
     max_c = [index+int(0.341*sum(freq)/n_bins),len(bins)-1]
     min_c = [index-int(0.341*sum(freq)/n_bins),0]
 
