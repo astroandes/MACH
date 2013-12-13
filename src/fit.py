@@ -100,11 +100,34 @@ def c_metropolis(data,obs,n_iterations):
     b_walk = np.loadtxt('b_walk.dat')
     chisq = np.loadtxt('chi2.dat')
 
-    max_pos = np.argmax(chisq)
-    best_a = a_walk[max_pos]
-    best_b = b_walk[max_pos]
+    first_max = np.argmax(chisq)
+    first_min = np.argmin(chisq)
+    first_a = a_walk[first_max]
+    first_b = b_walk[first_max]
+    last_a = a_walk[first_min]
+    last_b = b_walk[first_min]
+    p0 = np.array([first_a,first_b])
+    p1 = np.array([last_a,last_b])
+    distance = np.sqrt(np.sum((p0-p1)**2))
+
+    positions = sample_ball(np.array([first_a,first_b]), distance*np.ones(2), 5)
+    
+    for i in range(5):
+        position = positions[i,:]
+        
+        os.system('./metropolis.out profile.dat '+str(position[0])+' '+str(position[1])+' '+str(n_iterations))
+
+        a_walk = np.concatenate((a_walk,np.loadtxt('a_walk.dat')))
+        b_walk = np.concatenate((b_walk,np.loadtxt('b_walk.dat')))
+        chisq = np.concatenate((chisq,np.loadtxt('chi2.dat')))
+ 
+    
+    new_max = np.argmax(chisq)
+    best_a = a_walk[new_max]
+    best_b = b_walk[new_max]
 
     os.system('rm *.dat')
+
     sys.stdout.write('Done\n')
 
     return best_a,best_b,a_walk,b_walk,chisq

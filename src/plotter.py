@@ -175,3 +175,16 @@ def rainbow_loglikelihood(a_walk,b_walk,chi2):
     pylab.colorbar()
     pylab.savefig('loglikelihood.png',format='png',dpi=300)
     pylab.close()
+
+def random_walk(a_walk,b_walk,n_iterations):
+    
+    pylab.plot(a_walk,b_walk,'-k')
+    pylab.plot(a_walk,b_walk,',r')
+    pylab.plot(a_walk[0],b_walk[0],'ob')
+    for i in range(1,5):
+        pylab.plot(a_walk[n_iterations*i-1],b_walk[n_iterations*i-1],'oy')
+        pylab.plot(a_walk[n_iterations*i],b_walk[n_iterations*i],'oc')
+    pylab.xlabel(r'$\ln(R_s)$')
+    pylab.ylabel(r'$\ln(\rho_{0})$')    
+    pylab.savefig('randomwalk.png',format='png',dpi=300)
+    pylab.close()
