@@ -43,6 +43,7 @@ used_rvir = np.empty((0))
 used_c = np.empty((0))
 
 FA = 0
+NV = 0
 
 for i in range(len(bdmv_x)):
     d = distance(bdmv_x[i],bdmv_y[i],bdmv_z[i],mcmc_x,mcmc_y,mcmc_z)
@@ -63,7 +64,10 @@ for i in range(len(bdmv_x)):
         used_rvir = np.append(used_rvir , mcmc_rvir[j])
         used_c = np.append(used_c , mcmc_c[j])
     else:
-        FA = FA + 1
+        if(mcmc_rvir[j] > 0):
+            FA = FA + 1
+        else:
+            NV = NV + 1
         used_id = np.append(used_id , 0)
         used_x = np.append(used_x , 0)
         used_y = np.append(used_y , 0)
@@ -88,8 +92,7 @@ good_used_z = np.empty((0))
 good_used_rs = np.empty((0))
 
 for i in range(len(bdmv_rs)):
-    if (bdmv_rs[i]  >= used_rs_min[i] and bdmv_rs[i]  <= used_rs_max[i]):
-        pylab.plot(bdmv_rs[i], used_rs[i],'.b')
+    if(used_rs_min[i] <= bdmv_rs[i]  <= used_rs_max[i]):
 
         good_bdmv_x = np.append(good_bdmv_x,bdmv_x[i])
         good_bdmv_y = np.append(good_bdmv_y,bdmv_y[i])
@@ -101,58 +104,19 @@ for i in range(len(bdmv_rs)):
         good_used_z = np.append(good_used_z,used_z[i])
         good_used_rs = np.append(good_used_rs,used_rs[i])
 
-    else:
-        pylab.plot(bdmv_rs[i], used_rs[i],'.r')
-
+pylab.plot(bdmv_rs, used_rs,'.r')
+pylab.plot(good_bdmv_rs, good_used_rs,'.b')
 pylab.plot(bdmv_rs, bdmv_rs,'--k')
 pylab.xlim([0,bdmv_rs[np.argmax(bdmv_rs)]])
 pylab.ylim([0,bdmv_rs[np.argmax(bdmv_rs)]])
+pylab.title('Scale Radius')
+pylab.xlabel('BDMV')
+pylab.ylabel('MCMC')
 pylab.savefig('rs.png',format='png',dpi=300)
-pylab.close()
-
-a_min = np.array([good_used_rs[np.argmin(good_used_rs)],bdmv_rs[np.argmin(bdmv_rs)]])
-a_max = np.array([good_used_rs[np.argmax(good_used_rs)],bdmv_rs[np.argmax(bdmv_rs)]])
-mini = a_min[np.argmin(a_min)]
-maxi = a_max[np.argmax(a_max)]
-
-N = 2000j
-extent = (bdmv_x[bdmv_x.argmin()],bdmv_x[bdmv_x.argmax()],bdmv_y[bdmv_y.argmin()],bdmv_y[bdmv_y.argmax()])
-
-bdmv_xs,bdmv_ys = np.mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
-
-bdmv_resampled = griddata(bdmv_x, bdmv_y, bdmv_rs, bdmv_xs, bdmv_ys)
-pylab.imshow(bdmv_resampled.T, extent=extent,interpolation='none',cmap='spectral',norm=matplotlib.colors.Normalize(vmin=mini, vmax=maxi, clip=False))
-pylab.title('BDMV Scale Radius')
-pylab.xlabel('x (Mpc/h)')
-pylab.ylabel('y (Mpc/h)')
-pylab.colorbar()
-pylab.savefig('bdmv_rs.png',format='png',dpi=600)
-pylab.close()
-
-good_bdmv_xs,good_bdmv_ys = np.mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
-
-good_bdmv_resampled = griddata(good_bdmv_x, good_bdmv_y, good_bdmv_rs, good_bdmv_xs, good_bdmv_ys)
-pylab.imshow(good_bdmv_resampled.T, extent=extent,interpolation='none',cmap='spectral',norm=matplotlib.colors.Normalize(vmin=mini, vmax=maxi, clip=False))
-pylab.title('BDMV Scale Radius')
-pylab.xlabel('x (Mpc/h)')
-pylab.ylabel('y (Mpc/h)')
-pylab.colorbar()
-pylab.savefig('good_bdmv_rs.png',format='png',dpi=600)
-pylab.close()
-
-
-good_used_xs,good_used_ys = np.mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
-
-good_used_resampled = griddata(good_used_x, good_used_y, good_used_rs, good_used_xs, good_used_ys)
-pylab.imshow(good_used_resampled.T, extent=extent,interpolation='none',cmap='spectral',norm=matplotlib.colors.Normalize(vmin=mini, vmax=maxi, clip=False))
-pylab.title('MCMC Scale Radius')
-pylab.xlabel('x (Mpc/h)')
-pylab.ylabel('y (Mpc/h)')
-pylab.colorbar()
-pylab.savefig('good_mcmc_rs.png',format='png',dpi=600)
 pylab.close()
 
 print 'Good Haloes: '+str(len(good_used_x))
 print 'Bad Haloes: '+str(len(bdmv_x)-len(good_used_x)-FA)
 print 'Forever Alone Haloes: '+str(FA)
+print 'Non-Virialized Haloes: '+str(NV)
 print 'Total Number of Haloes: '+str(len(bdmv_x))
