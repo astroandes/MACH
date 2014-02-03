@@ -77,7 +77,6 @@ int main(int argc, char** argv)
     }
     else
     {
-      //  printf("%lf %lf %lf\n",a_walk[i],diff,beta);
       beta = log(rand_generator(0,1));
       if(diff >= beta)
       {
@@ -145,7 +144,7 @@ double random_normal(double mu, double sigma)
   for(i=0;i<16;i++)
     ans += rand_generator(mu-sigma,mu+sigma);
   ans = ans/16;
-//  printf("%lf\n",ans);
+
   return ans;
 }
 

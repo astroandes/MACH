@@ -83,7 +83,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     density = [(mass[i+1]-mass[i-1])/((r_values[i+1]-r_values[i-1])*(4.0 * np.pi * r_values[i]**2)) for i in range(1,len(mass)-1)]
     r_density = [radius[i] for i in range(1,len(mass)-1)]
 
-    n_iterations = 5000
+    n_iterations = 30000
     a,b,a_walk,b_walk,chi2 = fit.c_metropolis(np.log(radius),np.log(mass),n_iterations)
     mean_density = np.exp(a)
     scale_radius = np.exp(b)
