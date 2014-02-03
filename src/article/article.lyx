@@ -2,8 +2,13 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass article
+\textclass paper
 \use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package auto
@@ -24,8 +29,8 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 10
-\spacing single
+\paperfontsize default
+\spacing onehalf
 \use_hyperref false
 \papersize letterpaper
 \use_geometry true
@@ -52,7 +57,7 @@
 \paragraph_separation indent
 \paragraph_indentation 0bp
 \quotes_language english
-\papercolumns 1
+\papercolumns 2
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
@@ -72,8 +77,24 @@ This is Article
 Christian Poveda Ruiz
 \end_layout
 
+\begin_layout Abstract
+FIXME: Write abstract
+\end_layout
+
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Standard
+FIXME: Multidark
+\end_layout
+
+\begin_layout Standard
+FIXME: NFW profile
+\end_layout
+
+\begin_layout Standard
+FIXME: MCMC
 \end_layout
 
 \begin_layout Section
@@ -84,20 +105,126 @@ State of Art
 What did I do?
 \end_layout
 
-\begin_layout Subsection
-Which simulation?
+\begin_layout Standard
+FIXME: Which simulation? 
+\begin_inset Formula $m=1.7\times10^{11}\ M_{\odot}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In order to obtain a mass profile for each halo in funcion of the radius,
+ the center of each halo must be calculated.
+ However the center of mass will not give an accurate position for the center
+ because some haloes are highly irregular, is more convenient to take the
+ gravitational potential for each particle
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\phi\left(\boldsymbol{r}_{n}\right)=-\sum_{j\neq i}\frac{1}{\left\Vert \boldsymbol{r}_{n}-\boldsymbol{r}_{j}\right\Vert }
+\]
+
+\end_inset
+
+Take 
+\begin_inset Formula $\boldsymbol{r}_{0}=\min\left(\phi\left(\boldsymbol{r}_{n}\right)\right)$
+\end_inset
+
+ as the center then define new coordinates 
+\begin_inset Formula $\boldsymbol{r}_{n}^{\prime}=\boldsymbol{r}_{0}-\boldsymbol{r}_{n}$
+\end_inset
+
+, this 
+\begin_inset Formula $\boldsymbol{r}_{0}$
+\end_inset
+
+ will be in the most relevant region for the dynamics of each halo.
+ Organizing the 
+\begin_inset Formula $\left\{ \boldsymbol{r}_{n}^{\prime}\right\} $
+\end_inset
+
+ in crescent order, the accumulated mass for each 
+\begin_inset Formula $\boldsymbol{r}_{n}^{\prime}$
+\end_inset
+
+ will be 
+\begin_inset Formula $m_{n}=nm$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+FIXME: Mass profile of a halo
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The last part of the process consists in fitting the NFW mass profile to
+ the 
+\begin_inset Formula $m_{n}$
+\end_inset
+
+ data using the Metropolis-Hastings algorithm to sample the Likelihood 
+\begin_inset Formula ${\cal L}\left(\rho_{0},r_{s}\right)=\exp\left(-\frac{1}{2}\chi^{2}\left(\rho_{0},r_{s}\right)\right)$
+\end_inset
+
+, where 
+\begin_inset Formula $\chi^{2}\left(\rho_{0},r_{s}\right)=\sum\limits _{n}\left|m_{n}-m\left(\boldsymbol{r}_{n}^{\prime},\rho_{0},r_{s}\right)\right|^{2}$
+\end_inset
+
+, and take the values of 
+\begin_inset Formula $\rho_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{s}$
+\end_inset
+
+ where the Likelihood is maximum.
 \end_layout
 
 \begin_layout Section
 Results
 \end_layout
 
-\begin_layout Subsubsection
-Why Im sure that my results are reasonable
+\begin_layout Subsection
+Why I'm sure that my results are reasonable
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+FIXME: I tested it with HaloGenerator
+\end_layout
+
+\begin_layout Subsection
 Results from the simulation
+\end_layout
+
+\begin_layout Standard
+FIXME: Plor with error bars
 \end_layout
 
 \begin_layout Subsection
