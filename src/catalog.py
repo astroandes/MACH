@@ -90,6 +90,8 @@ good_used_x = np.empty((0))
 good_used_y = np.empty((0))
 good_used_z = np.empty((0))
 good_used_rs = np.empty((0))
+good_used_rs_max = np.empty((0))
+good_used_rs_min = np.empty((0))
 
 for i in range(len(bdmv_rs)):
     if(used_rs_min[i] <= bdmv_rs[i]  <= used_rs_max[i]):
@@ -98,15 +100,19 @@ for i in range(len(bdmv_rs)):
         good_bdmv_y = np.append(good_bdmv_y,bdmv_y[i])
         good_bdmv_z = np.append(good_bdmv_z,bdmv_z[i])
         good_bdmv_rs = np.append(good_bdmv_rs,bdmv_rs[i])
-        
+
         good_used_x = np.append(good_used_x,used_x[i])
         good_used_y = np.append(good_used_y,used_y[i])
         good_used_z = np.append(good_used_z,used_z[i])
         good_used_rs = np.append(good_used_rs,used_rs[i])
+        good_used_rs_max = np.append(good_used_rs_max,used_rs_max[i])
+        good_used_rs_min = np.append(good_used_rs_min,used_rs_min[i])
+
+sigma = np.array([good_used_rs_max-good_used_rs,good_used_rs-good_used_rs_min])
 
 pylab.plot(bdmv_rs, used_rs,'.r')
 pylab.plot(bdmv_rs, bdmv_rs,'-k')
-pylab.plot(good_bdmv_rs, good_used_rs,'ob')
+pylab.errorbar(good_bdmv_rs,good_used_rs,yerr=sigma,fmt='.b',elinewidth=1,capsize=2,capthick=1)
 pylab.xscale('log')
 pylab.yscale('log')
 pylab.xlim([0,bdmv_rs[np.argmax(bdmv_rs)]])
