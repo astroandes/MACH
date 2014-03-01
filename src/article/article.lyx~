@@ -224,46 +224,7 @@ Results from the simulation
 \end_layout
 
 \begin_layout Standard
-FIXME: Plot with error bars
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /home/christian/Documentos/git/Montecarlo-NFW/data/results/results_2014-02-11-23:43:20/rs.png
-	lyxscale 10
-	scale 43
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
+FIXME: Plor with error bars
 \end_layout
 
 \begin_layout Subsection

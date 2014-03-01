@@ -84,7 +84,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     r_density = [radius[i] for i in range(1,len(mass)-1)]
 
     n_iterations = 30000
-    a,b,a_walk,b_walk,chi2 = fit.c_metropolis(np.log(radius),np.log(mass),n_iterations)
+    a,b,a_walk,b_walk,chi2 = fit.metropolis(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations)
     mean_density = np.exp(a)
     scale_radius = np.exp(b)
     parameters = np.array([mean_density,scale_radius])
