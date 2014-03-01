@@ -1,6 +1,7 @@
-import numpy as np, emcee, sys, os, nfw
+import numpy as np, sys, os, nfw
 from scipy.optimize import curve_fit
 from emcee.utils import sample_ball
+from numba import jit
 
 # Returns the chi squared estimate given a prediction and the real data
 # Requires:
@@ -8,7 +9,7 @@ from emcee.utils import sample_ball
 #     mod: expected data from the model
 # Returns:
 #     The chi squared estimate
-
+@jit
 def chi2(obs,mod):
     return np.sum(-0.5*(obs-mod)**2)
 
@@ -20,7 +21,7 @@ def chi2(obs,mod):
 #     n_iterations: number of steps for the random walk
 # Returns:
 #     best parameters, the random walk for each parameter and the chi squared for each step
-
+@jit
 def metropolis(data,obs,mod,n_iterations):
 
     sys.stdout.write('\rRunning Metropolis-Hastings Algorithm... ')
@@ -109,17 +110,6 @@ def c_metropolis(data,obs,n_iterations):
     p0 = np.array([first_a,first_b])
     p1 = np.array([last_a,last_b])
     distance = np.sqrt(np.sum((p0-p1)**2))
-
-##    positions = sample_ball(np.array([first_a,first_b]), distance*np.ones(2), 5)
-    
-##    for i in range(5):
-##        position = positions[i,:]
-        
-##        os.system('./metropolis.out profile.dat '+str(position[0])+' '+str(position[1])+' '+str(n_iterations))
-
-##        a_walk = np.concatenate((a_walk,np.loadtxt('a_walk.dat')))
-##        b_walk = np.concatenate((b_walk,np.loadtxt('b_walk.dat')))
-##        chisq = np.concatenate((chisq,np.loadtxt('chi2.dat')))
  
     new_max = np.argmax(chisq)
     best_a = a_walk[new_max]
@@ -140,37 +130,37 @@ def c_metropolis(data,obs,n_iterations):
 # Returns:
 #     best parameters, the random walk for each parameter and the chi squared for each step
 
-def emcee_sampler(data,obs,mod,n_iterations):
+#def emcee_sampler(data,obs,mod,n_iterations):
 
-    sys.stdout.write('\rRunning Emcee Sampling Algorithm... ')
-    sys.stdout.flush()
+#    sys.stdout.write('\rRunning Emcee Sampling Algorithm... ')
+#    sys.stdout.flush()
 
-    dim = 2
-    walkers = 4
-    guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
-    print guess
-    p0 = sample_ball(guess, 100*np.ones(dim), walkers)
+#    dim = 2
+#    walkers = 4
+#    guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
+#    print guess
+#    p0 = sample_ball(guess, 100*np.ones(dim), walkers)
     
     
-    def loglike(p):        
-	return -np.sum(((mod(data,p[0],p[1]))-obs)**2)/dim
+#    def loglike(p):        
+#	return -np.sum(((mod(data,p[0],p[1]))-obs)**2)/dim
 
-    sampler = emcee.EnsembleSampler(walkers, dim, loglike)
-    sampler.run_mcmc(p0, n_iterations)
+#    sampler = emcee.EnsembleSampler(walkers, dim, loglike)
+#    sampler.run_mcmc(p0, n_iterations)
     
-    a_walk = sampler.flatchain[:,0]
-    b_walk = sampler.flatchain[:,1]
-    chisq = sampler.flatlnprobability
-    for l in chisq:
-        print l
+#    a_walk = sampler.flatchain[:,0]
+#    b_walk = sampler.flatchain[:,1]
+#    chisq = sampler.flatlnprobability
+#    for l in chisq:
+#        print l
 
-    max_pos = np.argmax(chisq)
-    best_a = a_walk[max_pos]
-    best_b = b_walk[max_pos]
+#    max_pos = np.argmax(chisq)
+#    best_a = a_walk[max_pos]
+#    best_b = b_walk[max_pos]
 
-    sys.stdout.write('Done\n')
+#    sys.stdout.write('Done\n')
     
-    return best_a,best_b,a_walk,b_walk,chisq
+#    return best_a,best_b,a_walk,b_walk,chisq
 
 # Gets the acceptance interval for a value of a parameter in a random walk
 # Requires:
@@ -180,6 +170,7 @@ def emcee_sampler(data,obs,mod,n_iterations):
 # Returns:
 #     minimum and maximum boundary for the interval
 
+@jit
 def error_bars(walk,parameter,opt):
 
     n_iterations = len(walk)
