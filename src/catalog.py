@@ -1,5 +1,6 @@
 import numpy as np, pylab, sys, matplotlib, plotter
 from matplotlib.mlab import griddata
+from scipy.optimize import curve_fit
 
 def distance(x1,y1,z1,x2,y2,z2):
     return np.sqrt(((x1-x2)**2.0)+((y1-y2)**2.0)+((z1-z2)**2.0))
@@ -20,11 +21,14 @@ mcmc_rs_min = mcmc[:,9]
 mcmc_rvir = mcmc[:,10]
 mcmc_c = mcmc[:,11]
 
+pylab.plot(np.log10(mcmc_rho0),np.log10(f(mcmc_rho0,param[0],param[1],param[2])),'or')
+pylab.plot(np.log10(mcmc_rho0),np.log10(mcmc_rs),'.k')
+pylab.show()
+
 bdmv_id = bdmv[:,0]
 bdmv_x = bdmv[:,1]
 bdmv_y = bdmv[:,2]
 bdmv_z = bdmv[:,3]
-bdmv_rho0 = bdmv[:,7]
 bdmv_rvir = bdmv[:,7]
 bdmv_c = bdmv[:,8]
 bdmv_rs = bdmv_rvir/bdmv_c

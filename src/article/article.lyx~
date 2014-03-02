@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass aastex
+\textclass paper
 \use_default_options true
 \begin_modules
 theorems-ams
@@ -30,7 +30,7 @@ figs-within-sections
 \bibtex_command default
 \index_command default
 \paperfontsize default
-\spacing single
+\spacing onehalf
 \use_hyperref false
 \papersize letterpaper
 \use_geometry true
@@ -38,7 +38,7 @@ figs-within-sections
 \use_esint 1
 \use_mhchem 1
 \use_mathdots 1
-\cite_engine natbib_authoryear
+\cite_engine basic
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -57,7 +57,7 @@ figs-within-sections
 \paragraph_separation indent
 \paragraph_indentation 0bp
 \quotes_language english
-\papercolumns 1
+\papercolumns 2
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
@@ -228,6 +228,41 @@ FIXME: Plot with error bars
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/christian/Documentos/git/Montecarlo-NFW/data/results/results_2014-02-11-23:43:20/rs.png
+	lyxscale 10
+	scale 43
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 

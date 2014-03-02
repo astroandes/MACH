@@ -99,7 +99,6 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         plotter.mass(radius, mass, parameters)
         plotter.logmass(radius, mass, parameters)
         plotter.logdensity(r_density, density, parameters)
-        plotter.random_walk(a_walk,b_walk,n_iterations)
         plotter.rainbow_likelihood(a_walk,b_walk,chi2)
 
         sys.stdout.write('Done\n')
@@ -115,7 +114,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         c = r_vir/scale_radius
     else:
         r_vir = 0
-        c = 0
+        c = -99
 
     export = open('results_'+now+'.dat', 'a')
     rho_max, rho_min = np.exp(fit.error_bars(a_walk,a,'log'))
