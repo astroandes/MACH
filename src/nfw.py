@@ -9,7 +9,7 @@ import numpy as np
 #     a numpy array with the mass/density profile
 
 def mass(r,a,b):
-    return 4*np.pi*a*(b**3)*(np.log(1+r/b)-(1+(r/b))**(-1))
+    return 4*np.pi*a*(b**3)*(np.log(1+r/b)-(1+(b/r))**(-1))
 
 def density(r,a,b):
     return a*((r/b)*(1+(r/b))**2)**(-1)
@@ -23,7 +23,7 @@ def density(r,a,b):
 #     a numpy array with the logarithm of the mass/density profile
 
 def logmass(logr,a,b):
-    return np.log(4*np.pi)+ np.log(a)+3*np.log(b)+np.log(np.log(1+np.exp(logr)/b)-(1+np.exp(logr)/b)**(-1))
+    return np.log(4*np.pi)+ np.log(a)+3*np.log(b)+np.log(np.log(1+np.exp(logr)/b)-(1+b/np.exp(logr))**(-1))
 
 def logdensity(logr,a,b):
     return np.log(a)+np.log(b)-logr-2*np.log(1+np.exp(logr)/b)
@@ -37,7 +37,7 @@ def logdensity(logr,a,b):
 #     a numpy array with the logarithm of the mass/density profile
 
 def loglogmass(logr,loga,logb):
-    return np.log(4*np.pi)+ loga+3*logb+np.log(np.log(1+np.exp(logr-logb))-(1+np.exp(logr-logb))**(-1))
+    return np.log(4*np.pi)+ loga+3*logb+np.log(np.log(1+np.exp(logr-logb))-(1+np.exp(logb-logr))**(-1))
 
 def loglogdensity(logr,loga,logb):
     return loga+logb-logr-2*np.log(1+np.exp(logr-logb))
