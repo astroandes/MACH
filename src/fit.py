@@ -1,14 +1,13 @@
-import numpy as np, sys, os, nfw
+import numpy as np, sys, os, nfw, emcee
 from scipy.optimize import curve_fit
-from numba import jit
-
+from emcee.utils import sample_ball
 # Returns the chi squared estimate given a prediction and the real data
 # Requires:
 #     obs: observed data
 #     mod: expected data from the model
 # Returns:
 #     The chi squared estimate
-@jit
+
 def chi2(obs,mod):
     return np.sum(-0.5*(obs-mod)**2)
 
@@ -20,14 +19,13 @@ def chi2(obs,mod):
 #     n_iterations: number of steps for the random walk
 # Returns:
 #     best parameters, the random walk for each parameter and the chi squared for each step
-@jit
+
 def metropolis(data,obs,mod,n_iterations):
 
     sys.stdout.write('\rRunning Metropolis-Hastings Algorithm... ')
     sys.stdout.flush()
 
     guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
-
     a_walk = np.empty((0))
     b_walk = np.empty((0))
     chisq = np.empty((0))
@@ -37,22 +35,23 @@ def metropolis(data,obs,mod,n_iterations):
     chisq = np.append(chisq,chi2(obs,mod(data,guess[0],guess[1])))
         
     for i in range(n_iterations):
-        a_prime = np.random.normal(a_walk[i],0.001)
-        b_prime = np.random.normal(b_walk[i],0.001) 
+        a_prime = np.random.normal(a_walk[i],10.0)
+        b_prime = np.random.normal(b_walk[i],10.0) 
         
         chi2_init = chi2(obs,mod(data,a_walk[i],b_walk[i]))
         chi2_prime = chi2(obs,mod(data,a_prime,b_prime))
 
-        alpha = np.exp(chi2_prime-chi2_init)
-        ratio = chi2_init/chi2_prime
-        if (ratio >= 1.0):
+        ratio = chi2_prime - chi2_init
+        alpha = np.exp(ratio)
+
+        if (ratio > 0.0):
             a_walk = np.append(a_walk,a_prime)
             b_walk = np.append(b_walk,b_prime)
             chisq = np.append(chisq,chi2_prime)
 
         else:
             beta = np.random.random()
-            if (alpha >= beta):
+            if (alpha > beta):
                 a_walk = np.append(a_walk,a_prime)
                 b_walk = np.append(b_walk,b_prime)
                 chisq = np.append(chisq,chi2_prime)
@@ -62,6 +61,7 @@ def metropolis(data,obs,mod,n_iterations):
                 chisq = np.append(chisq,chi2_init)
 
     max_pos = np.argmax(chisq)
+
     best_a = a_walk[max_pos]
     best_b = b_walk[max_pos]
 
@@ -100,19 +100,10 @@ def c_metropolis(data,obs,n_iterations):
     b_walk = np.loadtxt('b_walk.dat')
     chisq = np.loadtxt('chi2.dat')
 
-    first_max = np.argmax(chisq)
-    first_min = np.argmin(chisq)
-    first_a = a_walk[first_max]
-    first_b = b_walk[first_max]
-    last_a = a_walk[first_min]
-    last_b = b_walk[first_min]
-    p0 = np.array([first_a,first_b])
-    p1 = np.array([last_a,last_b])
-    distance = np.sqrt(np.sum((p0-p1)**2))
- 
-    new_max = np.argmax(chisq)
-    best_a = a_walk[new_max]
-    best_b = b_walk[new_max]
+    n_max = np.argmax(chisq)
+
+    best_a = a_walk[n_max]
+    best_b = b_walk[n_max]
 
     os.system('rm *.dat')
 
@@ -129,37 +120,35 @@ def c_metropolis(data,obs,n_iterations):
 # Returns:
 #     best parameters, the random walk for each parameter and the chi squared for each step
 
-#def emcee_sampler(data,obs,mod,n_iterations):
+def emcee_sampler(data,obs,mod,n_iterations):
 
-#    sys.stdout.write('\rRunning Emcee Sampling Algorithm... ')
-#    sys.stdout.flush()
+    sys.stdout.write('\rRunning Emcee Sampling Algorithm... ')
+    sys.stdout.flush()
 
-#    dim = 2
-#    walkers = 4
-#    guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
+    dim = 2
+    walkers = 4
+    guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
 #    print guess
-#    p0 = sample_ball(guess, 100*np.ones(dim), walkers)
+    p0 = sample_ball(guess, np.ones(dim), walkers)
     
     
-#    def loglike(p):        
-#	return -np.sum(((mod(data,p[0],p[1]))-obs)**2)/dim
+    def loglike(p):        
+	return -np.sum(((mod(data,p[0],p[1]))-obs)**2)/dim
 
-#    sampler = emcee.EnsembleSampler(walkers, dim, loglike)
-#    sampler.run_mcmc(p0, n_iterations)
+    sampler = emcee.EnsembleSampler(walkers, dim, loglike)
+    sampler.run_mcmc(p0, n_iterations)
     
-#    a_walk = sampler.flatchain[:,0]
-#    b_walk = sampler.flatchain[:,1]
-#    chisq = sampler.flatlnprobability
-#    for l in chisq:
-#        print l
+    a_walk = sampler.flatchain[:,0]
+    b_walk = sampler.flatchain[:,1]
+    chisq = sampler.flatlnprobability
 
-#    max_pos = np.argmax(chisq)
-#    best_a = a_walk[max_pos]
-#    best_b = b_walk[max_pos]
+    max_pos = np.argmax(chisq)
+    best_a = a_walk[max_pos]
+    best_b = b_walk[max_pos]
 
-#    sys.stdout.write('Done\n')
+    sys.stdout.write('Done\n')
     
-#    return best_a,best_b,a_walk,b_walk,chisq
+    return best_a,best_b,a_walk,b_walk,chisq
 
 # Gets the acceptance interval for a value of a parameter in a random walk
 # Requires:
@@ -169,7 +158,6 @@ def c_metropolis(data,obs,n_iterations):
 # Returns:
 #     minimum and maximum boundary for the interval
 
-@jit
 def error_bars(walk,parameter,opt):
 
     n_iterations = len(walk)
@@ -190,8 +178,10 @@ def error_bars(walk,parameter,opt):
     m = min_c[np.argmax(min_c)]
     
     if (opt=='log'):
+
         max = np.log(bins[M])
         min = np.log(bins[m])
+
     else:
         max = bins[M]
         min = bins[m]
