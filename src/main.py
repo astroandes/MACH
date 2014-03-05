@@ -77,14 +77,14 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     r_values = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
     center_difference = np.sqrt((np.average(x)-x_center)**2+(np.average(y)-y_center)**2+(np.average(z)-z_center)**2)
 
-    mass = np.array([i*mass_element for i in np.array(range(1,n_points))])
-    radius = np.array([r_values[i] for i in range(1,n_points)])
+    mass = np.array([i*mass_element for i in np.array(range(2,n_points))])
+    radius = np.array([r_values[i] for i in range(2,n_points)])
 
     density = [(mass[i+1]-mass[i-1])/((r_values[i+1]-r_values[i-1])*(4.0 * np.pi * r_values[i]**2)) for i in range(1,len(mass)-1)]
     r_density = [radius[i] for i in range(1,len(mass)-1)]
 
-    n_iterations = 30000
-    a,b,a_walk,b_walk,chi2 = fit.metropolis(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations)
+    n_iterations = 20000
+    a,b,a_walk,b_walk,chi2 = fit.emcee_sampler(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations)
     mean_density = np.exp(a)
     scale_radius = np.exp(b)
     parameters = np.array([mean_density,scale_radius])
@@ -100,7 +100,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         plotter.logmass(radius, mass, parameters)
         plotter.logdensity(r_density, density, parameters)
         plotter.rainbow_likelihood(a_walk,b_walk,chi2)
-
+        plotter.random_walk(a_walk,b_walk,n_iterations)
         sys.stdout.write('Done\n')
         os.chdir('../')
 
