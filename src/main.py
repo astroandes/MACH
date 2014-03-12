@@ -74,38 +74,54 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     os.system('rm potential.dat positions.dat')
     sys.stdout.write('Done\n')
 
-    x_new,y_new,z_new = x-x_center,y-y_center,z-z_center
+    r_values = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
+    center_difference = np.sqrt((np.average(x)-x_center)**2+(np.average(y)-y_center)**2+(np.average(z)-z_center)**2)
 
-    r = np.sort(np.sqrt((x_new)**2 + (y_new)**2 + (z_new)**2), kind='quicksort')
-    m = mass_element*np.arange(1,n_points+1,1)
+    mass = mass_element*np.arange(2,n_points+1,1)
+    radius = np.delete(r_values,0)
 
-    avg_dens = m/((4.0/3.0)*np.pi*(radius**3))
-    r_vir = radius[np.argmin(np.abs(avg_dens-200*(mass_element*(2048.0/1000.0)**3)))]
+    density = [(mass[i+1]-mass[i-1])/((r_values[i+1]-r_values[i-1])*(4.0 * np.pi * r_values[i]**2)) for i in range(1,len(mass)-1)]
+    r_density = [radius[i] for i in range(1,len(mass)-1)]
+
+    n_iterations = 30000
+    a,b,a_walk,b_walk,chi2 = fit.metropolis(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations,np.log(radius[-1]),np.log(radius[0]))
+    mean_density = np.exp(a)
+    scale_radius = np.exp(b)
+    parameters = np.array([mean_density,scale_radius])
+
+    rho_max, rho_min = np.exp(fit.error_bars(a_walk,a,'log'))
+    rs_max, rs_min = np.exp(fit.error_bars(b_walk,b,'log'))
     
-    norm_r = r/r_vir
-    norm_m = np.arange(1,n_points+1,1)
-
-    n_iterations = 20000
-    logc,logc_walk,chi2 = fit.emcee_sampler(np.log(norm_r),np.log(norm_m),nfw.loglogmass,n_iterations)
-    conc = np.exp(logc)
-    c_walk = np.exp(c_walk)
-
     if (plt == 1):
 
         os.system('mkdir '+results_folder)
         os.chdir(results_folder)
+        plotter.halo(x,y,z,x_center,y_center,z_center)
         sys.stdout.write('\rPlotting results... ')
-        
+        sys.stdout.flush()
+        plotter.mass(radius, mass, parameters)
+        plotter.logmass(radius, mass, parameters,[rho_max,rho_min],[rs_max,rs_min])
+        plotter.logdensity(r_density, density, parameters)
+        plotter.rainbow_chi2(np.log10(np.exp(a_walk)),np.log10(np.exp(b_walk)),chi2)
+#        plotter.random_walk(a_walk,b_walk,n_iterations)
         sys.stdout.write('Done\n')
         os.chdir('../')
 
     else:
         os.chdir('./results_'+now+'/')
 
+    avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
+
+    if np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3))) != len(avg_density)-1:
+        r_vir = radius[np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3)))]
+        c = r_vir/scale_radius
+    else:
+        r_vir = 0
+        c = -99
+
     export = open('results_'+now+'.dat', 'a')
-    c_max, c_min = np.exp(fit.error_bars(logc_walk,logc,'log'))
-    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,conc,c_max,c_min,r_vir]]
-    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
+    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,mean_density,rho_max, rho_min,scale_radius,rs_max, rs_min,r_vir,c]]
+    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
 
     stop = timeit.default_timer()
     time = stop - start

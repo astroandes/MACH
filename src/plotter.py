@@ -70,10 +70,16 @@ def mass(radius, mass, parameters):
 # Returns:
 #     A file with a graphic of the mass profile in logarithmic scale
     
-def logmass(radius, mass, parameters):
+def logmass(radius, mass, parameters,lims_a,lims_b):
     
     pylab.plot(radius, mass,'.r',label="Real Mass")
     pylab.plot(radius, nfw.mass(radius,parameters[0],parameters[1]),'k',label="NFW profile")
+
+    pylab.plot(radius , nfw.mass(radius,lims_a[0],lims_b[0]),'--r',label="++")
+#    pylab.plot(radius , nfw.mass(radius,lims_a[0],lims_b[1]),'--m',label="+-")
+#    pylab.plot(radius , nfw.mass(radius,lims_a[1],lims_b[0]),'--g',label="-+")
+    pylab.plot(radius , nfw.mass(radius,lims_a[1],lims_b[1]),'--b',label="--")
+
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xscale('log')
     pylab.yscale('log')
@@ -119,11 +125,11 @@ def rainbow_chi2(a_walk,b_walk,chi2):
 
     my_xs,my_ys = np.mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
 
-    my_resampled = griddata(a_walk, b_walk, -2*(chi2), my_xs, my_ys)
+    my_resampled = griddata(a_walk, b_walk, -chi2, my_xs, my_ys)
     pylab.imshow(my_resampled.T,extent=extent,origin='lower',interpolation='bicubic',cmap='spectral',aspect='auto')
-    pylab.title(r'$\cal{L}$')
-    pylab.xlabel(r'$\ln(R_s)$')
-    pylab.ylabel(r'$\ln(\rho_{0})$')
+    pylab.title(r'$\ln(\cal{L})$')
+    pylab.xlabel(r'$\log(\rho_{0})$')
+    pylab.ylabel(r'$\log(R_s)$')
     pylab.colorbar()
     pylab.savefig('chi2.png',format='png',dpi=300)
     pylab.close()
@@ -145,6 +151,8 @@ def rainbow_likelihood(a_walk,b_walk,chi2):
 
     my_resampled = griddata(a_walk, b_walk, np.exp(chi2), my_xs, my_ys)
     pylab.imshow(my_resampled.T,extent=extent,origin='lower',interpolation='bicubic',cmap='spectral',aspect='auto')
+    pylab.plot(a_walk[0],b_walk[0],'or')
+    pylab.plot(a_walk[-1],b_walk[-1],'ob')
     pylab.title(r'$\cal{L}$')
     pylab.xlabel(r'$\ln(R_s)$')
     pylab.ylabel(r'$\ln(\rho_{0})$')
@@ -170,8 +178,10 @@ def rainbow_loglikelihood(a_walk,b_walk,chi2):
     my_resampled = griddata(a_walk, b_walk, chi2, my_xs, my_ys)
     pylab.imshow(my_resampled.T,extent=extent,origin='lower',interpolation='bicubic',cmap='spectral',aspect='auto')
     pylab.title(r'$\ln(\cal{L})$')
-    pylab.xlabel(r'$\ln(R_s)$')
-    pylab.ylabel(r'$\ln(\rho_{0})$')
+    pylab.xlabel(r'$\rho_{0}$')
+    pylab.ylabel(r'$\R_s$')
+    pylab.xscale('log')
+    pylab.yscale('log')
     pylab.colorbar()
     pylab.savefig('loglikelihood.png',format='png',dpi=300)
     pylab.close()
