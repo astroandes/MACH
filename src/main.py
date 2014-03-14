@@ -33,6 +33,10 @@ sys.stdout.flush()
 os.system('cc potential.c -lm -o  potential.out')
 sys.stdout.write('Done\n')
 
+export = open('./results_'+now+'/results_'+now+'.dat', 'w')
+export.write('#Id,x,y,z,rho0,rho0_max,rho0_min,rs,rs_max,rs_min,r_max,r_vir,c\n')
+export.close()
+
 fit.compile_c_metropolis()
 
 count = 1
@@ -118,11 +122,10 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     else:
         r_vir = 0
         c = -99
-
     export = open('results_'+now+'.dat', 'a')
-    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,mean_density,rho_max, rho_min,scale_radius,rs_max, rs_min,r_vir,c]]
-    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
-
+    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,mean_density,rho_max, rho_min,scale_radius,rs_max, rs_min,radius[-1],r_vir,c]]
+    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'])
+    
     stop = timeit.default_timer()
     time = stop - start
 
