@@ -33,17 +33,18 @@ def metropolis(data,obs,mod,n_iterations, maxi,mini):
     a_walk[0] = guess[0]
     b_walk[0] = guess[1]
     chisq[0] = chi2(obs,mod(data,guess[0],guess[1]))
-        
+    n = len(data)
     for i in range(n_iterations):
 
 	step_a = 1.0
         step_b = 0.1
         a_prime = np.random.normal(a_walk[i],step_a)
         b_prime = np.random.normal(b_walk[i],step_b) 
-    
-        while(b_prime > maxi or b_prime < mini):
-	    b_prime = np.random.normal(b_walk[i],step_b) 
- 
+        if(n > 100):
+            while(b_prime > maxi or b_prime < mini):
+                b_prime = np.random.normal(b_walk[i],step_b)
+                print 'asd'
+
         chi2_init = chi2(obs,mod(data,a_walk[i],b_walk[i]))
         chi2_prime = chi2(obs,mod(data,a_prime,b_prime))
 
