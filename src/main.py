@@ -73,7 +73,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     maximum = np.argmax(potential)
 
     x_center,y_center,z_center=x[maximum],y[maximum],z[maximum]
-    x_center,y_center,z_center=0,0,0
+
     os.system('rm potential.dat positions.dat')
     sys.stdout.write('Done\n')
 
