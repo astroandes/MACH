@@ -24,8 +24,14 @@ def metropolis(data,obs,mod,n_iterations, maxi,mini):
 
     sys.stdout.write('\rRunning Metropolis-Hastings Algorithm... ')
     sys.stdout.flush()
-
+    
     guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
+
+    if guess[1] > maxi:
+        guess[1] = maxi
+    if guess[1] < mini:
+        guess[1] = mini 
+
     a_walk = np.empty((n_iterations+1))
     b_walk = np.empty((n_iterations+1))
     chisq = np.empty((n_iterations+1))
@@ -33,18 +39,16 @@ def metropolis(data,obs,mod,n_iterations, maxi,mini):
     a_walk[0] = guess[0]
     b_walk[0] = guess[1]
     chisq[0] = chi2(obs,mod(data,guess[0],guess[1]))
-    n = len(data)
+    
     for i in range(n_iterations):
 
 	step_a = 1.0
         step_b = 0.1
         a_prime = np.random.normal(a_walk[i],step_a)
         b_prime = np.random.normal(b_walk[i],step_b) 
-        if(n > 100):
-            while(b_prime > maxi or b_prime < mini):
-                b_prime = np.random.normal(b_walk[i],step_b)
-                print 'asd'
-
+        
+        while(b_prime > maxi or b_prime < mini):
+            b_prime = np.random.normal(b_walk[i],step_b)
         chi2_init = chi2(obs,mod(data,a_walk[i],b_walk[i]))
         chi2_prime = chi2(obs,mod(data,a_prime,b_prime))
 
