@@ -76,8 +76,6 @@ def logmass(radius, mass, parameters,lims_a,lims_b):
     pylab.plot(radius, nfw.mass(radius,parameters[0],parameters[1]),'k',label="NFW profile")
 
     pylab.plot(radius , nfw.mass(radius,lims_a[0],lims_b[0]),'--r',label="++")
-#    pylab.plot(radius , nfw.mass(radius,lims_a[0],lims_b[1]),'--m',label="+-")
-#    pylab.plot(radius , nfw.mass(radius,lims_a[1],lims_b[0]),'--g',label="-+")
     pylab.plot(radius , nfw.mass(radius,lims_a[1],lims_b[1]),'--b',label="--")
 
     pylab.legend(loc=4, borderaxespad=0.5)
