@@ -49,7 +49,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     sys.stdout.flush()
 
     path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
-    data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=16)
+    data = np.loadtxt(open(path, 'r'), delimiter=",")#,skiprows=16)
 
     x = data[:,int(sys.argv[2])]
     y = data[:,int(sys.argv[3])]
