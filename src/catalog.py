@@ -5,7 +5,7 @@ from scipy.optimize import curve_fit
 def distance(x1,y1,z1,x2,y2,z2):
     return np.sqrt(((x1-x2)**2.0)+((y1-y2)**2.0)+((z1-z2)**2.0))
 
-mcmc = np.loadtxt(sys.argv[1],delimiter=' ')
+mcmc = np.loadtxt(sys.argv[1],delimiter=',')
 bdmv = np.loadtxt(sys.argv[2],delimiter=',')
 
 mcmc_id = mcmc[:,0]
@@ -20,10 +20,6 @@ mcmc_rs_max = mcmc[:,8]
 mcmc_rs_min = mcmc[:,9]
 mcmc_rvir = mcmc[:,10]
 mcmc_c = mcmc[:,11]
-
-pylab.plot(np.log10(mcmc_rho0),np.log10(f(mcmc_rho0,param[0],param[1],param[2])),'or')
-pylab.plot(np.log10(mcmc_rho0),np.log10(mcmc_rs),'.k')
-pylab.show()
 
 bdmv_id = bdmv[:,0]
 bdmv_x = bdmv[:,1]
@@ -116,7 +112,7 @@ sigma = np.array([good_used_rs_max-good_used_rs,good_used_rs-good_used_rs_min])
 
 pylab.plot(bdmv_rs, used_rs,'.r')
 pylab.plot(bdmv_rs, bdmv_rs,'-k')
-pylab.errorbar(good_bdmv_rs,good_used_rs,yerr=sigma,fmt='.b',elinewidth=1,capsize=2,capthick=1)
+pylab.plot(good_bdmv_rs,good_used_rs,'.b')
 pylab.xscale('log')
 pylab.yscale('log')
 pylab.xlim([0,bdmv_rs[np.argmax(bdmv_rs)]])
@@ -125,6 +121,19 @@ pylab.title('Scale Radius')
 pylab.xlabel('BDMV')
 pylab.ylabel('MCMC')
 pylab.savefig('rs.png',format='png',dpi=600)
+pylab.close()
+
+pylab.plot(bdmv_rs, used_rs,'.r')
+pylab.plot(bdmv_rs, bdmv_rs,'-k')
+pylab.errorbar(good_bdmv_rs,good_used_rs,yerr=sigma,fmt='.b',elinewidth=1,capsize=2,capthick=1)
+pylab.xscale('log')
+pylab.yscale('log')
+pylab.xlim([0,bdmv_rs[np.argmax(bdmv_rs)]])
+pylab.ylim([0,bdmv_rs[np.argmax(bdmv_rs)]])
+pylab.title('Scale Radius')
+pylab.xlabel('BDMV')
+pylab.ylabel('MCMC')
+pylab.savefig('rs_errorbars.png',format='png',dpi=600)
 pylab.close()
 
 print 'Good Haloes: '+str(len(good_used_x))
