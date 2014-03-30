@@ -49,7 +49,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     sys.stdout.flush()
 
     path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
-    data = np.loadtxt(open(path, 'r'), delimiter=",")#,skiprows=16)
+    data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=16)
 
     x = data[:,int(sys.argv[2])]
     y = data[:,int(sys.argv[3])]
@@ -85,7 +85,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     density = [(mass[i+1]-mass[i-1])/((r_values[i+1]-r_values[i-1])*(4.0 * np.pi * r_values[i]**2)) for i in range(1,len(mass)-1)]
     r_density = [radius[i] for i in range(1,len(mass)-1)]
 
-    n_iterations = 30000
+    n_iterations = 60000
     a,b,a_walk,b_walk,chi2 = fit.metropolis(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations,np.log(radius[-1]),np.log(radius[0]))
     mean_density = np.exp(a)
     scale_radius = np.exp(b)
