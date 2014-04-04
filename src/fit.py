@@ -11,6 +11,58 @@ from emcee.utils import sample_ball
 def chi2(obs,mod):
     return np.sum((obs-mod)**2)
 
+# Does a maximum-likelihood estimate using the Metropolis-Hastings algorithm for a model with one parameters.
+# Requires:
+#     data: free variable data
+#     obs: observed data
+#     mod: expected data from the model
+#     n_iterations: number of steps for the random walk
+# Returns:
+#     best parameter, the random walk for the parameter and the chi squared for each step
+
+def metropolis_one(data,obs,mod,n_iterations):
+
+    sys.stdout.write('\rRunning Metropolis-Hastings Algorithm... ')
+    sys.stdout.flush()
+    
+    guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
+
+    a_walk = np.empty((n_iterations+1))
+    chisq = np.empty((n_iterations+1))
+
+    a_walk[0] = guess[0]
+    chisq[0] = chi2(obs,mod(data,guess[0]))
+    
+    for i in range(n_iterations):
+
+	step_a = 0.1
+        a_prime = np.random.normal(a_walk[i],step_a)
+        chi2_init = chi2(obs,mod(data,a_walk[i]))
+        chi2_prime = chi2(obs,mod(data,a_prime))
+        
+        ratio = (chi2_init - chi2_prime)
+
+        if (ratio > 0.0):
+            a_walk[i+1] = a_prime
+            chisq[i+1] = chi2_prime
+
+        else:
+            beta = np.random.random()
+            if (ratio > np.log(beta)):
+                a_walk[i+1] = a_prime
+                chisq[i+1] = chi2_prime
+            else:
+                a_walk[i+1] = a_walk[i]
+                chisq[i+1] = chisq[i]
+
+    n = np.argmin(chisq)
+
+    best_a = a_walk[n]
+
+    sys.stdout.write('Done\n')
+
+    return best_a,a_walk,chisq
+
 # Does a maximum-likelihood estimate using the Metropolis-Hastings algorithm for a model with two parameters.
 # Requires:
 #     data: free variable data
