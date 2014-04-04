@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass aastex
+\textclass article
 \use_default_options true
 \begin_modules
 theorems-ams
@@ -77,24 +77,8 @@ This is Article
 Christian Poveda Ruiz
 \end_layout
 
-\begin_layout Abstract
-FIXME: Write abstract
-\end_layout
-
 \begin_layout Section
 Introduction
-\end_layout
-
-\begin_layout Standard
-FIXME: Multidark
-\end_layout
-
-\begin_layout Standard
-FIXME: NFW profile
-\end_layout
-
-\begin_layout Standard
-FIXME: MCMC
 \end_layout
 
 \begin_layout Section
@@ -103,21 +87,6 @@ State of Art
 
 \begin_layout Section
 What did I do?
-\end_layout
-
-\begin_layout Standard
-FIXME: Which simulation? 
-\begin_inset Formula $m=1.7\times10^{11}\ M_{\odot}$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $ $
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -192,11 +161,15 @@ The last part of the process consists in fitting the NFW mass profile to
 \begin_inset Formula ${\cal L}\left(\rho_{0},r_{s}\right)=\exp\left(-\frac{1}{2}\chi^{2}\left(\rho_{0},r_{s}\right)\right)$
 \end_inset
 
-, where 
-\begin_inset Formula $\chi^{2}\left(\rho_{0},r_{s}\right)=\sum\limits _{n}\left|m_{n}-m\left(\boldsymbol{r}_{n}^{\prime},\rho_{0},r_{s}\right)\right|^{2}$
+ where 
+\begin_inset Formula 
+\[
+\chi^{2}\left(\rho_{0},r_{s}\right)=\sum\limits _{n}\left|m_{n}-m\left(r_{n}^{\prime},\rho_{0},r_{s}\right)\right|^{2}
+\]
+
 \end_inset
 
-, and take the values of 
+And taking the values of 
 \begin_inset Formula $\rho_{0}$
 \end_inset
 
@@ -205,6 +178,23 @@ The last part of the process consists in fitting the NFW mass profile to
 \end_inset
 
  where the Likelihood is maximum.
+ After this the concentration 
+\begin_inset Formula $c=r_{vir}/r_{s}$
+\end_inset
+
+ is computed for each halo.
+ Finally we compare this results with the results obtaned by BDM, since
+ the number of halos obtained by FOF and BDM is different, each BDM halo
+ gets related with the nearest halo in FOF.
+ We compute two concentrations, one where the overdensity limit is 
+\begin_inset Formula $360\rho_{back}$
+\end_inset
+
+ (like in BDMV) an other where the overdensity limit is 
+\begin_inset Formula $740\rho_{back}$
+\end_inset
+
+ (like in BDMW).
 \end_layout
 
 \begin_layout Section
@@ -215,16 +205,8 @@ Results
 Trial Problem with several Generated Halos 
 \end_layout
 
-\begin_layout Standard
-FIXME: I tested it with HaloGenerator
-\end_layout
-
 \begin_layout Subsection
-Results from the simulation
-\end_layout
-
-\begin_layout Standard
-FIXME: Plot with error bars
+Results from the simulations
 \end_layout
 
 \begin_layout Standard
