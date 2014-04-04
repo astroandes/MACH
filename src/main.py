@@ -82,17 +82,52 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     mass = mass_element*np.arange(1,n_points,1)
     radius = np.delete(r_values,0)
 
-    density = [(mass[i+1]-mass[i-1])/((r_values[i+1]-r_values[i-1])*(4.0 * np.pi * r_values[i]**2)) for i in range(1,len(mass)-1)]
-    r_density = [radius[i] for i in range(1,len(mass)-1)]
+    avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
+    rho_back = mass_element*(2048.0/1000.0)**3
+
+    bdmv = 360.0
+    bdmw = 740.0
+
+    bdmv_index = np.argmin(np.abs(avg_density-bdmv*rho_back))
+    bdmw_index = np.argmin(np.abs(avg_density-bdmw*rho_back))
+
+    if np.argmin(np.abs(avg_density-bdmv*rho_back)) != len(avg_density)-1:
+        r_bdmv = radius[bdmv_index]
+    else:
+        r_bdmv = radius[-1]
+        bdmv_index = -1
+
+    if np.argmin(np.abs(avg_density-bdmw*rho_back)) != len(avg_density)-1:
+        r_bdmw = radius[bdmw_index]
+    else:
+        r_bdmw = radius[-1]
+        bdmw_index = -1
+    
+    bdmv_mass = np.split(mass,bdmv_index)[0]
+    bdmv_radius = np.split(radius,bdmv_index)[0]
+
+    bdmv_mass = bdmv_mass/bdmv_mass[-1]
+    bdmv_radius = bdmv_radius/bdmv_radius[-1]
+    
+    bdmw_mass = np.split(mass,bdmw_index)[0]
+    bdmw_radius = np.split(radius,bdmw_index)[0]
+
+    bdmw_mass = bdmw_mass/bdmw_mass[-1]
+    bdmw_radius = bdmw_radius/bdmw_radius[-1]
+
+    pylab.scatter(bdmv_radius,bdmv_mass,c='b')
+    pylab.scatter(bdmw_radius,bdmw_mass,c='r')
+    pylab.show()
 
     n_iterations = 60000
-    a,b,a_walk,b_walk,chi2 = fit.metropolis(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations,np.log(radius[-1]),np.log(radius[0]))
-    mean_density = np.exp(a)
-    scale_radius = np.exp(b)
-    parameters = np.array([mean_density,scale_radius])
+    log_bdmv,bdmv_walk,bdmv_chi2 = fit.metropolis_one(np.log(bdmv_radius),np.log(bdmv_mass),nfw.loglogmass_norm,n_iterations)
+    log_bdmw,bdmw_walk,bdmw_chi2 = fit.metropolis_one(np.log(bdmw_radius),np.log(bdmw_mass),nfw.loglogmass_norm,n_iterations)
+    
+    c_bdmv = np.exp(log_bdmv)
+    c_bdmw = np.exp(log_bdmw)
 
-    rho_max, rho_min = np.exp(fit.error_bars(a_walk,a,'log'))
-    rs_max, rs_min = np.exp(fit.error_bars(b_walk,b,'log'))
+    bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,c_bdmv,'log'))
+    bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,c_bdmw,'log'))
     
     if (plt == 1):
 
@@ -100,26 +135,15 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         os.chdir(results_folder)
         plotter.halo(x,y,z,x_center,y_center,z_center)
         sys.stdout.write('\rPlotting results... ')
+        plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
+        plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
         sys.stdout.flush()
-        plotter.mass(radius, mass, parameters)
-        plotter.logmass(radius, mass, parameters,[rho_max,rho_min],[rs_max,rs_min])
-        plotter.logdensity(r_density, density, parameters)
-        plotter.rainbow_chi2(np.log10(np.exp(a_walk)),np.log10(np.exp(b_walk)),chi2)
-#        plotter.random_walk(a_walk,b_walk,n_iterations)
         sys.stdout.write('Done\n')
         os.chdir('../')
 
     else:
         os.chdir('./results_'+now+'/')
 
-    avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
-
-    if np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3))) != len(avg_density)-1:
-        r_vir = radius[np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3)))]
-        c = r_vir/scale_radius
-    else:
-        r_vir = 0
-        c = -99
     export = open('results_'+now+'.csv', 'a')
     line = [[int(filename.split('_')[1]),x_center,y_center,z_center,mean_density,rho_max, rho_min,scale_radius,rs_max, rs_min,radius[-1],r_vir,c]]
     np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'],delimiter=',')
