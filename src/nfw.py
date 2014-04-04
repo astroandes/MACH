@@ -41,3 +41,6 @@ def loglogmass(logr,loga,logb):
 
 def loglogdensity(logr,loga,logb):
     return loga+logb-logr-2*np.log(1+np.exp(logr-logb))
+
+def loglogmass_norm(logr_norm,logc):
+    return np.log( np.log(1+np.exp(logr_norm+logc))-((1+np.exp(-logr_norm-logc)))**(-1))-np.log( np.log(np.log(1+np.exp(logc))) - (1+np.exp(-logc))**(-1) )
