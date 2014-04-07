@@ -14,6 +14,10 @@ def mass(r,a,b):
 def density(r,a,b):
     return a*((r/b)*(1+(r/b))**2)**(-1)
 
+def mass_norm(r_norm,c):
+    return ( np.log(1+r_norm*c)-r_norm*c/(1+r_norm*c))/( np.log(1+c)-c/(1+c))
+
+
 # Profiles in logarithmic scale
 # Parameters:
 #     logr: numpy array with the logarithm of the radial distances from the center of the halo
@@ -43,4 +47,4 @@ def loglogdensity(logr,loga,logb):
     return loga+logb-logr-2*np.log(1+np.exp(logr-logb))
 
 def loglogmass_norm(logr_norm,logc):
-    return np.log( np.log(1+np.exp(logr_norm+logc))-((1+np.exp(-logr_norm-logc)))**(-1))-np.log( np.log(np.log(1+np.exp(logc))) - (1+np.exp(-logc))**(-1) )
+    return np.log(( np.log(1+np.exp(logr_norm+logc))-np.exp(logr_norm+logc)/(1+np.exp(logr_norm+logc)))/( np.log(np.log(1+np.exp(logc)))-np.exp(logc)/(1+np.exp(logc)) ))

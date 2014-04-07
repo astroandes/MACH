@@ -1,6 +1,8 @@
 import numpy as np, pylab,sys, nfw
 from matplotlib.mlab import griddata
 
+angle = np.arange(0,2*np.pi,0.01)
+
 # Plots a halo
 # Requires:
 #     x,y,z: arrays with the positions for each particle
@@ -8,13 +10,14 @@ from matplotlib.mlab import griddata
 # Returns:
 #     Three files with graphics in the planes x-y, y-z and z-x of the halo
 
-def halo(x,y,z,x_center,y_center,z_center):
+def halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw):
     
     sys.stdout.write('\rPlotting halo... ')
     sys.stdout.flush()
     pylab.plot(x , y, 'k.')
-    pylab.plot(x_center , y_center, 'ro', label="Potential Minumum")
-    pylab.plot(np.average(x) , np.average(y), 'bo', label="Center of Mass")
+    pylab.plot(x_center , y_center, 'ko')
+    pylab.plot(r_bdmv*np.cos(angle)+x_center,r_bdmv*np.sin(angle)+y_center,'--b',label='BDMV')
+    pylab.plot(r_bdmw*np.cos(angle)+x_center,r_bdmw*np.sin(angle)+y_center,'--r',label='BDMW')
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('x (Mpc/H)')
     pylab.ylabel('y (Mpc/H)')
@@ -23,8 +26,9 @@ def halo(x,y,z,x_center,y_center,z_center):
     pylab.close()
 
     pylab.plot(y , z, 'k.')
-    pylab.plot(y_center , z_center, 'ro', label="Potential Minumum")
-    pylab.plot(np.average(y) , np.average(z), 'bo',label="Center of Mass")
+    pylab.plot(y_center , z_center, 'ko')
+    pylab.plot(r_bdmv*np.cos(angle)+y_center,r_bdmv*np.sin(angle)+z_center,'--b',label='BDMV')
+    pylab.plot(r_bdmw*np.cos(angle)+y_center,r_bdmw*np.sin(angle)+z_center,'--r',label='BDMW')
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('y (Mpc/H)')
     pylab.ylabel('z (Mpc/H)')
@@ -33,8 +37,9 @@ def halo(x,y,z,x_center,y_center,z_center):
     pylab.close()
 
     pylab.plot(z , x, 'k.')
-    pylab.plot(z_center , x_center, 'ro', label="Potential Minumum")
-    pylab.plot(np.average(z) , np.average(x), 'bo',label="Center of Mass")
+    pylab.plot(z_center , x_center, 'ko')
+    pylab.plot(r_bdmv*np.cos(angle)+z_center,r_bdmv*np.sin(angle)+x_center,'--b',label='BDMV')
+    pylab.plot(r_bdmw*np.cos(angle)+z_center,r_bdmw*np.sin(angle)+x_center,'--r',label='BDMW')
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('z (Mpc/H)')
     pylab.ylabel('x (Mpc/H)')
@@ -85,6 +90,18 @@ def logmass(radius, mass, parameters,lims_a,lims_b):
     pylab.ylabel('Mass (10^11 Solar Masses)')
     pylab.title('Mass (log-log)')
     pylab.savefig('log_mass.png',format='png',dpi=300)
+    pylab.close()
+
+def mass_norm(radius,mass,c,c_max,c_min,name):
+    
+    pylab.plot(radius, mass,'.r',label="Real Norm Mass")
+    pylab.plot(radius, nfw.mass_norm(radius,c),'k',label="NFW profile")
+    pylab.plot(radius , nfw.mass_norm(radius,c_max),'--r',label="Max param")
+    pylab.plot(radius , nfw.mass_norm(radius,c_min),'--b',label="Min param")
+    pylab.legend(loc=4, borderaxespad=0.5)
+    pylab.xlabel('Radius (Normalized)')
+    pylab.ylabel('Mass (Normalized)')
+    pylab.savefig('mass_norm_'+name+'.png',format='png',dpi=300)
     pylab.close()
 
 # Plots the NFW density profile in logarithmic scale 

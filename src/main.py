@@ -35,7 +35,7 @@ sys.stdout.write('Done\n')
 
 export = open('./results_'+now+'/results_'+now+'.csv', 'w')
 
-export.write('#Id,x_center,y_center,z_center,c_bdmv,c_bdmv_max,c_bdmv_min,c_bdmw,c_bdmw_max,c_bdmw_min,r_vir_bdmv,r_vir_bdmw,c\n')
+export.write('#Id,x_center,y_center,z_center,c_bdmv,c_bdmv_max,c_bdmv_min,c_bdmw,c_bdmw_max,c_bdmw_min,r_vir_bdmv,r_vir_bdmw\n')
 export.close()
 
 count = 1
@@ -102,37 +102,33 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         r_bdmw = radius[-1]
         bdmw_index = -1
     
-    bdmv_mass = np.split(mass,bdmv_index)[0]
-    bdmv_radius = np.split(radius,bdmv_index)[0]
+    bdmv_mass = np.resize(mass,bdmv_index)
+    bdmv_radius = np.resize(radius,bdmv_index)
 
     bdmv_mass = bdmv_mass/bdmv_mass[-1]
     bdmv_radius = bdmv_radius/bdmv_radius[-1]
     
-    bdmw_mass = np.split(mass,bdmw_index)[0]
-    bdmw_radius = np.split(radius,bdmw_index)[0]
+    bdmw_mass = np.resize(mass,bdmw_index)
+    bdmw_radius = np.resize(radius,bdmw_index)
 
     bdmw_mass = bdmw_mass/bdmw_mass[-1]
     bdmw_radius = bdmw_radius/bdmw_radius[-1]
 
-    pylab.scatter(bdmv_radius,bdmv_mass,c='b')
-    pylab.scatter(bdmw_radius,bdmw_mass,c='r')
-    pylab.show()
-
     n_iterations = 60000
     log_bdmv,bdmv_walk,bdmv_chi2 = fit.metropolis_one(np.log(bdmv_radius),np.log(bdmv_mass),nfw.loglogmass_norm,n_iterations)
     log_bdmw,bdmw_walk,bdmw_chi2 = fit.metropolis_one(np.log(bdmw_radius),np.log(bdmw_mass),nfw.loglogmass_norm,n_iterations)
-    
+
     c_bdmv = np.exp(log_bdmv)
     c_bdmw = np.exp(log_bdmw)
-
-    bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,c_bdmv,'log'))
-    bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,c_bdmw,'log'))
+    
+    bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,log_bdmv,'log'))
+    bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,log_bdmw,'log'))
     
     if (plt == 1):
 
         os.system('mkdir '+results_folder)
         os.chdir(results_folder)
-        plotter.halo(x,y,z,x_center,y_center,z_center)
+        plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw)
         sys.stdout.write('\rPlotting results... ')
         plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
         plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
