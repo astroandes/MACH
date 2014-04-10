@@ -4,11 +4,12 @@ from scipy.optimize import fsolve
 # Gets the mean-density, scale radius and virial radius for several haloes
 # It must be executed with the following command line:
 #
-#      python main.py directory #x #y #x noplot*
+#      python main.py directory #x #y #x skip noplot*
 #
 # Where:
 #      directory: is the path of the directory with the files with the positions of the haloes
 #      #x, #y, #z: are the column position of each coordinate in the files (for Multidark is 2 3 4)
+#      skip: number of rows to skip (For Multidark is 16) 
 #      noplot: is an optional parameter, if it is added the code will not make any graphics
 #
 # Have fun! 
@@ -20,7 +21,7 @@ now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 
 plt = 1
 try:
-    if (sys.argv[5]=='noplot'):
+    if (sys.argv[6]=='noplot'):
         print 'No Plotting mode enabled'
         plt = 0
 except:
@@ -48,7 +49,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     sys.stdout.flush()
 
     path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
-    data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=16)
+    data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(sys.argv[5]))
 
     x = data[:,int(sys.argv[2])]
     y = data[:,int(sys.argv[3])]
@@ -132,6 +133,13 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         sys.stdout.write('\rPlotting results... ')
         plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
         plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
+	pylab.scatter(bdmv_walk,bdmv_chi2,label='BDMV')
+	pylab.scatter(bdmw_walk,bdmw_chi2,c='r',label='BDMW')
+ 	pylab.legend(loc=4, borderaxespad=0.5)
+        pylab.xlabel('$c$')
+        pylab.ylabel('$\chi ^2$')
+	pylab.savefig('chi2.png',dpi=300)
+	pylab.close()
         sys.stdout.flush()
         sys.stdout.write('Done\n')
         os.chdir('../')
