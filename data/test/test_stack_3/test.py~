@@ -24,7 +24,6 @@ pylab.savefig('bdmv.png',dpi=300)
 pylab.close()
 
 pylab.title('$r_s$')
-pylab.plot(rs,rs,'-k')
 pylab.plot(rs,rs_bdmw,'or')
 pylab.xlabel('Real')
 pylab.ylabel('BDMW')
