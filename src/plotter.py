@@ -59,8 +59,8 @@ def halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw):
 def mass(radius, mass, parameters):
     
     pylab.plot(radius , mass,'.r',label="Real Mass")
-    pylab.plot(radius , nfw.mass(radius,parameters[0],parameters[1]),'k',label="NFW profile")
-    pylab.legend(loc=4, borderaxespad=0.5)
+#    pylab.plot(radius , nfw.mass(radius,parameters[0],parameters[1]),'k',label="NFW profile")
+#    pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('Radius (Mpc/H)')
     pylab.ylabel('Mass (10^11 Solar Masses)')
     pylab.title('Mass')

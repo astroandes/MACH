@@ -4,12 +4,11 @@ from scipy.optimize import fsolve
 # Gets the mean-density, scale radius and virial radius for several haloes
 # It must be executed with the following command line:
 #
-#      python main.py directory #x #y #x skip noplot*
+#      python main.py directory #x #y #x noplot*
 #
 # Where:
 #      directory: is the path of the directory with the files with the positions of the haloes
 #      #x, #y, #z: are the column position of each coordinate in the files (for Multidark is 2 3 4)
-#      skip: number of rows to skip (For Multidark is 16) 
 #      noplot: is an optional parameter, if it is added the code will not make any graphics
 #
 # Have fun! 
@@ -21,7 +20,7 @@ now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 
 plt = 1
 try:
-    if (sys.argv[6]=='noplot'):
+    if (sys.argv[5]=='noplot'):
         print 'No Plotting mode enabled'
         plt = 0
 except:
@@ -35,9 +34,10 @@ os.system('cc potential.c -lm -o  potential.out')
 sys.stdout.write('Done\n')
 
 export = open('./results_'+now+'/results_'+now+'.csv', 'w')
-
-export.write('#Id,x_center,y_center,z_center,c_bdmv,c_bdmv_max,c_bdmv_min,c_bdmw,c_bdmw_max,c_bdmw_min,r_vir_bdmv,r_vir_bdmw\n')
+export.write('#Id,x,y,z,rho0,rho0_max,rho0_min,rs,rs_max,rs_min,r_max,r_vir,c\n')
 export.close()
+
+fit.compile_c_metropolis()
 
 count = 1
 for filename in os.listdir('./'+str(sys.argv[1])):
@@ -49,7 +49,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     sys.stdout.flush()
 
     path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
-    data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(sys.argv[5]))
+    data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=16)
 
     x = data[:,int(sys.argv[2])]
     y = data[:,int(sys.argv[3])]
@@ -82,78 +82,47 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     mass = mass_element*np.arange(1,n_points,1)
     radius = np.delete(r_values,0)
 
-    avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
-    rho_back = mass_element*(2048.0/1000.0)**3
-
-    bdmv = 360.0
-    bdmw = 740.0
-
-    bdmv_index = np.argmin(np.abs(avg_density-bdmv*rho_back))
-    bdmw_index = np.argmin(np.abs(avg_density-bdmw*rho_back))
-    r_bdmv = radius[bdmv_index]
-    r_bdmw = radius[bdmw_index]
-
-    '''
-    if np.argmin(np.abs(avg_density-bdmv*rho_back)) != len(avg_density)-1:
-        r_bdmv = radius[bdmv_index]
-    else:
-        r_bdmv = radius[-1]
-        bdmv_index = -1
-
-    if np.argmin(np.abs(avg_density-bdmw*rho_back)) != len(avg_density)-1:
-        r_bdmw = radius[bdmw_index]
-    else:
-        r_bdmw = radius[-1]
-        bdmw_index = -1
-    '''
-
-    bdmv_mass = np.resize(mass,bdmv_index)
-    bdmv_radius = np.resize(radius,bdmv_index)
-
-    bdmv_mass = bdmv_mass/bdmv_mass[-1]
-    bdmv_radius = bdmv_radius/bdmv_radius[-1]
-    
-    bdmw_mass = np.resize(mass,bdmw_index)
-    bdmw_radius = np.resize(radius,bdmw_index)
-
-    bdmw_mass = bdmw_mass/bdmw_mass[-1]
-    bdmw_radius = bdmw_radius/bdmw_radius[-1]
+    density = [(mass[i+1]-mass[i-1])/((r_values[i+1]-r_values[i-1])*(4.0 * np.pi * r_values[i]**2)) for i in range(1,len(mass)-1)]
+    r_density = [radius[i] for i in range(1,len(mass)-1)]
 
     n_iterations = 60000
-    log_bdmv,bdmv_walk,bdmv_chi2 = fit.metropolis_one(np.log(bdmv_radius),np.log(bdmv_mass),nfw.loglogmass_norm,n_iterations)
-    log_bdmw,bdmw_walk,bdmw_chi2 = fit.metropolis_one(np.log(bdmw_radius),np.log(bdmw_mass),nfw.loglogmass_norm,n_iterations)
+    a,b,a_walk,b_walk,chi2 = fit.metropolis(np.log(radius),np.log(mass),nfw.loglogmass,n_iterations,np.log(radius[-1]),np.log(radius[0]))
+    mean_density = np.exp(a)
+    scale_radius = np.exp(b)
+    parameters = np.array([mean_density,scale_radius])
 
-    c_bdmv = np.exp(log_bdmv)
-    c_bdmw = np.exp(log_bdmw)
-    
-    bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,log_bdmv,'log'))
-    bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,log_bdmw,'log'))
+    rho_max, rho_min = np.exp(fit.error_bars(a_walk,a,'log'))
+    rs_max, rs_min = np.exp(fit.error_bars(b_walk,b,'log'))
     
     if (plt == 1):
 
         os.system('mkdir '+results_folder)
         os.chdir(results_folder)
-        plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw)
+        plotter.halo(x,y,z,x_center,y_center,z_center,0,0)
         sys.stdout.write('\rPlotting results... ')
-        plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
-        plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
-	pylab.scatter(bdmv_walk,bdmv_chi2,label='BDMV')
-	pylab.scatter(bdmw_walk,bdmw_chi2,c='r',label='BDMW')
- 	pylab.legend(loc=4, borderaxespad=0.5)
-        pylab.xlabel('$c$')
-        pylab.ylabel('$\chi ^2$')
-	pylab.savefig('chi2.png',dpi=300)
-	pylab.close()
         sys.stdout.flush()
+        plotter.mass(radius, mass, parameters)
+        plotter.logmass(radius, mass, parameters,[rho_max,rho_min],[rs_max,rs_min])
+        plotter.logdensity(r_density, density, parameters)
+        plotter.rainbow_chi2(np.log10(np.exp(a_walk)),np.log10(np.exp(b_walk)),chi2)
+#        plotter.random_walk(a_walk,b_walk,n_iterations)
         sys.stdout.write('Done\n')
         os.chdir('../')
 
     else:
         os.chdir('./results_'+now+'/')
 
+    avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
+
+    if np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3))) != len(avg_density)-1:
+        r_vir = radius[np.argmin(np.abs(avg_density-200*(mass_element*(2048.0/1000.0)**3)))]
+        c = r_vir/scale_radius
+    else:
+        r_vir = 0
+        c = -99
     export = open('results_'+now+'.csv', 'a')
-    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,c_bdmv,bdmv_max,bdmv_min,c_bdmw,bdmw_max,bdmw_min,r_bdmv,r_bdmw]]
-    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'],delimiter=',')
+    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,mean_density,rho_max, rho_min,scale_radius,rs_max, rs_min,radius[-1],r_vir,c]]
+    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'],delimiter=',')
     
     stop = timeit.default_timer()
     time = stop - start
