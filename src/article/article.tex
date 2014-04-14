@@ -1,24 +1,16 @@
 %% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[twocolumn,english]{paper}
+\documentclass[english]{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage[letterpaper]{geometry}
 \geometry{verbose,tmargin=2.65cm,bmargin=2.65cm,lmargin=2.65cm,rmargin=2.65cm}
 \setlength{\parindent}{0bp}
+\usepackage{float}
 \usepackage{amsthm}
 \usepackage{amsmath}
-\usepackage{graphicx}
-\usepackage{setspace}
-\onehalfspacing
 
 \makeatletter
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% A simple dot to overcome graphicx limitations
-\newcommand{\lyxdot}{.}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
@@ -32,28 +24,25 @@
 
 
 \author{Christian Poveda Ruiz}
+
 \maketitle
-\begin{abstract}
-FIXME: Write abstract
-\end{abstract}
 
 \section{Introduction}
 
-FIXME: Multidark
+The Navarro-Frenk-White mass profile can be normalized respect to
+the virial mass and written in function of the normalized radius respect
+to the virial radius $r_{norm}$ and the concentration $c$ 
 
-FIXME: NFW profile
-
-FIXME: MCMC
+\[
+m_{nfw}\left(r_{norm},c\right)=A\left[\log\left(1+r_{norm}c\right)-\left(\frac{1}{r_{norm}c}+1\right)^{-1}\right]
+\]
+Where $A$ is a normalization constant such that $m_{nfw}\left(1,c\right)=1$
 
 
 \section{State of Art}
 
 
 \section{What did I do?}
-
-FIXME: Which simulation? $m=1.7\times10^{11}\ M_{\odot}$ 
-
-$ $
 
 In order to obtain a mass profile for each halo in funcion of the
 radius, the center of each halo must be calculated. However the center
@@ -62,51 +51,61 @@ some haloes are highly irregular, is more convenient to take the gravitational
 potential for each particle
 
 \[
-\phi\left(\boldsymbol{r}_{n}\right)=-\sum_{j\neq i}\frac{1}{\left\Vert \boldsymbol{r}_{n}-\boldsymbol{r}_{j}\right\Vert }
+\phi\left(\boldsymbol{R}_{n}\right)=-\sum_{j\neq n}\frac{1}{\left\Vert \boldsymbol{R}_{n}-\boldsymbol{R}_{j}\right\Vert }
 \]
-Take $\boldsymbol{r}_{0}=\min\left(\phi\left(\boldsymbol{r}_{n}\right)\right)$
-as the center then define new coordinates $\boldsymbol{r}_{n}^{\prime}=\boldsymbol{r}_{0}-\boldsymbol{r}_{n}$,
-this $\boldsymbol{r}_{0}$ will be in the most relevant region for
-the dynamics of each halo. Organizing the $\left\{ \boldsymbol{r}_{n}^{\prime}\right\} $
-in crescent order, the accumulated mass for each $\boldsymbol{r}_{n}^{\prime}$
-will be $m_{n}=nm$.
+Take $\boldsymbol{R}_{0}=\min\left(\phi\left(\boldsymbol{R}_{n}\right)\right)$
+as the center then define new coordinates $\boldsymbol{R}_{n}^{\prime}=\boldsymbol{R}_{0}-\boldsymbol{R}_{n}$,
+this $\boldsymbol{R}_{0}$ will be in the most relevant region for
+the dynamics of each halo. Organizing the $\left\{ \boldsymbol{R}_{n}^{\prime}\right\} $
+in crescent order, the accumulated mass for each $\boldsymbol{R}_{n}^{\prime}$
+will be $M_{n}=nM$.
 
-$ $
+\begin{figure}[H]
+\caption{FIXME: Mass profile of a halo}
+\end{figure}
 
-FIXME: Mass profile of a halo
 
-$ $
-
-The last part of the process consists in fitting the NFW mass profile
-to the $m_{n}$ data using the Metropolis-Hastings algorithm to sample
-the Likelihood ${\cal L}\left(\rho_{0},r_{s}\right)=\exp\left(-\frac{1}{2}\chi^{2}\left(\rho_{0},r_{s}\right)\right)$,
-where $\chi^{2}\left(\rho_{0},r_{s}\right)=\sum\limits _{n}\left|m_{n}-m\left(\boldsymbol{r}_{n}^{\prime},\rho_{0},r_{s}\right)\right|^{2}$,
-and take the values of $\rho_{0}$ and $r_{s}$ where the Likelihood
-is maximum.
+Then the virial radius is obtained and the particles that are beyond
+the virial radius are removed. After that both the mass and the radius
+get normalized respect to the mass and virial radius, we will call
+these new variables $m_{n}$ and $r_{n}$. The last part of the process
+consists in fitting the normalized NFW mass profile to the $m_{n}$
+data using the Metropolis-Hastings algorithm to sample the Likelihood
+${\cal L}\left(c\right)=\exp\left(-\chi^{2}\left(c\right)\right)$
+where 
+\[
+\chi^{2}\left(c\right)=\sum\limits _{n}\left|m_{n}-m_{nfw}\left(r_{n},c\right)\right|^{2}
+\]
+And taking the values of $c$ where the Likelihood is maximum. Finally
+we compare this results with the values obtaned by BDM, since the
+number of halos obtained by FOF and BDM is different, each BDM halo
+gets related with the nearest halo in FOF. We compute two concentrations,
+one where the overdensity limit is $360\rho_{back}$ (like in BDMV)
+an other where the overdensity limit is $740\rho_{back}$ (like in
+BDMW).
 
 
 \section{Results}
 
 
-\subsection{Trial Problem with several Generated Halos }
+\subsection{Trial Problem with several Generated Halos}
 
-FIXME: I tested it with HaloGenerator
+To be sure that the results are reasonable, several tests were performed
+generating halos from the Navarro-Frenk-White profile with known values
+for $\rho_{0}$ and $r_{s}.$ The center of the generated halos is
+$\boldsymbol{0}=\left(0,0,0\right)$ so we can determine how good
+estimate is the minimum of the potential at the center of each halo.
+Two types of tests were run: The first omitting the calculation of
+the center of each halo and assuming that is $\boldsymbol{0}$ and
+second by calculating the center as the minimum of the potential.
 
-
-\subsection{Results from the simulation}
-
-FIXME: Plot with error bars
-
-\begin{figure}
-\begin{centering}
-\includegraphics[scale=0.43]{/home/christian/Documentos/git/Montecarlo-NFW/data/results/results_2014-02-11-23:43:20/rs}
-\par\end{centering}
-
-\caption{}
-
-
+\begin{figure}[H]
+\caption{FIXME: Test results}
 \end{figure}
 
+
+
+\subsection{Results from the simulations}
 
 
 \subsection{What kind of implications (Low resolution simulations, other fitting

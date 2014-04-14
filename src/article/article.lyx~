@@ -272,30 +272,6 @@ To be sure that the results are reasonable, several tests were performed
  and second by calculating the center as the minimum of the potential.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-FIXME: Test results
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 Results from the simulations
 \end_layout

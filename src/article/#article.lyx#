@@ -263,37 +263,22 @@ To be sure that the results are reasonable, several tests were performed
 \end_inset
 
  so we can determine how good estimate is the minimum of the potential at
- the center of each halo.
- Two types of tests were run: The first omitting the calculation of the
- center of each halo and assuming that is 
-\begin_inset Formula $\boldsymbol{0}$
-\end_inset
-
- and second by calculating the center as the minimum of the potential.
+ the center of each halo
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-FIXME: Test results
-\end_layout
-
+El centro de todos los halos que se generan es 
+\begin_inset Formula $\boldsymbol{0}=\left(0,0,0\right)$
 \end_inset
 
-
-\end_layout
-
+, asi que se puede determinar que tan buen estimativo es el mínimo de potencial
+ como centro de cada halo.
+ Se corrieron dos tipos de pruebas: La primera omitiendo el cálculo del
+ centro de cada halo y asumiendo que es 
+\begin_inset Formula $\boldsymbol{0}$
 \end_inset
 
-
+ y la segunda calculando el centro como el mínimo del potencial.
 \end_layout
 
 \begin_layout Subsection
