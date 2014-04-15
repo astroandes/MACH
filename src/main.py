@@ -90,10 +90,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
 
     bdmv_index = np.argmin(np.abs(avg_density-bdmv*rho_back))
     bdmw_index = np.argmin(np.abs(avg_density-bdmw*rho_back))
-    r_bdmv = radius[bdmv_index]
-    r_bdmw = radius[bdmw_index]
 
-    '''
     if np.argmin(np.abs(avg_density-bdmv*rho_back)) != len(avg_density)-1:
         r_bdmv = radius[bdmv_index]
     else:
@@ -105,7 +102,6 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     else:
         r_bdmw = radius[-1]
         bdmw_index = -1
-    '''
 
     bdmv_mass = np.resize(mass,bdmv_index)
     bdmv_radius = np.resize(radius,bdmv_index)
@@ -119,7 +115,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     bdmw_mass = bdmw_mass/bdmw_mass[-1]
     bdmw_radius = bdmw_radius/bdmw_radius[-1]
 
-    n_iterations = 60000
+    n_iterations = 25000
     log_bdmv,bdmv_walk,bdmv_chi2 = fit.metropolis_one(np.log(bdmv_radius),np.log(bdmv_mass),nfw.loglogmass_norm,n_iterations)
     log_bdmw,bdmw_walk,bdmw_chi2 = fit.metropolis_one(np.log(bdmw_radius),np.log(bdmw_mass),nfw.loglogmass_norm,n_iterations)
 
@@ -137,6 +133,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         sys.stdout.write('\rPlotting results... ')
         plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
         plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
+
 	pylab.scatter(bdmv_walk,bdmv_chi2,label='BDMV')
 	pylab.scatter(bdmw_walk,bdmw_chi2,c='r',label='BDMW')
  	pylab.legend(loc=4, borderaxespad=0.5)
@@ -144,6 +141,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         pylab.ylabel('$\chi ^2$')
 	pylab.savefig('chi2.png',dpi=300)
 	pylab.close()
+
         sys.stdout.flush()
         sys.stdout.write('Done\n')
         os.chdir('../')
