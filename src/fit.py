@@ -38,6 +38,9 @@ def metropolis_one(data,obs,mod,n_iterations):
     for i in range(n_iterations):
         
         a_prime = np.random.normal(a_walk[i],step_a)
+
+        while a_prime < 0 :            
+            a_prime = np.random.normal(a_walk[i],step_a)
         
         chi2_init = chi2(obs,mod(data,a_walk[i]))
         chi2_prime = chi2(obs,mod(data,a_prime))
