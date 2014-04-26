@@ -1,7 +1,7 @@
 import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, fit, plotter
 from scipy.optimize import fsolve
 
-# Gets the mean-density, scale radius and virial radius for several haloes
+# Gets the concentration and virial radius for several haloes
 # It must be executed with the following command line:
 #
 #      python main.py directory #x #y #x skip noplot*
@@ -36,7 +36,7 @@ sys.stdout.write('Done\n')
 
 export = open('./results_'+now+'/results_'+now+'.csv', 'w')
 
-export.write('#Id,x_center,y_center,z_center,c_bdmv,c_bdmv_max,c_bdmv_min,c_bdmw,c_bdmw_max,c_bdmw_min,r_vir_bdmv,r_vir_bdmw\n')
+export.write('#Id,x_center,y_center,z_center,c_bdmv,c_bdmv_max,c_bdmv_min,c_bdmw,c_bdmw_max,c_bdmw_min,r_vir_bdmv,r_vir_bdmw,n_vir_bdmv,n_vir_bdmw,n_tot\n')
 export.close()
 
 count = 1
@@ -150,8 +150,8 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         os.chdir('./results_'+now+'/')
 
     export = open('results_'+now+'.csv', 'a')
-    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,c_bdmv,bdmv_max,bdmv_min,c_bdmw,bdmw_max,bdmw_min,r_bdmv,r_bdmw]]
-    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf'],delimiter=',')
+    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,c_bdmv,bdmv_max,bdmv_min,c_bdmw,bdmw_max,bdmw_min,r_bdmv,r_bdmw,len(bdmv_mass),len(bdmw_mas),n_points]]
+    np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d','%d'],delimiter=',')
     
     stop = timeit.default_timer()
     time = stop - start
