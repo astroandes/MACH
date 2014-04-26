@@ -150,7 +150,7 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         os.chdir('./results_'+now+'/')
 
     export = open('results_'+now+'.csv', 'a')
-    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,c_bdmv,bdmv_max,bdmv_min,c_bdmw,bdmw_max,bdmw_min,r_bdmv,r_bdmw,len(bdmv_mass),len(bdmw_mas),n_points]]
+    line = [[int(filename.split('_')[1]),x_center,y_center,z_center,c_bdmv,bdmv_max,bdmv_min,c_bdmw,bdmw_max,bdmw_min,r_bdmv,r_bdmw,len(bdmv_mass),len(bdmw_mass),n_points]]
     np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d','%d'],delimiter=',')
     
     stop = timeit.default_timer()
