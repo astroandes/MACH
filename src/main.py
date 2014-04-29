@@ -91,17 +91,19 @@ for filename in os.listdir('./'+str(sys.argv[1])):
     bdmv_index = np.argmin(np.abs(avg_density-bdmv*rho_back))
     bdmw_index = np.argmin(np.abs(avg_density-bdmw*rho_back))
 
-    if np.argmin(np.abs(avg_density-bdmv*rho_back)) != len(avg_density)-1:
+    if np.argmin(np.abs(avg_density-bdmv*rho_back)) > 1:
         r_bdmv = radius[bdmv_index]
     else:
         r_bdmv = radius[-1]
-        bdmv_index = -1
+        bdmv_index = len(avg_density)-1
 
-    if np.argmin(np.abs(avg_density-bdmw*rho_back)) != len(avg_density)-1:
+    if np.argmin(np.abs(avg_density-bdmw*rho_back)) > 1:
         r_bdmw = radius[bdmw_index]
     else:
         r_bdmw = radius[-1]
-        bdmw_index = -1
+        bdmw_index = len(avg_density)-1
+
+    print bdmv_index, bdmw_index
 
     bdmv_mass = np.resize(mass,bdmv_index)
     bdmv_radius = np.resize(radius,bdmv_index)
@@ -134,8 +136,8 @@ for filename in os.listdir('./'+str(sys.argv[1])):
         plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
         plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
 
-	pylab.scatter(bdmv_walk,bdmv_chi2,label='BDMV')
-	pylab.scatter(bdmw_walk,bdmw_chi2,c='r',label='BDMW')
+	pylab.scatter(np.exp(bdmv_walk),bdmv_chi2,label='BDMV')
+	pylab.scatter(np.exp(bdmw_walk),bdmw_chi2,c='r',label='BDMW')
  	pylab.legend(loc=4, borderaxespad=0.5)
         pylab.xlabel('$c$')
         pylab.ylabel('$\chi ^2$')
