@@ -3,18 +3,12 @@
 \documentclass[12pt,spanish]{article}
 \usepackage{fontspec}
 \usepackage[landscape,paperwidth=60cm,paperheight=40cm]{geometry}
-\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\geometry{verbose,tmargin=2.5cm,bmargin=3cm,lmargin=3cm,rmargin=3cm}
 \setlength{\parindent}{0bp}
 \usepackage{graphicx}
 \usepackage[numbers]{natbib}
 
 \makeatletter
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% A simple dot to overcome graphicx limitations
-\newcommand{\lyxdot}{.}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 \usepackage{enumitem}		% customizable list environments
 \newlength{\lyxlabelwidth}      % auxiliary length 
@@ -69,7 +63,7 @@ el perfil de masa
 \[
 m\left(r;c\right)=A\left[\log\left(1+rc\right)-\frac{rc}{1+rc}\right]
 \]
-Donde $r=R/R_{vir}$. Y
+Donde $r=R/R_{vir}$ y
 \[
 A=\left[\log\left(1+c\right)-\frac{c}{1+c}\right]^{-1}
 \]
@@ -89,7 +83,7 @@ de un umbral de densidad. Si dos partículas están separadas por una
 distancia menor a su longitud de enlace, pertenecen al mismo halo.
 
 \begin{center}
-\includegraphics[scale=0.9]{\lyxdot \lyxdot /Dropbox/Research/Seminario/FOFgroups-sub-linklength}
+\includegraphics[scale=0.9]{FOFgroups-sub-linklength}
 \par\end{center}
 
 
@@ -102,7 +96,7 @@ que no estén ligadas. En MultiDark hay dos catálogos: BDMV ($\eta=360$)
 y BDMW ($\eta=740$).
 
 \begin{center}
-\includegraphics[scale=0.9]{\lyxdot \lyxdot /Dropbox/Research/Seminario/BDMhalos-s}
+\includegraphics[scale=0.9]{BDMhalos-s}
 \par\end{center}
 
 
@@ -129,7 +123,7 @@ nuevo centro
 Se cuenta el número de partículas dentro de cada radio. Despues de
 esto se calcula el radio virial, se eliminan las partículas con un
 radio mayor a este y se normalizan las distancias. En la siguiente
-gráfica se muestra la proyección de un halo de la simulación MDR1
+gráfica se muestra la proyección de un halo deÑ catálogo FOF-MDR1
 sobre el plano y-z con sus respectivos radios viriales
 
 \begin{center}
@@ -175,7 +169,7 @@ para ambos casos, se obtienen las siguientes curvas
 
 Usando los datos de la simulación MDR1\citep{MULTIDARK} se compararon
 los valores de la concentración obtenidos por BDM con los obtenidos
-por este método usando el catalogo FOF como base. Sin embargo no existe
+por este método usando el catálogo FOF como base. Sin embargo no existe
 una correspondecia uno a uno entre estos dos catálogos, asi que se
 le asigna a cada halo de BDM un compañero en FOF como los halos con
 centros más cercanos, al tomar la mediana de la concentración contra

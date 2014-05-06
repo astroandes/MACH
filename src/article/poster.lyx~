@@ -27,7 +27,7 @@ enumitem
 
 \graphics default
 \default_output_format default
-\output_sync 0
+\output_sync 1
 \bibtex_command default
 \index_command default
 \paperfontsize 12
@@ -51,10 +51,10 @@ enumitem
 \end_index
 \paperwidth 60cm
 \paperheight 40cm
-\leftmargin 3cm
+\leftmargin 2.5cm
 \topmargin 2.5cm
-\rightmargin 3cm
-\bottommargin 3cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -271,7 +271,8 @@ Donde
 \begin_inset Formula $r=R/R_{vir}$
 \end_inset
 
- y
+.
+ Y
 \begin_inset Formula 
 \[
 A=\left[\log\left(1+c\right)-\frac{c}{1+c}\right]^{-1}
@@ -317,7 +318,7 @@ key "FOF"
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename FOFgroups-sub-linklength.png
+	filename ../Dropbox/Research/Seminario/FOFgroups-sub-linklength.png
 	scale 90
 
 \end_inset
@@ -358,7 +359,7 @@ key "BDM"
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename BDMhalos-s.png
+	filename ../Dropbox/Research/Seminario/BDMhalos-s.png
 	scale 90
 
 \end_inset
@@ -409,8 +410,8 @@ Luego se redefinen las coordenadas de cada partícula respecto a este nuevo
 Se cuenta el número de partículas dentro de cada radio.
  Despues de esto se calcula el radio virial, se eliminan las partículas
  con un radio mayor a este y se normalizan las distancias.
- En la siguiente gráfica se muestra la proyección de un halo deÑ catálogo
- FOF-MDR1 sobre el plano y-z con sus respectivos radios viriales
+ En la siguiente gráfica se muestra la proyección de un halo de la simulación
+ MDR1 sobre el plano y-z con sus respectivos radios viriales
 \end_layout
 
 \begin_layout Standard
@@ -529,7 +530,7 @@ key "MULTIDARK"
 \end_inset
 
  se compararon los valores de la concentración obtenidos por BDM con los
- obtenidos por este método usando el catálogo FOF como base.
+ obtenidos por este método usando el catalogo FOF como base.
  Sin embargo no existe una correspondecia uno a uno entre estos dos catálogos,
  asi que se le asigna a cada halo de BDM un compañero en FOF como los halos
  con centros más cercanos, al tomar la mediana de la concentración contra
