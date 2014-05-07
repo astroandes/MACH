@@ -23,7 +23,7 @@ dt = 10.0*60.0
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 mass_element = 1.0   
 plt = 1
-total_list = os.listdir('./'+str(sys.argv[1]))
+total_list = os.listdir(str(sys.argv[1]))
 len_list = len(total_list)
 lists = [total_list[i*len_list // processes: (i+1)*len_list //processes] for i in range(processes)]
 jobs = []
@@ -156,18 +156,5 @@ for i in range(processes):
     jobs.append(p)
     p.start()
 
-for p in jobs: 
-    while(p.is_alive()):
-        time.sleep(dt) 
-
-export = open('./results_'+now+'/results_'+now+'.csv', 'w')
-
-filenames = ['./results_'+now+'/results_'+str(i)+'.csv' for i in range(processes)]
-with export as outfile:
-    for fname in filenames:
-        with open(fname) as infile:
-            for line in infile:
-                outfile.write(line)    
-    
 os.system('rm  potential.out')
 sys.stdout.write('Fresh data from the oven!\n')
