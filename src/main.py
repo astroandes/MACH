@@ -4,12 +4,13 @@ from scipy.optimize import fsolve
 # Gets the concentration and virial radius for several haloes
 # It must be executed with the following command line:
 #
-#      python main.py directory #x #y #x skip noplot*
+#      python main.py directory #x #y #x skip processes noplot*
 #
 # Where:
 #      directory: is the path of the directory with the files with the positions of the haloes
 #      #x, #y, #z: are the column position of each coordinate in the files (for Multidark is 2 3 4)
 #      skip: number of rows to skip (For Multidark is 16) 
+#      processes: number of child processes
 #      noplot: is an optional parameter, if it is added the code will not make any graphics
 #
 # Have fun! 
@@ -18,18 +19,17 @@ from scipy.optimize import fsolve
 #
 # Thanks to Diva Martinez (dm.martinez831@uniandes.edu.co) for the multiprocessing idea
 
-processes = 4
-dt = 10.0*60.0
+processes = int(sys.argv[6])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 mass_element = 1.0   
 plt = 1
-total_list = os.listdir(str(sys.argv[1]))
+total_list = os.listdir('./'+str(sys.argv[1]))
 len_list = len(total_list)
 lists = [total_list[i*len_list // processes: (i+1)*len_list //processes] for i in range(processes)]
 jobs = []
 
 try:
-    if (sys.argv[6]=='noplot'):
+    if (sys.argv[7]=='noplot'):
         print 'No Plotting mode enabled'
         plt = 0
 except:
@@ -51,8 +51,7 @@ def run(directories,process_number):
     for filename in directories:
 
         count = count + 1
-        sys.stdout.write('\rWorking with file '+str(count)+' of '+str(len(directories))+' in process '+str(process_number)+'... ')
-        sys.stdout.flush()
+        print '\rWorking with file '+str(count)+' of '+str(len(directories))+' in process '+str(process_number)
 
         path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
         data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(sys.argv[5]))
@@ -62,11 +61,11 @@ def run(directories,process_number):
         z = data[:,int(sys.argv[4])]
 
         n_points = len(x)
-        results_folder ='./results_'+now+'/'+str(filename)
         
         file_id = int(filename.split('_')[1])
         positions_name ='positions_'+str(file_id)+'.dat'
         potential_name ='potential_'+str(file_id)+'.dat'
+        results_folder ='./results_'+now+'/'+str(file_id)
         open(positions_name, "w").write('\n'.join('%lf,%lf,%lf' % (x[i],y[i],z[i]) for i in range(n_points)))
 
         os.system('./potential.out '+positions_name+' '+potential_name)
@@ -138,7 +137,7 @@ def run(directories,process_number):
             pylab.scatter(np.exp(bdmv_walk),bdmv_chi2,label='BDMV')
             pylab.scatter(np.exp(bdmw_walk),bdmw_chi2,c='r',label='BDMW')
             pylab.legend(loc=4, borderaxespad=0.5)
-            pylab.xlabel('$c$')
+            pylab.xlabel('$log(c)$')
             pylab.ylabel('$\chi ^2$')
             pylab.savefig('chi2.png',dpi=300)
             pylab.close()
@@ -149,12 +148,8 @@ def run(directories,process_number):
         line = [[file_id,x_center,y_center,z_center,c_bdmv,bdmv_max,bdmv_min,c_bdmw,bdmw_max,bdmw_min,r_bdmv,r_bdmw,len(bdmv_mass),len(bdmw_mass),n_points]]
         np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d','%d'],delimiter=',')
 
-        sys.stdout.write('Done\n')
-
 for i in range(processes):
     p = multiprocessing.Process(target=run, args=(lists[i],i))
     jobs.append(p)
     p.start()
 
-os.system('rm  potential.out')
-sys.stdout.write('Fresh data from the oven!\n')

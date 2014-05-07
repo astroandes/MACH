@@ -1,0 +1,16 @@
+import sys, os
+
+
+total_list = os.listdir(str(sys.argv[1]))
+
+print total_list
+'''
+export = open('./results_'+now+'/results_'+now+'.csv', 'w')
+
+filenames = ['./results_'+now+'/results_'+str(i)+'.csv' for i in range(processes)]
+with export as outfile:
+    for fname in filenames:
+        with open(fname) as infile:
+            for line in infile:
+                outfile.write(line)   
+'''
