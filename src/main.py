@@ -1,6 +1,5 @@
-import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, fit, plotter
+import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, fit, plotter, multiprocessing
 from scipy.optimize import fsolve
-import multiprocessing
 
 # Gets the concentration and virial radius for several haloes
 # It must be executed with the following command line:
