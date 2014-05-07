@@ -129,7 +129,7 @@ log_m_bdmw_mcmc = np.log10(used_n_bdmw)
 log_m_bdmv_orig = np.log10(bdmv_m)
 log_m_bdmw_orig = np.log10(bdmw_m)
 
-bins_bdmv_mcmc,median_c_bdmv_mcmc,quartile_c_bdmv_mcmc  = get_stats(log_m_bdmv_mcmc,used_c_bdmv)
+bins_bdmv_mcmc,median_c_bdmv_mcmc,quartile_c_bdmv_mcmc = get_stats(log_m_bdmv_mcmc,used_c_bdmv)
 bins_bdmw_mcmc,median_c_bdmw_mcmc,quartile_c_bdmw_mcmc = get_stats(log_m_bdmw_mcmc,used_c_bdmw)
 bins_bdmv_orig,median_c_bdmv_orig,quartile_c_bdmv_orig = get_stats(log_m_bdmv_orig,bdmv_c)
 bins_bdmw_orig,median_c_bdmw_orig,quartile_c_bdmw_orig = get_stats(log_m_bdmw_orig,bdmw_c)

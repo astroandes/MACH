@@ -12,8 +12,6 @@ angle = np.arange(0,2*np.pi,0.01)
 
 def halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw):
     
-    sys.stdout.write('\rPlotting halo... ')
-    sys.stdout.flush()
     pylab.plot(x , y, 'k.')
     pylab.plot(x_center , y_center, 'ko')
     pylab.plot(r_bdmv*np.cos(angle)+x_center,r_bdmv*np.sin(angle)+y_center,'--b',label='BDMV')
@@ -46,8 +44,7 @@ def halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw):
     pylab.title('Halo z-x')
     pylab.savefig('halo_zx.png',format='png',dpi=300)
     pylab.close()
-    sys.stdout.write('Done\n')
-
+   
 # Plots the NFW mass profile 
 # Requires:
 #     radius: array with the radial distances

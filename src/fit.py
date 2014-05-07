@@ -22,9 +22,6 @@ def chi2(obs,mod):
 
 def metropolis_one(data,obs,mod,n_iterations):
 
-    sys.stdout.write('\rRunning Metropolis-Hastings Algorithm... ')
-    sys.stdout.flush()
-    
     guess = [np.log(10)]
     
     a_walk = np.empty((n_iterations+1))
@@ -62,8 +59,6 @@ def metropolis_one(data,obs,mod,n_iterations):
 
     best_a = a_walk[n]
 
-    sys.stdout.write('Done\n')
-
     return best_a,a_walk,chisq
 
 # Does a maximum-likelihood estimate using the Metropolis-Hastings algorithm for a model with two parameters.
@@ -77,9 +72,6 @@ def metropolis_one(data,obs,mod,n_iterations):
 
 def metropolis(data,obs,mod,n_iterations, maxi,mini):
 
-    sys.stdout.write('\rRunning Metropolis-Hastings Algorithm... ')
-    sys.stdout.flush()
-    
     guess = curve_fit(mod,data,obs,maxfev=n_iterations)[0]
 
     if guess[1] > maxi:
@@ -130,7 +122,6 @@ def metropolis(data,obs,mod,n_iterations, maxi,mini):
     best_a = a_walk[n]
     best_b = b_walk[n]
 
-    sys.stdout.write('Done\n')
 
     return best_a,best_b,a_walk,b_walk,chisq
 

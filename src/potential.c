@@ -7,6 +7,7 @@ int count_lines(char *filename);
 // Gives an array with the gravitational potential for each particle
 // Requires:
 //    argv[1]: name of the file with the positions of each particle in x,y and z
+//    argv[2]: name of the file to export the potential of each particle
 // Returns:
 //    a file with the potential for each particle
 
@@ -24,7 +25,7 @@ int main(int argc, char** argv){
  n_points = count_lines(argv[1]);
 
  rfile = fopen(argv[1], "r");
- cfile = fopen("potential.dat", "w");
+ cfile = fopen(argv[2], "w");
 
  x = malloc(n_points*sizeof(double));
  y = malloc(n_points*sizeof(double));
