@@ -1,4 +1,4 @@
-import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, fit, plotter, multiprocessing
+import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, fit, plotter, multiprocessing, time
 from scipy.optimize import fsolve
 
 # Gets the concentration and virial radius for several haloes
@@ -19,6 +19,7 @@ from scipy.optimize import fsolve
 # Thanks to Diva Martinez (dm.martinez831@uniandes.edu.co) for the multiprocessing idea
 
 processes = 4
+dt = 10.0*60.0
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 mass_element = 1.0   
 plt = 1
@@ -155,10 +156,9 @@ for i in range(processes):
     jobs.append(p)
     p.start()
 
-
 for p in jobs: 
     while(p.is_alive()):
-        pass
+        time.sleep(dt) 
 
 export = open('./results_'+now+'/results_'+now+'.csv', 'w')
 
