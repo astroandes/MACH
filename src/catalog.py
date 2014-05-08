@@ -1,4 +1,4 @@
-import numpy as np, pylab, sys, matplotlib, plotter
+import numpy as np, pylab, sys, matplotlib
 from matplotlib.mlab import griddata
 from scipy.optimize import curve_fit
 
@@ -10,7 +10,8 @@ def get_stats(log_mass,conc):
     bins = np.arange(0,np.amax(log_mass)+0.5,0.5)
     bins_index = np.digitize(log_mass,bins)
     median = np.empty(len(bins))
-    quartile = np.empty(len(bins))
+    quar1 = np.empty(len(bins))
+    quar2 = np.empty(len(bins))
 
     for i in range(len(bins)):
         tempo = []
@@ -19,8 +20,11 @@ def get_stats(log_mass,conc):
                 tempo.append(conc[j])
         tempo = np.array(tempo)
         median[i] = np.median(tempo)
-        quartile[i] = 0
-    return bins,median,quartile
+        if (tempo.size):
+            quar1[i],quar2[i] = np.percentile(tempo,[25,75])            
+        else:
+            quar1[i],quar2[i]=0,0
+    return bins,median,quar1,quar2
 
 dm = 8.721e9
 
@@ -129,18 +133,21 @@ log_m_bdmw_mcmc = np.log10(used_n_bdmw)
 log_m_bdmv_orig = np.log10(bdmv_m)
 log_m_bdmw_orig = np.log10(bdmw_m)
 
-bins_bdmv_mcmc,median_c_bdmv_mcmc,quartile_c_bdmv_mcmc = get_stats(log_m_bdmv_mcmc,used_c_bdmv)
-bins_bdmw_mcmc,median_c_bdmw_mcmc,quartile_c_bdmw_mcmc = get_stats(log_m_bdmw_mcmc,used_c_bdmw)
-bins_bdmv_orig,median_c_bdmv_orig,quartile_c_bdmv_orig = get_stats(log_m_bdmv_orig,bdmv_c)
-bins_bdmw_orig,median_c_bdmw_orig,quartile_c_bdmw_orig = get_stats(log_m_bdmw_orig,bdmw_c)
+bins_bdmv_mcmc,median_c_bdmv_mcmc,quartile1_c_bdmv_mcmc,quartile2_c_bdmv_mcmc = get_stats(log_m_bdmv_mcmc,used_c_bdmv)
+bins_bdmw_mcmc,median_c_bdmw_mcmc,quartile1_c_bdmw_mcmc,quartile2_c_bdmw_mcmc = get_stats(log_m_bdmw_mcmc,used_c_bdmw)
+bins_bdmv_orig,median_c_bdmv_orig,quartile1_c_bdmv_orig,quartile2_c_bdmv_orig = get_stats(log_m_bdmv_orig,bdmv_c)
+bins_bdmw_orig,median_c_bdmw_orig,quartile1_c_bdmw_orig,quartile2_c_bdmw_orig = get_stats(log_m_bdmw_orig,bdmw_c)
 
 pylab.plot(10**(bins_bdmv_mcmc),median_c_bdmv_mcmc,'-r',lw=2,label='MCMC-V')
+pylab.fill_between(10**(bins_bdmv_mcmc),quartile1_c_bdmv_mcmc,quartile2_c_bdmv_mcmc,color='r',alpha=0.3)
 pylab.plot(10**(bins_bdmw_mcmc),median_c_bdmw_mcmc,'-b',lw=2,label='MCMC-W')
+pylab.fill_between(10**(bins_bdmw_mcmc),quartile1_c_bdmw_mcmc,quartile2_c_bdmw_mcmc,color='b',alpha=0.3)
 pylab.plot(10**(bins_bdmv_orig),median_c_bdmv_orig,'--r',lw=2,label='BDMV')
 pylab.plot(10**(bins_bdmw_orig),median_c_bdmw_orig,'--b',lw=2,label='BDMW')
 pylab.legend(loc=1, borderaxespad=0.5)
 pylab.xscale('log')
 pylab.xlim([1E11,1E15])
+pylab.ylim([0,15])
 pylab.xlabel('$Mass\ (M_{sun}/h )$')
 pylab.ylabel('$Concentration$')
 pylab.savefig('concentration.png',dpi=300)
