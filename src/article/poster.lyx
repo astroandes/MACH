@@ -553,15 +553,14 @@ Discusión
 \end_layout
 
 \begin_layout Standard
-Cupcake ipsum dolor.
- Sit amet carrot cake cheesecake I love jelly sugar plum.
- Liquorice candy gummi bears dessert icing cupcake.
- I love macaroon cotton candy biscuit.
- Pudding candy canes I love candy canes.
- Macaroon ice cream I love powder.
- Biscuit lemon drops sweet wafer carrot cake.
- Apple pie pastry danish ice cream sweet pastry gummies lemon drops.
- Cheesecake cheesecake marzipan.
+A diferencia del estimado de la concentración dada por 
+\emph on
+BDM 
+\emph default
+este método permite obtener un estimado más directo.
+ Sin embargo no se sabe a que se deben las discrepancias entre los resultados
+ obtenidos, aun es necesario determinar si estas diferencias se deben al
+ algorítmo utilizado en si o a la población de datos que se tomó.
 \end_layout
 
 \begin_layout Bibliography
