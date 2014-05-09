@@ -28,7 +28,7 @@ enumitem
 
 \graphics default
 \default_output_format default
-\output_sync 0
+\output_sync 1
 \bibtex_command default
 \index_command default
 \paperfontsize 12
@@ -102,7 +102,11 @@ Huge{
 
 \end_inset
 
+
+\series bold
 Navarro-Frenk-White en Simulaciones Cosmológicas Usando MCMC
+\series default
+
 \begin_inset ERT
 status open
 
