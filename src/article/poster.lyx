@@ -102,7 +102,7 @@ Huge{
 
 \end_inset
 
-Navarro-Frenk-White en Simulaciones Cosmologicas Usando MCMC
+Navarro-Frenk-White en Simulaciones Cosmológicas Usando MCMC
 \begin_inset ERT
 status open
 
@@ -408,7 +408,7 @@ Luego se redefinen las coordenadas de cada partícula respecto a este nuevo
 
 \begin_layout Standard
 Se cuenta el número de partículas dentro de cada radio.
- Despues de esto se calcula el radio virial, se eliminan las partículas
+ Después de esto se calcula el radio virial, se eliminan las partículas
  con un radio mayor a este y se normalizan las distancias.
  En la siguiente gráfica se muestra la proyección de un halo del catálogo
  FOF-MDR1 sobre el plano y-z con sus respectivos radios viriales
@@ -432,6 +432,11 @@ Algoritmo de Metropolis-Hastings
 
 \begin_layout Standard
 Se utiliza el algoritmo de Metropolis-Hastings para muestrear la verosimilitud
+ asegurándonos que en la cadena de Markov se tenga que 
+\begin_inset Formula $c\geq1$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -461,11 +466,7 @@ Luego se toma el valor de donde
 \begin_inset Formula ${\cal L}\left(c\right)$
 \end_inset
 
- es máxima, sin embargo se toma la reestricción 
-\begin_inset Formula $c\geq1$
-\end_inset
-
-.
+ es máxima.
  Para el halo mostrado anteriormente vemos que
 \end_layout
 
@@ -531,8 +532,8 @@ key "MULTIDARK"
 
  se compararon los valores de la concentración obtenidos por BDM con los
  obtenidos por este método usando el catálogo FOF como base.
- Sin embargo no existe una correspondecia uno a uno entre estos dos catálogos,
- asi que se le asigna a cada halo de BDM un compañero en FOF como los halos
+ Sin embargo no existe una correspondencia uno a uno entre estos dos catálogos,
+ así que se le asigna a cada halo de BDM un compañero en FOF como los halos
  con centros más cercanos, al tomar la mediana de la concentración contra
  la masa de cada halo tenemos que
 \end_layout
