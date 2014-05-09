@@ -5,6 +5,7 @@
 \textclass article
 \begin_preamble
 \usepackage{multicol}
+\usepackage[super,sort&compress]{natbib}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -39,7 +40,7 @@ enumitem
 \use_esint 1
 \use_mhchem 1
 \use_mathdots 1
-\cite_engine natbib_numerical
+\cite_engine basic
 \use_bibtopic false
 \use_indices false
 \paperorientation landscape
@@ -309,7 +310,7 @@ key "FOF"
 
 .
  Este algoritmo buscador de halos consiste en definir una longitud de enlace
- a partír de un umbral de densidad.
+ a partir de un umbral de densidad.
  Si dos partículas están separadas por una distancia menor a su longitud
  de enlace, pertenecen al mismo halo.
 \end_layout
@@ -409,7 +410,7 @@ Luego se redefinen las coordenadas de cada partícula respecto a este nuevo
 Se cuenta el número de partículas dentro de cada radio.
  Despues de esto se calcula el radio virial, se eliminan las partículas
  con un radio mayor a este y se normalizan las distancias.
- En la siguiente gráfica se muestra la proyección de un halo deÑ catálogo
+ En la siguiente gráfica se muestra la proyección de un halo del catálogo
  FOF-MDR1 sobre el plano y-z con sus respectivos radios viriales
 \end_layout
 
