@@ -1,33 +1,101 @@
-%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[english]{article}
-\usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
-\usepackage[letterpaper]{geometry}
-\geometry{verbose,tmargin=2.65cm,bmargin=2.65cm,lmargin=2.65cm,rmargin=2.65cm}
-\setlength{\parindent}{0bp}
-\usepackage{float}
-\usepackage{amsthm}
+\documentclass[useAMS,usenatbib]{mn2e}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{epsfig} 
+\usepackage{hyperref}
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\ba{\begin{eqnarray}}
+\def\ea{\end{eqnarray}}
 
-\makeatletter
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
-\numberwithin{equation}{section}
-\numberwithin{figure}{section}
+% To highlight comments
+\usepackage{color}
+\definecolor{red}{rgb}{1,0.0,0.0}
+\newcommand{\red}{\color{red}}
+\definecolor{blue}{rgb}{0.1,0.3,0.9}
+\newcommand{\blue}{\color{blue}}
 
-\makeatother
+\usepackage[normalem]{ulem}
+\definecolor{darkgreen}{rgb}{0.0,0.5,0.0}
 
-\usepackage{babel}
+\newcommand{\documentname}{paper~}
+\newcommand{\LCDM}{$\Lambda$CDM~}
+\newcommand{\beq}{\begin{eqnarray}} 
+\newcommand{\eeq}{\end{eqnarray}} 
+\newcommand{\zz}{$z\sim 3$}
+
+\newcommand{\apj}{ApJ} 
+\newcommand{\apjs}{ApJS} 
+\newcommand{\apjl}{ApJL} 
+\newcommand{\aj}{AJ} 
+\newcommand{\mnras}{MNRAS} 
+\newcommand{\mnrassub}{MNRAS accepted} 
+\newcommand{\aap}{A\&A} 
+\newcommand{\aaps}{A\&AS} 
+\newcommand{\araa}{ARA\&A} 
+\newcommand{\nat}{Nature} 
+\newcommand{\physrep}{PhR}
+\newcommand{\pasp}{PASP}   
+\newcommand{\pasj}{PASJ}   
+\newcommand{\avg}[1]{\langle{#1}\rangle} 
+\newcommand{\ly}{{\ifmmode{{\rm Ly}\alpha}\else{Ly$\alpha$}\fi}}
+\newcommand{\hMpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}} 
+\newcommand{\hGpc}{{\ifmmode{h^{-1}{\rm Gpc}}\else{$h^{-1}$Gpc }\fi}} 
+\newcommand{\hmpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}} 
+\newcommand{\hkpc}{{\ifmmode{h^{-1}{\rm kpc}}\else{$h^{-1}$kpc }\fi}}
+\newcommand{\hMsun}{{\ifmmode{h^{-1}{\rm
+        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$~}\fi}}  
+\newcommand{\hmsun}{{\ifmmode{h^{-1}{\rm
+        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}  
+\newcommand{\Msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}} 
+\newcommand{\msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}} 
+\newcommand{\lya}{{Lyman$\alpha$~}}
+\newcommand{\clara}{{\texttt{CLARA}}~}
+\newcommand{\rand}{{\ifmmode{{\mathcal{R}}}\else{${\mathcal{R}}$ }\fi}} 
+\newcommand{\hs}{{\hspace{1mm}}}
+\newcommand{\muavg}{\vert\langle\cos\theta\rangle\vert}
+% definition to produce a "less than or similar to" symbol
+\def\lsim{~\rlap{$<$}{\lower 1.0ex\hbox{$\sim$}}}
+
+% definition to produce a "greater than or similar to" symbol
+
+% definition to produce a "greater than or similar to" symbol
+\def\gsim{~\rlap{$>$}{\lower 1.0ex\hbox{$\sim$}}}
+
 \begin{document}
 
-\title{This is Article}
-
-
-\author{Christian Poveda Ruiz}
-
+\title[Bayesian halo concentration]{Measurement of dark matter halo concentrations using a bayesian approach}
+\author[Poveda \& Forero-Romero]{
+\parbox[t]{\textwidth}{\raggedright
+  Christian Poveda$^{1}$ \&
+  Jaime E. Forero-Romero$^{1}$
+}
+\vspace*{6pt}\\
+$^{1}$Departamento de F\'{i}sica, Universidad de los Andes, Cra. 1
+No. 18A-10, Edificio Ip, Bogot\'a, Colombia\\
+}
 \maketitle
 
+\begin{abstract}
+asd
+\end{abstract}
+\begin{keywords}
+methods: numerical, galaxies: haloes, cosmology: theory, dark
+matter
+\end{keywords}
+
+
 \section{Introduction}
+\label{sec:introduction}
+
+
+\citep{NFW}
+
+
+\section{Basics of the NFW profile}
+\label{sec:basics}
 
 The Navarro-Frenk-White mass profile can be normalized respect to
 the virial mass and written in function of the normalized radius respect
@@ -39,10 +107,11 @@ m_{nfw}\left(r_{norm},c\right)=A\left[\log\left(1+r_{norm}c\right)-\left(\frac{1
 Where $A$ is a normalization constant such that $m_{nfw}\left(1,c\right)=1$
 
 
-\section{State of Art}
 
 
-\section{What did I do?}
+
+\section{Bayesian Method}
+\label{sec:method}
 
 In order to obtain a mass profile for each halo in funcion of the
 radius, the center of each halo must be calculated. However the center
@@ -85,8 +154,11 @@ an other where the overdensity limit is $740\rho_{back}$ (like in
 BDMW).
 
 
-\section{Results}
+\section{Mock Data and Simulations}
+\label{sec:data}
 
+\section{Results}
+\label{sec:results}
 
 \subsection{Trial Problem with several Generated Halos}
 
@@ -109,8 +181,18 @@ second by calculating the center as the minimum of the potential.
 
 
 \subsection{What kind of implications (Low resolution simulations, other fitting
-algorithms)}
+algorithms)} 
+
+
+\section{Discussion}
+\label{sec:discussion}
 
 
 \section{Conclusions}
+\label{sec:conclusions}
+
+
+\bibliographystyle{mn2e}
+\bibliography{references}
+
 \end{document}
