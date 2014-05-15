@@ -133,32 +133,10 @@ def metropolis(data,obs,mod,n_iterations, maxi,mini):
 # Returns:
 #     minimum and maximum boundary for the interval
 
-def error_bars(walk,parameter,opt):
-
-    n_iterations = len(walk)
-    n_bins = int(n_iterations/100)
+def error_bars(walk,opt):
 
     if (opt=='log'):
-        freq,bins = np.histogram(np.exp(walk), bins=n_bins)
-        index = np.argmin(np.abs(bins-np.exp(parameter)))
-
+        max,min = np.percentile(np.exp(walk),[13.6,86.4])
     else:
-        freq,bins = np.histogram(walk, bins=n_bins)
-        index = np.argmin(np.abs(bins-parameter))
-
-    max_c = [index+int(0.341*sum(freq)/n_bins),len(bins)-1]
-    min_c = [index-int(0.341*sum(freq)/n_bins),0]
-
-    M = max_c[np.argmin(max_c)]
-    m = min_c[np.argmax(min_c)]
-    
-    if (opt=='log'):
-
-        max = np.log(bins[M])
-        min = np.log(bins[m])
-
-    else:
-        max = bins[M]
-        min = bins[m]
-    
+        max,min = np.percentile(walk,[13.6,86.4])
     return max, min
