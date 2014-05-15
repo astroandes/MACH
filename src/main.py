@@ -133,12 +133,21 @@ def run(directories,process_number):
             plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw)
             plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
             plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
+
             pylab.scatter(np.exp(bdmv_walk),bdmv_chi2,label='BDMV')
             pylab.scatter(np.exp(bdmw_walk),bdmw_chi2,c='r',label='BDMW')
             pylab.legend(loc=4, borderaxespad=0.5)
             pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
             pylab.savefig('chi2.png',dpi=300)
+            pylab.close()
+
+            pylab.scatter(np.exp(bdmv_walk),np.exp(-bdmv_chi2/2),label='BDMV')
+            pylab.scatter(np.exp(bdmw_walk),np.exp(-bdmw_chi2/2),c='r',label='BDMW')
+            pylab.legend(loc=4, borderaxespad=0.5)
+            pylab.xlabel('$c$')
+            pylab.ylabel('$\cal{L}$')
+            pylab.savefig('likelihood.png',dpi=300)
             pylab.close()
 
             pylab.hist(np.exp(bdmv_walk),1000,normed=True)
