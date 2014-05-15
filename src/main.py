@@ -122,8 +122,8 @@ def run(directories,process_number):
         c_bdmv = np.exp(log_bdmv)
         c_bdmw = np.exp(log_bdmw)
     
-        bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,'log'))
-        bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,'log'))
+        bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,log_bdmv,'log'))
+        bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,log_bdmw,'log'))
     
         if (plt == 1):
 
@@ -133,13 +133,24 @@ def run(directories,process_number):
             plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw)
             plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
             plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
-
             pylab.scatter(np.exp(bdmv_walk),bdmv_chi2,label='BDMV')
             pylab.scatter(np.exp(bdmw_walk),bdmw_chi2,c='r',label='BDMW')
             pylab.legend(loc=4, borderaxespad=0.5)
-            pylab.xlabel('$log(c)$')
+            pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
             pylab.savefig('chi2.png',dpi=300)
+            pylab.close()
+
+            pylab.hist(np.exp(bdmv_walk),1000,normed=True)
+            pylab.xlabel('c')
+            pylab.ylabel('P(c)')
+            pylab.savefig('bdmv_hist.png',dpi=300)
+            pylab.close()
+
+            pylab.hist(np.exp(bdmw_walk),1000,normed=True)
+            pylab.xlabel('c')
+            pylab.ylabel('P(c)')
+            pylab.savefig('bdmw_hist.png',dpi=300)
             pylab.close()
 
             os.chdir('../../')
