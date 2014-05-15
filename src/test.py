@@ -91,7 +91,7 @@ def run(directories,process_number):
 
         c = np.exp(log_c)
     
-        c_max, c_min = np.exp(fit.error_bars(c_walk,log_c,'log'))
+        c_max, c_min = np.exp(fit.error_bars(c_walk,'log'))
 
         export = open(filename_export, 'a')
         line = [[file_id,x_center,y_center,z_center,c,c_max,c_min]]

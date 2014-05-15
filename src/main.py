@@ -122,8 +122,8 @@ def run(directories,process_number):
         c_bdmv = np.exp(log_bdmv)
         c_bdmw = np.exp(log_bdmw)
     
-        bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,log_bdmv,'log'))
-        bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,log_bdmw,'log'))
+        bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,'log'))
+        bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,'log'))
     
         if (plt == 1):
 
