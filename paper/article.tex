@@ -97,80 +97,42 @@ matter
 \section{Basics of the NFW profile}
 \label{sec:basics}
 
-The Navarro-Frenk-White mass profile can be normalized respect to
-the virial mass and written in function of the normalized radius respect
-to the virial radius $r_{norm}$ and the concentration $c$ 
-
+The Navarro-Frenk-White mass profile can be normalized respect to the virial mass and written in function of the normalized radius respect to the virial radius $r=R/R_{vir}$ and the concentration $c$ 
 \[
-m_{nfw}\left(r_{norm},c\right)=A\left[\log\left(1+r_{norm}c\right)-\left(\frac{1}{r_{norm}c}+1\right)^{-1}\right]
+m_{nfw}\left(r;c\right)=A\left[\log\left(1+rc\right)-\left(\frac{rc}{rc+1}\right)\right]
 \]
-Where $A$ is a normalization constant such that $m_{nfw}\left(1,c\right)=1$
-
-
-
-
-
+Where
+\[
+A=\left[\log\left(1+c\right)-\left(\frac{c}{c+1}\right)\right]^{-1} 
+\]
 \section{Bayesian Method}
 \label{sec:method}
 
-In order to obtain a mass profile for each halo in funcion of the
-radius, the center of each halo must be calculated. However the center
-of mass will not give an accurate position for the center because
-some haloes are highly irregular, is more convenient to take the gravitational
-potential for each particle
-
+In order to obtain a mass profile for each halo in funcion of the radius, the center of each halo must be calculated. However the center of mass will not give an accurate position for the center because some haloes are highly irregular, is more convenient to take the gravitational potential for each particle
 \[
 \phi\left(\boldsymbol{R}_{n}\right)=-\sum_{j\neq n}\frac{1}{\left\Vert \boldsymbol{R}_{n}-\boldsymbol{R}_{j}\right\Vert }
 \]
-Take $\boldsymbol{R}_{0}=\min\left(\phi\left(\boldsymbol{R}_{n}\right)\right)$
-as the center then define new coordinates $\boldsymbol{R}_{n}^{\prime}=\boldsymbol{R}_{0}-\boldsymbol{R}_{n}$,
-this $\boldsymbol{R}_{0}$ will be in the most relevant region for
-the dynamics of each halo. Organizing the $\left\{ \boldsymbol{R}_{n}^{\prime}\right\} $
-in crescent order, the accumulated mass for each $\boldsymbol{R}_{n}^{\prime}$
-will be $M_{n}=nM$.
+Take $\boldsymbol{R}_{0}=\min\left(\phi\left(\boldsymbol{R}_{n}\right)\right)$ as the center then define new coordinates $\boldsymbol{R}_{n}^{\prime}=\boldsymbol{R}_{0}-\boldsymbol{R}_{n}$, this $\boldsymbol{R}_{0}$ will be in the most relevant region for the dynamics of each halo. Organizing the $\left\{ \boldsymbol{R}_{n}^{\prime}\right\} $ in crescent order, the accumulated mass for each $\boldsymbol{R}_{n}^{\prime}$ will be $M_{n}=nM$.
 
 \begin{figure}[H]
 \caption{FIXME: Mass profile of a halo}
 \end{figure}
 
-
-Then the virial radius is obtained and the particles that are beyond
-the virial radius are removed. After that both the mass and the radius
-get normalized respect to the mass and virial radius, we will call
-these new variables $m_{n}$ and $r_{n}$. The last part of the process
-consists in fitting the normalized NFW mass profile to the $m_{n}$
-data using the Metropolis-Hastings algorithm to sample the Likelihood
-${\cal L}\left(c\right)=\exp\left(-\chi^{2}\left(c\right)\right)$
-where 
+Then the virial radius is obtained and the particles that are beyond the virial radius are removed. After that both the mass and the radius get normalized respect to the mass and virial radius, we will call these new variables $m_{n}$ and $r_{n}$. The last part of the process consists in fitting the normalized NFW mass profile to the $m_{n}$ data using the Metropolis-Hastings algorithm to sample the Likelihood ${\cal L}\left(c\right)=\exp\left(-\chi^{2}\left(c\right)\right)$ where 
 \[
 \chi^{2}\left(c\right)=\sum\limits _{n}\left|m_{n}-m_{nfw}\left(r_{n},c\right)\right|^{2}
 \]
-And taking the values of $c$ where the Likelihood is maximum. Finally
-we compare this results with the values obtaned by BDM, since the
-number of halos obtained by FOF and BDM is different, each BDM halo
-gets related with the nearest halo in FOF. We compute two concentrations,
-one where the overdensity limit is $360\rho_{back}$ (like in BDMV)
-an other where the overdensity limit is $740\rho_{back}$ (like in
-BDMW).
-
+And taking the values of $c$ where the Likelihood is maximum. Moreover, we can obtain a confidence interval for $c$ doing an histogram of the random walk done by the Metropolis-Hastings Algorithm. Finally we compare this results with the values obtaned by BDM, since the number of halos obtained by FOF and BDM is different, each BDM halo gets related with the nearest halo in FOF. We compute two concentrations, one where the overdensity limit is $360\rho_{back}$ (like in BDMV) an other where the overdensity limit is $740\rho_{back}$ (like in BDMW).
 
 \section{Mock Data and Simulations}
 \label{sec:data}
-
 \section{Results}
 \label{sec:results}
 
 \subsection{Trial Problem with several Generated Halos}
 
-To be sure that the results are reasonable, several tests were performed
-generating halos from the Navarro-Frenk-White profile with known values
-for $\rho_{0}$ and $r_{s}.$ The center of the generated halos is
-$\boldsymbol{0}=\left(0,0,0\right)$ so we can determine how good
-estimate is the minimum of the potential at the center of each halo.
-Two types of tests were run: The first omitting the calculation of
-the center of each halo and assuming that is $\boldsymbol{0}$ and
-second by calculating the center as the minimum of the potential.
 
+Several halos with known values of $c$ were generated. These halos were then processed to determine the acurracy of this method. The number of particles and value of $c$ for each halo were generated randomly. 
 \begin{figure}[H]
 \caption{FIXME: Test results}
 \end{figure}
@@ -180,8 +142,7 @@ second by calculating the center as the minimum of the potential.
 \subsection{Results from the simulations}
 
 
-\subsection{What kind of implications (Low resolution simulations, other fitting
-algorithms)} 
+\subsection{What kind of implications (Low resolution simulations, other fitting algorithms)} 
 
 
 \section{Discussion}
