@@ -54,7 +54,6 @@ def run(directories,process_number):
         print '\rWorking with file '+str(count)+' of '+str(len(directories))+' in process '+str(process_number)
 
         path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
-        print(open(path,'r'))
         data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(sys.argv[5]))
 
         x = data[:,int(sys.argv[2])]
