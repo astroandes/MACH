@@ -23,7 +23,7 @@ processes = int(sys.argv[6])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 mass_element = 1.0   
 plt = 1
-total_list = os.listdir('./'+str(sys.argv[1]))
+total_list = sorted(os.listdir('./'+str(sys.argv[1])))
 len_list = len(total_list)
 lists = [total_list[i*len_list // processes: (i+1)*len_list //processes] for i in range(processes)]
 jobs = []
@@ -54,6 +54,7 @@ def run(directories,process_number):
         print '\rWorking with file '+str(count)+' of '+str(len(directories))+' in process '+str(process_number)
 
         path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
+        print(open(path,'r'))
         data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(sys.argv[5]))
 
         x = data[:,int(sys.argv[2])]
@@ -91,7 +92,7 @@ def run(directories,process_number):
 
         c = np.exp(log_c)
     
-        c_max, c_min = np.exp(fit.error_bars(c_walk,'log'))
+        c_max, c_min = np.exp(fit.error_bars(c_walk,log_c,'log'))
 
         export = open(filename_export, 'a')
         line = [[file_id,x_center,y_center,z_center,c,c_max,c_min]]
