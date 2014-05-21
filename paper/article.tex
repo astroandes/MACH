@@ -94,17 +94,67 @@ matter
 \citep{NFW}
 
 
-\section{Basics of the NFW profile}
+\section{Basics of dark matter halos and the NFW profile}
 \label{sec:basics}
 
-The Navarro-Frenk-White mass profile can be normalized respect to the virial mass and written in function of the normalized radius respect to the virial radius $r=R/R_{vir}$ and the concentration $c$ 
-\[
-m_{nfw}\left(r;c\right)=A\left[\log\left(1+rc\right)-\left(\frac{rc}{rc+1}\right)\right]
-\]
+The Navarro-Frenk-White density profile can be written as
+
+\begin{equation}
+\rho(r) = \frac{\rho_c\delta_c}{r/R_s(1+r/R_s)^2}, 
+\end{equation}
+%
+where $\rho_c\equiv 3H^2/8\pi G$ is the Universe critical density,
+$\delta_c$ is the halo dimensionless characteristic density. is a
+normalization constant and $R_s$ is known as the scale radius, the
+radius that marks the transition between the two power law behaviour
+in the $\rho\propto r^{-1}$ for $r<R_s$ and $\rho\propto r^{-2}$ for
+$r>R_s$. 
+
+One can define the scale radius as a fraction of the virial radius,
+$R_{vir}$,
+
+\begin{equation}
+R_s = R_{vir}/c,
+\end{equation}
+
+where $c>1$ is known as the concentration of the halo.
+
+Taking the virial radius as the radius that encloses 200 times the
+critical density, the concentration and the characteristic density are
+related by 
+
+\begin{equation}
+\delta_c =\frac{200}{3}\frac{c^3}{[\ln(1+c)-c/(1+c)]}.
+\end{equation}
+
+Therefore, for a given value of the overdensity that defines a halo,
+the density profile has only one free parameter: the concentration.
+
+
+The total mass enclosed within a radius $r$ can be computed to be:
+
+\begin{equation}
+M(<r) = 4\pi\rho_c\delta_c  R_s^3\left[\ln \left
+  (\frac{R_s+r}{r})\right) - \frac{r}{R_s+r}\right].
+\end{equation}
+
+If we now define dimensionless variables $x\equiv r/R_{\rm vir}$ and
+$m\equiv M(<r)/M_{\rm vir}$...
+
+profile can be normalized respect to the
+virial mass and written in function of the normalized radius respect
+to the virial radius $r=R/R_{vir}$ and the concentration $c$  
+
+
+
+\begin{equation}
+m_{\rm NFW}\left(r;c\right)=A\left[\log\left(1+rc\right)-\left(\frac{rc}{rc+1}\right)\right) 
+\end{equation}
 Where
-\[
+\begin{equation}
 A=\left[\log\left(1+c\right)-\left(\frac{c}{c+1}\right)\right]^{-1} 
-\]
+\end{equation}
+
 \section{Bayesian Method}
 \label{sec:method}
 
@@ -132,7 +182,10 @@ And taking the values of $c$ where the Likelihood is maximum. Moreover, we can o
 \subsection{Trial Problem with several Generated Halos}
 
 
-Several halos with known values of $c$ were generated. These halos were then processed to determine the acurracy of this method. The number of particles and value of $c$ for each halo were generated randomly. 
+Several halos with known values of $c$ were generated. These halos
+were then processed to determine the acurracy of this method. The
+number of particles and value of $c$ for each halo were generated
+randomly.  
 \begin{figure}[H]
 \caption{FIXME: Test results}
 \end{figure}
