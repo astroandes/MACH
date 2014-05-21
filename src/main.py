@@ -1,4 +1,4 @@
-import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, fit, plotter, multiprocessing, time
+import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, mcmc,fit , plotter, multiprocessing, time
 from scipy.optimize import fsolve
 
 # Gets the concentration and virial radius for several haloes
@@ -115,9 +115,26 @@ def run(directories,process_number):
         bdmw_mass = bdmw_mass/bdmw_mass[-1]
         bdmw_radius = bdmw_radius/bdmw_radius[-1]
 
-        n_iterations = 25000
-        log_bdmv,bdmv_walk,bdmv_chi2 = fit.metropolis_one(np.log(bdmv_radius),np.log(bdmv_mass),nfw.loglogmass_norm,n_iterations)
-        log_bdmw,bdmw_walk,bdmw_chi2 = fit.metropolis_one(np.log(bdmw_radius),np.log(bdmw_mass),nfw.loglogmass_norm,n_iterations)
+        n_iterations = 50000
+
+#        log_bdmv,bdmv_walk,bdmv_chi2 = fit.metropolis_one(np.log(bdmv_radius),np.log(bdmv_mass),nfw.loglogmass_norm,n_iterations)
+#        log_bdmw,bdmw_walk,bdmw_chi2 = fit.metropolis_one(np.log(bdmw_radius),np.log(bdmw_mass),nfw.loglogmass_norm,n_iterations)
+
+        step = np.array([np.log(1.03)])
+        guess = np.array([np.log(10)])
+        reest = [lambda x: x >= 0]
+
+        chi_bdmv = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(bdmv_radius),np.log(bdmv_mass),np.ones(len(bdmv_radius)))
+        chi_bdmw = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(bdmw_radius),np.log(bdmw_mass),np.ones(len(bdmw_radius)))
+    
+        bdmv_walk,bdmv_chi2 = mcmc.walker(chi_bdmv,guess,step,n_iterations,reest)
+        bdmw_walk,bdmw_chi2 = mcmc.walker(chi_bdmw,guess,step,n_iterations,reest)
+
+        bdmv_walk = bdmv_walk[0]
+        bdmw_walk = bdmw_walk[0]
+        
+        log_bdmv = bdmv_walk[np.argmin(bdmv_chi2)]
+        log_bdmw = bdmw_walk[np.argmin(bdmw_chi2)]
 
         c_bdmv = np.exp(log_bdmv)
         c_bdmw = np.exp(log_bdmw)

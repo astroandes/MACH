@@ -2,7 +2,7 @@ import sys, os
 
 directory = str(sys.argv[1])
 total_list = os.listdir(directory)
-filenames = [directory+'/'+element for element in total_list if 'result' in element]
+filenames = sorted([directory+'/'+element for element in total_list if 'result' in element])
 
 
 export = open(directory+'/results.csv', 'w')
