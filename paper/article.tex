@@ -66,7 +66,7 @@
 
 \begin{document}
 
-\title[Bayesian halo concentrations]{Measuring dark matter halo
+\title[Bayesian halo concentrations]{Dark matter halo
   concentrations with a bayesian approach}
 \author[Poveda \& Forero-Romero]{
 \parbox[t]{\textwidth}{\raggedright
@@ -177,7 +177,7 @@ dimensionless variables $x_i$ and $m_i$.
 Using these positions and masses we define the following $\chi^2$ function
 
 \begin{equation}
-\chi^2(c) = \sum_{i}[m_i - m(< x_i;c)]^2, 
+\chi^2(c) = \sum_{i}[\log m_i - \log m(< x_i;c)]^2, 
 \end{equation}
 %
 where $m(<x_i;c)$ corresponds to the values in Eq.(\ref{eq:profile}) at
@@ -189,6 +189,22 @@ find the optimum value of $c$ and its associated uncertainty
 $\sigma_c$. 
 
 \section{Numerical Experiments}
+
+
+\subsection{Mock Halos}
+Several halos with known values of $c$ were generated. These halos
+were then processed to determine the acurracy of this method. The
+number of particles and value of $c$ for each halo were generated
+randomly.  
+
+\subsection{Simulation Data}
+\label{sec:data}
+
+
+
+\section{Results}
+\label{sec:results}
+
 Finally we compare this results with the values obtaned by BDM, since
 the number of halos obtained by FOF and BDM is different, each BDM
 halo gets related with the nearest halo in FOF. We compute two
@@ -196,32 +212,25 @@ concentrations, one where the overdensity limit is $360\rho_{back}$
 (like in BDMV) an other where the overdensity limit is
 $740\rho_{back}$ (like in BDMW). 
 
-\subsection{Mock Data and Simulations}
-\label{sec:data}
-\section{Results}
-\label{sec:results}
-
-\subsection{Trial Problem with several Generated Halos}
-
-
-Several halos with known values of $c$ were generated. These halos
-were then processed to determine the acurracy of this method. The
-number of particles and value of $c$ for each halo were generated
-randomly.  
+\subsection{Mock Halos}
 \begin{figure}[H]
 \caption{FIXME: Test results}
 \end{figure}
 
 
 
-\subsection{Results from the simulations}
-
-
-\subsection{What kind of implications (Low resolution simulations, other fitting algorithms)} 
-
+\subsection{Simulation Dat}
 
 \section{Discussion}
 \label{sec:discussion}
+
+\subsection{Comparison against other methods}
+
+\subsection{Concentration as a function of halo mass}
+
+\subsection{Implication for comparison against observations}
+
+
 
 
 \section{Conclusions}
