@@ -66,7 +66,8 @@
 
 \begin{document}
 
-\title[Bayesian halo concentration]{Measurement of dark matter halo concentrations using a bayesian approach}
+\title[Bayesian halo concentrations]{Dark matter halo
+  concentrations with a bayesian approach}
 \author[Poveda \& Forero-Romero]{
 \parbox[t]{\textwidth}{\raggedright
   Christian Poveda$^{1}$ \&
@@ -94,112 +95,142 @@ matter
 \citep{NFW}
 
 
-\section{Basics of dark matter halos and the NFW profile}
+\section{Basic properties of the NFW density profile}
 \label{sec:basics}
 
 The Navarro-Frenk-White density profile can be written as
 
 \begin{equation}
-\rho(r) = \frac{\rho_c\delta_c}{r/R_s(1+r/R_s)^2}, 
+\rho(r) = \frac{\rho_c\delta_c}{r/r_s(1+r/r_s)^2}, 
 \end{equation}
 %
 where $\rho_c\equiv 3H^2/8\pi G$ is the Universe critical density,
-$\delta_c$ is the halo dimensionless characteristic density. is a
-normalization constant and $R_s$ is known as the scale radius, the
-radius that marks the transition between the two power law behaviour
-in the $\rho\propto r^{-1}$ for $r<R_s$ and $\rho\propto r^{-2}$ for
-$r>R_s$. 
+$\delta_c$ is the halo dimensionless characteristic density and $r_s$
+is known as the scale radius, the radius that marks the transition
+between the two power law behaviour in the $\rho\propto r^{-1}$ for
+$r<r_s$ and $\rho\propto r^{-2}$ for  $r>r_s$.  
 
-One can define the scale radius as a fraction of the virial radius,
-$R_{vir}$,
-
-\begin{equation}
-R_s = R_{vir}/c,
-\end{equation}
-
-where $c>1$ is known as the concentration of the halo.
-
-Taking the virial radius as the radius that encloses 200 times the
-critical density, the concentration and the characteristic density are
-related by 
-
-\begin{equation}
-\delta_c =\frac{200}{3}\frac{c^3}{[\ln(1+c)-c/(1+c)]}.
-\end{equation}
-
-Therefore, for a given value of the overdensity that defines a halo,
-the density profile has only one free parameter: the concentration.
+We define the virial radius of a halo, $r_v$, as the boundary of the
+spherical volume that encloses an average density of $\Delta_v$ times
+the critical density of the Universe. The corresponding mass $M_{v}$
+can be thus expressed as $M_{v} = \frac{4\pi}{3}\rho_c\Delta_v r_v^3$. 
 
 
 The total mass enclosed within a radius $r$ can be computed to be:
-
 \begin{equation}
-M(<r) = 4\pi\rho_c\delta_c  R_s^3\left[\ln \left
-  (\frac{R_s+r}{r})\right) - \frac{r}{R_s+r}\right].
+M(<r) = 4\pi\rho_c\delta_c  r_s^3\left[\ln \left
+  (\frac{r_s+r}{r}\right) - \frac{r}{r_s+r}\right].
 \end{equation}
-
-If we now define dimensionless variables $x\equiv r/R_{\rm vir}$ and
-$m\equiv M(<r)/M_{\rm vir}$...
-
-profile can be normalized respect to the
-virial mass and written in function of the normalized radius respect
-to the virial radius $r=R/R_{vir}$ and the concentration $c$  
-
+ 
+We can now define the concentration of the halo as $c=r_v/r_s$, the
+dimensioless variable $x\equiv r/r_v$ and $m\equiv M(<r)/M_v$, which
+allows us to express the total enclosed mass within a dimensionless
+radius $x$ as:
 
 
 \begin{equation}
-m_{\rm NFW}\left(r;c\right)=A\left[\log\left(1+rc\right)-\left(\frac{rc}{rc+1}\right)\right) 
+m(<x) =
+\frac{1}{A}\left[\ln\left(1+xc\right)-\left(\frac{xc}{xc+1}\right)\right],
+\label{eq:profile}
 \end{equation}
-Where
+%
+where 
+%
 \begin{equation}
-A=\left[\log\left(1+c\right)-\left(\frac{c}{c+1}\right)\right]^{-1} 
+A=\left[\ln\left(1+c\right)-\left(\frac{c}{c+1}\right)\right],
 \end{equation}
 
-\section{Bayesian Method}
-\label{sec:method}
+meaning that the concentration is the only free parameter to
+determine the density profile of the halo.
 
-In order to obtain a mass profile for each halo in funcion of the radius, the center of each halo must be calculated. However the center of mass will not give an accurate position for the center because some haloes are highly irregular, is more convenient to take the gravitational potential for each particle
-\[
-\phi\left(\boldsymbol{R}_{n}\right)=-\sum_{j\neq n}\frac{1}{\left\Vert \boldsymbol{R}_{n}-\boldsymbol{R}_{j}\right\Vert }
-\]
-Take $\boldsymbol{R}_{0}=\min\left(\phi\left(\boldsymbol{R}_{n}\right)\right)$ as the center then define new coordinates $\boldsymbol{R}_{n}^{\prime}=\boldsymbol{R}_{0}-\boldsymbol{R}_{n}$, this $\boldsymbol{R}_{0}$ will be in the most relevant region for the dynamics of each halo. Organizing the $\left\{ \boldsymbol{R}_{n}^{\prime}\right\} $ in crescent order, the accumulated mass for each $\boldsymbol{R}_{n}^{\prime}$ will be $M_{n}=nM$.
 
-\begin{figure}[H]
+\begin{figure}
 \caption{FIXME: Mass profile of a halo}
 \end{figure}
 
-Then the virial radius is obtained and the particles that are beyond the virial radius are removed. After that both the mass and the radius get normalized respect to the mass and virial radius, we will call these new variables $m_{n}$ and $r_{n}$. The last part of the process consists in fitting the normalized NFW mass profile to the $m_{n}$ data using the Metropolis-Hastings algorithm to sample the Likelihood ${\cal L}\left(c\right)=\exp\left(-\chi^{2}\left(c\right)\right)$ where 
-\[
-\chi^{2}\left(c\right)=\sum\limits _{n}\left|m_{n}-m_{nfw}\left(r_{n},c\right)\right|^{2}
-\]
-And taking the values of $c$ where the Likelihood is maximum. Moreover, we can obtain a confidence interval for $c$ doing an histogram of the random walk done by the Metropolis-Hastings Algorithm. Finally we compare this results with the values obtaned by BDM, since the number of halos obtained by FOF and BDM is different, each BDM halo gets related with the nearest halo in FOF. We compute two concentrations, one where the overdensity limit is $360\rho_{back}$ (like in BDMV) an other where the overdensity limit is $740\rho_{back}$ (like in BDMW).
 
-\section{Mock Data and Simulations}
-\label{sec:data}
-\section{Results}
-\label{sec:results}
-
-\subsection{Trial Problem with several Generated Halos}
+\section{A Bayesian Approach to Halo Fitting}
+\label{sec:method}
 
 
+We proceed to find the value of the concentration parameter that
+best describes the simulation data, following the model in
+Eq. (\ref{eq:profile}). We use the integrated mass profile because it
+allows us to use the data directly with the simulation without binning
+the particle positions and estimating a density.
+
+We construct the integrated mass profile by ranking the particles by
+their increasing distance to the center of the halo. Once they are ranked,
+the total mass at a radius $r_i$, increases by $m_p$, where $r_i$ is
+the position of the $i$-th particle and $m_p$ is the mass of the
+computational particle.  We define the center of the halo to be  at
+the position of the particle with the lowest gravitational
+potential. In the process of building the mass profile we discard the
+particle at the center.
+
+We stop the construction of the integrated mass profile once we arrive
+at an average density of $\Delta_h\rho_c$. This radius marks the
+virial radius and the virial mass. We divide the total mass enclosed
+mass $M_i$ and the radii $r_i$ by these values to obtaine the
+dimensionless variables $x_i$ and $m_i$. 
+
+Using these positions and masses we define the following $\chi^2$ function
+
+\begin{equation}
+\chi^2(c) = \sum_{i}[\log m_i - \log m(< x_i;c)]^2, 
+\end{equation}
+%
+where $m(<x_i;c)$ corresponds to the values in Eq.(\ref{eq:profile}) at
+$x=x_i$ and a given value of the concentration parameter $c$.
+
+Finally we use a Metropolis-Hastings algorithm to sample the likelihood
+function distribution defined by ${\cal L}(c)=\exp(-\chi^2(c)/2)$ to
+find the optimum value of $c$ and its associated uncertainty
+$\sigma_c$. 
+
+\section{Numerical Experiments}
+
+
+\subsection{Mock Halos}
 Several halos with known values of $c$ were generated. These halos
 were then processed to determine the acurracy of this method. The
 number of particles and value of $c$ for each halo were generated
 randomly.  
+
+\subsection{Simulation Data}
+\label{sec:data}
+
+
+
+\section{Results}
+\label{sec:results}
+
+Finally we compare this results with the values obtaned by BDM, since
+the number of halos obtained by FOF and BDM is different, each BDM
+halo gets related with the nearest halo in FOF. We compute two
+concentrations, one where the overdensity limit is $360\rho_{back}$
+(like in BDMV) an other where the overdensity limit is
+$740\rho_{back}$ (like in BDMW). 
+
+\subsection{Mock Halos}
 \begin{figure}[H]
 \caption{FIXME: Test results}
 \end{figure}
 
 
 
-\subsection{Results from the simulations}
-
-
-\subsection{What kind of implications (Low resolution simulations, other fitting algorithms)} 
-
+\subsection{Simulation Dat}
 
 \section{Discussion}
 \label{sec:discussion}
+
+\subsection{Comparison against other methods}
+
+\subsection{Concentration as a function of halo mass}
+
+\subsection{Implication for comparison against observations}
+
+
 
 
 \section{Conclusions}
