@@ -203,7 +203,11 @@ placed in the range $1<c<10$. Each one of the halos is generated with
 four different total particle numbers: $20$, $200$, $2000$ and $20000$.
 
 The method we use to generate the halos is based on the integrated
-mass profile. {\bf Our algorithm works as follows...}
+mass profile. Given the number of particles $n$ and the concentration $c$ we define the mass element as $\delta m = 1/n$ (this corresponds to the mass of each particle, such that the total mass is one). Then for each number $k$ from $1$ to $n$ we find the value of $r$ such that
+\begin{equation}
+m(<r;c)-k \cdot \delta m 
+\end{equation}
+is zero using Ridders' method. This value of $r$ will be the radius of the $k$th particle of the generated halo, then polar and azimuthal angles $\theta$ and $\phi$ are generated randomly. Finally these three coordinates are transformed into cartesian coordinates $(r,\theta,\phi) \rightarrow (x,y,z)$. This process is repeated $n$ times in order to generate the $x,y,z$ coordinates for each particle.
 
 \subsection{Simulation Data}
 \label{sec:data}
@@ -232,13 +236,6 @@ procedure spelled out in Section \ref{sec:method} with $\Delta_h=740$
 (corresponding to $200$ times the critical density) to find the
 halo concentration. Finally, we store the values obtained for the
 virial radius, virial mass and concentration. 
-
-Finally we compare this results with the values obtaned by BDM, since
-the number of halos obtained by FOF and BDM is different, each BDM
-halo gets related with the nearest halo in FOF. We compute two
-concentrations, one where the overdensity limit is $360\rho_{back}$
-(like in BDMV) an other where the overdensity limit is
-$740\rho_{back}$ (like in BDMW). 
 
 
 \section{Results}
