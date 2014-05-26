@@ -129,19 +129,19 @@ def run(directories,process_number):
             pylab.scatter(np.exp(bdmw_walk),bdmw_chi2)
             pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
-            pylab.savefig('chi2.png',dpi=300)
+            pylab.savefig('chi2.pdf',dpi=300)
             pylab.close()
 
             pylab.scatter(np.exp(bdmw_walk),np.exp(-bdmw_chi2/2),c='r',label='BDMW')
             pylab.xlabel('$c$')
             pylab.ylabel('$\cal{L}$')
-            pylab.savefig('likelihood.png',dpi=300)
+            pylab.savefig('likelihood.pdf',dpi=300)
             pylab.close()
 
             pylab.hist(np.exp(bdmw_walk),1000,normed=True)
             pylab.xlabel('c')
             pylab.ylabel('P(c)')
-            pylab.savefig('histogram.png',dpi=300)
+            pylab.savefig('histogram.pdf',dpi=300)
             pylab.close()
 
             os.chdir('../../')
