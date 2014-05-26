@@ -23,7 +23,7 @@ processes = int(sys.argv[6])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 mass_element = 1.0   
 plt = 1
-total_list = sorted(os.listdir('./'+str(sys.argv[1])))
+total_list = os.listdir('./'+str(sys.argv[1]))
 len_list = len(total_list)
 lists = [total_list[i*len_list // processes: (i+1)*len_list //processes] for i in range(processes)]
 jobs = []
@@ -124,9 +124,9 @@ def run(directories,process_number):
             os.system('mkdir '+results_folder)
             os.chdir(results_folder)
 
-            plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw)
-            plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min)
-            pylab.scatter(np.exp(bdmv_walk),bdmv_chi2)
+            plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmw)
+            plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'bdmw')
+            pylab.scatter(np.exp(bdmw_walk),bdmw_chi2)
             pylab.legend(loc=4, borderaxespad=0.5)
             pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
