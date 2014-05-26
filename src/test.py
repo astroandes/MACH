@@ -23,7 +23,7 @@ processes = int(sys.argv[6])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 mass_element = 1.0   
 plt = 1
-total_list = sorted(os.listdir('./'+str(sys.argv[1])))
+total_list = os.listdir('./'+str(sys.argv[1]))
 len_list = len(total_list)
 lists = [total_list[i*len_list // processes: (i+1)*len_list //processes] for i in range(processes)]
 jobs = []
@@ -85,7 +85,7 @@ def run(directories,process_number):
         mass = mass/mass[-1]
         radius = radius/radius[-1]
         
-        n_iterations = 25000
+        n_iterations = 100000
         
         log_c,c_walk,chi2 = fit.metropolis_one(np.log(radius),np.log(mass),nfw.loglogmass_norm,n_iterations)
 
