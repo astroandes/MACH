@@ -85,17 +85,9 @@ def run(directories,process_number):
         avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
         rho_back = mass_element*(2048.0/1000.0)**3
 
-        bdmv = 360.0
         bdmw = 740.0
 
-        bdmv_index = np.argmin(np.abs(avg_density-bdmv*rho_back))
         bdmw_index = np.argmin(np.abs(avg_density-bdmw*rho_back))
-
-        if np.argmin(np.abs(avg_density-bdmv*rho_back)) > 1:
-            r_bdmv = radius[bdmv_index]
-        else:
-            r_bdmv = radius[-1]
-            bdmv_index = len(avg_density)-1
 
         if np.argmin(np.abs(avg_density-bdmw*rho_back)) > 1:
             r_bdmw = radius[bdmw_index]
@@ -103,13 +95,7 @@ def run(directories,process_number):
             r_bdmw = radius[-1]
             bdmw_index = len(avg_density)-1
 
-        bdmv_mass = np.resize(mass,bdmv_index)
-        bdmv_radius = np.resize(radius,bdmv_index)
-        
-        bdmv_mass = bdmv_mass/bdmv_mass[-1]
-        bdmv_radius = bdmv_radius/bdmv_radius[-1]
-        
-        bdmw_mass = np.resize(mass,bdmw_index)
+            bdmw_mass = np.resize(mass,bdmw_index)
         bdmw_radius = np.resize(radius,bdmw_index)
 
         bdmw_mass = bdmw_mass/bdmw_mass[-1]
@@ -117,29 +103,20 @@ def run(directories,process_number):
 
         n_iterations = 50000
 
-#        log_bdmv,bdmv_walk,bdmv_chi2 = fit.metropolis_one(np.log(bdmv_radius),np.log(bdmv_mass),nfw.loglogmass_norm,n_iterations)
-#        log_bdmw,bdmw_walk,bdmw_chi2 = fit.metropolis_one(np.log(bdmw_radius),np.log(bdmw_mass),nfw.loglogmass_norm,n_iterations)
-
         step = np.array([np.log(1.03)])
         guess = np.array([np.log(10)])
         reest = [lambda x: x >= 0]
 
-        chi_bdmv = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(bdmv_radius),np.log(bdmv_mass),np.ones(len(bdmv_radius)))
         chi_bdmw = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(bdmw_radius),np.log(bdmw_mass),np.ones(len(bdmw_radius)))
     
-        bdmv_walk,bdmv_chi2 = mcmc.walker(chi_bdmv,guess,step,n_iterations,reest)
         bdmw_walk,bdmw_chi2 = mcmc.walker(chi_bdmw,guess,step,n_iterations,reest)
 
-        bdmv_walk = bdmv_walk[0]
         bdmw_walk = bdmw_walk[0]
         
-        log_bdmv = bdmv_walk[np.argmin(bdmv_chi2)]
         log_bdmw = bdmw_walk[np.argmin(bdmw_chi2)]
 
-        c_bdmv = np.exp(log_bdmv)
         c_bdmw = np.exp(log_bdmw)
     
-        bdmv_max, bdmv_min = np.exp(fit.error_bars(bdmv_walk,log_bdmv,'log'))
         bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,log_bdmw,'log'))
     
         if (plt == 1):
@@ -148,42 +125,32 @@ def run(directories,process_number):
             os.chdir(results_folder)
 
             plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw)
-            plotter.mass_norm(bdmv_radius,bdmv_mass,c_bdmv,bdmv_max,bdmv_min,'BDMV')
-            plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'BDMW')
-
-            pylab.scatter(np.exp(bdmv_walk),bdmv_chi2,label='BDMV')
-            pylab.scatter(np.exp(bdmw_walk),bdmw_chi2,c='r',label='BDMW')
+            plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min)
+            pylab.scatter(np.exp(bdmv_walk),bdmv_chi2)
             pylab.legend(loc=4, borderaxespad=0.5)
             pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
             pylab.savefig('chi2.png',dpi=300)
             pylab.close()
 
-            pylab.scatter(np.exp(bdmv_walk),np.exp(-bdmv_chi2/2),label='BDMV')
             pylab.scatter(np.exp(bdmw_walk),np.exp(-bdmw_chi2/2),c='r',label='BDMW')
-            pylab.legend(loc=4, borderaxespad=0.5)
             pylab.xlabel('$c$')
             pylab.ylabel('$\cal{L}$')
             pylab.savefig('likelihood.png',dpi=300)
             pylab.close()
 
-            pylab.hist(np.exp(bdmv_walk),1000,normed=True)
-            pylab.xlabel('c')
-            pylab.ylabel('P(c)')
-            pylab.savefig('bdmv_hist.png',dpi=300)
-            pylab.close()
 
             pylab.hist(np.exp(bdmw_walk),1000,normed=True)
             pylab.xlabel('c')
             pylab.ylabel('P(c)')
-            pylab.savefig('bdmw_hist.png',dpi=300)
+            pylab.savefig('histogram.png',dpi=300)
             pylab.close()
 
             os.chdir('../../')
 
         export = open(filename_export, 'a')
-        line = [[file_id,x_center,y_center,z_center,c_bdmv,bdmv_max,bdmv_min,c_bdmw,bdmw_max,bdmw_min,r_bdmv,r_bdmw,len(bdmv_mass),len(bdmw_mass),n_points]]
-        np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d','%d'],delimiter=',')
+        line = [[file_id,x_center,y_center,z_center,c_bdmw,bdmw_max,bdmw_min,r_bdmw,len(bdmw_mass),n_points]]
+        np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d'],delimiter=',')
 
 for i in range(processes):
     p = multiprocessing.Process(target=run, args=(lists[i],i))
