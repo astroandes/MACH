@@ -95,7 +95,7 @@ def run(directories,process_number):
             r_bdmw = radius[-1]
             bdmw_index = len(avg_density)-1
 
-            bdmw_mass = np.resize(mass,bdmw_index)
+        bdmw_mass = np.resize(mass,bdmw_index)
         bdmw_radius = np.resize(radius,bdmw_index)
 
         bdmw_mass = bdmw_mass/bdmw_mass[-1]
@@ -138,7 +138,6 @@ def run(directories,process_number):
             pylab.ylabel('$\cal{L}$')
             pylab.savefig('likelihood.png',dpi=300)
             pylab.close()
-
 
             pylab.hist(np.exp(bdmw_walk),1000,normed=True)
             pylab.xlabel('c')
