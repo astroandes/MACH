@@ -1,6 +1,6 @@
-import numpy as np, sys, os, nfw, emcee
+import numpy as np, sys, os, nfw
 from scipy.optimize import curve_fit
-from emcee.utils import sample_ball
+
 # Returns the chi squared estimate given a prediction and the real data
 # Requires:
 #     obs: observed data
