@@ -127,7 +127,6 @@ def run(directories,process_number):
             plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmw)
             plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'bdmw')
             pylab.scatter(np.exp(bdmw_walk),bdmw_chi2)
-            pylab.legend(loc=4, borderaxespad=0.5)
             pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
             pylab.savefig('chi2.png',dpi=300)
