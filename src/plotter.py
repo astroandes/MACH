@@ -10,13 +10,12 @@ angle = np.arange(0,2*np.pi,0.01)
 # Returns:
 #     Three files with graphics in the planes x-y, y-z and z-x of the halo
 
-def halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw):
+def halo(x,y,z,x_center,y_center,z_center,r_vir):
     
     pylab.plot(x , y, 'k.')
     pylab.plot(x_center , y_center, 'ko')
-    pylab.plot(r_bdmv*np.cos(angle)+x_center,r_bdmv*np.sin(angle)+y_center,'--b',label='BDMV')
-    pylab.plot(r_bdmw*np.cos(angle)+x_center,r_bdmw*np.sin(angle)+y_center,'--r',label='BDMW')
-    pylab.legend(loc=4, borderaxespad=0.5)
+    pylab.plot(r_vir*np.cos(angle)+x_center,r_vir*np.sin(angle)+y_center,'--b')
+    
     pylab.xlabel('x (Mpc/H)')
     pylab.ylabel('y (Mpc/H)')
     pylab.title('Halo x-y')
@@ -25,9 +24,7 @@ def halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw):
 
     pylab.plot(y , z, 'k.')
     pylab.plot(y_center , z_center, 'ko')
-    pylab.plot(r_bdmv*np.cos(angle)+y_center,r_bdmv*np.sin(angle)+z_center,'--b',label='BDMV')
-    pylab.plot(r_bdmw*np.cos(angle)+y_center,r_bdmw*np.sin(angle)+z_center,'--r',label='BDMW')
-    pylab.legend(loc=4, borderaxespad=0.5)
+    pylab.plot(r_vir*np.cos(angle)+y_center,r_vir*np.sin(angle)+z_center,'--b')
     pylab.xlabel('y (Mpc/H)')
     pylab.ylabel('z (Mpc/H)')
     pylab.title('Halo y-z')
@@ -36,9 +33,7 @@ def halo(x,y,z,x_center,y_center,z_center,r_bdmv,r_bdmw):
 
     pylab.plot(z , x, 'k.')
     pylab.plot(z_center , x_center, 'ko')
-    pylab.plot(r_bdmv*np.cos(angle)+z_center,r_bdmv*np.sin(angle)+x_center,'--b',label='BDMV')
-    pylab.plot(r_bdmw*np.cos(angle)+z_center,r_bdmw*np.sin(angle)+x_center,'--r',label='BDMW')
-    pylab.legend(loc=4, borderaxespad=0.5)
+    pylab.plot(r_vir*np.cos(angle)+z_center,r_vir*np.sin(angle)+x_center,'--b')
     pylab.xlabel('z (Mpc/H)')
     pylab.ylabel('x (Mpc/H)')
     pylab.title('Halo z-x')
@@ -203,9 +198,6 @@ def random_walk(a_walk,b_walk,n_iterations):
     pylab.plot(a_walk,b_walk,'-k')
     pylab.plot(a_walk,b_walk,',r')
     pylab.plot(a_walk[0],b_walk[0],'ob')
-    for i in range(1,5):
-        pylab.plot(a_walk[n_iterations*i-1],b_walk[n_iterations*i-1],'oy')
-        pylab.plot(a_walk[n_iterations*i],b_walk[n_iterations*i],'oc')
     pylab.xlabel(r'$\ln(R_s)$')
     pylab.ylabel(r'$\ln(\rho_{0})$')    
     pylab.savefig('randomwalk.png',format='png',dpi=300)
