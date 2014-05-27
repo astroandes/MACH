@@ -195,7 +195,6 @@ $\sigma_c$.
 
 \section{Numerical Experiments}
 
-
 \subsection{Mock Halos}
 
 We generate $100$ mock halos with concentration values randomly
@@ -203,11 +202,22 @@ placed in the range $1<c<10$. Each one of the halos is generated with
 four different total particle numbers: $20$, $200$, $2000$ and $20000$.
 
 The method we use to generate the halos is based on the integrated
-mass profile. Given the number of particles $n$ and the concentration $c$ we define the mass element as $\delta m = 1/n$ (this corresponds to the mass of each particle such that the total mass is one). Then for each number $k$ from $1$ to $n$ we find the value of $r$ such that
+mass profile. Given the number of particles $n$ and the concentration
+$c$ we define the mass element as $\delta m = 1/n$ (this corresponds
+to the mass of each particle such that the total mass is one). Then
+for each number $k$ from $1$ to $n$ we find the value of $r$ such that
+the difference 
+%
 \begin{equation}
 m(<r;c)-k \cdot \delta m 
 \end{equation}
-is zero using Ridders' method. This value of $r$ will be the radius of the $k$th particle of the generated halo, then polar and azimuthal angles $\theta$ and $\phi$ are generated randomly. Finally these three coordinates are transformed into cartesian coordinates $(r,\theta,\phi) \rightarrow (x,y,z)$. This process is repeated $n$ times in order to generate the $x,y,z$ coordinates for each particle.
+%
+is zero using Ridders' method. This value of $r$ is the radius of
+the $k$th particle of the generated halo, then polar and azimuthal
+angles $\theta$ and $\phi$ are randomly generated. Finally these three
+coordinates are transformed into cartesian coordinates
+$(r,\theta,\phi) \rightarrow (x,y,z)$. This process is repeated $n$
+times in order to generate the $x,y,z$ coordinates for each particle. 
 
 \subsection{Simulation Data}
 \label{sec:data}
@@ -244,10 +254,23 @@ virial radius, virial mass and concentration.
 
 \subsection{Mock Halos}
 \label{sec:results_mocks}
-\begin{figure}[H]
-\caption{FIXME: Test results}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{percentual_diff.pdf}
+\end{center}
+\caption{Cumulative distribution of the fractional difference between
+  the input concentration in the mock halo generator, $c_{in}$ and the
+  measurement by our MCMC code, $c_{out}$. Each curve corresponds to
+  halos generated with a different number of particles, $N$.
+    \label{fig:results_mocks}}
 \end{figure}
 
+
+In Figure \ref{fig:results_mocks} we show the integrated distribution
+percentual difference between the concentration measured with our
+fitting method $c_{out}$ in comparison with the concentration used to
+generate the mock halos, $c_{in}$, $D=(c_{in}-c_{out})/c_{in}$. 
 
 
 \subsection{Simulation Data}
