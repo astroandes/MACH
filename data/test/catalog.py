@@ -4,8 +4,8 @@ expected = np.loadtxt('parameters.csv',delimiter = ',')
 obtained = np.loadtxt('results.csv',delimiter = ',')
 
 c_exp = expected[:,0]
-r_vir = expected[:,1]
-m_vir = expected[:,2]
+r_vir = np.ones(len(expected[:,0]))
+m_vir = expected[:,1]
 c_obt = obtained[:,4]
 c_max = obtained[:,5]
 c_min = obtained[:,6]
