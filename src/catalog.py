@@ -29,157 +29,74 @@ def get_stats(log_mass,conc):
 dm = 8.721e9
 
 mcmc = np.loadtxt(sys.argv[1],delimiter=',')
-bdmv = np.loadtxt(sys.argv[2],delimiter=',')
-bdmw = np.loadtxt(sys.argv[3],delimiter=',')
+bdm = np.loadtxt(sys.argv[2],delimiter=',')
 
 mcmc_id = mcmc[:,0]
 mcmc_x = mcmc[:,1]
 mcmc_y = mcmc[:,2]
 mcmc_z = mcmc[:,3]
-mcmc_c_bdmv = mcmc[:,4]
-mcmc_c_bdmv_max = mcmc[:,5]
-mcmc_c_bdmv_min = mcmc[:,6]
-mcmc_c_bdmw = mcmc[:,7]
-mcmc_c_bdmw_max = mcmc[:,8]
-mcmc_c_bdmw_min = mcmc[:,9]
-mcmc_r_bdmv = mcmc[:,10]
-mcmc_r_bdmw = mcmc[:,11]
-mcmc_n_bdmv = mcmc[:,12]*dm
-mcmc_n_bdmw = mcmc[:,13]*dm
+mcmc_c = mcmc[:,4]
+mcmc_c_max = mcmc[:,5]
+mcmc_c_min = mcmc[:,6]
+mcmc_r = mcmc[:,7]
+mcmc_m = mcmc[:,8]*dm
 
-bdmv_id = bdmv[:,0]
-bdmv_x = bdmv[:,1]
-bdmv_y = bdmv[:,2]
-bdmv_z = bdmv[:,3]
-bdmv_m = bdmv[:,6]
-bdmv_r = bdmv[:,7]
-bdmv_c = bdmv[:,8]
+bdm_id = bdm[:,0]
+bdm_x = bdm[:,4]
+bdm_y = bdm[:,5]
+bdm_z = bdm[:,6]
+bdm_m = bdm[:,11]
+bdm_r = bdm[:,13]
+bdm_c = bdm[:,16]
 
-bdmw_id = bdmw[:,0]
-bdmw_x = bdmw[:,1]
-bdmw_y = bdmw[:,2]
-bdmw_z = bdmw[:,3]
-bdmw_m = bdmw[:,6]
-bdmw_r = bdmw[:,7]
-bdmw_c = bdmw[:,8]
+used_id = np.empty(0)
+used_x = np.empty(0)
+used_y = np.empty(0)
+used_z = np.empty(0)
+used_c = np.empty(0)
+used_c_max = np.empty(0)
+used_c_min = np.empty(0)
+used_r = np.empty(0)
+used_m = np.empty(0)
 
-used_id_bdmv = np.empty(0)
-used_x_bdmv = np.empty(0)
-used_y_bdmv = np.empty(0)
-used_z_bdmv = np.empty(0)
-used_id_bdmw = np.empty(0)
-used_x_bdmw = np.empty(0)
-used_y_bdmw = np.empty(0)
-used_z_bdmw = np.empty(0)
-used_c_bdmv = np.empty(0)
-used_c_bdmv_max = np.empty(0)
-used_c_bdmv_min = np.empty(0)
-used_c_bdmw = np.empty(0)
-used_c_bdmw_max = np.empty(0)
-used_c_bdmw_min = np.empty(0)
-used_r_bdmv = np.empty(0)
-used_r_bdmw = np.empty(0)
-used_n_bdmv = np.empty(0)
-used_n_bdmw = np.empty(0)
-
-for i in range(len(bdmv_id)):
-	r = distance(bdmv_x[i],bdmv_y[i],bdmv_z[i],mcmc_x,mcmc_y,mcmc_z)
+for i in range(len(bdm_id)):
+	r = distance(bdm_x[i],bdm_y[i],bdm_z[i],mcmc_x,mcmc_y,mcmc_z)
 	j = np.argmin(r)
-	used_id_bdmv = np.append(used_id_bdmv,mcmc_id[j])
-	used_x_bdmv = np.append(used_x_bdmv,mcmc_x[j])
-	used_y_bdmv = np.append(used_y_bdmv,mcmc_y[j])
-	used_z_bdmv = np.append(used_z_bdmv,mcmc_z[j])
-	used_c_bdmv = np.append(used_c_bdmv,mcmc_c_bdmv[j])
-	used_c_bdmv_max = np.append(used_c_bdmv_max,mcmc_c_bdmv_max[j])
-	used_c_bdmv_min = np.append(used_c_bdmv_min,mcmc_c_bdmv_min[j])
-	used_r_bdmv = np.append(used_r_bdmv,mcmc_r_bdmv[j])
-	used_n_bdmv = np.append(used_n_bdmv,mcmc_n_bdmv[j])
+	used_id = np.append(used_id,mcmc_id[j])
+	used_x = np.append(used_x,mcmc_x[j])
+	used_y = np.append(used_y,mcmc_y[j])
+	used_z = np.append(used_z,mcmc_z[j])
+	used_c = np.append(used_c,mcmc_c[j])
+	used_c_max = np.append(used_c_max,mcmc_c_max[j])
+	used_c_min = np.append(used_c_min,mcmc_c_min[j])
+	used_r = np.append(used_r,mcmc_r[j])
+	used_m = np.append(used_m,mcmc_m[j])
 
-for i in range(len(bdmw_id)):
-	r = distance(bdmw_x[i],bdmw_y[i],bdmw_z[i],mcmc_x,mcmc_y,mcmc_z)
-	j = np.argmin(r)
-	used_id_bdmw = np.append(used_id_bdmw,mcmc_id[j])
-	used_x_bdmw = np.append(used_x_bdmw,mcmc_x[j])
-	used_y_bdmw = np.append(used_y_bdmw,mcmc_y[j])
-	used_z_bdmw = np.append(used_z_bdmw,mcmc_z[j])
-	used_c_bdmw = np.append(used_c_bdmw,mcmc_c_bdmw[j])
-	used_c_bdmw_max = np.append(used_c_bdmw_max,mcmc_c_bdmw_max[j])
-	used_c_bdmw_min = np.append(used_c_bdmw_min,mcmc_c_bdmw_min[j])
-	used_r_bdmw = np.append(used_r_bdmw,mcmc_r_bdmw[j])
-	used_n_bdmw = np.append(used_n_bdmw,mcmc_n_bdmw[j])
-
-pylab.plot(bdmv_c,used_c_bdmv,'.b')
-pylab.plot(bdmv_c,bdmv_c,'-k')
+pylab.scatter(bdm_c,used_c)
+pylab.plot(bdm_c,bdm_c,'-k')
 pylab.xscale('log')
 pylab.yscale('log')
-pylab.xlabel('$BDMV$')
+pylab.xlabel('$BDM$')
 pylab.ylabel('$MCMC$')
 pylab.title('$Concentration$')
-pylab.savefig('bdmv.png',dpi=300)
+pylab.savefig('Concentration.png',dpi=300)
 pylab.close()
 
-pylab.plot(bdmw_c,used_c_bdmw,'.b')
-pylab.plot(bdmw_c,bdmw_c,'-k')
-pylab.xscale('log')
-pylab.yscale('log')
-pylab.xlabel('$BDMW$')
-pylab.ylabel('$MCMC$')
-pylab.title('$Concentration$')
-pylab.savefig('bdmw.png',dpi=300)
-pylab.close()
+log_m_mcmc = np.log10(used_m)
+log_m_bdm = np.log10(bdm_m)
 
-log_m_bdmv_mcmc = np.log10(used_n_bdmv)
-log_m_bdmw_mcmc = np.log10(used_n_bdmw)
-log_m_bdmv_orig = np.log10(bdmv_m)
-log_m_bdmw_orig = np.log10(bdmw_m)
+bins_mcmc,median_c_mcmc,quartile1_c_mcmc,quartile2_c_mcmc = get_stats(log_m_mcmc,used_c)
+bins_bdm,median_c_bdm,quartile1_c_bdm,quartile2_c_bdm = get_stats(log_m_bdm,bdm_c)
 
-bins_bdmv_mcmc,median_c_bdmv_mcmc,quartile1_c_bdmv_mcmc,quartile2_c_bdmv_mcmc = get_stats(log_m_bdmv_mcmc,used_c_bdmv)
-bins_bdmw_mcmc,median_c_bdmw_mcmc,quartile1_c_bdmw_mcmc,quartile2_c_bdmw_mcmc = get_stats(log_m_bdmw_mcmc,used_c_bdmw)
-bins_bdmv_orig,median_c_bdmv_orig,quartile1_c_bdmv_orig,quartile2_c_bdmv_orig = get_stats(log_m_bdmv_orig,bdmv_c)
-bins_bdmw_orig,median_c_bdmw_orig,quartile1_c_bdmw_orig,quartile2_c_bdmw_orig = get_stats(log_m_bdmw_orig,bdmw_c)
-
-pylab.plot(10**(bins_bdmv_mcmc),median_c_bdmv_mcmc,'-r',lw=2,label='MCMC-V')
-pylab.fill_between(10**(bins_bdmv_mcmc),quartile1_c_bdmv_mcmc,quartile2_c_bdmv_mcmc,color='r',alpha=0.3)
-pylab.plot(10**(bins_bdmv_orig),median_c_bdmv_orig,'-b',lw=2,label='BDMV')
-pylab.fill_between(10**(bins_bdmv_orig),quartile1_c_bdmv_orig,quartile2_c_bdmv_orig,color='b',alpha=0.3)
+pylab.plot(10**(bins_mcmc),median_c_mcmc,'-r',lw=2,label='MCMC')
+pylab.fill_between(10**(bins_mcmc),quartile1_c_mcmc,quartile2_c_mcmc,color='r',alpha=0.3)
+pylab.plot(10**(bins_bdm),median_c_bdm,'-b',lw=2,label='BDM')
+pylab.fill_between(10**(bins_bdm),quartile1_c_bdm,quartile2_c_bdm,color='b',alpha=0.3)
 pylab.legend(loc=1, borderaxespad=0.5)
 pylab.xscale('log')
 pylab.xlim([1E11,1E15])
-pylab.ylim([0,15])
+#pylab.ylim([0,15])
 pylab.xlabel('$Mass\ (M_{sun}/h )$')
 pylab.ylabel('$Concentration$')
-pylab.savefig('concentration-V.png',dpi=300)
-pylab.close()
-
-pylab.plot(10**(bins_bdmw_mcmc),median_c_bdmw_mcmc,'-r',lw=2,label='MCMC-W')
-pylab.fill_between(10**(bins_bdmw_mcmc),quartile1_c_bdmw_mcmc,quartile2_c_bdmw_mcmc,color='r',alpha=0.3)
-pylab.plot(10**(bins_bdmw_orig),median_c_bdmw_orig,'-b',lw=2,label='BDMW')
-pylab.fill_between(10**(bins_bdmw_orig),quartile1_c_bdmw_orig,quartile2_c_bdmw_orig,color='b',alpha=0.3)
-pylab.legend(loc=1, borderaxespad=0.5)
-pylab.xscale('log')
-pylab.xlim([1E11,1E15])
-pylab.ylim([0,15])
-pylab.xlabel('$Mass\ (M_{sun}/h )$')
-pylab.ylabel('$Concentration$')
-pylab.savefig('concentration-W.png',dpi=300)
-pylab.close()
-
-pylab.plot(used_n_bdmv,used_c_bdmv,'.b')
-pylab.plot(10**(bins_bdmv_mcmc),median_c_bdmv_mcmc,'-r',lw=2)
-pylab.xscale('log')
-pylab.yscale('log')
-pylab.xlabel('$Mass\ (M_{sun}/h )$')
-pylab.ylabel('$Concentration$')
-pylab.title('$BDMV$')
-pylab.savefig('n_vs_c_bdmv.png',dpi=300)
-pylab.close()
-
-pylab.plot(used_n_bdmw,used_c_bdmw,'.b')
-pylab.plot(10**(bins_bdmw_mcmc),median_c_bdmw_mcmc,'-r',lw=2)
-pylab.xscale('log')
-pylab.yscale('log')
-pylab.xlabel('$Mass\ (M_{sun}/h )$')
-pylab.ylabel('$Concentration$')
-pylab.title('$BDMW$')
-pylab.savefig('n_vs_c_bdmw.png',dpi=300)
+pylab.savefig('concentration2.png',dpi=300)
 pylab.close()
