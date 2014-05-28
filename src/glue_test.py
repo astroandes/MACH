@@ -7,12 +7,11 @@ filenames = sorted([directory+'/'+element for element in total_list if 'result' 
 
 export = open(directory+'/results.csv', 'w')
 head='Id,x_center,y_center,z_center,conc,c_max,c_min'
-
-with export as outfile:
-    for fname in filenames:
-        with open(fname) as infile:
-            for line in infile:
-                outfile.write(line)   
+for fname in filenames:
+    with open(fname) as infile:
+        for line in infile:
+            export.write(line)
+export.close()
 
 data = np.loadtxt(directory+'/results.csv',delimiter=',')
 data = data[data[:,0].argsort()]
