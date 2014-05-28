@@ -1,23 +1,5 @@
-import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, fit, plotter, multiprocessing, time
+import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, fit, mcmc, plotter, multiprocessing, time
 from scipy.optimize import fsolve
-
-# Gets the concentration and virial radius for several haloes
-# It must be executed with the following command line:
-#
-#      python main.py directory #x #y #x skip processes noplot*
-#
-# Where:
-#      directory: is the path of the directory with the files with the positions of the haloes
-#      #x, #y, #z: are the column position of each coordinate in the files (for Multidark is 2 3 4)
-#      skip: number of rows to skip (For Multidark is 16) 
-#      processes: number of child processes
-#      noplot: is an optional parameter, if it is added the code will not make any graphics
-#
-# Have fun! 
-#
-# Done by: Christian Poveda (cn.poveda542@uniandes.edu.co)
-#
-# Thanks to Diva Martinez (dm.martinez831@uniandes.edu.co) for the multiprocessing idea
 
 processes = int(sys.argv[6])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
@@ -84,15 +66,20 @@ def run(directories,process_number):
         
         mass = mass/mass[-1]
         radius = radius/radius[-1]
-        
-        n_iterations = 100000
-        
-        log_c,c_walk,chi2 = fit.metropolis_one(np.log(radius),np.log(mass),nfw.loglogmass_norm,n_iterations)
 
+        n_iterations = 50000
+
+        step = np.array([np.log(1.03)])
+        guess = np.array([np.log(10)])
+        reest = [lambda x: x >= 0]
+
+        chi_2 = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(radius),np.log(mass),np.ones(len(radius)))
+        walk,chi2 = mcmc.walker(chi_2,guess,step,n_iterations,reest)
+        walk = walk[0]
+        log_c = walk[np.argmin(chi2)]
         c = np.exp(log_c)
+        c_max, c_min = np.exp(fit.error_bars(walk,log_c,'log'))
     
-        c_max, c_min = np.exp(fit.error_bars(c_walk,log_c,'log'))
-
         export = open(filename_export, 'a')
         line = [[file_id,x_center,y_center,z_center,c,c_max,c_min]]
         np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf'],delimiter=',')
