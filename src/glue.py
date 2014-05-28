@@ -17,6 +17,4 @@ export.close()
 data = np.loadtxt(directory+'/results.csv',delimiter=',')
 data = data[data[:,0].argsort()]
 
-print np.shape(data)
-
 np.savetxt(directory+'/results.csv',data,fmt='%d,%f,%f,%f,%f,%f,%f,%f,%d,%d',header=head)
