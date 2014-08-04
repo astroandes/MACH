@@ -17,6 +17,8 @@ def density(r,a,b):
 def mass_norm(r_norm,c):
     return (np.log(1.0+r_norm*c)-r_norm*c/(1.0+r_norm*c))/(np.log(1.0+c)-c/(1.0+c))
 
+def density_norm(r_norm,c):
+    return ((1+c)**2/(r_norm*(1+r_norm*c)**2))
 
 # Profiles in logarithmic scale
 # Parameters:
@@ -31,6 +33,9 @@ def logmass(logr,a,b):
 
 def logdensity(logr,a,b):
     return np.log(a)+np.log(b)-logr-2*np.log(1+np.exp(logr)/b)
+
+def logdensity_norm(logr_norm,c):
+    return (2*np.log(1+c)-np.log(logr_norm)-2*np.log(1+c*np.exp(logr_norm)))
 
 # Profiles in logarithmic scale with logarithmic parameters
 # Parameters:
@@ -48,3 +53,6 @@ def loglogdensity(logr,loga,logb):
 
 def loglogmass_norm(logr_norm,logc):
     return np.log((np.log(1.0+np.exp(logr_norm+logc))-np.exp(logr_norm+logc)/(1.0+np.exp(logr_norm+logc)))/(np.log(1.0+np.exp(logc))-np.exp(logc)/(1.0+np.exp(logc))))
+
+def loglogdensity_norm(logr_norm,logc):
+    return (2*np.log(1+np.exp(logc))-np.log(logr_norm)-2*np.log(1+np.exp(logr_norm+logc)))
