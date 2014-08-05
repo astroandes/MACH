@@ -77,12 +77,12 @@ def run(directories,process_number):
         
         os.system('rm '+potential_name+' '+positions_name)
         
-        r_values = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
-        radius = np.delete(r_values,0)
-        dv = (4.0/3.0)*(np.pi*(r_values**3-np.delete(r_values,0)**3))
-	density = dm/dr
+        radius = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
+        dv = (4.0/3.0)*(np.pi*(np.delete(radius,0)**3-np.delete(radius,-1)**3))
+	radius = np.delete(radius,0)
+	density = dm/dv
 	
-        avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
+        avg_density = dm*np.arange(len(radius))/((4.0/3.0)*np.pi*(radius**3))
         rho_back = dm*(2048.0/1000.0)**3
 
         bdmw = 740.0
@@ -125,7 +125,7 @@ def run(directories,process_number):
             os.chdir(results_folder)
 
             plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmw)
-            plotter.logdensity_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'bdmw')
+            plotter.logdensity_norm(bdmw_radius,bdmw_density,c_bdmw,bdmw_max,bdmw_min,'bdmw')
             pylab.scatter(np.exp(bdmw_walk),bdmw_chi2)
             pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
