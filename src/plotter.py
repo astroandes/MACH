@@ -117,6 +117,20 @@ def logdensity(r_density, density, parameters):
     pylab.savefig('log_density.pdf',format='pdf',dpi=300)
     pylab.close()
 
+def logdensity_norm(radius,density,c,c_max,c_min,name):
+    
+    pylab.plot(radius, density,'.r',label="Real Norm Mass")
+    pylab.plot(radius, nfw.density_norm(radius,c),'k',label="NFW profile")
+    pylab.plot(radius , nfw.density_norm(radius,c_max),'--r',label="Max param")
+    pylab.plot(radius , nfw.density_norm(radius,c_min),'--b',label="Min param")
+    pylab.legend(loc=4, borderaxespad=0.5)
+    pylab.xlabel('Radius (Normalized)')
+    pylab.ylabel('Density (Normalized)')
+    pylab.xscale('log')
+    pylab.yscale('log')
+    pylab.savefig('logdensity_norm_'+name+'.pdf',format='pdf',dpi=300)
+    pylab.close()
+
 # Makes a contour plot of the chi squared 
 # Requires:
 #     a_walk: array with the random walk of the first parameter
