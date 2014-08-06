@@ -76,7 +76,7 @@ def run(directories,process_number):
         x_center,y_center,z_center = x[maximum],y[maximum],z[maximum]
         
         os.system('rm '+potential_name+' '+positions_name)
-        
+    
         r_values = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
         
         mass = mass_element*np.arange(1,n_points,1)
@@ -85,21 +85,21 @@ def run(directories,process_number):
         avg_density = mass/((4.0/3.0)*np.pi*(radius**3))
         rho_back = mass_element*(2048.0/1000.0)**3
 
-        bdmw = 740.0
+        crit = 740.0
 
-        bdmw_index = np.argmin(np.abs(avg_density-bdmw*rho_back))
+        vir_index = np.argmin(np.abs(avg_density-crit*rho_back))
 
-        if np.argmin(np.abs(avg_density-bdmw*rho_back)) > 1:
-            r_bdmw = radius[bdmw_index]
+        if np.argmin(np.abs(avg_density-crit*rho_back)) > 1:
+            r_vir = radius[vir_index]
         else:
-            r_bdmw = radius[-1]
-            bdmw_index = len(avg_density)-1
+            r_vir = radius[-1]
+            vir_index = len(avg_density)-1
 
-        bdmw_mass = np.resize(mass,bdmw_index)
-        bdmw_radius = np.resize(radius,bdmw_index)
+        mass = np.resize(mass,vir_index)
+        radius = np.resize(radius,vir_index)
 
-        bdmw_mass = bdmw_mass/bdmw_mass[-1]
-        bdmw_radius = bdmw_radius/bdmw_radius[-1]
+        mass = mass/mass[-1]
+        radius = radius/radius[-1]
 
         n_iterations = 50000
 
@@ -107,38 +107,38 @@ def run(directories,process_number):
         guess = np.array([np.log(10)])
         reest = [lambda x: x >= 0]
 
-        chi_bdmw = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(bdmw_radius),np.log(bdmw_mass),np.ones(len(bdmw_radius)))
+        chi_2 = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(radius),np.log(mass),np.ones(len(radius)))
     
-        bdmw_walk,bdmw_chi2 = mcmc.walker(chi_bdmw,guess,step,n_iterations,reest)
+        walk,chi2 = mcmc.walker(chi_2,guess,step,n_iterations,reest)
 
-        bdmw_walk = bdmw_walk[0]
+        walk = walk[0]
         
-        log_bdmw = bdmw_walk[np.argmin(bdmw_chi2)]
+        log_c = walk[np.argmin(chi2)]
 
-        c_bdmw = np.exp(log_bdmw)
+        c = np.exp(log_c)
     
-        bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,log_bdmw,'log'))
+        c_max, c_min = np.exp(fit.error_bars(walk,log_c,'log'))
     
         if (plt == 1):
 
             os.system('mkdir '+results_folder)
             os.chdir(results_folder)
 
-            plotter.halo(x,y,z,x_center,y_center,z_center,r_bdmw)
-            plotter.mass_norm(bdmw_radius,bdmw_mass,c_bdmw,bdmw_max,bdmw_min,'bdmw')
-            pylab.scatter(np.exp(bdmw_walk),bdmw_chi2)
+            plotter.halo(x,y,z,x_center,y_center,z_center,r_vir)
+            plotter.mass_norm(radius,mass,c,c_max,c_min)
+            pylab.scatter(np.exp(walk),chi2)
             pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
             pylab.savefig('chi2.pdf',dpi=300)
             pylab.close()
 
-            pylab.scatter(np.exp(bdmw_walk),np.exp(-bdmw_chi2/2),c='r',label='BDMW')
+            pylab.scatter(np.exp(walk),np.exp(-chi2/2.0),c='r',label='BDMW')
             pylab.xlabel('$c$')
             pylab.ylabel('$\cal{L}$')
             pylab.savefig('likelihood.pdf',dpi=300)
             pylab.close()
 
-            pylab.hist(np.exp(bdmw_walk),1000,normed=True)
+            pylab.hist(np.exp(walk),1000,normed=True)
             pylab.xlabel('c')
             pylab.ylabel('P(c)')
             pylab.savefig('histogram.pdf',dpi=300)
@@ -147,7 +147,7 @@ def run(directories,process_number):
             os.chdir('../../')
 
         export = open(filename_export, 'a')
-        line = [[file_id,x_center,y_center,z_center,c_bdmw,bdmw_max,bdmw_min,r_bdmw,len(bdmw_mass),n_points]]
+        line = [[file_id,x_center,y_center,z_center,c,c_max,c_min,r_vir,len(mass),n_points]]
         np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d'],delimiter=',')
 
 for i in range(processes):

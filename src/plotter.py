@@ -84,7 +84,7 @@ def logmass(radius, mass, parameters,lims_a,lims_b):
     pylab.savefig('log_mass.pdf',format='pdf',dpi=300)
     pylab.close()
 
-def mass_norm(radius,mass,c,c_max,c_min,name):
+def mass_norm(radius,mass,c,c_max,c_min):
     
     pylab.plot(radius, mass,'.r',label="Real Norm Mass")
     pylab.plot(radius, nfw.mass_norm(radius,c),'k',label="NFW profile")
@@ -93,7 +93,7 @@ def mass_norm(radius,mass,c,c_max,c_min,name):
     pylab.legend(loc=4, borderaxespad=0.5)
     pylab.xlabel('Radius (Normalized)')
     pylab.ylabel('Mass (Normalized)')
-    pylab.savefig('mass_norm_'+name+'.pdf',format='pdf',dpi=300)
+    pylab.savefig('mass_norm.pdf',format='pdf',dpi=300)
     pylab.close()
 
 # Plots the NFW density profile in logarithmic scale 
