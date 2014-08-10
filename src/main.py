@@ -95,8 +95,8 @@ def run(directories,process_number):
             r_vir = radius[-1]
             vir_index = len(avg_density)-1
 
-        mass = np.resize(mass,vir_index)
-        radius = np.resize(radius,vir_index)
+        mass = np.resize(mass,vir_index+1)
+        radius = np.resize(radius,vir_index+1)
 
         mass = mass/mass[-1]
         radius = radius/radius[-1]

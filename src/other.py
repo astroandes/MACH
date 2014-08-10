@@ -94,14 +94,25 @@ def run(directories,process_number):
         else:
             r_bdmw = radius[-1]
             bdmw_index = len(avg_density)-1
-
-        bdmw_density = np.resize(density,bdmw_index)
-        bdmw_radius = np.resize(radius,bdmw_index)
-
-        bdmw_density = bdmw_density/bdmw_density[-1]
-        bdmw_radius = bdmw_radius/bdmw_radius[-1]
-
+	print r_bdmw
+        radius = np.resize(radius,bdmw_index+1)
+	print radius[-1]        
+	radius = radius/radius[-1]
+        
+        r = np.exp(np.linspace(np.log(radius[0]),0,int(len(radius)/2.0)))
+        m = np.array([len([e for e in radius if e<=R]) for R in r])
+        
+	print r,m
+        DM = np.delete(m,0)-np.delete(m,-1)
+        DV = (4.0/3.0)*np.pi*(np.delete(r,0)**3-np.delete(r,-1)**3)
+        
+        rho = DM/DV
+        r = np.delete(r,0)
+        print rho,r
         n_iterations = 50000
+        
+        bdmw_radius = r
+        bdmw_density = rho
 
         step = np.array([np.log(1.03)])
         guess = np.array([np.log(10)])
@@ -118,7 +129,7 @@ def run(directories,process_number):
         c_bdmw = np.exp(log_bdmw)
     
         bdmw_max, bdmw_min = np.exp(fit.error_bars(bdmw_walk,log_bdmw,'log'))
-    
+        
         if (plt == 1):
 
             os.system('mkdir '+results_folder)
