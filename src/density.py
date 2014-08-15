@@ -1,4 +1,5 @@
 import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, mcmc,fit , plotter, multiprocessing, time
+
 from scipy.optimize import fsolve
 
 # Gets the concentration and virial radius for several haloes
@@ -52,7 +53,7 @@ def run(directories,process_number):
 
         count = count + 1
         print '\rWorking with file '+str(count)+' of '+str(len(directories))+' in process '+str(process_number)
-
+        
         path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
         data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(sys.argv[5]))
 
@@ -109,16 +110,17 @@ def run(directories,process_number):
         r = np.delete(r,0)
         
         n_iterations = 50000
-        
+        r = r[np.nonzero(rho)]
+        rho = rho[np.nonzero(rho)]
         bdmw_radius = r/r[-1]
         bdmw_density = rho/rho[-1]
 
-        step = np.array([np.log(1.03)])
-        guess = np.array([np.log(10)])
+        step = np.array([np.log(1.02)])
+        guess = np.array([np.log(5.0)])
         reest = [lambda x: x >= 0]
 
         chi_bdmw = lambda p : mcmc.chi2(p,nfw.loglogdensity_norm,np.log(bdmw_radius),np.log(bdmw_density),np.ones(len(bdmw_radius)))
-    
+            
         bdmw_walk,bdmw_chi2 = mcmc.walker(chi_bdmw,guess,step,n_iterations,reest)
 
         bdmw_walk = bdmw_walk[0]
@@ -157,7 +159,7 @@ def run(directories,process_number):
             os.chdir('../../')
 
         export = open(filename_export, 'a')
-        line = [[file_id,x_center,y_center,z_center,c_bdmw,bdmw_max,bdmw_min,r_bdmw,len(bdmw_density),n_points]]
+        line = [[file_id,x_center,y_center,z_center,c_bdmw,bdmw_max,bdmw_min,r_bdmw,len(radius),n_points]]
         np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d'],delimiter=',')
 
 for i in range(processes):
