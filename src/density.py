@@ -79,24 +79,10 @@ def run(directories,process_number):
         os.system('rm '+potential_name+' '+positions_name)
         
         radius = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
-        dv = (4.0/3.0)*(np.pi*(np.delete(radius,0)**3-np.delete(radius,-1)**3))
-	radius = np.delete(radius,0)
-	density = dm/dv
+        radius = np.delete(radius,0)
 	
-        avg_density = dm*np.arange(len(radius))/((4.0/3.0)*np.pi*(radius**3))
         rho_back = dm*(2048.0/1000.0)**3
-
         bdmw = 740.0
-
-        bdmw_index = np.argmin(np.abs(avg_density-bdmw*rho_back))
-
-        if np.argmin(np.abs(avg_density-bdmw*rho_back)) > 1:
-            r_bdmw = radius[bdmw_index]
-        else:
-            r_bdmw = radius[-1]
-            bdmw_index = len(avg_density)-1
-	
-        radius = np.resize(radius,bdmw_index+1)
 	
         r = np.exp(np.linspace(np.log(radius[0]),np.log(radius[-1]),int(len(radius)/2.0)))        
 	m = np.array([len([e for e in radius if e<=R]) for R in r])
@@ -109,6 +95,16 @@ def run(directories,process_number):
         rho = DM/DV
         r = np.delete(r,0)
         
+	bdmw_index = np.argmin(np.abs(rho-bdmw*rho_back))
+
+        if np.argmin(np.abs(rho-bdmw*rho_back)) > 1:
+            r_bdmw = r[bdmw_index]
+        else:
+            r_bdmw = r[-1]
+            bdmw_index = len(rho)-1
+	
+        r = np.resize(r,bdmw_index+1)
+	rho = np.resize(rho,bdmw_index+1)
         n_iterations = 50000
         r = r[np.nonzero(rho)]
         rho = rho[np.nonzero(rho)]
