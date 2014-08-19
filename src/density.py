@@ -84,7 +84,7 @@ def run(directories,process_number):
         rho_back = dm*(2048.0/1000.0)**3
         bdmw = 740.0
 	
-        r = np.exp(np.linspace(np.log(radius[0]),np.log(radius[-1]),int(len(radius)/2.0)))        
+        r = np.exp(np.linspace(np.log(radius[0]),np.log(radius[-1]),10))        
 	m = np.array([len([e for e in radius if e<=R]) for R in r])
         
         radius = radius/radius[-1]
