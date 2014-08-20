@@ -157,7 +157,7 @@ def run(directories,process_number):
                 os.chdir('../../')
 
             export = open(filename_export, 'a')
-            line = [[file_id,x_center,y_center,z_center,c_bdmw,bdmw_max,bdmw_min,r_bdmw,m[bdmw_index+2],n_points]]
+            line = [[file_id,x_center,y_center,z_center,c_bdmw,bdmw_max,bdmw_min,r_bdmw,m[bdmw_index+1],n_points]]
             np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d'],delimiter=',')
 
 for i in range(processes):
