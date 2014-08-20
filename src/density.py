@@ -96,7 +96,15 @@ def run(directories,process_number):
             
             rho = DM/DV
             r = np.delete(r,0)
-            	
+            
+            bdmw_index = np.argmin(np.abs(rho-bdmw*rho_back))
+
+            if np.argmin(np.abs(rho-bdmw*rho_back)) > 1:
+                r_bdmw = r[bdmw_index]
+            else:
+                r_bdmw = r[-1]
+                bdmw_index = len(rho)-1
+	
             r = np.resize(r,bdmw_index+1)
             rho = np.resize(rho,bdmw_index+1)
             n_iterations = 50000
