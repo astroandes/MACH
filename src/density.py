@@ -96,15 +96,7 @@ def run(directories,process_number):
             
             rho = DM/DV
             r = np.delete(r,0)
-            
-            bdmw_index = np.argmin(np.abs(rho-bdmw*rho_back))
-
-            if np.argmin(np.abs(rho-bdmw*rho_back)) > 1:
-                r_bdmw = r[bdmw_index]
-            else:
-                r_bdmw = r[-1]
-                bdmw_index = len(rho)-1
-	
+            	
             r = np.resize(r,bdmw_index+1)
             rho = np.resize(rho,bdmw_index+1)
             n_iterations = 50000
@@ -157,7 +149,7 @@ def run(directories,process_number):
                 os.chdir('../../')
 
             export = open(filename_export, 'a')
-            line = [[file_id,x_center,y_center,z_center,c_bdmw,bdmw_max,bdmw_min,r_bdmw,len(radius),n_points]]
+            line = [[file_id,x_center,y_center,z_center,c_bdmw,bdmw_max,bdmw_min,r_bdmw,m[bdmw_index+2],n_points]]
             np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d'],delimiter=',')
 
 for i in range(processes):
