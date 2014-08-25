@@ -86,7 +86,7 @@ def run(directories,process_number):
 	v_max = np.max(velocity)
 	v_vir = velocity[-1]
 	def f(c):
-		return (v_max/v_vir) - 0.216*c/(np.log(1+c)-c/(1+c)) 
+		return (v_max/v_vir) - np.sqrt(0.216*c/(np.log(1+c)-c/(1+c))) 
 	
 	c = fsolve(f,10.0)
         export = open(filename_export, 'a')
