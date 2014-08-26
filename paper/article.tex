@@ -285,17 +285,43 @@ generate the mock halos, $c_{in}$, $D=(c_{in}-c_{out})/c_{in}$. Then we can see 
 \subsection{Comparison against other methods}
 We compared this method against two methods: The first one consists in using shells for estimating the density in function of the radius and using the same MCMC method for fitting and the second one consists in using the circular velocity $V(r)=\sqrt{GM(<r)/r}$ and the relation for the NFW profile
 \begin{equation}
-\frac{V_{max}}{V(r_{vir})} = \sqrt{\frac{0.216c}{M(r_{vir})}}
+\frac{V_{max}}{V(r_{v})} = \sqrt{\frac{0.216c}{M(r_{v};c)}}
 \end{equation}
-Where $V_{max}$ is the maximum velocity, to find the value of the concentration. We obtained the following results
+Where $V_{max}$ is the maximum velocity, to find the value of the concentration.
 
-Fixme: RESULTS!
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{density-mass.pdf}
+\end{center}
+\caption{Concentration obtained from the mass method against the one obtained in the density method
+    \label{fig:density-mass}}
+\end{figure}
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{density-velocity.pdf}
+\end{center}
+\caption{Concentration obtained from the velocity method against the one obtained in the density method
+    \label{fig:density-velocity}}
+\end{figure}
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{velocity-mass.pdf}
+\end{center}
+\caption{Concentration obtained from the mass method against the one obtained in the velocity method
+    \label{fig:velocity-mass}}
+\end{figure}
 \subsection{Concentration as a function of halo mass}
-Aditionally we compared those three methods plotting the concentration as a function of halo mass 
+Aditionally we compared those three methods plotting the concentration as a function of the number of particles of each halo 
 
-Fixme: Plot!
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{concentration.pdf}
+\end{center}
+\caption{Concentration against number of particles
+    \label{fig:concentrations}}
+\end{figure}
 
-The bold lines in Figure ?? corresponds to the median and the thinner lines corresponds to the quartiles.
+The bold lines in Figure \ref{fig:concentrations} corresponds to the median and the thinner lines corresponds to the quartiles. As we can see the velocity method has a greater dispersion compared to the other two.
 \subsection{Implication for comparisons against observations}
 FIXME: Ask to Jaime
 
