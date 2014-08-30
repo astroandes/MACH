@@ -21,6 +21,9 @@ pylab.legend(loc=4, borderaxespad=0.5)
 pylab.savefig('vlct.png',dpi=300)
 pylab.close()
 
+
+print chi2(orig,vlct[:,1]),chi2(orig,vlct[:,2]),chi2(orig,vlct[:,3]),chi2(orig,vlct[:,4])
+
 orig = dens[:,0]
 
 pylab.title('$Density$')
@@ -36,6 +39,8 @@ pylab.legend(loc=4, borderaxespad=0.5)
 pylab.savefig('dens.png',dpi=300)
 pylab.close()
 
+print chi2(orig,dens[:,1]),chi2(orig,dens[:,2]),chi2(orig,dens[:,3])
+
 orig = mass[:,0]
 
 pylab.title('$Mass$')
@@ -49,3 +54,5 @@ pylab.xlabel=('$Obtained$')
 pylab.legend(loc=4, borderaxespad=0.5)
 pylab.savefig('mass.png',dpi=300)
 pylab.close()
+
+print chi2(orig,mass[:,1]),chi2(orig,mass[:,2]),chi2(orig,mass[:,3]),chi2(orig,mass[:,4])
