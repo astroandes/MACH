@@ -22,7 +22,7 @@ pylab.savefig('vlct.png',dpi=300)
 pylab.close()
 
 
-chi_vlct = [chi2(orig,vlct[:,1]),chi2(orig,vlct[:,2]),chi2(orig,vlct[:,3]),chi2(orig,vlct[:,4])]
+chi_vlct = np.array([chi2(orig,vlct[:,1]),chi2(orig,vlct[:,2]),chi2(orig,vlct[:,3]),chi2(orig,vlct[:,4])])
 
 orig = dens[:,0]
 
@@ -39,7 +39,7 @@ pylab.legend(loc=4, borderaxespad=0.5)
 pylab.savefig('dens.png',dpi=300)
 pylab.close()
 
-chi_dens =[chi2(orig,dens[:,1]),chi2(orig,dens[:,2]),chi2(orig,dens[:,3])]
+chi_dens = np.array([chi2(orig,dens[:,1]),chi2(orig,dens[:,2]),chi2(orig,dens[:,3])])
 
 orig = mass[:,0]
 
@@ -55,14 +55,14 @@ pylab.legend(loc=4, borderaxespad=0.5)
 pylab.savefig('mass.png',dpi=300)
 pylab.close()
 
-chi_mass = [chi2(orig,mass[:,1]),chi2(orig,mass[:,2]),chi2(orig,mass[:,3]),chi2(orig,mass[:,4])]
+chi_mass = np.array([chi2(orig,mass[:,1]),chi2(orig,mass[:,2]),chi2(orig,mass[:,3]),chi2(orig,mass[:,4])])
 
-pylab.plot([20,200,2000,20000],chi_mass,'or',label='$Mass$')
-pylab.plot([20,200,2000,20000],chi_mass,'-r')
-pylab.plot([20,200,2000,20000],chi_vlct,'sg',label='$Velocty$')
-pylab.plot([20,200,2000,20000],chi_vlct,'-g')
-pylab.plot([200,2000,20000],chi_dens,'^b',label='$Density$')
-pylab.plot([200,2000,20000],chi_dens,'-b')
+pylab.plot([20,200,2000,20000],chi_mass,'-k',lw=2)
+pylab.plot([20,200,2000,20000],chi_mass,'ok',label='$Mass$',ms=7)
+pylab.plot([20,200,2000,20000],chi_vlct,'-k',lw=2)
+pylab.plot([20,200,2000,20000],chi_vlct,'sk',label='$Velocity$',ms=7)
+pylab.plot([200,2000,20000],chi_dens,'-k',lw=2)
+pylab.plot([200,2000,20000],chi_dens,'^k',label='$Density$',ms=7)
 pylab.xscale('log')
 pylab.yscale('log')
 pylab.legend()
