@@ -314,10 +314,10 @@ Where $V_{max}$ is the maximum velocity, to find the value of the concentration.
 We tested the three methods using the same data from the Mock Halos test. In order to see the accuracy of each method depending on the number of particles we define 
 
 \begin{equation}
-\xi=\frac{1}{N}\sum\left|\frac{c_{org}-c_{obt}}{c_{org}}\right|
+\xi(n)=\frac{1}{\left|{\cal{H}}_n\right|}\sum_{{\cal{H}}_n}\left|\frac{c_{org}-c_{obt}}{c_{org}}\right|
 \end{equation}
 
-Where $c_{org}$ and $c_{obt}$ are the original and obtained concentrations respectively and $N$ the number of haloes with a certain number of particles. Then we calculate $\xi$ for each number of particles (20, 200, 2000 and 20000).
+Where ${\cal{H}}_n$ corresponds to the set of haloes with $n$ particles, $c_{org}$ and $c_{obt}$ are the original and obtained concentrations respectively for each halo in ${\cal{H}}_n$ and $\left|{\cal{H}}_n\right|$ the number of haloes in ${\cal{H}}_n$. Then we calculate $\xi$ for each number of particles (20, 200, 2000 and 20000).
 
 \begin{figure}
 \begin{center}
