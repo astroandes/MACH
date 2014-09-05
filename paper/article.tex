@@ -310,6 +310,25 @@ Where $V_{max}$ is the maximum velocity, to find the value of the concentration.
 \caption{Concentration obtained from the mass method against the one obtained in the velocity method
     \label{fig:velocity-mass}}
 \end{figure}
+
+We tested the three methods using the same data from the Mock Halos test. In order to see the accuracy of each method depending on the number of particles we define 
+
+\begin{equation}
+\xi=\frac{1}{N}\sum\left|\frac{c_{org}-c_{obt}}{c_{org}}\right|
+\end{equation}
+
+Where $c_{org}$ and $c_{obt}$ are the original and obtained concentrations respectively and $N$ the number of haloes with a certain number of particles. Then we calculate $\xi$ for each number of particles (20, 200, 2000 and 20000).
+
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{error.pdf}
+\end{center}
+\caption{Relative error Against number of Particles
+    \label{fig:error}}
+\end{figure}
+
+In Figure \ref{fig:error} we plotted $\xi$ for the three methods. We consider that $\xi$ is a good estimate because it is standardized, giving equal weight to all errors regardless of the magnitude of the concentrations or the number of halos. On the other hand we have that $\xi$ decreases quite fast with the number of particles and is more precise in any case that the other methods.
+
 \subsection{Concentration as a function of halo mass}
 Aditionally we compared those three methods plotting the concentration as a function of the number of particles of each halo 
 
@@ -321,7 +340,7 @@ Aditionally we compared those three methods plotting the concentration as a func
     \label{fig:concentrations}}
 \end{figure}
 
-The bold lines in Figure \ref{fig:concentrations} corresponds to the median and the thinner lines corresponds to the quartiles. As we can see the velocity method has a greater dispersion compared to the other two.
+The bold lines in Figure \ref{fig:concentrations} corresponds to the median and the thinner lines corresponds to the quartiles.
 \subsection{Implication for comparisons against observations}
 FIXME: Ask to Jaime
 
