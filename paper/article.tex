@@ -108,28 +108,26 @@ where $\rho_c\equiv 3H^2/8\pi G$ is the Universe critical density,
 $\delta_c$ is the halo dimensionless characteristic density and $r_s$
 is known as the scale radius, the radius that marks the transition
 between the two power law behaviour in the $\rho\propto r^{-1}$ for
-$r<r_s$ and $\rho\propto r^{-2}$ for  $r>r_s$.  
+$r<r_s$ and $\rho\propto r^{-3}$ for  $r>r_s$.  
 
 We define the virial radius of a halo, $r_v$, as the boundary of the
 spherical volume that encloses an average density of $\Delta_h$ times
 the average density of the Universe. The corresponding mass $M_{v}$,
-the virial mass, can be thus expressed as $M_{v} =
+the virial mass, can be written as $M_{v} =
 \frac{4\pi}{3}\bar{\rho}\Delta_h r_v^3$. 
 
 
-
-The total mass enclosed within a radius $r$ can be computed to be:
+\subsection{Integrated Mass}
+From these definitions we can compute the total mass enclosed inside a
+radius $r$:
 \begin{equation}
 M(<r) = 4\pi\rho_c\delta_c  r_s^3\left[\ln \left
   (\frac{r_s+r}{r}\right) - \frac{r}{r_s+r}\right].
 \end{equation}
  
-We can now define the concentration of the halo as $c=r_v/r_s$, the
-dimensioless variable $x\equiv r/r_v$ and $m\equiv M(<r)/M_v$, which
-allows us to express the total enclosed mass within a dimensionless
-radius $x$ as:
-
-
+We can now express the same quantity in terms of dimensionless the
+variables $x\equiv r/r_v$ and $m\equiv M(<r)/M_v$,
+%
 \begin{equation}
 m(<x) =
 \frac{1}{A}\left[\ln\left(1+xc\right)-\left(\frac{xc}{xc+1}\right)\right],
@@ -141,20 +139,38 @@ where
 \begin{equation}
 A=\left[\ln\left(1+c\right)-\left(\frac{c}{c+1}\right)\right],
 \end{equation}
+%
+and the parameter $c$ is known as the concentration $c\equiv r_v/r_s$.
 
-meaning that the concentration is the only free parameter to
-determine the density profile of the halo. In Figure
-\ref{fig:profiles} we show the family of normalized integrated mass
-profiles for different values of the concentration in the range
-$1\leq c \leq 20$. 
+
+
+The most interesting feature of Eq. (\ref{eq:profile}) is that the
+concentration is the only free parameter to describe the shape of the
+halo densitry profile. In Figure \ref{fig:profiles} we show $m(<x)$ as
+a function of $x$ for different values of the concentration in the range
+$1\leq c \leq 20$.  
 
 \begin{figure}
 \begin{center}
   \includegraphics[width=0.48\textwidth]{nfw_normalized.pdf}
 \end{center}
-\caption{Mass profiles of several haloes with different concentrations
+\caption{Dimensionless mass profiles as a function of the
+  dimensionless radius for different concentration values.
     \label{fig:profiles}}
 \end{figure}
+
+
+\subsection{Circular velocity}
+
+It is also customary to express the mass of the halo inte terms of the
+circular velocity $V_{c}=sqrt{GM(<r)/r}$. From this we can
+define a new dimensionless circular velocity $v(<x)\equiv
+V_{c}(<r)/V_{c}(<r_v)$, using the result in Equation \ref{eq:profile}
+to have:
+
+\begin{equation}
+v(<x)=\sqrt{\frac{1}{A}\left[\frac{\ln\left(1+xc\right)}{x}-\frac{c}{xc+1}\right]},
+\end{equation}
 
 
 \section{A Bayesian Approach to Halo Fitting}
