@@ -2,37 +2,22 @@ import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, mcmc,fi
 from scipy.optimize import fsolve
 
 # Gets the concentration and virial radius for several haloes
-# It must be executed with the following command line:
-#
-#      python main.py directory #x #y #x skip processes noplot*
-#
-# Where:
-#      directory: is the path of the directory with the files with the positions of the haloes
-#      #x, #y, #z: are the column position of each coordinate in the files (for Multidark is 2 3 4)
-#      skip: number of rows to skip (For Multidark is 16) 
-#      processes: number of child processes
-#      noplot: is an optional parameter, if it is added the code will not make any graphics
-#
-# Have fun! 
-#
-# Done by: Christian Poveda (cn.poveda542@uniandes.edu.co)
-#
-# Thanks to Diva Martinez (dm.martinez831@uniandes.edu.co) for the multiprocessing idea
 
-processes = int(sys.argv[6])
+config = open('config.div','r').readline().split()
+print config
+processes = int(config[5])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 mass_element = 1.0   
 plt = 1
-total_list = os.listdir('./'+str(sys.argv[1]))
+total_list = os.listdir('./'+str(config[0]))
 len_list = len(total_list)
 lists = [total_list[i*len_list // processes: (i+1)*len_list //processes] for i in range(processes)]
 jobs = []
 
-try:
-    if (sys.argv[7]=='noplot'):
-        print 'No Plotting mode enabled'
-        plt = 0
-except:
+if (config[7]=='False'):
+    print 'No Plotting mode enabled'
+    plt = 0
+else:
     plt = 1
  
 os.system('mkdir results_'+now)
@@ -54,13 +39,13 @@ def run(directories,process_number):
         print '\rWorking with file '+str(count)+' of '+str(len(directories))+' in process '+str(process_number)
 
     # Creates the "data" array with the information from the file in "path"
-        path = os.path.expanduser('./'+str(sys.argv[1])+'/'+filename)
-        data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(sys.argv[5]))
+        path = os.path.expanduser('./'+str(config[0])+'/'+filename)
+        data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(config[4]))
 
     # Gets the cartesian coordinates for each particle in the halo and the number of particles
-        x = data[:,int(sys.argv[2])]
-        y = data[:,int(sys.argv[3])]
-        z = data[:,int(sys.argv[4])]
+        x = data[:,int(config[1])]
+        y = data[:,int(config[2])]
+        z = data[:,int(config[3])]
         n_points = len(x)
 
     # Exports a file with the cartesian coordinates of each particle
@@ -93,15 +78,19 @@ def run(directories,process_number):
         rho_back = mass_element*(2048.0/1000.0)**3
 
     # Gets the virial radius
-        crit = 740.0
-        vir_index = np.argmin(np.abs(avg_density-crit*rho_back))
+        if config[8]=='False':
+            crit = 740.0
+            vir_index = np.argmin(np.abs(avg_density-crit*rho_back))
 
-        if np.argmin(np.abs(avg_density-crit*rho_back)) > 1:
-            r_vir = radius[vir_index]
+            if np.argmin(np.abs(avg_density-crit*rho_back)) > 1:
+                r_vir = radius[vir_index]
+            else:
+                r_vir = radius[-1]
+                vir_index = len(avg_density)-1
         else:
             r_vir = radius[-1]
             vir_index = len(avg_density)-1
-
+            
     # Removes the particles that have a greater radius than the virial radius
         mass = np.resize(mass,vir_index+1)
         radius = np.resize(radius,vir_index+1)
@@ -112,7 +101,7 @@ def run(directories,process_number):
 
     # Does the Metropolis algorithm in order to find the concentration
         
-        n_iterations = 50000
+        n_iterations = int(config[6])
 
         step = np.array([np.log(1.03)])
         guess = np.array([np.log(10)])
