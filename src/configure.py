@@ -21,7 +21,7 @@ tk.Entry(root,textvariable=proc).grid(row=5,column=1)
 tk.Entry(root,textvariable=step).grid(row=6,column=1)
 
 try:
-    params = open('config.div','r').readline().split()    
+    params = open('config.div','r').readline().split(',')    
     directory.set(params[0])
     x.set(params[1])
     y.set(params[2])
@@ -50,7 +50,7 @@ def change_path():
     
 def save():
     export = open('config.div','w')
-    line =  directory.get()+' '+x.get()+' '+y.get()+' '+z.get()+' '+skip.get()+' '+proc.get()+' '+step.get()+' '+('%r' % (plot.get()))+' '+('%r' % (test.get()))+'\n'
+    line =  directory.get()+','+x.get()+','+y.get()+','+z.get()+','+skip.get()+','+proc.get()+','+step.get()+','+('%r' % (plot.get()))+','+('%r' % (test.get()))+'\n'
     export.write(line)
     export.close()
     tkMessageBox.showinfo('Save', 'Configuration file was saved successfully')
