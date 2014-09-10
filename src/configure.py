@@ -1,6 +1,7 @@
 import Tkinter as tk, tkFileDialog, tkMessageBox
     
 root = tk.Tk()
+root.title('Configure & Run')
 
 directory = tk.StringVar()
 x = tk.StringVar()
@@ -31,10 +32,8 @@ try:
     step.set(params[6])
     plot.set((params[7] == 'True'))
     test.set((params[8] == 'True'))
-    print 'El archivin existe :D'
 except:
-    print 'El archivin no existe D:'
-
+    print '',
 tk.Label(root, text='Path').grid(row=0)
 tk.Label(root, text='X Column').grid(row=1)
 tk.Label(root, text='Y Column').grid(row=2)
@@ -53,7 +52,7 @@ def save():
     line =  directory.get()+','+x.get()+','+y.get()+','+z.get()+','+skip.get()+','+proc.get()+','+step.get()+','+('%r' % (plot.get()))+','+('%r' % (test.get()))
     export.write(line)
     export.close()
-    tkMessageBox.showinfo('Save', 'Configuration file was saved successfully')
+    tkMessageBox.showinfo('Saving...', 'Configuration file was saved successfully')
 
 
 tk.Button(root,text='Save',command=save).grid(row=9)
@@ -63,7 +62,5 @@ tk.Checkbutton(root,text='Yes',variable=plot).grid(row=7, column=1)
 tk.Checkbutton(root,text='Yes',variable=test).grid(row=8,column=1)
     
 root.mainloop()
-
-#root.withdraw()
 
 
