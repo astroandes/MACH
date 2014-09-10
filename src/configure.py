@@ -50,7 +50,7 @@ def change_path():
     
 def save():
     export = open('config.div','w')
-    line =  directory.get()+','+x.get()+','+y.get()+','+z.get()+','+skip.get()+','+proc.get()+','+step.get()+','+('%r' % (plot.get()))+','+('%r' % (test.get()))+'\n'
+    line =  directory.get()+','+x.get()+','+y.get()+','+z.get()+','+skip.get()+','+proc.get()+','+step.get()+','+('%r' % (plot.get()))+','+('%r' % (test.get()))
     export.write(line)
     export.close()
     tkMessageBox.showinfo('Save', 'Configuration file was saved successfully')
