@@ -3,8 +3,8 @@ from scipy.optimize import fsolve
 
 # Gets the concentration and virial radius for several haloes
 
-config = open('config.div','r').readline().split()
-print config
+config = open('config.div','r').readline().split(',')
+
 processes = int(config[5])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 mass_element = 1.0   
