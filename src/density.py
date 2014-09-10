@@ -133,7 +133,7 @@ def run(directories,process_number):
             os.chdir(results_folder)
 
             plotter.halo(x,y,z,x_center,y_center,z_center,r_vir)
-            plotter.logdensity_norm(radius,mass,c,c_max,c_min)
+            plotter.logdensity_norm(r,rho,c,c_max,c_min)
             pylab.scatter(np.exp(walk),chi2)
             pylab.xlabel('$c$')
             pylab.ylabel('$\chi ^2$')
