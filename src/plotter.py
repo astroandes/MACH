@@ -123,7 +123,7 @@ def logdensity_norm(radius,density,c,c_max,c_min,name):
     pylab.plot(radius, nfw.density_norm(radius,c),'k',label="NFW profile")
     pylab.plot(radius , nfw.density_norm(radius,c_max),'--r',label="Max param")
     pylab.plot(radius , nfw.density_norm(radius,c_min),'--b',label="Min param")
-    pylab.legend(loc=4, borderaxespad=0.5)
+    pylab.legend(loc=1, borderaxespad=0.5)
     pylab.xlabel('Radius (Normalized)')
     pylab.ylabel('Density (Normalized)')
     pylab.xscale('log')

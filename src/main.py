@@ -4,6 +4,7 @@ from scipy.optimize import fsolve
 # Gets the concentration and virial radius for several haloes
 
 config = open('config.div','r').readline().split(',')
+config[-1] = config[-1].replace('\n','')
 
 processes = int(config[5])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
@@ -39,7 +40,7 @@ def run(directories,process_number):
         print '\rWorking with file '+str(count)+' of '+str(len(directories))+' in process '+str(process_number)
 
     # Creates the "data" array with the information from the file in "path"
-        path = os.path.expanduser('./'+str(config[0])+'/'+filename)
+        path = os.path.expanduser(str(config[0])+'/'+filename)
         data = np.loadtxt(open(path, 'r'), delimiter=",",skiprows=int(config[4]))
 
     # Gets the cartesian coordinates for each particle in the halo and the number of particles
