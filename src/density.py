@@ -15,7 +15,7 @@ len_list = len(total_list)
 lists = [total_list[i*len_list // processes: (i+1)*len_list //processes] for i in range(processes)]
 jobs = []
 
-if (config[7]=='False'):
+if (config[7]=='0'):
     plt = 0
 else:
     plt = 1
@@ -78,7 +78,7 @@ def run(directories,process_number):
         rho_back = mass_element*(2048.0/1000.0)**3
 
     # Gets the virial radius
-        if config[8]=='False':
+        if config[8]=='0':
             crit = 740.0
             vir_index = np.argmin(np.abs(avg_density-crit*rho_back))
 
