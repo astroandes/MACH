@@ -119,7 +119,7 @@ def logdensity(r_density, density, parameters):
 
 def logdensity_norm(radius,density,c,c_max,c_min):
     
-    pylab.plot(radius, density,'.r',label="Real Norm Mass")
+    pylab.plot(radius, density,'.r',label="Real norm density")
     pylab.plot(radius, nfw.density_norm(radius,c),'k',label="NFW profile")
     pylab.plot(radius , nfw.density_norm(radius,c_max),'--r',label="Max param")
     pylab.plot(radius , nfw.density_norm(radius,c_min),'--b',label="Min param")
