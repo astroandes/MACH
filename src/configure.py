@@ -1,7 +1,7 @@
 import Tkinter as tk, tkFileDialog, tkMessageBox
     
 root = tk.Tk()
-root.title('Configure & Run')
+root.title('Configure')
 
 directory = tk.StringVar()
 x = tk.StringVar()
