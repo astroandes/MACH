@@ -5,17 +5,23 @@ mass = np.loadtxt('mass/table.csv',delimiter=',')
 dens = np.loadtxt('density/table.csv',delimiter=',')
 
 orig = vlct[:,0]
+gtt = [int(x) for x in np.argwhere(orig >=3)]
+
+vlct = vlct[gtt]
+mass = mass[gtt]
+dens = dens[gtt]
+
+orig = vlct[:,0]
 
 def chi2(x_obs,x_org):
-    return np.sum(np.abs((x_obs-x_org)/x_org))/len(x_obs)
-
+        return np.sum(np.abs((x_obs-x_org)/x_org))/len(x_obs)
+            
 def best_fit(original,results):
     ans = np.empty(len(original))
     for i in range(len(original)):
         concentrations = results[i,:]
         index = np.argmin(np.abs(original[i]-concentrations))
         ans[i] = concentrations[index]
-        print original[i],concentrations,index
     return ans
     
 pylab.title('$Velocity$')
