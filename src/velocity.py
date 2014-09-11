@@ -16,11 +16,17 @@ lists = [total_list[i*len_list // processes: (i+1)*len_list //processes] for i i
 jobs = []
 
 if (config[7]=='0'):
-    print 'No Plotting mode enabled'
+    print 'Plotting mode disabled'
     plt = 0
 else:
+    print 'Plotting mode enabled'
     plt = 1
- 
+
+if config[8]=='0':
+    print 'Test mode disabled'
+else:
+    print 'Test mode enabled'
+
 os.system('mkdir vlct_'+now)
 sys.stdout.write('\rCompiling the code used to calculate the center of each halo... ')
 sys.stdout.flush()

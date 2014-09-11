@@ -21,6 +21,7 @@ if (config[7]=='0'):
 else:
     print 'Plotting mode enabled'
     plt = 1
+    
 if config[8]=='0':
     print 'Test mode disabled'
 else:
