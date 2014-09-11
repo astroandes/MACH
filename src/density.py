@@ -20,7 +20,7 @@ if (config[7]=='0'):
 else:
     plt = 1
  
-os.system('mkdir results_'+now)
+os.system('mkdir dens_'+now)
 sys.stdout.write('\rCompiling the code used to calculate the center of each halo... ')
 sys.stdout.flush()
 os.system('cc potential.c -lm -o  potential.out')
@@ -30,7 +30,7 @@ def run(directories,process_number):
 
     process_number+=1
     count = 0
-    filename_export = './results_'+now+'/results_'+str(process_number)+'.csv'
+    filename_export = './dens_'+now+'/results_'+str(process_number)+'.csv'
     os.system('touch '+filename_export)
 
     for filename in directories:
@@ -52,7 +52,7 @@ def run(directories,process_number):
         file_id = int(filename.split('_')[1])
         positions_name ='positions_'+str(file_id)+'.dat'
         potential_name ='potential_'+str(file_id)+'.dat'
-        results_folder ='./results_'+now+'/'+str(file_id)
+        results_folder ='./dens_'+now+'/'+str(file_id)
         open(positions_name, "w").write('\n'.join('%lf,%lf,%lf' % (x[i],y[i],z[i]) for i in range(n_points)))
 
     # Runs the executable "potential.out" that will get the potential energy for each particle
