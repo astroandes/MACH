@@ -303,7 +303,26 @@ We compared this method against two methods: The first one consists in using she
 \begin{equation}
 \frac{V_{max}}{V(r_{v})} = \sqrt{\frac{0.216c}{M(r_{v};c)}}
 \end{equation}
-Where $V_{max}$ is the maximum velocity, to find the value of the concentration.
+Where $V_{max}$ is the maximum velocity, to find the value of the concentration. We tested the three methods using the same data from the Mock Halos test. In order to see the accuracy of each method depending on the number of particles we define 
+
+\begin{equation}
+\xi(n)=\frac{1}{\left|{\cal{H}}_n\right|}\sum_{{\cal{H}}_n}\left|\frac{c_{org}-c_{obt}}{c_{org}}\right|
+\end{equation}
+
+Where ${\cal{H}}_n$ corresponds to the set of haloes with $n$ particles, $c_{org}$ and $c_{obt}$ are the original and obtained concentrations respectively for each halo in ${\cal{H}}_n$ and $\left|{\cal{H}}_n\right|$ the number of haloes in ${\cal{H}}_n$. Then we calculate $\xi$ for each number of particles (20, 200, 2000 and 20000).
+
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{error.pdf}
+\end{center}
+\caption{Relative error Against number of Particles
+    \label{fig:error}}
+\end{figure}
+
+In Figure \ref{fig:error} we plotted $\xi$ for the three methods. We consider that $\xi$ is a good estimate because it is standardized, giving equal weight to all errors regardless of the magnitude of the concentrations or the number of halos. On the other hand we have that $\xi$ decreases quite fast with the number of particles for our method and is more precise in any case that the other methods.
+
+
+We also used these three methods to obtain the concentration for each halo in miniMDR1 and compared the results. As can be seen in the Figures \ref{fig:density-mass}, \ref{fig:density-velocity} and \ref{fig:velocity-mass} the three methods show mutually consistent results. However it can be inferred that the concentration values ​​obtained by the method of circular velocity are higher than those obtained by our method, and also the values ​​obtained by the density method are generally below the results of our method.
 
 \begin{figure}
 \begin{center}
@@ -327,24 +346,6 @@ Where $V_{max}$ is the maximum velocity, to find the value of the concentration.
     \label{fig:velocity-mass}}
 \end{figure}
 
-We tested the three methods using the same data from the Mock Halos test. In order to see the accuracy of each method depending on the number of particles we define 
-
-\begin{equation}
-\xi(n)=\frac{1}{\left|{\cal{H}}_n\right|}\sum_{{\cal{H}}_n}\left|\frac{c_{org}-c_{obt}}{c_{org}}\right|
-\end{equation}
-
-Where ${\cal{H}}_n$ corresponds to the set of haloes with $n$ particles, $c_{org}$ and $c_{obt}$ are the original and obtained concentrations respectively for each halo in ${\cal{H}}_n$ and $\left|{\cal{H}}_n\right|$ the number of haloes in ${\cal{H}}_n$. Then we calculate $\xi$ for each number of particles (20, 200, 2000 and 20000).
-
-\begin{figure}
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{error.pdf}
-\end{center}
-\caption{Relative error Against number of Particles
-    \label{fig:error}}
-\end{figure}
-
-In Figure \ref{fig:error} we plotted $\xi$ for the three methods. We consider that $\xi$ is a good estimate because it is standardized, giving equal weight to all errors regardless of the magnitude of the concentrations or the number of halos. On the other hand we have that $\xi$ decreases quite fast with the number of particles for our method and is more precise in any case that the other methods.
-
 \subsection{Concentration as a function of halo mass}
 Aditionally we compared those three methods plotting the concentration as a function of the number of particles of each halo 
 
@@ -356,7 +357,7 @@ Aditionally we compared those three methods plotting the concentration as a func
     \label{fig:concentrations}}
 \end{figure}
 
-The bold lines in Figure \ref{fig:concentrations} corresponds to the median and the thinner lines corresponds to the quartiles.
+The bold lines in Figure \ref{fig:concentrations} corresponds to the median and the thinner lines corresponds to the quartiles. Showing that our method has values ​​ranging from those obtained from the other two methods.
 \subsection{Implication for comparisons against observations}
 FIXME: Ask to Jaime
 
