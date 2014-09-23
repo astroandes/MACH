@@ -64,12 +64,12 @@ pylab.close()
 
 fig, (ax1,ax2,ax3) = pylab.subplots(1,3)
 
-ax1.scatter(c_vel,c_mcmc,c='k',alpha=0.1)
-ax1.plot(c_vel,c_vel,'-r',alpha=0.4,lw=2)
-ax1.set_xlim(xmin=np.amin(c_vel),xmax=np.amax(c_vel))
-ax1.set_ylim(ymin=np.amin(c_vel),ymax=np.amax(c_vel))
-ax1.set_xlabel("$\mathrm{Velocity\ Method}$",fontsize=15)
-ax1.set_ylabel("$\mathrm{Mass\ Method}$",fontsize=15)
+ax1.scatter(c_mcmc,c_vel,c='k',alpha=0.1)
+ax1.plot(c_mcmc,c_mcmc,'-r',alpha=0.4,lw=2)
+ax1.set_xlim(xmin=np.amin(c_vel),xmax=np.amax(c_mcmc))
+ax1.set_ylim(ymin=np.amin(c_vel),ymax=np.amax(c_mcmc))
+ax1.set_xlabel("$\mathrm{Mass\ Method}$",fontsize=15)
+ax1.set_ylabel("$\mathrm{Velocity\ Method}$",fontsize=15)
 ax1.set_xscale('log')
 ax1.set_yscale('log')
 
