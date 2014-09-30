@@ -91,6 +91,38 @@ matter
 
 \section{Introduction}
 \label{sec:introduction}
+In the context of the concordance cosmology, the matter contents of
+the Universe are dominated by an unknown dark matter which behaves as
+a collisionless fluid only perturbed by gravity.
+
+Numerical experiments are able to follow the non-linear evolution of
+dark matter down to galactic scales. On these scales a common
+approximation considers the matter distribution as spherical with a
+radial depedence. The function describing this distribution is known
+as a radial density profile. 
+
+The consensus is that density profiles are almost universal;
+almost independet of cosmological parameters and similar for different
+objects after some simple physical re-scalig is applied. 
+
+The detailed halo structure influences the hosted galaxies.
+
+The concentration parameter is imporant in galaxy formation studies.
+
+Different studies vary about the result of the concentration-mass
+relationship.
+
+We propose a new way to obtain the concentration for halos in N-body
+simulations. 
+
+We use the integrated mass profile because it
+allows us to use the data directly with the simulation without binning
+the particle positions and estimating a density.
+
+As an application we study the mass concentration relationship.
+
+
+
 
 
 \citep{NFW}
@@ -144,8 +176,8 @@ A=\left[\ln\left(1+c\right)-\left(\frac{c}{c+1}\right)\right],
 and the parameter $c$ is known as the concentration $c\equiv r_v/r_s$.
 
 The most interesting feature of Eq. (\ref{eq:profile}) is that the
-concentration is the only free parameter to describe the shape of the
-halo densitry profile. In Figure \ref{fig:profiles} we show $m(<x)$ as
+concentration is the only free parameter to describe the density
+profile. In Figure \ref{fig:profiles} we show $m(<x)$ as 
 a function of $x$ for different values of the concentration in the range
 $1\leq c \leq 20$.  
 
@@ -172,54 +204,74 @@ v(<x)=\sqrt{\frac{1}{A}\left[\frac{\ln\left(1+xc\right)}{x}-\frac{c}{xc+1}\right
 \end{equation}
 
 
-\section{A Bayesian Approach to Halo Fitting}
+In Figure XXX we show the circular velocity profile for the same
+concentrations as in Figure \ref{fig:profiles}.
+
+\section{A new Approach to Halo Fitting}
 \label{sec:method}
 
 
-We proceed to find the value of the concentration parameter that
-best describes the simulation data, following the model in
-Eq. (\ref{eq:profile}). We use the integrated mass profile because it
-allows us to use the data directly with the simulation without binning
-the particle positions and estimating a density.
+We estimate the concentration parameter by fitting the
+integrated mass profile described in Equation
+(\ref{eq:profile}). First we define the center of the halo to be  at
+the position of the particle with the lowest gravitational
+potential. 
+
+
 
 We construct the integrated mass profile by ranking the particles by
 their increasing distance to the center of the halo. Once they are ranked,
 the total mass at a radius $r_i$, increases by $m_p$, where $r_i$ is
 the position of the $i$-th particle and $m_p$ is the mass of the
-computational particle.  We define the center of the halo to be  at
-the position of the particle with the lowest gravitational
-potential. In the process of building the mass profile we discard the
-particle at the center.
+computational particle.  In this process we discard the
+particle at the center.  
+
 
 We stop the construction of the integrated mass profile once we arrive
-at an average density of $\Delta_h\bar{\rho}$. This radius marks the
+at an average density of $\Delta_h\bar{\rho}$, with $\Delta_h=740$,
+roughly corresponding to 200 times the critical density. This radius marks the
 virial radius and the virial mass. We divide the total mass enclosed
-mass $M_i$ and the radii $r_i$ by these values to obtaine the
+mass $M_i$ and the radii $r_i$ by these values to obtain the
 dimensionless variables $x_i$ and $m_i$. 
 
-Using these positions and masses we define the following $\chi^2$ function
+Using these new variables we define the following $\chi^2$ function
 
 \begin{equation}
 \chi^2(c) = \sum_{i}[\log m_i - \log m(< x_i;c)]^2, 
 \end{equation}
 %
 where $m(<x_i;c)$ corresponds to the values in Eq.(\ref{eq:profile}) at
-$x=x_i$ and a given value of the concentration parameter $c$.
+$x=x_i$ for a given value of the concentration parameter $c$. 
 
-Finally we use a Metropolis-Hastings algorithm to sample the likelihood
-function distribution defined by ${\cal L}(c)=\exp(-\chi^2(c)/2)$ to
-find the optimum value of $c$ and its associated uncertainty
-$\sigma_c$. 
+We sample the likelihood function distribution defined by ${\cal
+  L}(c)=\exp(-\chi^2(c)/2)$ with a Metropolos-Hastings algorithms to
+find the optimum value of $c$ and its  associated uncertainty
+$\sigma_c$.  
 
-\section{Numerical Experiments}
+
+{\bf Cuantos pasos usa la cadena? De cuanto es el sigma en
+los saltos de c en lca cadena?
+
+Falta alguna figura que muestre resultados de la -log likelihood para
+algunos casos representativos.
+}
+
+
+
+\section{Halo Samples}
+
+We apply our method to two different halo samples. The first one is a
+mock sample to test the algorithm and asses the impact of the number
+of computational particles on the concentration values. The second
+sample comes from a publicly available N-body cosmological
+simulation. These results for these sample can be then compared
+against other methods to find the concentration and feed the
+discussion about the implications of our method.
 
 \subsection{Mock Halos}
 
-We generate $100$ mock halos with concentration values randomly
-placed in the range $1<c<20$. Each one of the halos is generated with
-four different total particle numbers: $20$, $200$, $2000$ and $20000$.
-
-The method we use to generate the halos is based on the integrated
+First, we test our method using mock halos with known values for the
+concentration. The method we use to generate the halos is based on the integrated
 mass profile. Given the number of particles $n$ and the concentration
 $c$ we define the mass element as $\delta m = 1/n$ (this corresponds
 to the mass of each particle such that the total mass is one). Then
@@ -236,6 +288,14 @@ angles $\theta$ and $\phi$ are randomly generated. Finally these three
 coordinates are transformed into cartesian coordinates
 $(r,\theta,\phi) \rightarrow (x,y,z)$. This process is repeated $n$
 times in order to generate the $x,y,z$ coordinates for each particle. 
+ 
+
+
+We generate $100$ mock halos with concentration values randomly
+placed in the range $1<c<20$. Each one of the halos is generated with
+four different total particle numbers: $20$, $200$, $2000$ and
+$20000$. This gives us a total of $500$ halos. 
+
 
 \subsection{Simulation Data}
 \label{sec:data}
