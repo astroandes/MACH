@@ -67,8 +67,8 @@
 
 \begin{document}
 
-\title[Bayesian halo concentrations]{Dark matter halo
-  concentrations with a bayesian approach}
+\title[New approach to Halo concentrations]{A new method to estimate
+  dark matter halo concentrations}
 \author[Poveda \& Forero-Romero]{
 \parbox[t]{\textwidth}{\raggedright
   Christian Poveda$^{1}$ \&
@@ -91,41 +91,92 @@ matter
 
 \section{Introduction}
 \label{sec:introduction}
-In the context of the concordance cosmology, the matter contents of
-the Universe are dominated by an unknown dark matter which behaves as
-a collisionless fluid only perturbed by gravity.
+In the concordance cosmology paradigm the the matter content of the
+Universe are dominated by dark matter which behaves as a collisionless
+fluid under the influence of gravity. In the last three decades
+numerical experiments have made possible the simulation of large
+volumes of a Universe dominated by dark matter. 
 
-Numerical experiments are able to follow the non-linear evolution of
-dark matter down to galactic scales. On these scales a common
-approximation considers the matter distribution as spherical with a
-radial depedence. The function describing this distribution is known
-as a radial density profile. 
+One of the most striking results of these simulations is that dark
+matter clumps on galactic scales follows a universal density profile
+which in a first approximation is spherical symmetric and only
+dependent on the radial coordinate. These profiles seem to be
+universal; independent of the cosmological parameters and self-similar
+for different spatial scapes after an addecuate re-scaling is
+appplied.
 
-The consensus is that density profiles are almost universal;
-almost independet of cosmological parameters and similar for different
-objects after some simple physical re-scalig is applied. 
+One the most commong parameterization of this density is known as the
+Navarro-Frenk-White (NFW) profile \citep{NFW}. This profile is a
+double power law in radius, where the transition between the two
+happens at the so-called scale radius $r_s$. The ratio between the
+scale radius and the virial radius of the halo $R_v$ is known as the
+concentration $c=R_V/r_s$, a quantity that has been found to be
+correlated with the halo mass.  
 
-The detailed halo structure influences the hosted galaxies.
+The relationship between halo mass and concentration is in principle
+accesible to observations and provides a potential test of LCDM on
+galactic scales. With this promise a great deal of effort has been
+invested in calibrating this relationship with simulations but also
+finding the best possible way to constraint it with observations.
 
-The concentration parameter is imporant in galaxy formation studies.
+From the computational point of view there are two main methods to
+estimate the concetration parameter of a dark matter halo in a N-body
+simulation. The first method takes the particles comprosing the halos
+and bins them in logarithmic radii to estimate the density in each
+bin, then it proceeds with a fit of this density estimation as a
+function of radius. A second method uses an analytical property of the
+NFW that related the maximum of the ratio of the circular velocity to
+the virial velocity. In this method at each particle radius this ratio
+is estimated to find the maximum value for this ratio; this value is
+used to find the roots of an equation which represent the
+concentration parameter. 
 
-Different studies vary about the result of the concentration-mass
-relationship.
+The first method although is straightforward to apply has two main
+disadvantages. First of all it requires a large number of particles in
+order to have a proper density estimate in each bin. For a very low
+number of particles is hard to define a large number of bins to
+proceed with the fit. The second problem is that, as in any process
+involving data binning, there is not an way to estimate the optimal
+bin size, which in turn can affect the results of the fit.
 
-We propose a new way to obtain the concentration for halos in N-body
-simulations. 
+The second method solves the two problems mentioned above. It works
+with low particles numbers and does not involve data binning. However,
+it effectively takes into account a single data point and discards the
+behaviour of the ratio $V_{cirv}/V_{vir}$ below and above its
+maxima. 
 
-We use the integrated mass profile because it
-allows us to use the data directly with the simulation without binning
-the particle positions and estimating a density.
+In this paper we propose a new method to estimate the dark matter halo
+concentration from N-body simulation results. This method has two
+advantages with respect to the methods mentioned above. First, it does
+not involve data binning. Second, it does not throw away data
+points. Third, it allows for an straightforward estimation of the
+uncertainties in the concentration parameter. 
 
-As an application we study the mass concentration relationship.
+Our method consists in building the cumulative mass profile from the
+particle data in the N-body simulation to find the best possible
+concentration value using a Markov Chain Monte Carlo methodology by
+comparing the data against the analytical expectation.
+
+This paper is structured as follows. In Section \ref{sec:basics} we
+review the basic properties of the NFW density profile and define the
+basic notation for the rest of the paper. Next in Section
+\ref{sec:method} we present our new method to estimate the halo
+concentration, payin special attention to the bayesian framework to
+find the most probable value and its uncertaintt. In Section
+\ref{sec:halo_sample} we demonstrate the power of our method with two
+different halo samples; the first one generated under controlled
+conditions and the second taken from a cosmological N-body
+simulation. Next in \ref{sec:discussion} we discuss these results by
+comparing them against other methods to estimate the concentration and
+comment on the consequences for the concentration-mass
+relationship. We present our conclusions in Section \ref{sec:conclusions}.
 
 
 
 
 
-\citep{NFW}
+
+
 
 
 \section{Basic properties of the NFW density profile}
@@ -265,7 +316,8 @@ algunos casos representativos.
 
 
 
-\section{Halo Samples}
+\section{Results}
+\label{sec:results}
 
 We apply our method to two different halo samples. The first one is a
 mock sample to test the algorithm and asses the impact of the number
@@ -304,6 +356,26 @@ four different total particle numbers: $20$, $200$, $2000$ and
 $20000$. This gives us a total of $500$ halos. 
 
 
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{percentual_diff.pdf}
+\end{center}
+\caption{Cumulative distribution of the fractional difference between
+  the input concentration in the mock halo generator, $c_{in}$ and the
+  measurement by our MCMC code, $c_{out}$. Each curve corresponds to
+  halos generated with a different number of particles, $N$.
+    \label{fig:results_mocks}}
+\end{figure}
+
+
+In Figure \ref{fig:results_mocks} we show the integrated distribution
+percentual difference between the concentration measured with our
+fitting method $c_{out}$ in comparison with the concentration used to
+generate the mock halos, $c_{in}$, $D=(c_{in}-c_{out})/c_{in}$. Then we can see that as the number of particles increases, the curve becomes more pronounced at 0. Showing that for most of the halos $c_{in}$ is very similar to $c_{out}$.
+
+
+
+
 \subsection{Simulation Data}
 \label{sec:data}
 
@@ -333,39 +405,18 @@ halo concentration. Finally, we store the values obtained for the
 virial radius, virial mass and concentration. 
 
 
-\section{Results}
-\label{sec:results}
-
-
-\subsection{Mock Halos}
-\label{sec:results_mocks}
-
-\begin{figure}
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{percentual_diff.pdf}
-\end{center}
-\caption{Cumulative distribution of the fractional difference between
-  the input concentration in the mock halo generator, $c_{in}$ and the
-  measurement by our MCMC code, $c_{out}$. Each curve corresponds to
-  halos generated with a different number of particles, $N$.
-    \label{fig:results_mocks}}
-\end{figure}
-
-
-In Figure \ref{fig:results_mocks} we show the integrated distribution
-percentual difference between the concentration measured with our
-fitting method $c_{out}$ in comparison with the concentration used to
-generate the mock halos, $c_{in}$, $D=(c_{in}-c_{out})/c_{in}$. Then we can see that as the number of particles increases, the curve becomes more pronounced at 0. Showing that for most of the halos $c_{in}$ is very similar to $c_{out}$.
-
-
-\subsection{Simulation Data}
-\label{sec:results_mocks}
 
 \section{Discussion}
 \label{sec:discussion}
 
+
 \subsection{Comparison against other methods}
-We compared this method against two methods: The first one consists in using shells for estimating the density in function of the radius and using the same MCMC method for fitting and the second one consists in using the circular velocity $V(r)=\sqrt{GM(<r)/r}$ and the relation for the NFW profile
+\label{sec:comparison}
+We compared this method against two methods: The first one consists in
+using shells for estimating the density in function of the radius and
+using the same MCMC method for fitting and the second one consists in
+using the circular velocity $V(r)=\sqrt{GM(<r)/r}$ and the relation
+for the NFW profile 
 \begin{equation}
 \frac{V_{max}}{V(r_{v})} = \sqrt{\frac{0.216c}{M(r_{v};c)}}
 \end{equation}
@@ -397,9 +448,19 @@ In Figure \ref{fig:error} we plotted $\xi$ for the three methods. We consider th
 
 We also used these three methods to obtain the concentration for each halo in miniMDR1 and compared the results. As can be seen in Figure \ref{fig:mdv} the three methods show mutually consistent results. However it can be inferred that the concentration values ​​obtained by the method of circular velocity are higher than those obtained by our method, and also the values ​​obtained by the density method are generally below the results of our method.
 
-Running another test with halos whose concentrations vary as a normal distribution of variance ${\sigma}^2$ we found that the concentrations obtained by the method of circular velocity are a 35\% greater than the ones obtained by the density method. However the concentrations obtained by the velocity method are barey higher (around 2\% or 3\%) than the ones obtained by our method. We did not find any significant variation in the concentration values obtained by any method by changing ${\sigma}^2$ in contrast with FIXME.
+Running another test with halos whose concentrations vary as a normal
+distribution of variance ${\sigma}^2$ we found that the concentrations
+obtained by the method of circular velocity are a 35\% greater than
+the ones obtained by the density method. However the concentrations
+obtained by the velocity method are barey higher (around 2\% or 3\%)
+than the ones obtained by our method. We did not find any significant
+variation in the concentration values obtained by any method by
+changing ${\sigma}^2$ in contrast with FIXME. 
 
-\subsection{Concentration as a function of halo mass}
+
+
+
+\subsection{Impact on the mass-concentration relationship}
 Aditionally we compared those three methods plotting the concentration as a function of the number of particles of each halo 
 
 \begin{figure}
@@ -412,13 +473,15 @@ Aditionally we compared those three methods plotting the concentration as a func
 
 The bold lines in Figure \ref{fig:concentrations} corresponds to the median and the thinner lines corresponds to the quartiles. Showing that our method has values ​​ranging from those obtained from the other two methods.Also we can see that the concentration obtained by the velocity method is higher than that obtained by the density method, this fact is consistent with FIXME.
 \subsection{Implication for comparisons against observations}
-FIXME: Ask to Jaime
+FIXME: Ask Jaime
 
 \section{Conclusions}
 \label{sec:conclusions}
-FIXME: Ask to Jaime
+FIXME: Ask Jaime
 
 \bibliographystyle{mn2e}
 \bibliography{references}
 
+\verb"http://adsabs.harvard.edu/abs/2014ApJ...795..163U"
+\verb"http://adsabs.harvard.edu/abs/2012ApJS..199...25P" Figura 3!
 \end{document}
