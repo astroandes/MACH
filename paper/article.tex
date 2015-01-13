@@ -173,29 +173,26 @@ relationship. We present our conclusions in Section \ref{sec:conclusions}.
 
 
 
-
-
-
-
-
-
 \section{Basic properties of the NFW density profile}
 \label{sec:basics}
 
-The Navarro-Frenk-White density profile can be written as
+\subsection{Density profile}
+
+The NFW density profile can be written as
 
 \begin{equation}
 \rho(r) = \frac{\rho_c\delta_c}{r/r_s(1+r/r_s)^2}, 
+\label{eq:definition}
 \end{equation}
 %
 where $\rho_c\equiv 3H^2/8\pi G$ is the Universe critical density,
 $\delta_c$ is the halo dimensionless characteristic density and $r_s$
 is known as the scale radius, the radius that marks the transition
-between the two power law behaviour in the $\rho\propto r^{-1}$ for
+between the power law scaling $\rho\propto r^{-1}$ for
 $r<r_s$ and $\rho\propto r^{-3}$ for  $r>r_s$.  
 
 We define the virial radius of a halo, $r_v$, as the boundary of the
-spherical volume that encloses an average density of $\Delta_h$ times
+spherical volume that encloses a density of $\Delta_h$ times
 the average density of the Universe. The corresponding mass $M_{v}$,
 the virial mass, can be written as $M_{v} =
 \frac{4\pi}{3}\bar{\rho}\Delta_h r_v^3$. 
@@ -209,7 +206,7 @@ M(<r) = 4\pi\rho_c\delta_c  r_s^3\left[\ln \left
   (\frac{r_s+r}{r}\right) - \frac{r}{r_s+r}\right].
 \end{equation}
  
-We can now express the same quantity in terms of dimensionless the
+We express the same quantity in terms of dimensionless
 variables $x\equiv r/r_v$ and $m\equiv M(<r)/M_v$,
 %
 \begin{equation}
@@ -221,10 +218,19 @@ m(<x) =
 where 
 %
 \begin{equation}
-A=\left[\ln\left(1+c\right)-\left(\frac{c}{c+1}\right)\right],
+A=\ln\left(1+c\right)-\left(\frac{c}{c+1}\right),
 \end{equation}
 %
 and the parameter $c$ is known as the concentration $c\equiv r_v/r_s$.
+
+From this normalization value and for later convenience we define the
+following function 
+%
+\begin{equation}
+f(x) = \ln\left(1+x\right)-\left(\frac{x}{x+1}\right).
+\label{eq:f_NFW}
+\end{equation}
+%
 
 The most interesting feature of Eq. (\ref{eq:profile}) is that the
 concentration is the only free parameter to describe the density
@@ -243,15 +249,31 @@ $1\leq c \leq 20$.
 
 \subsection{Circular velocity}
 
-It is also customary to express the mass of the halo inte terms of the
+It is also customary to express the mass of the halo in terms of the
 circular velocity $V_{c}=\sqrt{GM(<r)/r}$. From this we can
 define a new dimensionless circular velocity $v(<x)\equiv
-V_{c}(<r)/V_{c}(<r_v)$, using the result in Equation \ref{eq:profile}
+V_{c}(<r)/V_{c}(<r_v)$, using the result in Eq. \ref{eq:profile}
 to have:
+
+
+In Figure \ref{fig:velocity} we show the circular velocity profile for the same
+concentrations as in Figure \ref{fig:profiles}. 
 
 \begin{equation}
 v(<x)=\sqrt{\frac{1}{A}\left[\frac{\ln\left(1+xc\right)}{x}-\frac{c}{xc+1}\right]},
 \end{equation}
+%
+this normalized profile always shows a maximum provided that the
+concentration is larger than a values of $c>???$. 
+It is possible to show that for the NFW profile the maximum is
+provided by 
+
+\begin{equation}
+\mathrm{max}(v(<x)) = \sqrt{\frac{c}{x_{\rm max}}\frac{f(x_{\rm
+      max})}{f(c)}}, 
+\label{eq:max_v}
+\end{equation}
+where $x_{\rm max}=2.163$ and the function $f(x)$ was defined in Eq. (\ref{eq:f_NFW}).
 
 \begin{figure}
 \begin{center}
@@ -262,11 +284,31 @@ v(<x)=\sqrt{\frac{1}{A}\left[\frac{\ln\left(1+xc\right)}{x}-\frac{c}{xc+1}\right
     \label{fig:velocity}}
 \end{figure}
 
-In Figure \ref{fig:velocity} we show the circular velocity profile for the same
-concentrations as in Figure \ref{fig:profiles}.
-
-\section{A new Approach to Halo Fitting}
+\section{A new approach to estimate the halo concentration}
 \label{sec:method}
+
+Once the density profile is expressed in dimensionless variables the
+only free variable is the concentration. 
+There are two main methods to estimate this values in dark matter
+halos extracted from N-body simulations.
+The first method bins the particles in the logarithm of the radial
+coordinate from the halo center to estimate the density in each
+logarithmic bin. 
+Then a direct fit to the density as a function of the radial
+coordinate is performed. This method has been most recently advocated
+by \cite{Ludlow2014} to study the mass-concentration-redshift relation
+of dark matter halos using the Millennium Simulation Series.
+
+A second method uses the circular velocity profile. 
+As it was shown in Fig. (\ref{fig:velocity}) the circular velocity
+shows a maximum for all profiles with concentration values larger than
+$c>???$. 
+For the numerical halos wne can then find the value of $x$ for which
+the normalized circular velocity $v(<x)$ shows a maximum and solve
+numerically for the corresponding value of the concentration using
+Eq. (\ref{eq:max_v}).  This method has been used by \cite{Klypin2014}
+to study the mass-concentration-redshift relation using the Multidark
+Simulation Suite.
 
 
 We estimate the concentration parameter by fitting the
@@ -275,15 +317,12 @@ integrated mass profile described in Equation
 the position of the particle with the lowest gravitational
 potential. 
 
-
-
 We construct the integrated mass profile by ranking the particles by
 their increasing distance to the center of the halo. Once they are ranked,
 the total mass at a radius $r_i$, increases by $m_p$, where $r_i$ is
 the position of the $i$-th particle and $m_p$ is the mass of the
 computational particle.  In this process we discard the
 particle at the center.  
-
 
 We stop the construction of the integrated mass profile once we arrive
 at an average density of $\Delta_h\bar{\rho}$, with $\Delta_h=740$,
