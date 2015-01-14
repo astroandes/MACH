@@ -1,5 +1,7 @@
 import numpy as np, pylab,sys
 
+dm = 8720999991.75 #https://raw.githubusercontent.com/forero/TrainingHalos/master/data/halo_ID/MDmini_all_halo-ID.csv
+
 def get_stats(log_mass,conc):
 
     bins = np.arange(0,np.amax(log_mass)+0.5,0.5)
@@ -43,21 +45,32 @@ bins_mcmc,median_mcmc,quar1_mcmc,quar2_mcmc = get_stats(np.log10(m_mcmc),c_mcmc)
 bins_vel,median_vel,quar1_vel,quar2_vel = get_stats(np.log10(m_vel),c_vel)
 bins_dens,median_dens,quar1_dens,quar2_dens = get_stats(np.log10(m_dens),c_dens)
 
-pylab.plot(10**(bins_dens),median_dens,'-g',lw=2,label='Density')
-pylab.fill_between(10**(bins_dens),quar1_dens,quar2_dens,color='g',alpha=0.4)
 
-pylab.plot(10**(bins_mcmc),median_mcmc,'-r',lw=2,label='Mass')
-pylab.fill_between(10**(bins_mcmc),quar1_mcmc,quar2_mcmc,color='r',alpha=0.4)
+fig, ax1 = pylab.subplots()
 
-pylab.plot(10**(bins_vel),median_vel,'-b',lw=2,label='Velocity')
-pylab.fill_between(10**(bins_vel),quar1_vel,quar2_vel,color='b',alpha=0.4)
+ax1.plot(10**(bins_dens)*dm,median_dens,'-g',lw=2,label='$\mathrm{Density}$')
+ax1.fill_between(10**(bins_dens)*dm,quar1_dens,quar2_dens,color='g',alpha=0.4)
 
-pylab.legend(loc=1, borderaxespad=0.5)
-pylab.xscale('log')
-pylab.xlim([1E2,1E5])
-pylab.ylim([0,10])
-pylab.xlabel('$\mathrm{Number\ of\ particles}$',fontsize=20)
-pylab.ylabel('$\mathrm{Concentration}$',fontsize=20)
+ax1.plot(10**(bins_mcmc)*dm,median_mcmc,'-r',lw=2,label='$\mathrm{Mass}$')
+ax1.fill_between(10**(bins_mcmc)*dm,quar1_mcmc,quar2_mcmc,color='r',alpha=0.4)
+
+ax1.plot(10**(bins_vel)*dm,median_vel,'-b',lw=2,label='$\mathrm{Velocity}$')
+ax1.fill_between(10**(bins_vel)*dm,quar1_vel,quar2_vel,color='b',alpha=0.4)
+
+ax1.legend(loc=1, borderaxespad=0.5)
+ax1.set_xscale('log')
+ax1.set_xlim([1E2*dm,1E5*dm])
+ax1.set_ylim([0,10])
+ax1.set_xlabel('$\mathrm{Halo\ Mass\ (M_{\odot})}$',fontsize=20)
+ax1.set_ylabel('$\mathrm{Concentration}$',fontsize=20)
+
+ax2 = ax1.twiny()
+ax2.plot(10**(bins_dens),median_dens,lw=0)
+ax2.set_xscale('log')
+ax2.set_xlim([1E2,1E5])
+ax2.set_ylim([0,10])
+ax2.set_xlabel('$\mathrm{Number\ of\ particles}$',fontsize=20)
+pylab.tight_layout()
 pylab.savefig('concentration.pdf',dpi=300)
 pylab.close()
 
