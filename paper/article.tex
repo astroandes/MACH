@@ -61,13 +61,11 @@
 \def\lsim{~\rlap{$<$}{\lower 1.0ex\hbox{$\sim$}}}
 
 % definition to produce a "greater than or similar to" symbol
-
-% definition to produce a "greater than or similar to" symbol
 \def\gsim{~\rlap{$>$}{\lower 1.0ex\hbox{$\sim$}}}
 
 \begin{document}
 
-\title[New approach to Halo concentrations]{A new method to estimate
+\title[A new method for concentrations]{A new method to estimate
   dark matter halo concentrations}
 \author[Poveda \& Forero-Romero]{
 \parbox[t]{\textwidth}{\raggedright
@@ -92,13 +90,14 @@ matter
 \section{Introduction}
 \label{sec:introduction}
 In the concordance cosmology paradigm the the matter content of the
-Universe are dominated by dark matter which behaves as a collisionless
+Universe is dominated by dark matter which behaves as a collisionless
 fluid under the influence of gravity. In the last three decades
-numerical experiments have made possible the simulation of large
-volumes of a Universe dominated by dark matter.
+numerical experiments have made possible the simulation of dark matter
+dominated universes, yielding valuable insights on the large scale
+structure formation process as depicted in observations.
 
 One of the most striking results of these simulations is that dark
-matter clumps on galactic scales follows a universal density profile
+matter clumps on galactic scales follow a universal density profile
 which in a first approximation is spherical symmetric and only
 dependent on the radial coordinate. These profiles seem to be
 universal; independent of the cosmological parameters and self-similar
@@ -287,65 +286,80 @@ where $x_{\rm max}=2.163$ and the function $f(x)$ was defined in Eq. (\ref{eq:f_
 \section{A new approach to estimate the halo concentration}
 \label{sec:method}
 
-Once the density profile is expressed in dimensionless variables the
-only free variable is the concentration.
-There are two main methods to estimate this values in dark matter
-halos extracted from N-body simulations.
-The first method bins the particles in the logarithm of the radial
-coordinate from the halo center to estimate the density in each
-logarithmic bin.
-Then a direct fit to the density as a function of the radial
-coordinate is performed. This method has been most recently advocated
-by \cite{Ludlow2014} to study the mass-concentration-redshift relation
-of dark matter halos using the Millennium Simulation Series.
+As we saw in the previous sections, once the density profile is
+expressed in dimensionless variables the only free parameter in the
+density profile  is the concentration. There are two main methods to
+estimate concentrations in dark matter halos extracted from N-body
+simulations. 
+
+The first method tries to directly estimate the density profile. 
+It takes all the particles in the halo and bins them in the logarithm
+of the radial coordinate from the halo center.
+Then, it estimates the density in each logarithmic bin counting the
+particles and divinding by the corresponding shell volume.
+At this point is is possible to make a direct fit to the density as a
+function of the radial coordinate. 
+This method has been most recently used by \cite{Ludlow2014} to study
+the mass-concentration-redshift relation of dark matter halos using
+the Millennium Simulation Series. 
 
 A second method uses the circular velocity profile.
 As it was shown in Fig. (\ref{fig:velocity}) the circular velocity
 shows a maximum for all profiles with concentration values larger than
-$c>???$.
-For the numerical halos wne can then find the value of $x$ for which
-the normalized circular velocity $v(<x)$ shows a maximum and solve
-numerically for the corresponding value of the concentration using
-Eq. (\ref{eq:max_v}).  This method has been used by \cite{Klypin2014}
-to study the mass-concentration-redshift relation using the Multidark
-Simulation Suite.
+$c>2$.
+The method finds the value of $x$ for which the normalized circular
+velocity $v(<x)$ shows a maximum. 
+Using this value it solves numerically for the corresponding value of
+the concentration using Eq. (\ref{eq:max_v}).  
+This method has been most recently used by \cite{Klypin2014} to study
+the mass-concentration-redshift relation using the Multidark
+Simulation Suite. 
 
-
-We estimate the concentration parameter by fitting the
-integrated mass profile described in Equation
-(\ref{eq:profile}). First we define the center of the halo to be  at
-the position of the particle with the lowest gravitational
-potential.
-
-We construct the integrated mass profile by ranking the particles by
-their increasing distance to the center of the halo. Once they are ranked,
-the total mass at a radius $r_i$, increases by $m_p$, where $r_i$ is
-the position of the $i$-th particle and $m_p$ is the mass of the
-computational particle.  In this process we discard the
-particle at the center.
+Our method is a third option that uses the integrated mass profile.
+First we define the center of the halo to be at the position of the
+particle with the lowest gravitational potential.
+Then we rank the particles by their increasing radial distance from
+the center.
+From this ranked list of $i=1,N$ particles, the total mass at a radius
+$r_i$ is $M_i=i\times m_p$, where $r_i$ is
+the position of the $i$-th particle and $m_p$ is the mass of a single
+computational particle.
+In this process we discard the particle at the center.
 
 We stop the construction of the integrated mass profile once we arrive
 at an average density of $\Delta_h\bar{\rho}$, with $\Delta_h=740$,
-roughly corresponding to 200 times the critical density. This radius marks the
-virial radius and the virial mass. We divide the total mass enclosed
-mass $M_i$ and the radii $r_i$ by these values to obtain the
-dimensionless variables $x_i$ and $m_i$.
+roughly corresponding to 200 times the critical density. 
+This radius marks the virial radius and the virial mass. 
+We divide the enclosed mass mass $M_i$ and the radii $r_i$ by these
+virial values to obtain the dimensionless variables $m_i$ and $x_i$.
 
-Using these new variables we define the following $\chi^2$ function
+The construction of the numerical integrated mass profile has the
+advantage that it does not involve any binning and uses the
+information from all the particles in the halo, unlike the method that
+tries to directly build. 
+Furthermore, as it will be clear in the next paragraph, the fit of
+this computational profile to the analytic expectation uses the
+information from all points, not only a single maxima point as the
+method using the circular velocity profile. 
+
+We use a Metropolis-Hastings algorithm to sample the likelihood
+function distribution defined by ${\cal L}(c)=\exp(-\chi^2(c)/2)$
+where the $\chi^2(c)$ is written as
 
 \begin{equation}
-\chi^2(c) = \sum_{i}[\log m_i - \log m(< x_i;c)]^2,
+\chi^2(c)= \sum_{i=1}^{N}[\log m_i - \log m(< x_i;c)]^2,
 \end{equation}
 %
 where $m(<x_i;c)$ corresponds to the values in Eq.(\ref{eq:profile}) at
-$x=x_i$ for a given value of the concentration parameter $c$.
+$x=x_i$ for a given value of the concentration parameter $c$ and the
+$i$ index sums over all the particles in the numerical profile.
 
-We sample the likelihood function distribution defined by ${\cal
-  L}(c)=\exp(-\chi^2(c)/2)$ with a Metropolis-Hastings algorithm to
-find the optimum value of $c$ and its  associated uncertainty
-$\sigma_c$. We used 50000 steps for walk, where each step was randomly generated
-with a normal distribution centered around the last step with an standard
-deviation of $\sigma=0.03$.
+For the walk in the Metropolis-Hastings algorithm we used 50000 steps
+where each step was randomly generated with a normal distribution
+centered around the last step with an standard deviation of
+$\sigma=0.03$. 
+From the $\chi^2$ distribution we find the optimal value of the
+concentration and  its associated uncertainty.
 
 \section{Results}
 \label{sec:results}
