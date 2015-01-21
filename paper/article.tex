@@ -364,59 +364,100 @@ concentration and  its associated uncertainty.
 \section{Results}
 \label{sec:results}
 
-We apply our method to two different halo samples. The first one is a
-mock sample to test the algorithm and asses the impact of the number
-of computational particles on the concentration values. The second
-sample comes from a publicly available N-body cosmological
-simulation. These results for these sample can be then compared
-against other methods to find the concentration and feed the
-discussion about the implications of our method.
+In this Section we present the results of applying our method on two
+different halo samples.
 
-\subsection{Mock Halos}
+The first sample is composed by mock halos generated to have known
+concentration values in perfect spherical symmetry following an NFW
+profile. 
+We use this sample to check that we can recover the expected values
+but also gauge the impact of the number of particles on the outcomes
+and the difference with respect to the two other fitting methods.
 
-First, we test our method using mock halos with known values for the
-concentration. The method we use to generate the halos is based on the integrated
-mass profile. Given the number of particles $n$ and the concentration
-$c$ we define the mass element as $\delta m = 1/n$ (this corresponds
-to the mass of each particle such that the total mass is one). Then
-for each number $k$ from $1$ to $n$ we find the value of $r$ such that
+
+The second sample comes from a publicly available N-body cosmological
+simulation. 
+From this sample we quantify again the differences between all the
+methods we have to fit the data.
+We also estimate the possible impact of the different methods in
+estimating the mass-concentration relationship from simulations. 
+
+\subsection{Tests on Mock Halos}
+
+The method we use to generate the halos is based on the integrated
+mass profile. 
+We start by fixing the desired concentration $c$ and total number of
+particles $N$ in the mock halo 
+With this values we define the mass element as $\delta m = 1/M$, corresponding
+to the mass of each particle such that the total mass is one. 
+Then for each particle $i=1,\ldots,N$, we find the value of $r_i$ such that
 the difference
 %
 \begin{equation}
-m(<r;c)-k \cdot \delta m
+m(<r_i;c) - i \cdot \delta m
 \end{equation}
 %
-is zero using Ridders' method. This value of $r$ is the radius of
-the $k$th particle of the generated halo, then polar and azimuthal
-angles $\theta$ and $\phi$ are randomly generated. Finally these three
-coordinates are transformed into cartesian coordinates
-$(r,\theta,\phi) \rightarrow (x,y,z)$. This process is repeated $n$
-times in order to generate the $x,y,z$ coordinates for each particle.
+is zero using Ridders' method. 
+
+The value of $r_i$ is the radius of the $i$-th particle of the mock
+halo.
+Then we generate random polar and azimuthal angles $\theta$ and $\phi$
+for each particle to ensure spherical symmetry. 
+Finally these three spherical coordinates are transformed into cartesian coordinates
+$(r,\theta,\phi) \rightarrow (x,y,z)$.
 
 
 
-We generate $100$ mock halos with concentration values randomly
-placed in the range $1<c<20$. Each one of the halos is generated with
-four different total particle numbers: $20$, $200$, $2000$ and
-$20000$. This gives us a total of $500$ halos.
+We generate in total $400$ mock halos splitted into four different
+groups of $100$ halos each. 
+The four groups differ in the total number of particles for their halos:
+$20$, $200$, $2000$ and $20000$.
+Inside each group the halos have random concentration values in
+the range $1<c<20$ with a flat distribution. 
+For all these halos with find the concentration values using the
+density, velocity and mass methods described in the previous
+section. We quantify the difference between the expected $c_{in}$
+and obtained $c_{out}$ values by $D=(c_{in}-c_{out})/c_{in}$.  
 
+\subsubsection{The impact of particle number}
 
 \begin{figure}
 \begin{center}
-  \includegraphics[width=0.48\textwidth]{percentual_diff.pdf}
+  \includegraphics[width=0.50\textwidth]{percentual_diff.pdf}
 \end{center}
-\caption{Cumulative distribution of the fractional difference between
+\caption{Cumulative distribution of the fractional difference, $D$, between
   the input concentration in the mock halo generator, $c_{in}$ and the
   measurement by our MCMC code, $c_{out}$. Each curve corresponds to
   halos generated with a different number of particles, $N$.
     \label{fig:results_mocks}}
 \end{figure}
 
+Figure \ref{fig:results_mocks} shows the integrated distribution for
+$D$ for the fits using our method, splitted into four different groups
+according the particle number. 
+From this Figure the first immediate
+conclusion is that increasing the number of particles increases the
+chances to recover the input values. 
 
-In Figure \ref{fig:results_mocks} we show the integrated distribution
-percentual difference between the concentration measured with our
-fitting method $c_{out}$ in comparison with the concentration used to
-generate the mock halos, $c_{in}$, $D=(c_{in}-c_{out})/c_{in}$. Then we can see that as the number of particles increases, the curve becomes more pronounced at 0. Showing that for most of the halos $c_{in}$ is very similar to $c_{out}$.
+We believe that the main effect that contributes to this trend
+is that the particle that our algorithm finds to be the halo center
+(where the potential is minimum) gets closer to the original
+geometrical center (where no particle sits by construction) used to
+generate the halo.  Poissonian noise makes this center fluctuate,
+changing the numerical radial profile from the analytical input. 
+
+For particle number of $20$ the offset betwen the input and output
+concentration can be as large as $20\%$, with a slight bias around
+$-0.05\%$, i.e. the output concentration is biased towards lower
+values than the input.
+For particle numbers of $2000$ most of the offsets fall below $5\%$,
+with a clear peak around $0\%$ indicating that any appreciable bias is
+absent. 
+
+
+\subsubsection{The impact of the input concentration}
+
+Hace falta hacer una figura para este caso.
 
 
 
