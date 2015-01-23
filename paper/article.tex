@@ -462,7 +462,7 @@ absent.
 
 \subsubsection{The impact of the input concentration}
 
-Hace falta hacer una figura para este caso.
+{\bf Hace falta hacer una figura para este caso.}
 
 \subsubsection{The impact of different methods}
 
@@ -478,11 +478,14 @@ Hace falta hacer una figura para este caso.
     \label{fig:error}}
 \end{figure}
 
+
 Using this dataset we also compare our method against the other two
-methods described earlier. Using shells to estimate the density as a
-function of radius radius and the maximum circular velocity method.
+methods described earlier: using shells to estimate the density as a
+function of radius and the maximum circular velocity method.
 In the first case we use the same Metropolis-Hastings algorithm we
 have in our methot to fit the density profile. 
+In the second method we simply follow the procedure described in
+Section \ref{sec:method}
 
 We quantify the accuracy of each method with the following statistic:
 
@@ -496,41 +499,56 @@ $\left|{\cal{H}}_n\right|$ is the number of haloes in ${\cal{H}}_n$.
 
 
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
-particle number for the three different methods to estimate the
+halo particle number for the three different methods to estimate the
 concentration. 
-We find that our method always shows the lowest $\avg{|D|}$ values compared
-to the other two methods at fixed particle numbers. 
-The accuracy of this method to estimate the input concentration is on
-the order of $10\%$ for $20$ particles in the halo, going down to
-$0.1\%$ for halos with $20000$ particles. 
-The drop of $\avg{|D|}$ with increasing particle number $N$ goes
+At fixed particle numbers our method always shows the lowest
+$\avg{|D|}$ values compared to the other two methods.
+Its accuracy is on the order of $10\%$ for $20$ particles in the halo,
+going down to $0.1\%$ for halos with $20000$ particles. 
+The decrease of $\avg{|D|}$ with increasing particle number $N$ goes
 approximately as $\avg{|D|}\propto N^{-1/2}$, which reinforces the hint that
 the accuracy of the method is related to a decrease of Poissonian
 noise.
- 
 
-
-
-On the other hand we have that
-$\xi$ decreases quite fast with the number of particles for our method
-and is more precise in any case that the other methods. As mentioned
-in FIXME \textit{``for a large fraction of halos, and for the most
-  massive in particular, the NFW functional does not Represent a good
-  fit to the density profile."} This fact could explain why $\xi$
-increases with the number of particles for the density method. 
-
-
-
-
+The second best accuracy is achieved by the method based on the
+maximum of the circular velocity. 
+It also shows a similar behaviour $\avg{|D|}\propto N^{-1/2}$. 
+Its accuracy is $2-5$ times less than in our method, on the order of
+$20\%$ for $20$ particle halos and $0.5\%$ for $20000$ particle halos.
+The method based on the direct density fit shows the lowest accuracy
+of all methods. 
+Its average values $\avg{|D|}$ are always between $30\%$ adn $50\%$
+regardless of the particle number. {\bf Necesitamos entender el
+  comportamiento de esto.}
 
 \subsection{Tests on N-body data}
 \label{sec:data}
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.99\textwidth]{mass-density-velocity.pdf}
+\end{center}
+\caption{Comparison between the obtained concentrations by the three methods
+    \label{fig:mdv}}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.90\textwidth]{concentration.pdf}
+\end{center}
+\caption{Mass-concentration relationship for the three different
+  methods used on the same cosmological N-body data. The central lines
+  correspond the median and the shadowed region indicates the
+  quartiles. 
+    \label{fig:concentrations}}
+\end{figure*}
+
+
 
 We use data from the MultiDark cosmological simulation. 
 It follows the non-linear evolution of a dark matter density field
 sampled with $2048^3$ particles over a cubic box of $1000$ \hMpc on a side. 
 The data is publicly available through \url{http://www.cosmosim.org/}.
-Mre details about the structure of the database and the simulation
+More details about the structure of the database and the simulation
 can be found in \citep{2013AN....334..691R}. 
 
 We build a sample of all halos located in a cubic sub-volume of $100$
@@ -552,56 +570,44 @@ Section \ref{sec:method} with $\Delta_h=740$  (corresponding to $200$
 times the critical density) to find the halo concentration. 
 This choice makes that our overdensities are fully included inside the
 original FoF particle group.
+We only report results from overdensities with at least $100$ particles.
 Finally, we store the values obtained for the virial radius, virial
 mass and concentration. 
 
 
-\begin{figure*}
-\begin{center}
-  \includegraphics[width=0.99\textwidth]{mass-density-velocity.pdf}
-\end{center}
-\caption{Comparison between the obtained concentrations by the three methods
-    \label{fig:mdv}}
-\end{figure*}
+Figure \ref{fig:mdv} shows the results that compare the concentration
+values in the simulated halos from the three different methods. 
+At zeroth order the results are consistent. 
+However, the concentration values from the velocity method produces
+concentrations that are $XXX$ times larger on average than the results
+from our method.
+On the other hand, the concentrations from the velocity method are
+$XXX$ times lower than in our method.
 
-We also used these three methods to obtain the concentration for each
-halo in miniMDR1 and compared the results. As can be seen in Figure
-\ref{fig:mdv} the three methods show mutually consistent
-results. However it can be inferred that the concentration values
-​​obtained by the method of circular velocity are higher than those
-obtained by our method, and also the values ​​obtained by the density
-method are generally below the results of our method. 
-
-Running another test with halos whose concentrations vary as a normal
-distribution of variance ${\sigma}^2$ we found that the concentrations
-obtained by the method of circular velocity are a 35\% greater than
-the ones obtained by the density method. However the concentrations
-obtained by the velocity method are barey higher (around 2\% or 3\%)
-than the ones obtained by our method. We did not find any significant
-variation in the concentration values obtained by any method by
-changing ${\sigma}^2$ in contrast with FIXME.
+%Running another test with halos whose concentrations vary as a normal
+%distribution of variance ${\sigma}^2$ we found that the concentrations
+%obtained by the method of circular velocity are a 35\% greater than
+%the ones obtained by the density method. However the concentrations
+%obtained by the velocity method are barey higher (around 2\% or 3\%)
+%than the ones obtained by our method. We did not find any significant
+%variation in the concentration values obtained by any method by
+%changing ${\sigma}^2$ in contrast with FIXME.
 
 
+Figure \ref{fig:concentration} shows the mass-concentration
+relationship from the N-body data with the results of the three
+different methods.  
+The central lines correspond the median and the
+shadowed region indicates the quartiles.
+In this relationship our methods represents a compromise between the
+velocity and density methods.
+The slope is flatter and the overall normalization is below the
+velocity method and above the density.
 
-
-\subsection{Impact on the mass-concentration relationship}
-Aditionally we compared those three methods plotting the concentration as a function of the number of particles of each halo
-
-\begin{figure}
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{concentration.pdf}
-\end{center}
-\caption{Concentration against number of particles
-    \label{fig:concentrations}}
-\end{figure}
-
-The bold lines in Figure \ref{fig:concentrations} corresponds to the median and the thinner lines corresponds to the quartiles. Showing that our method has values ​​ranging from those obtained from the other two methods.Also we can see that the concentration obtained by the velocity method is higher than that obtained by the density method, this fact is consistent with FIXME.
-\subsection{Implication for comparisons against observations}
-FIXME: Ask Jaime
 
 \section{Conclusions}
 \label{sec:conclusions}
-FIXME: Ask Jaime
+
 
 \bibliographystyle{mn2e}
 \bibliography{references}
