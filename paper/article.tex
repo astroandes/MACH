@@ -417,7 +417,12 @@ the range $1<c<20$ with a flat distribution.
 For all these halos with find the concentration values using the
 density, velocity and mass methods described in the previous
 section. We quantify the difference between the expected $c_{in}$
-and obtained $c_{out}$ values by $D=(c_{in}-c_{out})/c_{in}$.  
+and obtained $c_{out}$ values by 
+
+\begin{equation}
+D=(c_{in}-c_{out})/c_{in}.  
+\label{eq:D}
+\end{equation}
 
 \subsubsection{The impact of particle number}
 
@@ -459,70 +464,97 @@ absent.
 
 Hace falta hacer una figura para este caso.
 
-
-
-
-\subsection{Simulation Data}
-\label{sec:data}
-
-We use data from the MultiDark cosmological volume. This simulation
-follows the non-linear evolution of a dark matter density field
-sampled with $2048^3$ particles over a cubic box of $1000$ \hMpc on a
-side. The data is publicly available, more details about the structure
-of the database and the simulations can be found in
-\citep{2013AN....334..691R}.
-
-We select a sample of halos in a cubic sub-volumne of $100$ \hMpc on a
-side centered on the most massive halo in the simulation at
-$z=0$\footnote{This corresponds to the \texttt{miniMDR1} database in
-  the MultiDark webpage}. We select first all the halos at $z=0$
-detected with a Friends-of-Friends (FoF) algorithm with masses in the
-interval $10^{11}\leq M_{\rm FoF}/\hMsun \leq 10^{15}$. The FoF
-algorithm ran with a linking length of $0.17$ times the average
-interparticle distance. This choice translates into an overdensity
-$\Delta_h\sim 400-700$ that is dependent on the halo concentration
-\citep{More2011}.
-
-For each selected halo with the previous procedure we select from the database
-all the particles that belong to it. From the particles we follow the
-procedure spelled out in Section \ref{sec:method} with $\Delta_h=740$
-(corresponding to $200$ times the critical density) to find the
-halo concentration. Finally, we store the values obtained for the
-virial radius, virial mass and concentration.
-
-
-
-\section{Discussion}
-\label{sec:discussion}
-
-
-\subsection{Comparison against other methods}
-\label{sec:comparison}
-We compared this method against two methods: The first one consists in
-using shells for estimating the density in function of the radius and
-using the same MCMC method for fitting and the second one consists in
-using the circular velocity $V(r)=\sqrt{GM(<r)/r}$ and the relation
-for the NFW profile
-\begin{equation}
-\frac{V_{max}}{V(r_{v})} = \sqrt{\frac{0.216c}{M(r_{v};c)}}
-\end{equation}
-Where $V_{max}$ is the maximum velocity, to find the value of the concentration. We tested the three methods using the same data from the Mock Halos test. In order to see the accuracy of each method depending on the number of particles we define
-
-\begin{equation}
-\xi(n)=\frac{1}{\left|{\cal{H}}_n\right|}\sum_{{\cal{H}}_n}\left|\frac{c_{org}-c_{obt}}{c_{org}}\right|
-\end{equation}
-
-Where ${\cal{H}}_n$ corresponds to the set of haloes with $n$ particles, $c_{org}$ and $c_{obt}$ are the original and obtained concentrations respectively for each halo in ${\cal{H}}_n$ and $\left|{\cal{H}}_n\right|$ the number of haloes in ${\cal{H}}_n$. Then we calculate $\xi$ for each number of particles (20, 200, 2000 and 20000).
+\subsubsection{The impact of different methods}
 
 \begin{figure}
 \begin{center}
   \includegraphics[width=0.48\textwidth]{error.pdf}
 \end{center}
-\caption{Relative error against number of particles
+\caption{Average value of the relative error in the concentration
+  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
+  the set of mock halos. Different symbols represent different
+  methods. Our method provide the most accurate estimate at fixed
+  particle number $N$. 
     \label{fig:error}}
 \end{figure}
 
-In Figure \ref{fig:error} we plotted $\xi$ for the three methods. We consider that $\xi$ is a good estimate because it is standardized, giving equal weight to all errors regardless of the magnitude of the concentrations or the number of halos. On the other hand we have that $\xi$ decreases quite fast with the number of particles for our method and is more precise in any case that the other methods. As mentioned in FIXME \textit{``for a large fraction of halos, and for the most massive in particular, the NFW functional does not Represent a good fit to the density profile."} This fact could explain why $\xi$ increases with the number of particles for the density method.
+Using this dataset we also compare our method against the other two
+methods described earlier. Using shells to estimate the density as a
+function of radius radius and the maximum circular velocity method.
+In the first case we use the same Metropolis-Hastings algorithm we
+have in our methot to fit the density profile. 
+
+We quantify the accuracy of each method with the following statistic:
+
+\begin{equation}
+\avg{|D|}=\frac{1}{\left|{\cal{H}}_N\right|}\sum_{{\cal{H}}_N} |D|,
+\end{equation}
+
+where ${\cal{H}}_N$ corresponds to the set of haloes with $N$
+particles, $D$ follows the definition in Eq. (\ref{eq:D}) and
+$\left|{\cal{H}}_n\right|$ is the number of haloes in ${\cal{H}}_n$. 
+
+
+Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
+particle number for the three different methods to estimate the
+concentration. 
+We find that our method always shows the lowest $\avg{|D|}$ values compared
+to the other two methods at fixed particle numbers. 
+The accuracy of this method to estimate the input concentration is on
+the order of $10\%$ for $20$ particles in the halo, going down to
+$0.1\%$ for halos with $20000$ particles. 
+The drop of $\avg{|D|}$ with increasing particle number $N$ goes
+approximately as $\avg{|D|}\propto N^{-1/2}$, which reinforces the hint that
+the accuracy of the method is related to a decrease of Poissonian
+noise.
+ 
+
+
+
+On the other hand we have that
+$\xi$ decreases quite fast with the number of particles for our method
+and is more precise in any case that the other methods. As mentioned
+in FIXME \textit{``for a large fraction of halos, and for the most
+  massive in particular, the NFW functional does not Represent a good
+  fit to the density profile."} This fact could explain why $\xi$
+increases with the number of particles for the density method. 
+
+
+
+
+
+\subsection{Tests on N-body data}
+\label{sec:data}
+
+We use data from the MultiDark cosmological simulation. 
+It follows the non-linear evolution of a dark matter density field
+sampled with $2048^3$ particles over a cubic box of $1000$ \hMpc on a side. 
+The data is publicly available through \url{http://www.cosmosim.org/}.
+Mre details about the structure of the database and the simulation
+can be found in \citep{2013AN....334..691R}. 
+
+We build a sample of all halos located in a cubic sub-volume of $100$
+\hMpc on a side centered on the most massive halo in the simulation at
+$z=0$ which corresponds to the \texttt{miniMDR1} tables in the
+database.   
+From this sample we select all the halos at $z=0$ detected with a
+Friends-of-Friends (FoF) algorithm with masses in the interval
+$10^{11}\leq M_{\rm FoF}/\hMsun \leq 10^{15}$. 
+The FoF algorithm used with a linking length of $0.17$ times the average
+interparticle distance. This choice translates into an overdensity
+$\Delta_h\sim 400-700$ dependent on the halo concentration
+\citep{More2011}. 
+Finally, for each FoF halo we select from all the particles that
+belong to it.   
+
+From this set of particles we follow the procedure spelled out in
+Section \ref{sec:method} with $\Delta_h=740$  (corresponding to $200$
+times the critical density) to find the halo concentration. 
+This choice makes that our overdensities are fully included inside the
+original FoF particle group.
+Finally, we store the values obtained for the virial radius, virial
+mass and concentration. 
+
 
 \begin{figure*}
 \begin{center}
@@ -532,7 +564,13 @@ In Figure \ref{fig:error} we plotted $\xi$ for the three methods. We consider th
     \label{fig:mdv}}
 \end{figure*}
 
-We also used these three methods to obtain the concentration for each halo in miniMDR1 and compared the results. As can be seen in Figure \ref{fig:mdv} the three methods show mutually consistent results. However it can be inferred that the concentration values ​​obtained by the method of circular velocity are higher than those obtained by our method, and also the values ​​obtained by the density method are generally below the results of our method.
+We also used these three methods to obtain the concentration for each
+halo in miniMDR1 and compared the results. As can be seen in Figure
+\ref{fig:mdv} the three methods show mutually consistent
+results. However it can be inferred that the concentration values
+​​obtained by the method of circular velocity are higher than those
+obtained by our method, and also the values ​​obtained by the density
+method are generally below the results of our method. 
 
 Running another test with halos whose concentrations vary as a normal
 distribution of variance ${\sigma}^2$ we found that the concentrations
