@@ -290,30 +290,30 @@ As we saw in the previous sections, once the density profile is
 expressed in dimensionless variables the only free parameter in the
 density profile  is the concentration. There are two main methods to
 estimate concentrations in dark matter halos extracted from N-body
-simulations. 
+simulations.
 
-The first method tries to directly estimate the density profile. 
+The first method tries to directly estimate the density profile.
 It takes all the particles in the halo and bins them in the logarithm
 of the radial coordinate from the halo center.
 Then, it estimates the density in each logarithmic bin counting the
 particles and divinding by the corresponding shell volume.
 At this point is is possible to make a direct fit to the density as a
-function of the radial coordinate. 
+function of the radial coordinate.
 This method has been most recently used by \cite{Ludlow2014} to study
 the mass-concentration-redshift relation of dark matter halos using
-the Millennium Simulation Series. 
+the Millennium Simulation Series.
 
 A second method uses the circular velocity profile.
 As it was shown in Fig. (\ref{fig:velocity}) the circular velocity
 shows a maximum for all profiles with concentration values larger than
 $c>2$.
 The method finds the value of $x$ for which the normalized circular
-velocity $v(<x)$ shows a maximum. 
+velocity $v(<x)$ shows a maximum.
 Using this value it solves numerically for the corresponding value of
-the concentration using Eq. (\ref{eq:max_v}).  
+the concentration using Eq. (\ref{eq:max_v}).
 This method has been most recently used by \cite{Klypin2014} to study
 the mass-concentration-redshift relation using the Multidark
-Simulation Suite. 
+Simulation Suite.
 
 Our method is a third option that uses the integrated mass profile.
 First we define the center of the halo to be at the position of the
@@ -328,19 +328,19 @@ In this process we discard the particle at the center.
 
 We stop the construction of the integrated mass profile once we arrive
 at an average density of $\Delta_h\bar{\rho}$, with $\Delta_h=740$,
-roughly corresponding to 200 times the critical density. 
-This radius marks the virial radius and the virial mass. 
+roughly corresponding to 200 times the critical density.
+This radius marks the virial radius and the virial mass.
 We divide the enclosed mass mass $M_i$ and the radii $r_i$ by these
 virial values to obtain the dimensionless variables $m_i$ and $x_i$.
 
 The construction of the numerical integrated mass profile has the
 advantage that it does not involve any binning and uses the
 information from all the particles in the halo, unlike the method that
-tries to directly build. 
+tries to directly build.
 Furthermore, as it will be clear in the next paragraph, the fit of
 this computational profile to the analytic expectation uses the
 information from all points, not only a single maxima point as the
-method using the circular velocity profile. 
+method using the circular velocity profile.
 
 We use a Metropolis-Hastings algorithm to sample the likelihood
 function distribution defined by ${\cal L}(c)=\exp(-\chi^2(c)/2)$
@@ -357,7 +357,7 @@ $i$ index sums over all the particles in the numerical profile.
 For the walk in the Metropolis-Hastings algorithm we used 50000 steps
 where each step was randomly generated with a normal distribution
 centered around the last step with an standard deviation of
-$\sigma=0.03$. 
+$\sigma=0.03$.
 From the $\chi^2$ distribution we find the optimal value of the
 concentration and  its associated uncertainty.
 
@@ -369,27 +369,27 @@ different halo samples.
 
 The first sample is composed by mock halos generated to have known
 concentration values in perfect spherical symmetry following an NFW
-profile. 
+profile.
 We use this sample to check that we can recover the expected values
 but also gauge the impact of the number of particles on the outcomes
 and the difference with respect to the two other fitting methods.
 
 
 The second sample comes from a publicly available N-body cosmological
-simulation. 
+simulation.
 From this sample we quantify again the differences between all the
 methods we have to fit the data.
 We also estimate the possible impact of the different methods in
-estimating the mass-concentration relationship from simulations. 
+estimating the mass-concentration relationship from simulations.
 
 \subsection{Tests on Mock Halos}
 
 The method we use to generate the halos is based on the integrated
-mass profile. 
+mass profile.
 We start by fixing the desired concentration $c$ and total number of
-particles $N$ in the mock halo 
+particles $N$ in the mock halo
 With this values we define the mass element as $\delta m = 1/M$, corresponding
-to the mass of each particle such that the total mass is one. 
+to the mass of each particle such that the total mass is one.
 Then for each particle $i=1,\ldots,N$, we find the value of $r_i$ such that
 the difference
 %
@@ -397,30 +397,30 @@ the difference
 m(<r_i;c) - i \cdot \delta m
 \end{equation}
 %
-is zero using Ridders' method. 
+is zero using Ridders' method.
 
 The value of $r_i$ is the radius of the $i$-th particle of the mock
 halo.
 Then we generate random polar and azimuthal angles $\theta$ and $\phi$
-for each particle to ensure spherical symmetry. 
+for each particle to ensure spherical symmetry.
 Finally these three spherical coordinates are transformed into cartesian coordinates
 $(r,\theta,\phi) \rightarrow (x,y,z)$.
 
 
 
 We generate in total $400$ mock halos splitted into four different
-groups of $100$ halos each. 
+groups of $100$ halos each.
 The four groups differ in the total number of particles for their halos:
 $20$, $200$, $2000$ and $20000$.
 Inside each group the halos have random concentration values in
-the range $1<c<20$ with a flat distribution. 
+the range $1<c<20$ with a flat distribution.
 For all these halos with find the concentration values using the
 density, velocity and mass methods described in the previous
 section. We quantify the difference between the expected $c_{in}$
-and obtained $c_{out}$ values by 
+and obtained $c_{out}$ values by
 
 \begin{equation}
-D=(c_{in}-c_{out})/c_{in}.  
+D=(c_{in}-c_{out})/c_{in}.
 \label{eq:D}
 \end{equation}
 
@@ -439,17 +439,17 @@ D=(c_{in}-c_{out})/c_{in}.
 
 Figure \ref{fig:results_mocks} shows the integrated distribution for
 $D$ for the fits using our method, splitted into four different groups
-according the particle number. 
+according the particle number.
 From this Figure the first immediate
 conclusion is that increasing the number of particles increases the
-chances to recover the input values. 
+chances to recover the input values.
 
 We believe that the main effect that contributes to this trend
 is that the particle that our algorithm finds to be the halo center
 (where the potential is minimum) gets closer to the original
 geometrical center (where no particle sits by construction) used to
 generate the halo.  Poissonian noise makes this center fluctuate,
-changing the numerical radial profile from the analytical input. 
+changing the numerical radial profile from the analytical input.
 
 For particle number of $20$ the offset betwen the input and output
 concentration can be as large as $20\%$, with a slight bias around
@@ -457,7 +457,7 @@ $-0.05\%$, i.e. the output concentration is biased towards lower
 values than the input.
 For particle numbers of $2000$ most of the offsets fall below $5\%$,
 with a clear peak around $0\%$ indicating that any appreciable bias is
-absent. 
+absent.
 
 
 \subsubsection{The impact of the input concentration}
@@ -474,7 +474,7 @@ absent.
   estimate, $\avg{|D|}$, as a function of the particle number $N$ in
   the set of mock halos. Different symbols represent different
   methods. Our method provide the most accurate estimate at fixed
-  particle number $N$. 
+  particle number $N$.
     \label{fig:error}}
 \end{figure}
 
@@ -483,7 +483,7 @@ Using this dataset we also compare our method against the other two
 methods described earlier: using shells to estimate the density as a
 function of radius and the maximum circular velocity method.
 In the first case we use the same Metropolis-Hastings algorithm we
-have in our methot to fit the density profile. 
+have in our methot to fit the density profile.
 In the second method we simply follow the procedure described in
 Section \ref{sec:method}
 
@@ -495,41 +495,57 @@ We quantify the accuracy of each method with the following statistic:
 
 where ${\cal{H}}_N$ corresponds to the set of haloes with $N$
 particles, $D$ follows the definition in Eq. (\ref{eq:D}) and
-$\left|{\cal{H}}_n\right|$ is the number of haloes in ${\cal{H}}_n$. 
+$\left|{\cal{H}}_n\right|$ is the number of haloes in ${\cal{H}}_n$.
 
 
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
 halo particle number for the three different methods to estimate the
-concentration. 
+concentration.
 At fixed particle numbers our method always shows the lowest
 $\avg{|D|}$ values compared to the other two methods.
 Its accuracy is on the order of $10\%$ for $20$ particles in the halo,
-going down to $0.1\%$ for halos with $20000$ particles. 
+going down to $0.1\%$ for halos with $20000$ particles.
 The decrease of $\avg{|D|}$ with increasing particle number $N$ goes
 approximately as $\avg{|D|}\propto N^{-1/2}$, which reinforces the hint that
 the accuracy of the method is related to a decrease of Poissonian
 noise.
 
 The second best accuracy is achieved by the method based on the
-maximum of the circular velocity. 
-It also shows a similar behaviour $\avg{|D|}\propto N^{-1/2}$. 
+maximum of the circular velocity.
+It also shows a similar behaviour $\avg{|D|}\propto N^{-1/2}$.
 Its accuracy is $2-5$ times less than in our method, on the order of
 $20\%$ for $20$ particle halos and $0.5\%$ for $20000$ particle halos.
 The method based on the direct density fit shows the lowest accuracy
-of all methods. 
+of all methods.
 Its average values $\avg{|D|}$ are always between $30\%$ adn $50\%$
 regardless of the particle number. {\bf Necesitamos entender el
   comportamiento de esto.}
 
 \subsection{Tests on N-body data}
 \label{sec:data}
-\begin{figure*}
-\begin{center}
-  \includegraphics[width=0.99\textwidth]{mass-density-velocity.pdf}
-\end{center}
-\caption{Comparison between the obtained concentrations by the three methods
-    \label{fig:mdv}}
-\end{figure*}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{mass-velocity.pdf}
+  \end{center}
+  \caption{Comparison between the obtained concentrations by our method and the velocity method
+  \label{fig:mdv}}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{mass-density.pdf}
+  \end{center}
+  \caption{Comparison between the obtained concentrations by our method and the density method
+  \label{fig:mdv}}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{density-velocity.pdf}
+  \end{center}
+  \caption{Comparison between the obtained concentrations by the density method and the velocity method
+  \label{fig:mdv}}
+\end{figure}
 
 \begin{figure*}
 \begin{center}
@@ -538,46 +554,46 @@ regardless of the particle number. {\bf Necesitamos entender el
 \caption{Mass-concentration relationship for the three different
   methods used on the same cosmological N-body data. The central lines
   correspond the median and the shadowed region indicates the
-  quartiles. 
+  quartiles.
     \label{fig:concentrations}}
 \end{figure*}
 
 
 
-We use data from the MultiDark cosmological simulation. 
+We use data from the MultiDark cosmological simulation.
 It follows the non-linear evolution of a dark matter density field
-sampled with $2048^3$ particles over a cubic box of $1000$ \hMpc on a side. 
+sampled with $2048^3$ particles over a cubic box of $1000$ \hMpc on a side.
 The data is publicly available through \url{http://www.cosmosim.org/}.
 More details about the structure of the database and the simulation
-can be found in \citep{2013AN....334..691R}. 
+can be found in \citep{2013AN....334..691R}.
 
 We build a sample of all halos located in a cubic sub-volume of $100$
 \hMpc on a side centered on the most massive halo in the simulation at
 $z=0$ which corresponds to the \texttt{miniMDR1} tables in the
-database.   
+database.
 From this sample we select all the halos at $z=0$ detected with a
 Friends-of-Friends (FoF) algorithm with masses in the interval
-$10^{11}\leq M_{\rm FoF}/\hMsun \leq 10^{15}$. 
+$10^{11}\leq M_{\rm FoF}/\hMsun \leq 10^{15}$.
 The FoF algorithm used with a linking length of $0.17$ times the average
 interparticle distance. This choice translates into an overdensity
 $\Delta_h\sim 400-700$ dependent on the halo concentration
-\citep{More2011}. 
+\citep{More2011}.
 Finally, for each FoF halo we select from all the particles that
-belong to it.   
+belong to it.
 
 From this set of particles we follow the procedure spelled out in
 Section \ref{sec:method} with $\Delta_h=740$  (corresponding to $200$
-times the critical density) to find the halo concentration. 
+times the critical density) to find the halo concentration.
 This choice makes that our overdensities are fully included inside the
 original FoF particle group.
 We only report results from overdensities with at least $100$ particles.
 Finally, we store the values obtained for the virial radius, virial
-mass and concentration. 
+mass and concentration.
 
 
 Figure \ref{fig:mdv} shows the results that compare the concentration
-values in the simulated halos from the three different methods. 
-At zeroth order the results are consistent. 
+values in the simulated halos from the three different methods.
+At zeroth order the results are consistent.
 However, the concentration values from the velocity method produces
 concentrations that are $XXX$ times larger on average than the results
 from our method.
@@ -596,7 +612,7 @@ $XXX$ times lower than in our method.
 
 Figure \ref{fig:concentration} shows the mass-concentration
 relationship from the N-body data with the results of the three
-different methods.  
+different methods.
 The central lines correspond the median and the
 shadowed region indicates the quartiles.
 In this relationship our methods represents a compromise between the
