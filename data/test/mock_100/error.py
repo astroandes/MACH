@@ -15,7 +15,7 @@ orig = vlct[:,0]
 
 def chi2(x_obs,x_org):
         return np.sum(np.abs((x_obs-x_org)/x_org))/len(x_obs)
-            
+
 def best_fit(original,results):
     ans = np.empty(len(original))
     for i in range(len(original)):
@@ -23,7 +23,7 @@ def best_fit(original,results):
         index = np.argmin(np.abs(original[i]-concentrations))
         ans[i] = concentrations[index]
     return ans
-    
+
 pylab.title('$Velocity$')
 pylab.plot(orig,orig,'--k',label='$real$')
 #pylab.plot(orig,vlct[:,1],'.b',label='$n=20$')
@@ -74,16 +74,20 @@ pylab.close()
 chi_dens = np.array([chi2(orig,dens[:,1]),chi2(orig,dens[:,2]),chi2(orig,dens[:,3]),chi2(orig,dens[:,4])])
 
 pylab.plot([20,200,2000,20000],chi_mass,'-k',lw=2)
-pylab.plot([20,200,2000,20000],chi_mass,'ok',label='$Mass$',ms=7)
+pylab.plot([20,200,2000,20000],chi_mass,'ok',label='$\mathrm{Our\ Method}$',ms=7)
 pylab.plot([20,200,2000,20000],chi_vlct,'-k',lw=2)
-pylab.plot([20,200,2000,20000],chi_vlct,'sk',label='$Velocity$',ms=7)
+pylab.plot([20,200,2000,20000],chi_vlct,'sk',label='$\mathrm{Velocity\ Method}$',ms=7)
 pylab.plot([20,200,2000,20000],chi_dens,'-k',lw=2)
-pylab.plot([20,200,2000,20000],chi_dens,'^k',label='$Density$',ms=7)
+pylab.plot([20,200,2000,20000],chi_dens,'^k',label='$\mathrm{Density\ Method}$',ms=7)
 pylab.xscale('log')
 pylab.yscale('log')
-pylab.legend(loc=3)
-pylab.xlabel('$\mathrm{Number\ of\ particles}$',fontsize=20)
-pylab.ylabel('$\mathrm{\\xi}$',fontsize=20)
+pylab.legend(loc=3, scatterpoints=1, prop={'size':20})
+pylab.xlabel('$\mathrm{Number\ of\ particles}$',fontsize=25)
+pylab.ylabel('$\mathrm{\langle|D|\\rangle}$',fontsize=25)
+pylab.tick_params(labelsize=20)
+pylab.xticks(family='serif')
+pylab.yticks(family='serif')
+pylab.tight_layout()
 pylab.savefig('error.png',dpi=200)
 pylab.savefig('error.pdf',dpi=200)
 pylab.close()
