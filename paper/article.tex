@@ -79,7 +79,26 @@ No. 18A-10, Edificio Ip, Bogot\'a, Colombia\\
 \maketitle
 
 \begin{abstract}
-asd
+
+We present a new method to estimate the concentration of dark matter
+halos in N-body simulations. Our method is based on a fit to the
+integrated mass density as a function of halo radius. 
+The advantage of this method is that the full particle information
+without any binning. 
+We test our method both on mock and N-body halos to compare it against
+two popular methods to find concentrations: radial particle binning to
+estimate the density and the maximum radial velocity. 
+Tests on the mock halos show that the accuracy of our method to
+recover input concentrations can achieve $0.1\%$ whil for the maximum
+radial velocity and density methods it is on the order of $0.5\%$ and
+$40\%$ respectively. 
+We also measure the mass-concentration relationship on the N-body data with
+the three methods. With respect to the other two approaches our method
+produces a flatter relationship, while its normalization falls below
+the maximum velocity method and above the density method.
+
+
+
 \end{abstract}
 \begin{keywords}
 methods: numerical, galaxies: haloes, cosmology: theory, dark
@@ -175,6 +194,16 @@ relationship. We present our conclusions in Section \ref{sec:conclusions}.
 \section{Basic properties of the NFW density profile}
 \label{sec:basics}
 
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{nfw_normalized.pdf}
+  \includegraphics[width=0.48\textwidth]{vel_normalized.pdf}
+\end{center}
+\caption{Dimensionless mass (left) and velocity (right) profiles as a
+  function of the dimensionless radius for different concentration
+  values. \label{fig:profiles}}
+\end{figure*}
+
 \subsection{Density profile}
 
 The NFW density profile can be written as
@@ -237,14 +266,6 @@ profile. In Figure \ref{fig:profiles} we show $m(<x)$ as
 a function of $x$ for different values of the concentration in the range
 $1\leq c \leq 20$.
 
-\begin{figure}
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{nfw_normalized.pdf}
-\end{center}
-\caption{Dimensionless mass profiles as a function of the
-  dimensionless radius for different concentration values.
-    \label{fig:profiles}}
-\end{figure}
 
 \subsection{Circular velocity}
 
@@ -255,8 +276,9 @@ V_{c}(<r)/V_{c}(<r_v)$, using the result in Eq. \ref{eq:profile}
 to have:
 
 
-In Figure \ref{fig:velocity} we show the circular velocity profile for the same
-concentrations as in Figure \ref{fig:profiles}.
+In the right panel of Figure \ref{fig:profiles} we show the circular
+velocity profile for the same concentrations as in the left panel of
+Figure \ref{fig:profiles}. 
 
 \begin{equation}
 v(<x)=\sqrt{\frac{1}{A}\left[\frac{\ln\left(1+xc\right)}{x}-\frac{c}{xc+1}\right]},
@@ -273,15 +295,6 @@ provided by
 \label{eq:max_v}
 \end{equation}
 where $x_{\rm max}=2.163$ and the function $f(x)$ was defined in Eq. (\ref{eq:f_NFW}).
-
-\begin{figure}
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{vel_normalized.pdf}
-\end{center}
-\caption{Dimensionless velocity profiles as a function of the
-  dimensionless radius for different concentration values.
-    \label{fig:velocity}}
-\end{figure}
 
 \section{A new approach to estimate the halo concentration}
 \label{sec:method}
@@ -492,7 +505,7 @@ We quantify the accuracy of each method with the following statistic:
 \begin{equation}
 \avg{|D|}=\frac{1}{\left|{\cal{H}}_N\right|}\sum_{{\cal{H}}_N} |D|,
 \end{equation}
-
+%
 where ${\cal{H}}_N$ corresponds to the set of haloes with $N$
 particles, $D$ follows the definition in Eq. (\ref{eq:D}) and
 $\left|{\cal{H}}_n\right|$ is the number of haloes in ${\cal{H}}_n$.
@@ -523,42 +536,17 @@ regardless of the particle number. {\bf Necesitamos entender el
 
 \subsection{Tests on N-body data}
 \label{sec:data}
-\begin{figure}
+\begin{figure*}
   \begin{center}
     \includegraphics[width=0.48\textwidth]{mass-velocity.pdf}
-  \end{center}
-  \caption{Comparison between the obtained concentrations by our method and the velocity method
-  \label{fig:mdv}}
-\end{figure}
-
-\begin{figure}
-  \begin{center}
     \includegraphics[width=0.48\textwidth]{mass-density.pdf}
   \end{center}
-  \caption{Comparison between the obtained concentrations by our method and the density method
+  \caption{Comparison between the concentrations measured by our
+    method and the maximum velocity (left) and density (right)
+    methods. The line indicates the equal value between the two
+    techniques.
   \label{fig:mdv}}
-\end{figure}
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=0.48\textwidth]{density-velocity.pdf}
-  \end{center}
-  \caption{Comparison between the obtained concentrations by the density method and the velocity method
-  \label{fig:mdv}}
-\end{figure}
-
-\begin{figure*}
-\begin{center}
-  \includegraphics[width=0.90\textwidth]{concentration.pdf}
-\end{center}
-\caption{Mass-concentration relationship for the three different
-  methods used on the same cosmological N-body data. The central lines
-  correspond the median and the shadowed region indicates the
-  quartiles.
-    \label{fig:concentrations}}
 \end{figure*}
-
-
 
 We use data from the MultiDark cosmological simulation.
 It follows the non-linear evolution of a dark matter density field
@@ -619,6 +607,20 @@ In this relationship our methods represents a compromise between the
 velocity and density methods.
 The slope is flatter and the overall normalization is below the
 velocity method and above the density.
+
+
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.90\textwidth]{concentration.pdf}
+\end{center}
+\caption{Mass-concentration relationship for the three different
+  methods used on the same cosmological N-body data. The central lines
+  correspond the median and the shadowed region indicates the
+  quartiles.
+    \label{fig:concentrations}}
+\end{figure*}
+
+
 
 
 \section{Conclusions}
