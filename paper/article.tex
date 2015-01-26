@@ -82,20 +82,20 @@ No. 18A-10, Edificio Ip, Bogot\'a, Colombia\\
 
 We present a new method to estimate the concentration of dark matter
 halos in N-body simulations. Our method is based on a fit to the
-integrated mass density as a function of halo radius. 
-The advantage of this method is that the full particle information
+integrated mass as a function of halo radius. 
+The main advantage of this method is that it uses the full particle information
 without any binning. 
 We test our method both on mock and N-body halos to compare it against
-two popular methods to find concentrations: radial particle binning to
-estimate the density and the maximum radial velocity. 
+two popular methods to find concentrations: maximum radial velocity
+measurements and radial particle binning to estimate the density.
 Tests on the mock halos show that the accuracy of our method to
-recover input concentrations can achieve $0.1\%$ whil for the maximum
+recover input concentrations can achieve $0.1\%$ while for the maximum
 radial velocity and density methods it is on the order of $0.5\%$ and
 $40\%$ respectively. 
-We also measure the mass-concentration relationship on the N-body data with
-the three methods. With respect to the other two approaches our method
-produces a flatter relationship, while its normalization falls below
-the maximum velocity method and above the density method.
+We also measure the mass-concentration relationship on the N-body
+data. With respect to the other two approaches our method produces a
+flatter relationship, while its normalization falls below the maximum
+velocity method and above the density method. 
 
 
 
@@ -120,10 +120,10 @@ matter clumps on galactic scales follow a universal density profile
 which in a first approximation is spherical symmetric and only
 dependent on the radial coordinate. These profiles seem to be
 universal; independent of the cosmological parameters and self-similar
-for different spatial scapes after an addecuate re-scaling is
-appplied.
+for different spatial scales after an adequate re-scaling is
+app plied.
 
-One the most commong parameterization of this density is known as the
+One the most common parameterization of this density is known as the
 Navarro-Frenk-White (NFW) profile \citep{NFW}. This profile is a
 double power law in radius, where the transition between the two
 happens at the so-called scale radius $r_s$. The ratio between the
@@ -132,17 +132,17 @@ concentration $c=R_V/r_s$, a quantity that has been found to be
 correlated with the halo mass.
 
 The relationship between halo mass and concentration is in principle
-accesible to observations and provides a potential test of LCDM on
+accessible to observations and provides a potential test of LCDM on
 galactic scales. With this promise a great deal of effort has been
 invested in calibrating this relationship with simulations but also
 finding the best possible way to constraint it with observations.
 
 From the computational point of view there are two main methods to
-estimate the concetration parameter of a dark matter halo in a N-body
-simulation. The first method takes the particles comprosing the halos
+estimate the concentration parameter of a dark matter halo in a N-body
+simulation. The first method takes the particles composing the halos
 and bins them in logarithmic radii to estimate the density in each
 bin, then it proceeds with a fit of this density estimation as a
-function of radius. A second method uses an analytical property of the
+function of radius. A second method uses an analytic property of the
 NFW that related the maximum of the ratio of the circular velocity to
 the virial velocity. In this method at each particle radius this ratio
 is estimated to find the maximum value for this ratio; this value is
@@ -173,21 +173,20 @@ uncertainties in the concentration parameter.
 Our method consists in building the cumulative mass profile from the
 particle data in the N-body simulation to find the best possible
 concentration value using a Markov Chain Monte Carlo methodology by
-comparing the data against the analytical expectation.
+comparing the data against the analytic expectation.
 
 This paper is structured as follows. In Section \ref{sec:basics} we
 review the basic properties of the NFW density profile and define the
 basic notation for the rest of the paper. Next in Section
 \ref{sec:method} we present our new method to estimate the halo
-concentration, payin special attention to the bayesian framework to
-find the most probable value and its uncertaintt. In Section
-\ref{sec:halo_sample} we demonstrate the power of our method with two
+concentration, paying special attention to the Bayesian framework to
+find the most probable value and its uncertainty. In Section
+\ref{sec:results} we demonstrate the power of our method with two
 different halo samples; the first one generated under controlled
 conditions and the second taken from a cosmological N-body
-simulation. Next in \ref{sec:discussion} we discuss these results by
-comparing them against other methods to estimate the concentration and
-comment on the consequences for the concentration-mass
-relationship. We present our conclusions in Section \ref{sec:conclusions}.
+simulation to comment on the consequences for the concentration-mass
+relationship. We present our conclusions in Section
+\ref{sec:conclusions}. 
 
 
 
@@ -285,7 +284,7 @@ v(<x)=\sqrt{\frac{1}{A}\left[\frac{\ln\left(1+xc\right)}{x}-\frac{c}{xc+1}\right
 \end{equation}
 %
 this normalized profile always shows a maximum provided that the
-concentration is larger than a values of $c>???$.
+concentration is larger than $c>2$.
 It is possible to show that for the NFW profile the maximum is
 provided by
 
@@ -309,7 +308,7 @@ The first method tries to directly estimate the density profile.
 It takes all the particles in the halo and bins them in the logarithm
 of the radial coordinate from the halo center.
 Then, it estimates the density in each logarithmic bin counting the
-particles and divinding by the corresponding shell volume.
+particles and dividing by the corresponding shell volume.
 At this point is is possible to make a direct fit to the density as a
 function of the radial coordinate.
 This method has been most recently used by \cite{Ludlow2014} to study
@@ -317,9 +316,9 @@ the mass-concentration-redshift relation of dark matter halos using
 the Millennium Simulation Series.
 
 A second method uses the circular velocity profile.
-As it was shown in Fig. (\ref{fig:velocity}) the circular velocity
-shows a maximum for all profiles with concentration values larger than
-$c>2$.
+As it was shown in the right panel of Figure (\ref{fig:profiles}) the
+circular velocity shows a maximum for all profiles with concentration
+values larger than $c>2$.
 The method finds the value of $x$ for which the normalized circular
 velocity $v(<x)$ shows a maximum.
 Using this value it solves numerically for the corresponding value of
@@ -416,12 +415,12 @@ The value of $r_i$ is the radius of the $i$-th particle of the mock
 halo.
 Then we generate random polar and azimuthal angles $\theta$ and $\phi$
 for each particle to ensure spherical symmetry.
-Finally these three spherical coordinates are transformed into cartesian coordinates
+Finally these three spherical coordinates are transformed into Cartesian coordinates
 $(r,\theta,\phi) \rightarrow (x,y,z)$.
 
 
 
-We generate in total $400$ mock halos splitted into four different
+We generate in total $400$ mock halos split into four different
 groups of $100$ halos each.
 The four groups differ in the total number of particles for their halos:
 $20$, $200$, $2000$ and $20000$.
@@ -451,7 +450,7 @@ D=(c_{in}-c_{out})/c_{in}.
 \end{figure}
 
 Figure \ref{fig:results_mocks} shows the integrated distribution for
-$D$ for the fits using our method, splitted into four different groups
+$D$ for the fits using our method, split into four different groups
 according the particle number.
 From this Figure the first immediate
 conclusion is that increasing the number of particles increases the
@@ -461,10 +460,10 @@ We believe that the main effect that contributes to this trend
 is that the particle that our algorithm finds to be the halo center
 (where the potential is minimum) gets closer to the original
 geometrical center (where no particle sits by construction) used to
-generate the halo.  Poissonian noise makes this center fluctuate,
-changing the numerical radial profile from the analytical input.
+generate the halo.  Poisson noise makes this center fluctuate,
+changing the numerical radial profile from the analytic input.
 
-For particle number of $20$ the offset betwen the input and output
+For particle number of $20$ the offset between the input and output
 concentration can be as large as $20\%$, with a slight bias around
 $-0.05\%$, i.e. the output concentration is biased towards lower
 values than the input.
@@ -492,11 +491,11 @@ absent.
 \end{figure}
 
 
-Using this dataset we also compare our method against the other two
+Using this data-set we also compare our method against the other two
 methods described earlier: using shells to estimate the density as a
 function of radius and the maximum circular velocity method.
 In the first case we use the same Metropolis-Hastings algorithm we
-have in our methot to fit the density profile.
+have in our method to fit the density profile.
 In the second method we simply follow the procedure described in
 Section \ref{sec:method}
 
@@ -520,7 +519,7 @@ Its accuracy is on the order of $10\%$ for $20$ particles in the halo,
 going down to $0.1\%$ for halos with $20000$ particles.
 The decrease of $\avg{|D|}$ with increasing particle number $N$ goes
 approximately as $\avg{|D|}\propto N^{-1/2}$, which reinforces the hint that
-the accuracy of the method is related to a decrease of Poissonian
+the accuracy of the method is related to a decrease of Poisson
 noise.
 
 The second best accuracy is achieved by the method based on the
@@ -530,7 +529,7 @@ Its accuracy is $2-5$ times less than in our method, on the order of
 $20\%$ for $20$ particle halos and $0.5\%$ for $20000$ particle halos.
 The method based on the direct density fit shows the lowest accuracy
 of all methods.
-Its average values $\avg{|D|}$ are always between $30\%$ adn $50\%$
+Its average values $\avg{|D|}$ are always between $30\%$ and $50\%$
 regardless of the particle number. {\bf Necesitamos entender el
   comportamiento de esto.}
 
@@ -563,7 +562,7 @@ From this sample we select all the halos at $z=0$ detected with a
 Friends-of-Friends (FoF) algorithm with masses in the interval
 $10^{11}\leq M_{\rm FoF}/\hMsun \leq 10^{15}$.
 The FoF algorithm used with a linking length of $0.17$ times the average
-interparticle distance. This choice translates into an overdensity
+inter-particle distance. This choice translates into an overdensity
 $\Delta_h\sim 400-700$ dependent on the halo concentration
 \citep{More2011}.
 Finally, for each FoF halo we select from all the particles that
@@ -617,7 +616,7 @@ velocity method and above the density.
   methods used on the same cosmological N-body data. The central lines
   correspond the median and the shadowed region indicates the
   quartiles.
-    \label{fig:concentrations}}
+    \label{fig:concentration}}
 \end{figure*}
 
 
