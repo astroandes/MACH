@@ -82,20 +82,20 @@ No. 18A-10, Edificio Ip, Bogot\'a, Colombia\\
 
 We present a new method to estimate the concentration of dark matter
 halos in N-body simulations. Our method is based on a fit to the
-integrated mass as a function of halo radius. 
+integrated mass as a function of halo radius.
 The main advantage of this method is that it uses the full particle information
-without any binning. 
+without any binning.
 We test our method both on mock and N-body halos to compare it against
 two popular methods to find concentrations: maximum radial velocity
 measurements and radial particle binning to estimate the density.
 Tests on the mock halos show that the accuracy of our method to
 recover input concentrations can achieve $0.1\%$ while for the maximum
 radial velocity and density methods it is on the order of $0.5\%$ and
-$40\%$ respectively. 
+$40\%$ respectively.
 We also measure the mass-concentration relationship on the N-body
 data. With respect to the other two approaches our method produces a
 flatter relationship, while its normalization falls below the maximum
-velocity method and above the density method. 
+velocity method and above the density method.
 
 
 
@@ -186,7 +186,7 @@ different halo samples; the first one generated under controlled
 conditions and the second taken from a cosmological N-body
 simulation to comment on the consequences for the concentration-mass
 relationship. We present our conclusions in Section
-\ref{sec:conclusions}. 
+\ref{sec:conclusions}.
 
 
 
@@ -199,6 +199,16 @@ relationship. We present our conclusions in Section
   \includegraphics[width=0.48\textwidth]{vel_normalized.pdf}
 \end{center}
 \caption{Dimensionless mass (left) and velocity (right) profiles as a
+  function of the dimensionless radius for different concentration
+  values. \label{fig:profiles}}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{dv_dx.pdf}
+  \includegraphics[width=0.48\textwidth]{zeros.pdf}
+\end{center}
+\caption{Dimensionless derivative of the velocity profile as a
   function of the dimensionless radius for different concentration
   values. \label{fig:profiles}}
 \end{figure*}
@@ -277,10 +287,14 @@ to have:
 
 In the right panel of Figure \ref{fig:profiles} we show the circular
 velocity profile for the same concentrations as in the left panel of
-Figure \ref{fig:profiles}. 
+Figure \ref{fig:profiles}.
 
 \begin{equation}
 v(<x)=\sqrt{\frac{1}{A}\left[\frac{\ln\left(1+xc\right)}{x}-\frac{c}{xc+1}\right]},
+\end{equation}
+
+\begin{equation}
+\frac{dv}{dx}=\frac{1}{A}\frac{\frac{2cx+1}{\left(cx+1\right)^{2}}cx-\log\left(cx+1\right)}{2x^{2}v\left(x\right)}
 \end{equation}
 %
 this normalized profile always shows a maximum provided that the
