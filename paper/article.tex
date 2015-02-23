@@ -254,7 +254,7 @@ From these definitions we can compute the total mass enclosed inside a
 radius $r$:
 \begin{equation}
 M(<r) = 4\pi\rho_c\delta_c  r_s^3\left[\ln \left
-  (\frac{r_s+r}{r}\right) - \frac{r}{r_s+r}\right].
+  (\frac{r_s+r}{r_s}\right) - \frac{r}{r_s+r}\right].
 \end{equation}
 
 We express the same quantity in terms of dimensionless
@@ -321,8 +321,9 @@ provided by
       max})}{f(c)}},
 \label{eq:max_v}
 \end{equation}
-where $x_{\rm max}=2.163$ and the function $f(x)$ was defined in Eq. (\ref{eq:f_NFW}).
-
+where $x_{\rm max}=2.163$ \citep{Klypin2014} and the function $f(x)$
+was defined in Eq. (\ref{eq:f_NFW}).  
+ 
 \section{A new approach to estimate the halo concentration}
 \label{sec:method}
 
@@ -453,7 +454,7 @@ groups of $100$ halos each.
 The four groups differ in the total number of particles for their halos:
 $20$, $200$, $2000$ and $20000$.
 Inside each group the halos have random concentration values in
-the range $1<c<20$ with a flat distribution.
+the range $1<c<20$ with a uniform distribution.
 For all these halos with find the concentration values using the
 density, velocity and mass methods described in the previous
 section. We quantify the difference between the expected $c_{in}$
@@ -595,7 +596,7 @@ The FoF algorithm used with a linking length of $0.17$ times the average
 inter-particle distance. This choice translates into an overdensity
 $\Delta_h\sim 400-700$ dependent on the halo concentration
 \citep{More2011}.
-Finally, for each FoF halo we select from all the particles that
+Finally, for each FoF halo we select all the particles that
 belong to it.
 
 From this set of particles we follow the procedure spelled out in
