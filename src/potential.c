@@ -21,7 +21,7 @@ int main(int argc, char** argv){
  double* k;
  FILE *rfile;
  FILE *cfile;
- 
+
  n_points = count_lines(argv[1]);
 
  rfile = fopen(argv[1], "r");
@@ -34,20 +34,19 @@ int main(int argc, char** argv){
 
  for (i = 0; i < n_points; i ++){
    fscanf(rfile,"%lf,%lf,%lf\n",&(x[i]),&(y[i]),&(z[i]));
+   k[i] = 0;
  }
- 
+
 for (i = 0; i < n_points; i ++){
-   count = 0.0;
-   for (j = 0; j < n_points; j ++){
-     if(i != j){
-       count += 1.0/sqrt(pow(x[i]-x[j],2.0) + pow(y[i]-y[j],2.0) + pow(z[i]-z[j],2.0)); 
-     }
-    k[i] = count;  
+   for (j = i+1; j < n_points; j ++){
+     count = 1.0/sqrt(pow(x[i]-x[j],2.0) + pow(y[i]-y[j],2.0) + pow(z[i]-z[j],2.0));
+     k[i] += count;
+     k[j] += count;    
    }
  }
  for (i = 0; i < n_points; i ++){
    fprintf(cfile,"%lf\n",k[i]);
- } 
+ }
 }
 
 // Counts lines of a file, copied from github.com/forero/ComputationalPhysicsUniandes repository
@@ -71,7 +70,7 @@ int count_lines(char *filename){
       n_lines++;
     }
   }while(c!=EOF);
-  
+
   rewind(in);
   fclose(in);
   return n_lines;
