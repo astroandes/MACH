@@ -1,5 +1,4 @@
-import numpy as np, pylab, math, sys, timeit, os, random, datetime, nfw, mcmc,fit , plotter, multiprocessing, time
-from scipy.optimize import fsolve
+import numpy as np, pylab, sys, os, datetime, nfw, mcmc, plotter, multiprocessing, time
 
 # Gets the concentration and virial radius for several haloes
 
@@ -8,7 +7,7 @@ config[-1] = config[-1].replace('\n','')
 
 processes = int(config[5])
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-mass_element = 1.0   
+mass_element = 1.0
 plt = 1
 total_list = os.listdir(str(config[0]))
 len_list = len(total_list)
@@ -21,12 +20,12 @@ if (config[7]=='0'):
 else:
     print 'Plotting mode enabled'
     plt = 1
-    
+
 if config[8]=='0':
     print 'Test mode disabled'
 else:
     print 'Test mode enabled'
- 
+
 os.system('mkdir mass_'+now)
 sys.stdout.write('\rCompiling the code used to calculate the center of each halo... ')
 sys.stdout.flush()
@@ -72,7 +71,7 @@ def run(directories,process_number):
 
     # Gets the radial distance from the new origin to each particle and sorts it
         r_values = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
-    
+
     # Removes the files used by "potential.out"
         os.system('rm '+potential_name+' '+positions_name)
 
@@ -97,7 +96,7 @@ def run(directories,process_number):
         else:
             r_vir = radius[-1]
             vir_index = len(avg_density)-1
-            
+
     # Removes the particles that have a greater radius than the virial radius
         mass = np.resize(mass,vir_index+1)
         radius = np.resize(radius,vir_index+1)
@@ -107,14 +106,14 @@ def run(directories,process_number):
         radius = radius/radius[-1]
 
     # Does the Metropolis algorithm in order to find the concentration
-        
+
         n_iterations = int(config[6])
 
         step = np.array([np.log(1.03)])
         guess = np.array([np.log(10)])
         reest = [lambda x: x >= 0]
 
-        chi_2 = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(radius),np.log(mass),np.ones(len(radius)))    
+        chi_2 = lambda p : mcmc.chi2(p,nfw.loglogmass_norm,np.log(radius),np.log(mass),np.ones(len(radius)))
         walk,chi2 = mcmc.walker(chi_2,guess,step,n_iterations,reest)
         walk = walk[0]
         log_c = walk[np.argmin(chi2)]
@@ -148,7 +147,7 @@ def run(directories,process_number):
             pylab.close()
 
             os.chdir('../../')
-            
+
     # Writes the results for the halo
         export = open(filename_export, 'a')
         line = [[file_id,x_center,y_center,z_center,c,c_max,c_min,r_vir,len(mass),n_points]]
@@ -158,4 +157,3 @@ for i in range(processes):
     p = multiprocessing.Process(target=run, args=(lists[i],i))
     jobs.append(p)
     p.start()
-
