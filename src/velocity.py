@@ -133,7 +133,7 @@ def run(directories,process_number):
             
     # Writes the results for the halo
         export = open(filename_export, 'a')
-        line = [[file_id,x_center,y_center,z_center,c,f(c),r_vir,len(mass),n_points]]
+        line = [[file_id,x_center,y_center,z_center,c,f(c),r_vir,len(mass)+1,n_points]]
         np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d'],delimiter=',')
 
 for i in range(processes):

@@ -1,4 +1,4 @@
-import numpy as np, pylab, sys, os, datetime, nfw, mcmc, plotter, multiprocessing, time
+import numpy as np, pylab, sys, os, datetime, nfw, mcmc, plotter, multiprocessing, time, fit
 
 # Gets the concentration and virial radius for several haloes
 
@@ -68,9 +68,12 @@ def run(directories,process_number):
         potential = np.loadtxt(open(potential_name, 'r'))
         maximum = np.argmax(potential)
         x_center,y_center,z_center = x[maximum],y[maximum],z[maximum]
+        x -= x_center
+        y -= y_center
+        z -= z_center
 
     # Gets the radial distance from the new origin to each particle and sorts it
-        r_values = np.sort(np.sqrt((x-x_center)**2 + (y-y_center)**2 + (z-z_center)**2), kind='quicksort')
+        r_values = np.sort(np.sqrt(x*x + y*y + z*z), kind='quicksort')
 
     # Removes the files used by "potential.out"
         os.system('rm '+potential_name+' '+positions_name)
@@ -104,7 +107,14 @@ def run(directories,process_number):
     # Normalizes the mass and radius
         mass = mass/mass[-1]
         radius = radius/radius[-1]
-
+    # Gets the diagonal entries of the Inertia tensor
+        R = np.dstack((x,y,z))[0]
+        I = np.zeros((3,3))
+        for j in range(3):
+            for k in range(3):
+                for i in range(len(R)):
+                    I[j,k] += (j == k)*np.sqrt(np.sum(R[i]*R[i])) - R[i,j]*R[i,k]
+        eig = np.linalg.eig(I)[0]
     # Does the Metropolis algorithm in order to find the concentration
 
         n_iterations = int(config[6])
@@ -150,8 +160,8 @@ def run(directories,process_number):
 
     # Writes the results for the halo
         export = open(filename_export, 'a')
-        line = [[file_id,x_center,y_center,z_center,c,c_max,c_min,r_vir,len(mass),n_points]]
-        np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d'],delimiter=',')
+        line = [[file_id,x_center,y_center,z_center,c,c_max,c_min,r_vir,len(mass)+1,n_points,eig[0],eig[1],eig[2]]]
+        np.savetxt(export,line,fmt=['%d','%lf','%lf','%lf','%lf','%lf','%lf','%lf','%d','%d','%lf','%lf','%lf'],delimiter=',')
 
 for i in range(processes):
     p = multiprocessing.Process(target=run, args=(lists[i],i))
