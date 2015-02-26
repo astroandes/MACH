@@ -1,5 +1,5 @@
 import Tkinter as tk, tkFileDialog, tkMessageBox
-    
+
 root = tk.Tk()
 root.title('Configure')
 
@@ -22,7 +22,7 @@ tk.Entry(root,textvariable=proc).grid(row=5,column=1)
 tk.Entry(root,textvariable=step).grid(row=6,column=1)
 
 try:
-    params = open('config.div','r').readline().split(',')    
+    params = open('config.div','r').readline().split(',')
     directory.set(params[0])
     x.set(params[1])
     y.set(params[2])
@@ -30,8 +30,8 @@ try:
     skip.set(params[4])
     proc.set(params[5])
     step.set(params[6])
-    plot.set((params[7] == 'True'))
-    test.set((params[8] == 'True'))
+    plot.set((params[7] == '1'))
+    test.set((params[8] == '1'))
 except:
     print '',
 tk.Label(root, text='Path').grid(row=0)
@@ -46,7 +46,7 @@ tk.Label(root, text='Test Mode').grid(row=8)
 
 def change_path():
     directory.set(tkFileDialog.askdirectory())
-    
+
 def save():
     export = open('config.div','w')
     line =  directory.get()+','+x.get()+','+y.get()+','+z.get()+','+skip.get()+','+proc.get()+','+step.get()+','+('%r' % (plot.get()))+','+('%r' % (test.get()))
@@ -60,7 +60,5 @@ tk.Button(root,text='Change Path',command=change_path).grid(row=9,column=1)
 
 tk.Checkbutton(root,text='Yes',variable=plot).grid(row=7, column=1)
 tk.Checkbutton(root,text='Yes',variable=test).grid(row=8,column=1)
-    
+
 root.mainloop()
-
-
