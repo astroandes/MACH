@@ -113,7 +113,7 @@ def run(directories,process_number):
         for j in range(3):
             for k in range(3):
                 for i in range(len(R)):
-                    I[j,k] += (j == k)*np.sqrt(np.sum(R[i]*R[i])) - R[i,j]*R[i,k]
+                    I[j,k] += (j == k)*(np.sum(R[i]*R[i])) - R[i,j]*R[i,k]
         eig = np.linalg.eig(I)[0]
     # Does the Metropolis algorithm in order to find the concentration
 
