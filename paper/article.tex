@@ -1,89 +1,55 @@
-\documentclass[useAMS,usenatbib]{mn2e}
-\usepackage{float}
-\usepackage{amsmath}
-\usepackage{amssymb}
+\documentclass{emulateapj}
+\submitted{{\it Submitted for publication in ApJ}}
+\usepackage{multirow,color,wrapfig,ulem}
+\usepackage {graphicx}
 \usepackage{graphics}
-\usepackage{graphicx}
-\usepackage{epsfig}
-\usepackage{hyperref}
-\def\be{\begin{equation}}
-\def\ee{\end{equation}}
-\def\ba{\begin{eqnarray}}
-\def\ea{\end{eqnarray}}
-
-% To highlight comments
-\usepackage{color}
-\definecolor{red}{rgb}{1,0.0,0.0}
-\newcommand{\red}{\color{red}}
-\definecolor{blue}{rgb}{0.1,0.3,0.9}
-\newcommand{\blue}{\color{blue}}
-
-\usepackage[normalem]{ulem}
-\definecolor{darkgreen}{rgb}{0.0,0.5,0.0}
-
-\newcommand{\documentname}{paper~}
-\newcommand{\LCDM}{$\Lambda$CDM~}
-\newcommand{\beq}{\begin{eqnarray}}
-\newcommand{\eeq}{\end{eqnarray}}
-\newcommand{\zz}{$z\sim 3$}
-
-\newcommand{\apj}{ApJ}
-\newcommand{\apjs}{ApJS}
-\newcommand{\apjl}{ApJL}
-\newcommand{\aj}{AJ}
-\newcommand{\mnras}{MNRAS}
-\newcommand{\jcap}{JCAP}
-\newcommand{\mnrassub}{MNRAS accepted}
-\newcommand{\aap}{A\&A}
-\newcommand{\aaps}{A\&AS}
-\newcommand{\araa}{ARA\&A}
-\newcommand{\nat}{Nature}
-\newcommand{\physrep}{PhR}
-\newcommand{\pasp}{PASP}
-\newcommand{\pasj}{PASJ}
-\newcommand{\avg}[1]{\langle{#1}\rangle}
-\newcommand{\ly}{{\ifmmode{{\rm Ly}\alpha}\else{Ly$\alpha$}\fi}}
-\newcommand{\hMpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}
-\newcommand{\hGpc}{{\ifmmode{h^{-1}{\rm Gpc}}\else{$h^{-1}$Gpc }\fi}}
-\newcommand{\hmpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}
-\newcommand{\hkpc}{{\ifmmode{h^{-1}{\rm kpc}}\else{$h^{-1}$kpc }\fi}}
+\usepackage[dvips]{epsfig}
+\bibliographystyle{apj}
+\newcommand{\jcap}{JCAP}  
+\newcommand{\avg}[1]{\langle{#1}\rangle}  
+\newcommand{\nscatt}{\langle N_{\rm  scatt}\rangle}
+\newcommand{\ly}{{\ifmmode{{\rm Ly}\alpha~}\else{Ly$\alpha$~}\fi}}
+\newcommand{\hMpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}   
+\newcommand{\hGpc}{{\ifmmode{h^{-1}{\rm Gpc}}\else{$h^{-1}$Gpc }\fi}}   
+\newcommand{\hmpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}  
+\newcommand{\hkpc}{{\ifmmode{h^{-1}{\rm kpc}}\else{$h^{-1}$kpc }\fi}}  
 \newcommand{\hMsun}{{\ifmmode{h^{-1}{\rm
-        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$~}\fi}}
+        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}   
 \newcommand{\hmsun}{{\ifmmode{h^{-1}{\rm
-        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}
-\newcommand{\Msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}
-\newcommand{\msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}
-\newcommand{\lya}{{Lyman$\alpha$~}}
+        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}   
+\newcommand{\Msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}  
+\newcommand{\msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}  
+\newcommand{\lya}{{Lyman $\alpha$~}}
 \newcommand{\clara}{{\texttt{CLARA}}~}
-\newcommand{\rand}{{\ifmmode{{\mathcal{R}}}\else{${\mathcal{R}}$ }\fi}}
-\newcommand{\hs}{{\hspace{1mm}}}
-\newcommand{\muavg}{\vert\langle\cos\theta\rangle\vert}
+\newcommand{\rand}{{\ifmmode{{\mathcal{R}}}\else{${\mathcal{R}}$ }\fi}}  
+\newcommand{\hs}{{\hspace{1mm}}}  
+\newcommand{\kms}{{\ifmmode{{\mathrm{\,km\ s}^{-1}}}\else{\,km~s$^{-1}$}\fi}}
 % definition to produce a "less than or similar to" symbol
 \def\lsim{~\rlap{$<$}{\lower 1.0ex\hbox{$\sim$}}}
-
 % definition to produce a "greater than or similar to" symbol
 \def\gsim{~\rlap{$>$}{\lower 1.0ex\hbox{$\sim$}}}
-
+%@arxiver{fig3.pdf,fig11a.pdf, fig11b.pdf} 
 \begin{document}
 
-\title[A new method for concentrations]{A new method to estimate
-  dark matter halo concentrations}
-\author[Poveda \& Forero-Romero]{
-\parbox[t]{\textwidth}{\raggedright
-  Christian Poveda$^{1}$ \&
-  Jaime E. Forero-Romero$^{1}$
-}
-\vspace*{6pt}\\
-$^{1}$Departamento de F\'{i}sica, Universidad de los Andes, Cra. 1
-No. 18A-10, Edificio Ip, Bogot\'a, Colombia\\
-}
-\maketitle
+\title{A new method to estimate dark matter halo concentrations}
+\shorttitle{New method to estimate concentrations}
 
+\shortauthors{Poveda \& Forero-Romero}
+
+\author{Christian Poveda, Jaime E. Forero-Romero}
+\affil{Departamento de F\'{i}sica, Universidad de los Andes, Cra. 1
+No. 18A-10, Edificio Ip, Bogot\'a, Colombia}
+\email{cn.poveda542@uniandes.edu.co}
+\email{je.forero@uniandes.edu.co}
+
+\keywords{ methods: numerical --- galaxies: halos --- cosmology: theory --- dark
+matter}
 \begin{abstract}
 
 We present a new method to estimate the concentration of dark matter
-halos in N-body simulations. Our method is based on a fit to the
-integrated mass as a function of halo radius.
+halos in N-body simulations. 
+Our method is based on a fit to the integrated mass as a function of
+halo radius.  
 The main advantage of this method is that it uses the full particle information
 without any binning.
 We test our method both on mock and N-body halos to compare it against
@@ -94,17 +60,12 @@ recover input concentrations can achieve $0.1\%$ while for the maximum
 radial velocity and density methods it is on the order of $0.5\%$ and
 $40\%$ respectively.
 We also measure the mass-concentration relationship on the N-body
-data. With respect to the other two approaches our method produces a
+data. 
+With respect to the other two approaches our method produces a
 flatter relationship, while its normalization falls below the maximum
 velocity method and above the density method.
-
-
-
 \end{abstract}
-\begin{keywords}
-methods: numerical, galaxies: haloes, cosmology: theory, dark
-matter
-\end{keywords}
+
 
 
 \section{Introduction}
@@ -661,7 +622,7 @@ uncertainties.
 \label{sec:conclusions}
 
 
-\bibliographystyle{mn2e}
+
 \bibliography{references}
 
 \end{document}
