@@ -70,42 +70,49 @@ velocity method and above the density method.
 
 \section{Introduction}
 \label{sec:introduction}
-In the concordance cosmology paradigm the the matter content of the
-Universe is dominated by dark matter which behaves as a collisionless
-fluid under the influence of gravity. In the last three decades
-numerical experiments have made possible the simulation of dark matter
-dominated universes, yielding valuable insights on the large scale
-structure formation process as depicted in observations
-\citep{Springel2005,2011ApJ...740..102K}. 
+In the concordance cosmology paradigm the matter content of the
+Universe is dominated by dark matter, a collisionless fluid shaped by
+gravitational interactions.
+In the last three decades numerical experiments have made possible the
+simulation of dark matter dominated universes, yielding valuable
+insights on the large scale structure formation process.
+This description shows a remarkable success in comparisons against
+observations of galaxy distributions on large scales
+\citep{Springel2005,2011ApJ...740..102K}.  
 
-One of the most striking results of these simulations is that dark
-matter clumps on galactic scales follow a universal density profile
-which in a first approximation is spherical symmetric and only
-dependent on the radial coordinate. These profiles seem to be to a
-very good approximation universal \citep{NFW,Taylor2001}; independent
-of the cosmological parameters and self-similar for different spatial
-scales after an adequate re-scaling is applied. 
+Regarding the small scale dark matter distribution, one of the most
+striking results of these simulations is that dark matter overdensities
+follow a universal density profile.
+In a first approximation this profile is spherically symmetric and its
+density only dependens on the radial coordinate. 
+The universality of this profiles seems to be independent of the
+cosmological parameters and self-similar for different spatial scales
+after an adequate re-scaling is applied.  
+\citep{NFW,Taylor2001}
 
-One the most common parameterization of this density is known as the
-Navarro-Frenk-White (NFW) profile \citep{NFW}. This profile is a
-double power law in radius, where the transition between the two
-happens at the so-called scale radius $r_s$. The ratio between the
-scale radius and the virial radius of the halo $R_v$ is known as the
-concentration $c=R_v/r_s$, a quantity that has been found to be
-correlated with the halo mass.
-
-In spite of the fact that high resolution simulations of
-Milky Way sized dark matter halos \citep{Navarro2010} show that the
-universality property is not  perfect and that a better fitting
-parameterization to the radial density profile is provided by the
-Einasto profile \citep{Einasto1965}, the NFW and its concentration
-have become a standard and useful way to describe the structure of
-dark matter halos.
+One the most popular parameterization for a halo radial density
+distribution is known as the Navarro-Frenk-White (NFW) profile
+\citep{NFW}. 
+This profile is a  double power law in radius, where the transition
+between the two happens at the so-called scale radius $r_s$. 
+The ratio between the scale radius and the virial radius of the halo
+$R_v$ is known as the concentration $c=R_v/r_s$. 
+Simulations also show that the concentration is a function of halo
+mass. 
 
 
-The relationship between halo mass and concentration is in principle
-accessible to observations and provides a potential test of LCDM on
-galactic scales. 
+High resolution simulations of Milky Way sized dark matter halos
+\citep{Navarro2010} show that the universality property is not
+perfect and that a better fitting parameterization to the radial
+density profile is provided by the Einasto profile
+\citep{Einasto1965}.
+However, the NFW density profile and its concentration have become a
+standard metric to describe the structure of dark matter
+halos. 
+
+
+Observationally, the relationship between halo mass and concentration
+could provides a potential test of LCDM on galactic scales. 
 With this promise a great deal of effort has been
 invested in calibrating this relationship with simulations
 \citep{Neto2007,Duffy2008,Munoz2011,Prada2012,Ludlow2014} but also
@@ -114,30 +121,40 @@ finding the best possible way to constraint it with observations
 
 From the computational point of view there are two main methods to
 estimate the concentration parameter of a dark matter halo in a N-body
-simulation. The first method takes the particles composing the halos
+simulation. 
+The first method takes the particles composing the halos
 and bins them in logarithmic radii to estimate the density in each
 bin, then it proceeds with a fit of this density estimation as a
-function of radius. A second method uses an analytic property of the
-NFW that related the maximum of the ratio of the circular velocity to
-the virial velocity. In this method at each particle radius this ratio
-is estimated to find the maximum value for this ratio; this value is
-used to find the roots of an equation which represent the
-concentration parameter.
+function of the radius. 
+A second method uses an analytic property of the
+NFW that relates the maximum of the ratio of the circular velocity to
+the virial velocity. 
+In this method the user estimates this ratio as a function of radius
+to determine its maxium value.
+Then, the user can take this value to find the roots of an equation
+which represent the concentration parameter.
 
-The first method although is straightforward to apply has two main
-disadvantages. First of all it requires a large number of particles in
-order to have a proper density estimate in each bin. For a very low
-number of particles is hard to define a large number of bins to
-proceed with the fit. The second problem is that, as in any process
-involving data binning, there is not an way to estimate the optimal
-bin size, which in turn can affect the results of the fit.
+The first method is straightforward to apply, but it has two 
+disadvantages. 
+First, it requires a large number of particles in
+order to have a proper density estimate in each bin. 
+This makes the method robust only when halos with at least  $10^3$
+particles are fitted.
+The second problem is that there is not a way to estimate the optimal
+bin size.
+Different choices affect the results of the fit.
 
-The second method solves the two problems mentioned above. It works
-with low particles numbers and does not involve data binning. However,
-it effectively takes into account a single data point and discards the
-behaviour of the ratio $V_{cirv}/V_{vir}$ below and above its
-maxima.
+The second method solves the two problems mentioned above. 
+It works with low particles numbers and does not involve data
+binning. 
+However, it effectively takes into account only a single data point
+and discards the behaviour of the ratio $V_{\rm circ}/V_{\rm vir}$ below and
+above its maxima. 
+Additionally, small fluctuations on the value of this maximum can
+yield large perturbations on the estimated concentration parameter.
 
+%%%
+ 
 In this paper we propose a new method to estimate the dark matter halo
 concentration from N-body simulation results. This method has two
 advantages with respect to the methods mentioned above. First, it does
