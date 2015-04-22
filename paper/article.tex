@@ -45,11 +45,11 @@ No. 18A-10, Edificio Ip, Bogot\'a, Colombia}
 \keywords{ methods: numerical --- galaxies: halos --- cosmology: theory --- dark
 matter}
 \begin{abstract}
-
+ 
 We present a new method to estimate the concentration of dark matter
-halos in N-body simulations. 
+halos in N-body simulations.  
 Our method is based on a fit to the integrated mass as a function of
-halo radius.  
+halo radius.    
 The main advantage of this method is that it uses the full particle information
 without any binning.
 We test our method both on mock and N-body halos to compare it against
@@ -153,34 +153,25 @@ above its maxima.
 Additionally, small fluctuations on the value of this maximum can
 yield large perturbations on the estimated concentration parameter.
 
-%%%
+
  
 In this paper we propose a new method to estimate the dark matter halo
-concentration from N-body simulation results. This method has two
-advantages with respect to the methods mentioned above. First, it does
-not involve data binning. Second, it does not throw away data
-points. Third, it allows for an straightforward estimation of the
-uncertainties in the concentration parameter.
-
-Our method consists in building the cumulative mass profile from the
+concentration in halos obtained in numerical simulations. 
+It consists in building the cumulative mass profile from the
 particle data in the N-body simulation to find the best possible
-concentration value using a Markov Chain Monte Carlo methodology by
-comparing the data against the analytic expectation.
+concentration value using a Markov Chain Monte Carlo (MCMC)
+methodology by comparing the data against the analytic expectation. 
+ 
+Our proposal has two advantages with respect to the two methods mentioned
+above. 
+First, it does not involve data binning. 
+Second, it does not throw away data points. 
+Furthermore, the MCMC approach allows for an straightforward
+estimation of the uncertainties in the concentration parameter, and
+inclusion of informative priors.
+ 
 
-This paper is structured as follows. In Section \ref{sec:basics} we
-review the basic properties of the NFW density profile and define the
-basic notation for the rest of the paper. Next in Section
-\ref{sec:method} we present our new method to estimate the halo
-concentration, paying special attention to the Bayesian framework to
-find the most probable value and its uncertainty. In Section
-\ref{sec:results} we demonstrate the power of our method with two
-different halo samples; the first one generated under controlled
-conditions and the second taken from a cosmological N-body
-simulation to comment on the consequences for the concentration-mass
-relationship. We present our conclusions in Section
-\ref{sec:conclusions}.
-
-
+%%%
 
 \section{Basic properties of the NFW density profile}
 \label{sec:basics}
