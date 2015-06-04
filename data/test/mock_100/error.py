@@ -2,7 +2,7 @@ import numpy as np, pylab
 
 vlct = np.loadtxt('velocity/table.csv',delimiter=',')
 mass = np.loadtxt('mass/table.csv',delimiter=',')
-dens = np.loadtxt('density/table.csv',delimiter=',')
+dens = np.loadtxt('newDensity/table.csv',delimiter=',')
 
 orig = vlct[:,0]
 gtt = [int(x) for x in np.argwhere(orig >=3)]
@@ -12,9 +12,8 @@ mass = mass[gtt]
 dens = dens[gtt]
 
 orig = vlct[:,0]
-
 def chi2(x_obs,x_org):
-        return np.sum(np.abs((x_obs-x_org)/x_org))/len(x_obs)
+    return np.sum(np.abs((x_obs-x_org)/x_org))/len(x_obs)
 
 def best_fit(original,results):
     ans = np.empty(len(original))
@@ -57,21 +56,21 @@ pylab.close()
 
 chi_mass = np.array([chi2(orig,mass[:,1]),chi2(orig,mass[:,2]),chi2(orig,mass[:,3]),chi2(orig,mass[:,4])])
 
-orig = dens[:,0]
+orig = vlct[:,0]
 
 pylab.title('$Density$')
 pylab.plot(orig,orig,label='$real$')
 #pylab.plot(orig,dens[:,1],'.',label='$n=20$')
 #pylab.plot(orig,dens[:,2],'.',label='$n=200$')
 #pylab.plot(orig,dens[:,3],'.',label='$n=2000$')
-pylab.plot(orig,best_fit(orig,dens[:,1:5]),'-r',label='$best\ fit$')
+pylab.plot(orig,best_fit(orig,dens[:,0:4]),'-r',label='$best\ fit$')
 pylab.xlabel('$\mathrm{Original}$')
 pylab.ylabel('$\mathrm{Obtained}$')
 pylab.legend(loc=4, borderaxespad=0.5)
 pylab.savefig('dens.png',dpi=300)
 pylab.close()
 
-chi_dens = np.array([chi2(orig,dens[:,1]),chi2(orig,dens[:,2]),chi2(orig,dens[:,3]),chi2(orig,dens[:,4])])
+chi_dens = np.array([chi2(orig,dens[:,0]),chi2(orig,dens[:,1]),chi2(orig,dens[:,2]),chi2(orig,dens[:,3])])
 
 pylab.plot([20,200,2000,20000],chi_mass,'-k',lw=2)
 pylab.plot([20,200,2000,20000],chi_mass,'ok',label='$\mathrm{Our\ Method}$',ms=7)
@@ -96,7 +95,9 @@ c = orig
 c_dens = dens[:,3]
 c_mass = np.empty(0)
 c_vlct = np.empty(0)
-
+print(chi_dens)
+print(chi_vlct)
+print(chi_mass)
 for id in dens[:,0]:
     index = np.where(dens[:,0] == id)
     c_mass = np.append(c_mass,mass[index,4])
