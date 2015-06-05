@@ -5,30 +5,30 @@
 \usepackage{graphics}
 \usepackage[dvips]{epsfig}
 \bibliographystyle{apj}
-\newcommand{\jcap}{JCAP}  
-\newcommand{\avg}[1]{\langle{#1}\rangle}  
+\newcommand{\jcap}{JCAP}
+\newcommand{\avg}[1]{\langle{#1}\rangle}
 \newcommand{\nscatt}{\langle N_{\rm  scatt}\rangle}
 \newcommand{\ly}{{\ifmmode{{\rm Ly}\alpha~}\else{Ly$\alpha$~}\fi}}
-\newcommand{\hMpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}   
-\newcommand{\hGpc}{{\ifmmode{h^{-1}{\rm Gpc}}\else{$h^{-1}$Gpc }\fi}}   
-\newcommand{\hmpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}  
-\newcommand{\hkpc}{{\ifmmode{h^{-1}{\rm kpc}}\else{$h^{-1}$kpc }\fi}}  
+\newcommand{\hMpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}
+\newcommand{\hGpc}{{\ifmmode{h^{-1}{\rm Gpc}}\else{$h^{-1}$Gpc }\fi}}
+\newcommand{\hmpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}
+\newcommand{\hkpc}{{\ifmmode{h^{-1}{\rm kpc}}\else{$h^{-1}$kpc }\fi}}
 \newcommand{\hMsun}{{\ifmmode{h^{-1}{\rm
-        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}   
+        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}
 \newcommand{\hmsun}{{\ifmmode{h^{-1}{\rm
-        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}   
-\newcommand{\Msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}  
-\newcommand{\msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}  
+        {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}
+\newcommand{\Msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}
+\newcommand{\msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}
 \newcommand{\lya}{{Lyman $\alpha$~}}
 \newcommand{\clara}{{\texttt{CLARA}}~}
-\newcommand{\rand}{{\ifmmode{{\mathcal{R}}}\else{${\mathcal{R}}$ }\fi}}  
-\newcommand{\hs}{{\hspace{1mm}}}  
+\newcommand{\rand}{{\ifmmode{{\mathcal{R}}}\else{${\mathcal{R}}$ }\fi}}
+\newcommand{\hs}{{\hspace{1mm}}}
 \newcommand{\kms}{{\ifmmode{{\mathrm{\,km\ s}^{-1}}}\else{\,km~s$^{-1}$}\fi}}
 % definition to produce a "less than or similar to" symbol
 \def\lsim{~\rlap{$<$}{\lower 1.0ex\hbox{$\sim$}}}
 % definition to produce a "greater than or similar to" symbol
 \def\gsim{~\rlap{$>$}{\lower 1.0ex\hbox{$\sim$}}}
-%@arxiver{fig3.pdf,fig11a.pdf, fig11b.pdf} 
+%@arxiver{fig3.pdf,fig11a.pdf, fig11b.pdf}
 \begin{document}
 
 \title{A new method to estimate dark matter halo concentrations}
@@ -45,11 +45,11 @@ No. 18A-10, Edificio Ip, Bogot\'a, Colombia}
 \keywords{ methods: numerical --- galaxies: halos --- cosmology: theory --- dark
 matter}
 \begin{abstract}
- 
+
 We present a new method to estimate the concentration of dark matter
-halos in N-body simulations.  
+halos in N-body simulations.
 Our method is based on a fit to the integrated mass as a function of
-halo radius.    
+halo radius.
 The main advantage of this method is that it uses the full particle information
 without any binning.
 We test our method both on mock and N-body halos to compare it against
@@ -60,7 +60,7 @@ recover input concentrations can achieve $0.1\%$ while for the maximum
 radial velocity and density methods it is on the order of $0.5\%$ and
 $40\%$ respectively.
 We also measure the mass-concentration relationship on the N-body
-data. 
+data.
 With respect to the other two approaches our method produces a
 flatter relationship, while its normalization falls below the maximum
 velocity method and above the density method.
@@ -78,27 +78,27 @@ simulation of dark matter dominated universes, yielding valuable
 insights on the large scale structure formation process.
 This description shows a remarkable success in comparisons against
 observations of galaxy distributions on large scales
-\citep{Springel2005,2011ApJ...740..102K}.  
+\citep{Springel2005,2011ApJ...740..102K}.
 
 Regarding the small scale dark matter distribution, one of the most
 striking results of these simulations is that dark matter overdensities
 follow a universal density profile.
 In a first approximation this profile is spherically symmetric and its
-density only dependens on the radial coordinate. 
+density only dependens on the radial coordinate.
 The universality of this profiles seems to be independent of the
 cosmological parameters and self-similar for different spatial scales
-after an adequate re-scaling is applied.  
+after an adequate re-scaling is applied.
 \citep{NFW,Taylor2001}
 
 One the most popular parameterization for a halo radial density
 distribution is known as the Navarro-Frenk-White (NFW) profile
-\citep{NFW}. 
+\citep{NFW}.
 This profile is a  double power law in radius, where the transition
-between the two happens at the so-called scale radius $r_s$. 
+between the two happens at the so-called scale radius $r_s$.
 The ratio between the scale radius and the virial radius of the halo
-$R_v$ is known as the concentration $c=R_v/r_s$. 
+$R_v$ is known as the concentration $c=R_v/r_s$.
 Simulations also show that the concentration is a function of halo
-mass. 
+mass.
 
 
 High resolution simulations of Milky Way sized dark matter halos
@@ -108,11 +108,11 @@ density profile is provided by the Einasto profile
 \citep{Einasto1965}.
 However, the NFW density profile and its concentration have become a
 standard metric to describe the structure of dark matter
-halos. 
+halos.
 
 
 Observationally, the relationship between halo mass and concentration
-could provides a potential test of LCDM on galactic scales. 
+could provides a potential test of LCDM on galactic scales.
 With this promise a great deal of effort has been
 invested in calibrating this relationship with simulations
 \citep{Neto2007,Duffy2008,Munoz2011,Prada2012,Ludlow2014} but also
@@ -121,55 +121,55 @@ finding the best possible way to constraint it with observations
 
 From the computational point of view there are two main methods to
 estimate the concentration parameter of a dark matter halo in a N-body
-simulation. 
+simulation.
 The first method takes the particles composing the halos
 and bins them in logarithmic radii to estimate the density in each
 bin, then it proceeds with a fit of this density estimation as a
-function of the radius. 
+function of the radius.
 A second method uses an analytic property of the
 NFW that relates the maximum of the ratio of the circular velocity to
-the virial velocity. 
+the virial velocity.
 In this method the user estimates this ratio as a function of radius
 to determine its maxium value.
 Then, the user can take this value to find the roots of an equation
 which represent the concentration parameter.
 
-The first method is straightforward to apply, but it has two 
-disadvantages. 
+The first method is straightforward to apply, but it has two
+disadvantages.
 First, it requires a large number of particles in
-order to have a proper density estimate in each bin. 
+order to have a proper density estimate in each bin.
 This makes the method robust only when halos with at least  $10^3$
 particles are fitted.
 The second problem is that there is not a way to estimate the optimal
 bin size.
 Different choices affect the results of the fit.
 
-The second method solves the two problems mentioned above. 
+The second method solves the two problems mentioned above.
 It works with low particles numbers and does not involve data
-binning. 
+binning.
 However, it effectively takes into account only a single data point
 and discards the behaviour of the ratio $V_{\rm circ}/V_{\rm vir}$ below and
-above its maxima. 
+above its maxima.
 Additionally, small fluctuations on the value of this maximum can
 yield large perturbations on the estimated concentration parameter.
 
 
- 
+
 In this paper we propose a new method to estimate the dark matter halo
-concentration in halos obtained in numerical simulations. 
+concentration in halos obtained in numerical simulations.
 It consists in building the cumulative mass profile from the
 particle data in the N-body simulation to find the best possible
 concentration value using a Markov Chain Monte Carlo (MCMC)
-methodology by comparing the data against the analytic expectation. 
- 
+methodology by comparing the data against the analytic expectation.
+
 Our proposal has two advantages with respect to the two methods mentioned
-above. 
-First, it does not involve data binning. 
-Second, it does not throw away data points. 
+above.
+First, it does not involve data binning.
+Second, it does not throw away data points.
 Furthermore, the MCMC approach allows for an straightforward
 estimation of the uncertainties in the concentration parameter, and
 inclusion of informative priors.
- 
+
 
 %%%
 
@@ -291,8 +291,8 @@ provided by
 \label{eq:max_v}
 \end{equation}
 where $x_{\rm max}=2.163$ \citep{Klypin2014} and the function $f(x)$
-was defined in Eq. (\ref{eq:f_NFW}).  
- 
+was defined in Eq. (\ref{eq:f_NFW}).
+
 \section{A new approach to estimate the halo concentration}
 \label{sec:method}
 
@@ -511,7 +511,7 @@ $\left|{\cal{H}}_n\right|$ is the number of haloes in ${\cal{H}}_n$.
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
 halo particle number for the three different methods to estimate the
 concentration.
-At fixed particle numbers our method always shows the lowest
+At fixed particle numbers our method almost always shows the lowest
 $\avg{|D|}$ values compared to the other two methods.
 Its accuracy is on the order of $10\%$ for $20$ particles in the halo,
 going down to $0.1\%$ for halos with $20000$ particles.
@@ -528,8 +528,7 @@ $20\%$ for $20$ particle halos and $0.5\%$ for $20000$ particle halos.
 The method based on the direct density fit shows the lowest accuracy
 of all methods.
 Its average values $\avg{|D|}$ are always between $30\%$ and $50\%$
-regardless of the particle number. {\bf Necesitamos entender el
-  comportamiento de esto.}
+regardless of the particle number. {\bf Necesitamos reescribir esto.}
 
 \subsection{Tests on N-body data}
 \label{sec:data}
@@ -605,10 +604,10 @@ In this relationship our methods represents a compromise between the
 velocity and density methods.
 The slope is flatter and the overall normalization is below the
 velocity method and above the density.
-We also note that at high masses ($M>10^{14}\hMsun$) our method 
+We also note that at high masses ($M>10^{14}\hMsun$) our method
 and the velocity method show a reasonable agreement within the
-uncertainties. 
- 
+uncertainties.
+
 
 
 
