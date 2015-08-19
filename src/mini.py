@@ -1,12 +1,12 @@
-import numpy as np, matplotlib.pyplot as plt, emcee
+import numpy as np, emcee
 import sys, os
 
-def nfw_log_mass(log_r,c):
-    return np.log((np.log(1.0+c*np.exp(log_r))-c*np.exp(log_r)/(1.0+c*np.exp(log_r)))/(np.log(1.0+c)-c/(1.0+c)))
+def nfw_log_mass(log_r,log_c):
+    return np.log((np.log(1.0+np.exp(logc_+log_r))-np.exp(log_c+log_r)/(1.0+np.exp(log_c+log_r)))/(np.log(1.0+np.exp(log_c))-np.exp(log_c)/(1.0+np.exp(log_c))))
 
-def log_likelihood(c,log_r,log_m):
-    if c >= 1:
-        s = np.sum(log_m-nfw_log_mass(log_r,c))
+def log_likelihood(log_c,log_r,log_m):
+    if log_c >= 0:
+        s = np.sum(log_m-nfw_log_mass(log_r,log_c))
         return -.5*s*s
     else:
         return -np.inf
@@ -61,10 +61,10 @@ def main():
             log_r,log_m = np.log(r),np.log(m)
             del m,r
 
-            position = np.linspace(guess,2*guess,n_walkers)
+            position = np.linspace(np.log(guess),np.log(2*guess),n_walkers)
             position = [[x] for x in position]
 
-            sampler = emcee.EnsembleSampler(n_walkers, n_dimensions, log_likelihood, args=(log_r, log_m),threads=4)
+            sampler = emcee.EnsembleSampler(n_walkers, n_dimensions, log_likelihood, args=(log_r, log_m),threads=8)
             sampler.run_mcmc(position, 500)
             chain = sampler.flatchain
             c_low,c_mid,c_high = np.percentile(chain,[16,50,84])
