@@ -153,8 +153,6 @@ above its maxima.
 Additionally, small fluctuations on the value of this maximum can
 yield large perturbations on the estimated concentration parameter.
 
-
-
 In this paper we propose a new method to estimate the dark matter halo
 concentration in halos obtained in numerical simulations.
 It consists in building the cumulative mass profile from the
@@ -169,7 +167,6 @@ Second, it does not throw away data points.
 Furthermore, the MCMC approach allows for an straightforward
 estimation of the uncertainties in the concentration parameter, and
 inclusion of informative priors.
-
 
 %%%
 
@@ -352,7 +349,8 @@ this computational profile to the analytic expectation uses the
 information from all points, not only a single maxima point as the
 method using the circular velocity profile.
 
-We use a Metropolis-Hastings algorithm to sample the likelihood
+We use an Affine Invariant Markov chain Monte Carlo implemented in the python
+module emcee by FIXME (dfm et al) to sample the likelihood
 function distribution defined by ${\cal L}(c)=\exp(-\chi^2(c)/2)$
 where the $\chi^2(c)$ is written as
 
@@ -364,11 +362,8 @@ where $m(<x_i;c)$ corresponds to the values in Eq.(\ref{eq:profile}) at
 $x=x_i$ for a given value of the concentration parameter $c$ and the
 $i$ index sums over all the particles in the numerical profile.
 
-For the walk in the Metropolis-Hastings algorithm we used 50000 steps
-where each step was randomly generated with a normal distribution
-centered around the last step with an standard deviation of
-$\sigma=0.03$.
-From the $\chi^2$ distribution we find the optimal value of the
+For the walk in the MCMC algorithm we used the default emcee parameters which
+are optimal. From the $\chi^2$ distribution we find the optimal value of the
 concentration and  its associated uncertainty.
 
 \section{Results}
@@ -383,7 +378,6 @@ profile.
 We use this sample to check that we can recover the expected values
 but also gauge the impact of the number of particles on the outcomes
 and the difference with respect to the two other fitting methods.
-
 
 The second sample comes from a publicly available N-body cosmological
 simulation.
@@ -492,7 +486,7 @@ absent.
 Using this data-set we also compare our method against the other two
 methods described earlier: using shells to estimate the density as a
 function of radius and the maximum circular velocity method.
-In the first case we use the same Metropolis-Hastings algorithm we
+In the first case we use the same MCMC algorithm we
 have in our method to fit the density profile.
 In the second method we simply follow the procedure described in
 Section \ref{sec:method}
@@ -511,6 +505,7 @@ $\left|{\cal{H}}_n\right|$ is the number of haloes in ${\cal{H}}_n$.
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
 halo particle number for the three different methods to estimate the
 concentration.
+
 At fixed particle numbers our method almost always shows the lowest
 $\avg{|D|}$ values compared to the other two methods.
 Its accuracy is on the order of $10\%$ for $20$ particles in the halo,
@@ -520,15 +515,11 @@ approximately as $\avg{|D|}\propto N^{-1/2}$, which reinforces the hint that
 the accuracy of the method is related to a decrease of Poisson
 noise.
 
-The second best accuracy is achieved by the method based on the
-maximum of the circular velocity.
-It also shows a similar behaviour $\avg{|D|}\propto N^{-1/2}$.
-Its accuracy is $2-5$ times less than in our method, on the order of
-$20\%$ for $20$ particle halos and $0.5\%$ for $20000$ particle halos.
-The method based on the direct density fit shows the lowest accuracy
-of all methods.
-Its average values $\avg{|D|}$ are always between $30\%$ and $50\%$
-regardless of the particle number. {\bf Necesitamos reescribir esto.}
+The method based on the maximum of the circular velocity shows a similar
+behaviour $\avg{|D|}\propto N^{-1/2}$. Its accuracy is $2-5$ times less
+than in our method, on the order of $20\%$ for $20$ particle halos and
+$0.5\%$ for $20000$ particle halos. The method based on the direct density
+fit shows the an intermediate accuracy between the other two methods.
 
 \subsection{Tests on N-body data}
 \label{sec:data}
