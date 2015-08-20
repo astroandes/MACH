@@ -1,7 +1,7 @@
 import numpy as np, pylab
 
 vlct = np.loadtxt('velocity/table.csv',delimiter=',')
-mass = np.loadtxt('mass/table.csv',delimiter=',')
+mass = np.loadtxt('newMass/table.csv',delimiter=',')
 dens = np.loadtxt('newDensity/table.csv',delimiter=',')
 
 orig = vlct[:,0]
