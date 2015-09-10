@@ -214,15 +214,15 @@ The NFW density profile can be written as
 %
 where $\rho_c\equiv 3H^2/8\pi G$ is the Universe critical density,
 $\delta_c$ is the halo dimensionless characteristic density and $r_s$
-is known as the scale radius, the radius that marks the transition
+is the scale radius. This radius marks the transition
 between the power law scaling $\rho\propto r^{-1}$ for
 $r<r_s$ and $\rho\propto r^{-3}$ for  $r>r_s$.
 
 We define the virial radius of a halo, $r_v$, as the boundary of the
 spherical volume that encloses a density of $\Delta_h$ times
-the average density of the Universe. The corresponding mass $M_{v}$,
-the virial mass, can be written as $M_{v} =
-\frac{4\pi}{3}\bar{\rho}\Delta_h r_v^3$.
+the average density of the Universe. 
+The corresponding mass $M_{v}$, the virial mass, can be written as
+$M_{v} = \frac{4\pi}{3}\bar{\rho}\Delta_h r_v^3$.
 
 
 \subsection{Integrated Mass}
@@ -401,10 +401,10 @@ estimating the mass-concentration relationship from simulations.
 The method we use to generate the halos is based on the integrated
 mass profile.
 We start by fixing the desired concentration $c$ and total number of
-particles $N$ in the mock halo
-With this values we define the mass element as $\delta m = 1/M$, corresponding
+particles $N$ in the mock halo.
+With these values we define the mass element as $\delta m = 1/M$, corresponding
 to the mass of each particle such that the total mass is one.
-Then for each particle $i=1,\ldots,N$, we find the value of $r_i$ such that
+Then for each particle, $i=1,\ldots,N$, we find the value of $r_i$ such that
 the difference
 %
 \begin{equation}
@@ -477,23 +477,35 @@ absent.
 \subsubsection{The impact of the input concentration}
 
 \begin{figure*}
-
   \includegraphics[width=0.45\textwidth]{mock_percentual_diff_conc_20.pdf}
   \includegraphics[width=0.45\textwidth]{mock_percentual_diff_conc_20000.pdf}
-
 \caption{Cumulative distribution of the fractional difference, $D$, between
   the input concentration in the mock halo generator, $c_{in}$ and the
   measurement by our MCMC code, $c_{out}$. Each curve corresponds to
   halos generated with an input concentration in a different range for
   a number of particles $N=20$ (right panel) and $N=20000$ (left panel).
-    \label{fig:results_mocks_conc_20}}
+    \label{fig:results_mocks_conc}}
 \end{figure*}
 
+Figure \ref{fig:results_mocks_conc} shows the integrared distribution
+for $D$ for the fits using our method, split into different input
+concentrations for two different particle numbers describing the mock
+halos. 
+On the left we have the case of halos sampled with $N=20$ particles
+and on the right we have show results for halos with $N=20000$
+particles. 
+The scale for $D$ varies by almost three orders of magnitude.
+The accuracy of our method increases with larger values of $N$. 
+This was already seen in the previous section. 
+We explore the exact dependence of $D$ with the number of particles in
+the next section when we compare the accuracy of different methods.
 
+There are two interesting in Figure \ref{fig:results_mock_conc}. The
+first is that our method tends to underestimate the concentration
+and the second is that the degree of this underestimation increases
+with the input halo concentration.
 
-{\bf Hace falta discutir las figuras.}
-
-\subsubsection{The impact of different methods}
+\subsubsection{The accuracy of different methods}
 
 \begin{figure}
 \begin{center}
@@ -563,68 +575,26 @@ accuracy between the other two methods for a high particle number.
   \label{fig:mdv}}
 \end{figure*}
 
-We use data from the MultiDark cosmological simulation.
-It follows the non-linear evolution of a dark matter density field
-sampled with $2048^3$ particles over a cubic box of $1000$ \hMpc on a side.
-The data is publicly available through \url{http://www.cosmosim.org/}.
-More details about the structure of the database and the simulation
-can be found in \citep{2013AN....334..691R}.
+We use data from a N-body cosmological simulation that follows the non
+non-linear evolution of a dark matter density field sampled with
+$512^3$ particles over a cubic box of $400$ \hMpc on a side. 
+This simulation was run with the public available version of the
+Gadget-2 code. 
+The simulation uses a standard $\Lambda$CDM cosmology with values of
+$\Omega_m=0.258$, $\Omega_\Lambda=0.742$ and $h=0.72$ for the matter
+density parameter, cosmological constant parameter and the reduce
+Hubble constant, respectively. 
+With these parameters the mass of an individual simulation particle
+corresponds to $3.41\times 10^{10}$\hMsun.
 
-We build a sample of all halos located in a cubic sub-volume of $100$
-\hMpc on a side centered on the most massive halo in the simulation at
-$z=0$ which corresponds to the \texttt{miniMDR1} tables in the
-database.
-From this sample we select all the halos at $z=0$ detected with a
-Friends-of-Friends (FoF) algorithm with masses in the interval
-$10^{11}\leq M_{\rm FoF}/\hMsun \leq 10^{15}$.
-The FoF algorithm used with a linking length of $0.17$ times the average
-inter-particle distance. This choice translates into an overdensity
-$\Delta_h\sim 400-700$ dependent on the halo concentration
-\citep{More2011}.
-Finally, for each FoF halo we select all the particles that
-belong to it.
+{\bf descripcion del halo finder}
 
-From this set of particles we follow the procedure spelled out in
-Section \ref{sec:method} with $\Delta_h=740$  (corresponding to $200$
-times the critical density) to find the halo concentration.
-This choice makes that our overdensities are fully included inside the
-original FoF particle group.
-We only report results from overdensities with at least $100$ particles.
-Finally, we store the values obtained for the virial radius, virial
-mass and concentration.
+{\bf descripcionde separacion por grado de relajacion}.
 
+
+{\bf describcion de los resultados}
 Figure \ref{fig:mdv} shows the results that compare the concentration
 values in the simulated halos from the three different methods.
-At zeroth order the results are consistent.
-However, the concentration values from the velocity method produces
-concentrations that are $XXX$ times larger on average than the results
-from our method.
-On the other hand, the concentrations from the velocity method are
-$XXX$ times lower than in our method.
-
-%Running another test with halos whose concentrations vary as a normal
-%distribution of variance ${\sigma}^2$ we found that the concentrations
-%obtained by the method of circular velocity are a 35\% greater than
-%the ones obtained by the density method. However the concentrations
-%obtained by the velocity method are barey higher (around 2\% or 3\%)
-%than the ones obtained by our method. We did not find any significant
-%variation in the concentration values obtained by any method by
-%changing ${\sigma}^2$ in contrast with FIXME.
-
-
-Figure \ref{fig:concentration} shows the mass-concentration
-relationship from the N-body data with the results of the three
-different methods.
-The central lines correspond the median and the
-shadowed region indicates the quartiles.
-In this relationship our methods represents a compromise between the
-velocity and density methods.
-The slope is flatter and the overall normalization is below the
-velocity method and above the density.
-We also note that at high masses ($M>10^{14}\hMsun$) our method
-and the velocity method show a reasonable agreement within the
-uncertainties.
-
 
 
 
