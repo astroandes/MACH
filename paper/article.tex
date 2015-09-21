@@ -98,12 +98,12 @@ cosmological parameters and is self-similar for different spatial
 scales after an adequate re-scaling is applied. 
 \citep{NFW,Taylor2001}
 
-One the most popular parameterization for a halo radial density
-distribution is known as the Navarro-Frenk-White (NFW) profile
+One the most popular parameterization for a dark matter halo radial density
+distribution is the Navarro-Frenk-White (NFW) profile
 \citep{NFW}.
-This profile is a  double power law in radius, where the transition break
+This profile is a double power law in radius, where the transition break
 happens at the so-called scale radius $r_s$.
-The ratio between the scale radius and the virial radius, $R_v$ which
+The ratio between the scale radius and the virial radius $R_v$, which
 defines a natural scale for the halo, is known as the concentration
 $c=R_v/r_s$. 
 Simulations show that the concentration is a strong function of halo mass and
@@ -122,10 +122,10 @@ halos.
 
 
 Observationally, the relationship between halo mass and concentration
-could provides a potential test of LCDM on galactic scales.
-With this promise a great deal of effort has been
+could provide a potential test of LCDM on galactic scales.
+For this motivation a great deal of effort has been
 invested in calibrating this relationship with simulations
-\citep{Neto2007,Duffy2008,Munoz2011,Prada2012,Ludlow2014} but also
+\citep{Neto2007,Duffy2008,Munoz2011,Prada2012,Ludlow2014} and 
 finding the best possible way to constraint it with observations
 \citep{Buote2007,Comerford2007,Mandelbaum2008,Giocoli2014,Foex2014,Shan2015}.
 
@@ -139,20 +139,18 @@ function of the radius.
 A second method uses an analytic property of the
 NFW that relates the maximum of the ratio of the circular velocity to
 the virial velocity.
-In this method the user estimates this ratio as a function of radius
-to determine its maxium value.
-Then, the user can take this value to find the roots of an equation
-which represent the concentration parameter.
+The concentration can be then found as the root of an algorithmnic
+equation dependent on this maximum value.
 
-The first method is straightforward to apply, but it has two
+The first method is straightforward to apply but presents two
 disadvantages.
 First, it requires a large number of particles in
 order to have a proper density estimate in each bin.
-This makes the method robust only when halos with at least  $10^3$
-particles are fitted.
+This makes the method robust only for halos with at least  $10^3$
+particles.
 The second problem is that there is not a way to estimate the optimal
-bin size.
-Different choices affect the results of the fit.
+bin size, different choices produce different results for the
+concentration.
 
 The second method solves the two problems mentioned above.
 It works with low particles numbers and does not involve data
@@ -165,15 +163,14 @@ yield large perturbations on the estimated concentration parameter.
 
 In this paper we propose a new method to estimate the dark matter halo
 concentration in halos obtained in numerical simulations.
-It consists in building the cumulative mass profile from the
-particle data in the N-body simulation to find the best possible
-concentration value using a Markov Chain Monte Carlo (MCMC)
-methodology by comparing the data against the analytic expectation.
+It builds the cumulative mass profile from the particle data in the
+N-body simulation to find the best possible concentration value using
+a Markov Chain Monte Carlo (MCMC) methodology.
+
 
 Our proposal has two advantages with respect to the two methods mentioned
-above.
-First, it does not involve data binning.
-Second, it does not throw away data points.
+above. 
+It does not involve data binning and does not throw away data points.
 Furthermore, the MCMC approach allows for an straightforward
 estimation of the uncertainties in the concentration parameter, and
 inclusion of informative priors.
