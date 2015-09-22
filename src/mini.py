@@ -1,15 +1,15 @@
 import numpy as np, emcee
 import sys, os
+from time import clock
 
 def nfw_log_mass(log_r,log_c):
-    return np.log((np.log(1.0+np.exp(logc_+log_r))-np.exp(log_c+log_r)/(1.0+np.exp(log_c+log_r)))/(np.log(1.0+np.exp(log_c))-np.exp(log_c)/(1.0+np.exp(log_c))))
+    return np.log((np.log(1.0+np.exp(log_c+log_r))-np.exp(log_c+log_r)/(1.0+np.exp(log_c+log_r)))/(np.log(1.0+np.exp(log_c))-np.exp(log_c)/(1.0+np.exp(log_c))))
 
 def log_likelihood(log_c,log_r,log_m):
     if log_c >= 0:
         s = np.sum(log_m-nfw_log_mass(log_r,log_c))
         return -.5*s*s
-    else:
-        return -np.inf
+    return -np.inf
 
 def center(data):
     n = len(data)
@@ -36,6 +36,7 @@ def main():
         n_walkers = 2
 
         for filename in directory_list:
+            t_init = clock()
             data = np.loadtxt(filename,delimiter=',')
             #x_center,y_center,z_center = center(data)
             x_center,y_center,z_center = 0,0,0
@@ -61,17 +62,20 @@ def main():
             log_r,log_m = np.log(r),np.log(m)
             del m,r
 
-            position = np.linspace(np.log(guess),np.log(2*guess),n_walkers)
-            position = [[x] for x in position]
-
+            position = np.linspace(np.log(guess),np.log(2*guess),n_walkers).reshape((n_walkers,1))
+            
             sampler = emcee.EnsembleSampler(n_walkers, n_dimensions, log_likelihood, args=(log_r, log_m),threads=8)
             sampler.run_mcmc(position, 500)
-            chain = sampler.flatchain
+            chain = np.exp(sampler.flatchain)
+            
             c_low,c_mid,c_high = np.percentile(chain,[16,50,84])
             del sampler, chain
+            
+            interval = clock()-t_init
+            name = filename.split('/')[-1]
+            print(name,c_low,c_mid,c_high,n_particles,interval)
 
-            print(filename,str(c_low),str(c_mid),str(c_high))
-            results.append([filename,str(c_low),str(c_mid),str(c_high)])
+            results.append([name,str(c_low),str(c_mid),str(c_high),str(n_particles),str(interval)])
             del c_low,c_mid,c_high
 
     finally:
