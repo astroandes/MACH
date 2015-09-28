@@ -177,28 +177,11 @@ inclusion of informative priors.
 
 %%%
 
+
+
 \section{Basic properties of the NFW density profile}
 \label{sec:basics}
 
-\begin{figure*}
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{nfw_normalized.pdf}
-  \includegraphics[width=0.48\textwidth]{vel_normalized.pdf}
-\end{center}
-\caption{Dimensionless mass (left) and velocity (right) profiles as a
-  function of the dimensionless radius for different concentration
-  values. \label{fig:profiles}}
-\end{figure*}
-
-\begin{figure*}
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{dv_dx.pdf}
-  \includegraphics[width=0.48\textwidth]{zeros.pdf}
-\end{center}
-\caption{Dimensionless derivative of the velocity profile as a
-  function of the dimensionless radius for different concentration
-  values. \label{fig:profiles}}
-\end{figure*}
 
 \subsection{Density profile}
 
@@ -376,6 +359,19 @@ concentration and  its associated uncertainty.
 \section{Results}
 \label{sec:results}
 
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.75\textwidth]{error.pdf}
+\end{center}
+\caption{Average value of the relative error in the concentration
+  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
+  the set of mock halos. Different symbols represent different
+  methods. Our method provide the most accurate estimate at fixed
+  particle number $N$.
+    \label{fig:error}}
+\end{figure*}
+
+
 In this Section we present the results of applying our method on two
 different halo samples.
 
@@ -393,7 +389,10 @@ methods we have to fit the data.
 We also estimate the possible impact of the different methods in
 estimating the mass-concentration relationship from simulations.
 
-\subsection{Tests on Mock Halos}
+
+
+
+\subsection{Mock Halos}
 
 The method we use to generate the halos is based on the integrated
 mass profile.
@@ -435,86 +434,10 @@ D=(c_{in}-c_{out})/c_{in}.
 \label{eq:D}
 \end{equation}
 
-\subsubsection{The impact of particle number}
 
-\begin{figure}
-\begin{center}
-  \includegraphics[width=0.50\textwidth]{mock_percentual_diff.pdf}
-\end{center}
-\caption{Cumulative distribution of the fractional difference, $D$, between
-  the input concentration in the mock halo generator, $c_{in}$ and the
-  measurement by our MCMC code, $c_{out}$. Each curve corresponds to
-  halos generated with a different number of particles, $N$.
-    \label{fig:results_mocks}}
-\end{figure}
-
-Figure \ref{fig:results_mocks} shows the integrated distribution for
-$D$ for the fits using our method, split into four different groups
-according the particle number.
-From this Figure the first immediate
-conclusion is that increasing the number of particles increases the
-chances to recover the input values.
-
-We believe that the main effect that contributes to this trend
-is that the particle that our algorithm finds to be the halo center
-(where the potential is minimum) gets closer to the original
-geometrical center (where no particle sits by construction) used to
-generate the halo.  Poisson noise makes this center fluctuate,
-changing the numerical radial profile from the analytic input.
-
-For particle number of $20$ the offset between the input and output
-concentration can be as large as $20\%$, with a slight bias around
-$-0.05\%$, i.e. the output concentration is biased towards lower
-values than the input.
-For particle numbers of $2000$ most of the offsets fall below $5\%$,
-with a clear peak around $0\%$ indicating that any appreciable bias is
-absent.
-
-
-\subsubsection{The impact of the input concentration}
-
-\begin{figure*}
-  \includegraphics[width=0.45\textwidth]{mock_percentual_diff_conc_20.pdf}
-  \includegraphics[width=0.45\textwidth]{mock_percentual_diff_conc_20000.pdf}
-\caption{Cumulative distribution of the fractional difference, $D$, between
-  the input concentration in the mock halo generator, $c_{in}$ and the
-  measurement by our MCMC code, $c_{out}$. Each curve corresponds to
-  halos generated with an input concentration in a different range for
-  a number of particles $N=20$ (right panel) and $N=20000$ (left panel).
-    \label{fig:results_mocks_conc}}
-\end{figure*}
-
-Figure \ref{fig:results_mocks_conc} shows the integrared distribution
-for $D$ for the fits using our method, split into different input
-concentrations for two different particle numbers describing the mock
-halos. 
-On the left we have the case of halos sampled with $N=20$ particles
-and on the right we have show results for halos with $N=20000$
-particles. 
-The scale for $D$ varies by almost three orders of magnitude.
-The accuracy of our method increases with larger values of $N$. 
-This was already seen in the previous section. 
-We explore the exact dependence of $D$ with the number of particles in
-the next section when we compare the accuracy of different methods.
-
-There are two interesting in Figure \ref{fig:results_mock_conc}. The
-first is that our method tends to underestimate the concentration
-and the second is that the degree of this underestimation increases
-with the input halo concentration.
 
 \subsubsection{The accuracy of different methods}
 
-\begin{figure}
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{error.pdf}
-\end{center}
-\caption{Average value of the relative error in the concentration
-  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
-  the set of mock halos. Different symbols represent different
-  methods. Our method provide the most accurate estimate at fixed
-  particle number $N$.
-    \label{fig:error}}
-\end{figure}
 
 
 Using this data-set we also compare our method against the other two
@@ -556,7 +479,77 @@ $0.5\%$ for $20000$ particle halos. The method based on the direct density
 fit shows the lowest accuracy for a low particle number and an intermediate
 accuracy between the other two methods for a high particle number.
 
-\subsection{Tests on N-body data}
+
+\subsubsection{The impact of particle number}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.50\textwidth]{mock_percentual_diff.pdf}
+\end{center}
+\caption{Cumulative distribution of the fractional difference, $D$, between
+  the input concentration in the mock halo generator, $c_{in}$ and the
+  measurement by our MCMC code, $c_{out}$. Each curve corresponds to
+  halos generated with a different number of particles, $N$.
+    \label{fig:results_mocks}}
+\end{figure}
+
+Figure \ref{fig:results_mocks} shows the integrated distribution for
+$D$ for the fits using our method, split into four different groups
+according the particle number.
+From this Figure the first immediate
+conclusion is that increasing the number of particles increases the
+chances to recover the input values.
+
+We believe that the main effect that contributes to this trend
+is that the particle that our algorithm finds to be the halo center
+(where the potential is minimum) gets closer to the original
+geometrical center (where no particle sits by construction) used to
+generate the halo.  Poisson noise makes this center fluctuate,
+changing the numerical radial profile from the analytic input.
+
+For particle number of $20$ the offset between the input and output
+concentration can be as large as $20\%$, with a slight bias around
+$-0.05\%$, i.e. the output concentration is biased towards lower
+values than the input.
+For particle numbers of $2000$ most of the offsets fall below $5\%$,
+with a clear peak around $0\%$ indicating that any appreciable bias is
+absent.
+
+
+\subsubsection{The impact of the input concentration}
+
+\begin{figure}
+  \includegraphics[width=0.45\textwidth]{mock_percentual_diff_conc_20.pdf}
+  \includegraphics[width=0.45\textwidth]{mock_percentual_diff_conc_20000.pdf}
+\caption{Cumulative distribution of the fractional difference, $D$, between
+  the input concentration in the mock halo generator, $c_{in}$ and the
+  measurement by our MCMC code, $c_{out}$. Each curve corresponds to
+  halos generated with an input concentration in a different range for
+  a number of particles $N=20$ (right panel) and $N=20000$ (left panel).
+    \label{fig:results_mocks_conc}}
+\end{figure}
+
+Figure \ref{fig:results_mocks_conc} shows the integrared distribution
+for $D$ for the fits using our method, split into different input
+concentrations for two different particle numbers describing the mock
+halos. 
+On the left we have the case of halos sampled with $N=20$ particles
+and on the right we have show results for halos with $N=20000$
+particles. 
+The scale for $D$ varies by almost three orders of magnitude.
+The accuracy of our method increases with larger values of $N$. 
+This was already seen in the previous section. 
+We explore the exact dependence of $D$ with the number of particles in
+the next section when we compare the accuracy of different methods.
+
+There are two interesting in Figure \ref{fig:results_mock_conc}. The
+first is that our method tends to underestimate the concentration
+and the second is that the degree of this underestimation increases
+with the input halo concentration.
+
+
+
+\subsection{N-body data}
 \label{sec:data}
 \begin{figure*}
   \begin{center}
@@ -597,7 +590,7 @@ values in the simulated halos from the three different methods.
 
 \begin{figure*}
 \begin{center}
-  \includegraphics[width=0.90\textwidth]{concentration.pdf}
+  \includegraphics[width=0.75\textwidth]{concentration.pdf}
 \end{center}
 \caption{Mass-concentration relationship for the three different
   methods used on the same cosmological N-body data. The central lines
@@ -622,7 +615,20 @@ Finally, we applied our method to halos extracted from a cosmological
 N-body simulation to estimate the impact of our method on the mass
 concentration relationship. 
 
-Comparison against other methods.\\
+
+The first benchmark was performed on mock halos generated with known
+concentration values for different particle numbers. 
+For all methods, the accuracy in retrieveing the input concentration
+increases with the number of particles as summarized in Figure \ref{fig:error}.
+Our method systematically shows smaller errors in the retrieved values
+compared to the other two methods, going from $10\%$ for halos with
+$20$ particles down to $0.01\%$ for halos with $2\times 10^4$ particles. 
+In our method the average error on the retrieved values decreases with
+the number of particles as $\langle|D|\rangle\propto N^{-1}$.
+The error in density method initially behaves as $\langle|D|\rangle\propto
+N^{-3/2}$ but at $N=2\times 10^3$ it saturates to $0.1\%$. 
+For the velocity method the error behaves closely to
+$\langle|D|\rangle\propto N^{-1/2}$
 
 The effect of the number of particles.\\
 
@@ -635,5 +641,30 @@ Comment and future.\\
 
 
 \bibliography{references}
+
+\appendix
+
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{nfw_normalized.pdf}
+  \includegraphics[width=0.48\textwidth]{vel_normalized.pdf}
+\end{center}
+\caption{Dimensionless mass (left) and velocity (right) profiles as a
+  function of the dimensionless radius for different concentration
+  values. \label{fig:profiles}}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{dv_dx.pdf}
+  \includegraphics[width=0.48\textwidth]{zeros.pdf}
+\end{center}
+\caption{Dimensionless derivative of the velocity profile as a
+  function of the dimensionless radius for different concentration
+  values. \label{fig:profiles}}
+\end{figure*}
+
+
+
 
 \end{document}
