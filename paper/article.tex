@@ -26,7 +26,7 @@
 \newcommand{\kms}{{\ifmmode{{\mathrm{\,km\ s}^{-1}}}\else{\,km~s$^{-1}$}\fi}}
 % definition to produce a "less than or similar to" symbol
 \def\lsim{~\rlap{$<$}{\lower 1.0ex\hbox{$\sim$}}}
-% definition to produce a "greater than or similar to" symbol
+% definition to produce a "greater than or similar to" symbolxs
 \def\gsim{~\rlap{$>$}{\lower 1.0ex\hbox{$\sim$}}}
 %@arxiver{fig3.pdf,fig11a.pdf, fig11b.pdf}
 \begin{document}
@@ -628,13 +628,20 @@ the number of particles as $\langle|D|\rangle\propto N^{-1}$.
 The error in density method initially behaves as $\langle|D|\rangle\propto
 N^{-3/2}$ but at $N=2\times 10^3$ it saturates to $0.1\%$. 
 For the velocity method the error behaves closely to
-$\langle|D|\rangle\propto N^{-1/2}$
+$\langle|D|\rangle\propto N^{-1/2}$.
+We also gauged the effect of different concentration parameters at
+fixed particle numbers. 
+We found larger offsets for larger input concentrations. 
+The offset goes in the sense that the measured concentration tends to
+be underestimated.
+Nevertheless, the dominant effect on the measurement is the particle
+number.
 
-The effect of the number of particles.\\
+We used a N-body cosmological simulation to test the impact of our
+method on the mass-concentration relationship.
+Although the three methods are in general agreement there are
+noticeable differences in the mass concentration relationship.
 
-The effect of the input concentration.\\
-
-The impact on the mass-concentration relationship.\\
 
 Comment and future.\\
 
