@@ -1,5 +1,5 @@
 LATEX = pdflatex
-MAIN  = article
+MAIN  = paper
 
 all: $(MAIN).pdf
 
@@ -19,8 +19,7 @@ $(MAIN)_diff.pdf: $(MAIN).tex
 	$(LATEX) $(MAIN)_diff.tex 
 
 clean:
-	rm -f $(MAIN).{aux,bbl,ps,pdf,dvi,blg,log,out}
-	rm -f $(MAIN)_diff.{aux,bbl,ps,pdf,dvi,blg,log,out}
+	rm -f $(MAIN).pdf $(MAIN).out $(MAIN).bbl $(MAIN).aux
 
 view: 
 	open $(MAIN).pdf &

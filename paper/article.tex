@@ -602,47 +602,6 @@ values in the simulated halos from the three different methods.
 
 
 
-\section{Conclusions}
-\label{sec:conclusions}
-
-In this paper, we presented a new method to estimate the
-concentration of dark matter halos in N-body simulations. 
-We tested our method on mock halo data to study the impact of total
-number of particles and input concentration on the retrieved values.
-We compared these results against two other methods commonly used in
-the literature to estimate concentrations.
-Finally, we applied our method to halos extracted from a cosmological
-N-body simulation to estimate the impact of our method on the mass
-concentration relationship. 
-
-
-The first benchmark was performed on mock halos generated with known
-concentration values for different particle numbers. 
-For all methods, the accuracy in retrieveing the input concentration
-increases with the number of particles as summarized in Figure \ref{fig:error}.
-Our method systematically shows smaller errors in the retrieved values
-compared to the other two methods, going from $10\%$ for halos with
-$20$ particles down to $0.01\%$ for halos with $2\times 10^4$ particles. 
-In our method the average error on the retrieved values decreases with
-the number of particles as $\langle|D|\rangle\propto N^{-1}$.
-The error in density method initially behaves as $\langle|D|\rangle\propto
-N^{-3/2}$ but at $N=2\times 10^3$ it saturates to $0.1\%$. 
-For the velocity method the error behaves closely to
-$\langle|D|\rangle\propto N^{-1/2}$.
-We also gauged the effect of different concentration parameters at
-fixed particle numbers. 
-We found larger offsets for larger input concentrations. 
-The offset goes in the sense that the measured concentration tends to
-be underestimated.
-Nevertheless, the dominant effect on the measurement is the particle
-number.
-
-We used a N-body cosmological simulation to test the impact of our
-method on the mass-concentration relationship.
-Although the three methods are in general agreement there are
-noticeable differences in the mass concentration relationship.
-
-
 Comment and future.\\
 
 

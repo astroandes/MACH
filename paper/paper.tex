@@ -533,6 +533,111 @@ accuracy between the other two methods for a high particle number.
 
 \subsection{Halos from a cosmological simulation}
 
+
+\label{sec:data}
+\begin{figure*}
+  \begin{center}
+    \includegraphics[width=0.33\textwidth]{mass-velocity.pdf}
+    \includegraphics[width=0.33\textwidth]{mass-density.pdf}
+    \includegraphics[width=0.33\textwidth]{density-velocity.pdf}
+  \end{center}
+  \caption{Comparison between the concentrations measured by our
+    method and the maximum velocity (left) and density (middle)
+    methods. The line indicates the equal value between the two
+    techniques. The right panel compares the results of the maximum
+    velocity and density methods.
+  \label{fig:mdv}}
+\end{figure*}
+
+
+We use data from the MultiDark cosmological simulation that follows
+the non-linear evolution of a dark matter density field sampled with
+$2048^3$ particles over a cubic box of $1000$ \hMpc on a side. 
+The data is publicly available through \url{http://www.cosmosim.org/}.
+More details about the structure of the database and the simulation
+can be found in \citep{2013AN....334..691R}.
+
+We build a sample of all halos located in a cubic sub-volume of $100$
+\hMpc on a side centered on the most massive halo in the simulation at
+$z=0$ which corresponds to the \texttt{miniMDR1} tables in the
+database.
+From this sample we select all the halos at $z=0$ detected with a
+Friends-of-Friends (FoF) algorithm with masses in the interval
+$10^{12}\leq M_{\rm FoF}/\hMsun \leq 10^{15}$.
+The FoF algorithm used with a linking length of $0.17$ times the average
+inter-particle distance. This choice translates into an overdensity
+$\Delta_h\sim 400-700$ dependent on the halo concentration
+\citep{More2011}.
+Finally, we select from the database all the particles that belong to
+each FoF group.
+
+From this set of particles we follow the procedure spelled out in
+Section \ref{sec:method} with $\Delta_h=740$  (corresponding to $200$
+times the critical density) to select an spherical region that we
+redefine to be our halo.
+This choice makes that our overdensities are fully included inside the
+original FoF particle group.
+On the interest of providing a fair comparison against the density
+method we only report results from overdensities with at least $200$
+particles. 
+
+Figure \ref{fig:concentration} shows the results of the
+mass-concentration relationship.
+
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.75\textwidth]{concentration.pdf}
+\end{center}
+\caption{Mass-concentration relationship for the three different
+  methods used on the same cosmological N-body data. 
+  The lines correspond to the median concentration values in each bin.
+    \label{fig:concentration}}
+\end{figure*}
+
+
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+In this paper, we presented a new method to estimate the
+concentration of dark matter halos in N-body simulations. 
+We tested our method on mock halo data to study the impact of total
+number of particles and input concentration on the retrieved values.
+We compared these results against two other methods commonly used in
+the literature to estimate concentrations.
+Finally, we applied our method to halos extracted from a cosmological
+N-body simulation to estimate the impact of our method on the mass
+concentration relationship. 
+
+
+The first benchmark was performed on mock halos generated with known
+concentration values for different particle numbers. 
+For all methods, the accuracy in retrieveing the input concentration
+increases with the number of particles as summarized in Figure \ref{fig:error}.
+Our method systematically shows smaller errors in the retrieved values
+compared to the other two methods, going from $10\%$ for halos with
+$20$ particles down to $0.01\%$ for halos with $2\times 10^4$ particles. 
+In our method the average error on the retrieved values decreases with
+the number of particles as $\langle|D|\rangle\propto N^{-1}$.
+The error in density method initially behaves as $\langle|D|\rangle\propto
+N^{-3/2}$ but at $N=2\times 10^3$ it saturates to $0.1\%$. 
+For the velocity method the error behaves closely to
+$\langle|D|\rangle\propto N^{-1/2}$.
+We also gauged the effect of different concentration parameters at
+fixed particle numbers. 
+We found larger offsets for larger input concentrations. 
+The offset goes in the sense that the measured concentration tends to
+be underestimated.
+Nevertheless, the dominant effect on the measurement is the particle
+number.
+
+We used a N-body cosmological simulation to test the impact of our
+method on the mass-concentration relationship.
+Although the three methods are in general agreement there are
+noticeable differences in the mass concentration relationship.
+
+
+
 \bibliographystyle{mn2e}
 \bibliography{references}
 
