@@ -283,21 +283,22 @@ The NFW density profile can be written as
 where $\rho_c\equiv 3H^2/8\pi G$ is the Universe critical density, $H$
 is the Hubble constant, $G$ and the universal gravitational constant,
 $\delta_c$ is the halo dimensionless characteristic density and $r_s$
-is the scale radius. This radius marks {\bf the point where the
-  logarithmic slope of the density profile is equal to -2} marking the
-transition between the power law scaling $\rho\propto r^{-1}$ for
-$r<r_s$ and $\rho\propto r^{-3}$ for $r>r_s$.
+is the scale radius. 
+This radius marks the point where the logarithmic slope of the density
+profile is equal to -2, marking the transition between the power law
+scaling $\rho\propto r^{-1}$ for $r<r_s$ and $\rho\propto r^{-3}$ for
+$r>r_s$. 
 
 We define the virial radius of a halo, $r_v$, as the boundary of the
 spherical volume that encloses a density of $\Delta_h$ times the mean
-density of the Universe.  The corresponding mass $M_{v}$, the virial
-mass, can be written as $M_{v} = \frac{4\pi}{3}\bar{\rho}\Delta_h
-r_v^3$.  From these virial quantities we define new dimensionless
-variables for the radius and mass $x\equiv r/r_v$ and $m\equiv
-M(<r)/M_v$.
+density of the Universe.  
+The corresponding mass $M_{v}$, the virial mass, can be written as
+$M_{v} = \frac{4\pi}{3}\bar{\rho}\Delta_h r_v^3$.  
+From these virial quantities we define new dimensionless variables for
+the radius and mass $x\equiv r/r_v$ and $m\equiv M(<r)/M_v$. 
 
 In this paper we use $\Delta_h=740$ roughly corresponding to 200 times
-the critical density {\bf at redshift z=0}.
+the critical density at redshift z=0.
 
 
 \subsection{Integrated mass profile}
@@ -325,7 +326,7 @@ A=\ln\left(1+c\right)-\left(\frac{c}{c+1}\right),
 %
 and the parameter $c$ corresponds to the concentration $c\equiv r_v/r_s$.
 
-From this normalization value and for later convenience we define the
+From this normalization and for later convenience we define the
 following function
 %
 \begin{equation}
@@ -348,8 +349,7 @@ to have:
 \begin{equation}
 v(<x)=\sqrt{\frac{1}{A}\left[\frac{\ln\left(1+xc\right)}{x}-\frac{c}{xc+1}\right]},
 \end{equation}
-
-
+%
 This normalized profile always shows a maximum provided that the
 concentration is larger than $c>2$.
 It is possible to show that for the NFW profile the maximum is
@@ -361,54 +361,55 @@ provided by
 \label{eq:max_v}
 \end{equation}
 where $x_{\rm max}=2.163$ \citep{Klypin2014} and the function $f(x)$
-was defined in Eq. (\ref{eq:f_NFW}).
+correspondes to the definition in Eq. (\ref{eq:f_NFW}).
 
 \section{Methods to estimate the concentration from N-body simulations}
 \label{sec:method}
 
 \subsection{Estimates from the density and velocity profiles}
-{\bf To date,} there are two standard methods to estimate
-concentrations in dark matter halos extracted from N-body simulations.
 
-The first method tries to directly estimate the density profile.  It
-takes all the particles in the halo and bins them in the logarithm of
-the radial coordinate from the halo center.  Then, it estimates the
-density in each logarithmic bin counting the particles and dividing by
-the corresponding shell volume.  At this point is is possible to make
-a direct fit to the density as a function of the radial coordinate.
-This method has been {\bf used broadly for more than two decades} to
-study the mass-concentration-redshift relation of dark matter halos
-using the Millennium Simulation Series.
+To date, there are two standard methods to estimate concentrations in
+dark matter halos extracted from N-body simulations. 
 
-{\it no veo la necesidad de citar el ``trabajo mas'' reciente que usa
-  el metodo, cuando ha sido usado durante mas de dos decadas!}
+The first method tries to directly estimate the density profile.  
+It takes all the particles in the halo and bins them in the logarithm of
+the radial coordinate from the halo center.  
+Then, it estimates the density in each logarithmic bin counting the
+particles and dividing by the corresponding shell volume.  
+At this point is possible to make a direct fit to the density as a function of the radial coordinate.
+This method has been used broadly for more than two decades to study
+the mass-concentration-redshift relation of dark matter halos.
  
-A second method uses the circular velocity profile.  It finds the
-value of $x$ for which the normalized circular velocity $v(<x)$ shows
-a maximum.  Using this value it solves numerically for the
-corresponding value of the concentration using Eq. (\ref{eq:max_v}).
+A second method uses the circular velocity profile.  
+It finds the value of $x$ for which the normalized circular velocity
+$v(<x)$ shows a maximum.  
+Using this value it solves numerically for the corresponding value of
+the concentration using Eq. (\ref{eq:max_v}). 
 This method has been most recently used by \cite{Klypin2014} to study
 the mass-concentration-redshift relation using the Multidark
-Simulation Suite.
+Simulation Suite. 
 
 
 \subsection{Our proposal: estimate from the integrated mass profile}
-Our method uses the integrated mass profile.  First we define the
-center of the halo to be at the position of the particle with the
-lowest gravitational potential.  Then we rank the particles by their
-increasing radial distance from the center.  From this ranked list of
-$i=1,N$ particles, the total mass at a radius $r_i$ is $M_i=i\times
-m_p$, where $r_i$ is the position of the $i$-th particle and $m_p$ is
-the mass of a single computational particle. In this process we
-discard the particle at the center.
+
+Our method uses the integrated mass profile.  
+First we define the center of the halo to be at the position of the
+particle with the lowest gravitational potential.  
+Then we rank the particles by their increasing radial distance from
+the center. 
+From this ranked list of $i=1,N$ particles, the total mass at a radius
+$r_i$ is $M_i=i\times m_p$, where $r_i$ is the position of the $i$-th
+particle and $m_p$ is the mass of a single computational particle. In
+this process we discard the particle at the center. 
 
 We divide the enclosed mass mass $M_i$ and the radii $r_i$ by their
 virial values to obtain the dimensionless variables $m_i$ and $x_i$.
 Once the mass profile is expressed in dimensionless variables the
-concentration is the only free parameter. We use an Affine Invariant
-Markov chain Monte Carlo implemented in the python module {\em emcee}
-\citep{emcee} to sample the likelihood function distribution defined
-by ${\cal L}(c)\propto \exp(-\chi^2(c)/2)$ where the $\chi^2(c)$ is
+concentration is the only free parameter. 
+We use an Affine Invariant Markov Chain Monte Carlo implemented in the
+python module {\em emcee} \citep{emcee} to sample the likelihood
+function distribution defined by ${\cal L}(c)\propto
+\exp(-\chi^2(c)/2)$ where the $\chi^2(c)$ is 
 written as
 
 \begin{equation}
@@ -423,7 +424,7 @@ concentration and its associated uncertainty.
 
 The construction of the numerical integrated mass profile has two
 advantages with respect to the density and velocity methods, it does
-not involve any binning (unlike the density methods ) and the sampling
+not involve any binning (unlike the density methods) and the sampling
 method uses the information from all the particles in the halo (unlike
 the velocity method).
 
@@ -444,53 +445,6 @@ and also estimate the impact on the mass-concentration relationship.
 
 \subsection{Mock halo sample}
 
-The method we use to generate the mock halos is based on the
-integrated mass profile.  We start by fixing the desired concentration
-$c$ and total number of particles $N$ in the mock halo.  With these
-values we define the mass element as $\delta m = 1/M$, corresponding
-to the mass of each particle such that the total mass is one.  Then
-for each particle, $i=1,\ldots,N$, we find the value of $r_i$ such
-that the difference
-%
-\begin{equation}
-m(<r_i;c) - i \cdot \delta m
-\end{equation}
-%
-is zero using Ridders' method.
-
-The value of $r_i$ is the radius of the $i$-th particle of the mock
-halo.  Then we generate random polar and azimuthal angles $\theta$ and
-$\phi$ for each particle to ensure spherical symmetry.  Finally these
-three spherical coordinates are transformed into Cartesian coordinates
-$(r,\theta,\phi) \rightarrow (x,y,z)$.
-
-We generate in total $400$ mock halos split into four different groups
-of $100$ halos each.  The four groups differ in the total number of
-particles for their halos: $20$, $200$, $2000$ and $20000$.  Inside
-each group the halos have random concentration values in the range
-$1<c<20$ with a uniform distribution.  For all these halos {\bf ww?}
-the concentration values using the density, velocity and mass methods
-described in the previous section.  We quantify the difference between
-the expected $c_{in}$ and obtained $c_{out}$ values by
-%
-\begin{equation}
-D=(c_{in}-c_{out})/c_{in},
-\label{eq:D}
-\end{equation}
-%
-and
-%
-\begin{equation}
-\avg{|D|}=\frac{1}{\left|{\cal{H}}\right|}\sum_{{\cal{H}}} |D|,
-\end{equation}
-%
-where ${\cal{H}}$ corresponds to a set of mock halos, and
-$\left|{\cal{H}}\right|$ is the number of haloes in ${\cal{H}}$. {\bf
-  The larger the value of $\avg{|D|}$, the larger the discrepace of
-  the concentrations obtained for that method}
-
-
-
 \begin{figure*}
 \begin{center}
   \includegraphics[width=0.70\textwidth]{error.pdf}
@@ -504,6 +458,61 @@ $\left|{\cal{H}}\right|$ is the number of haloes in ${\cal{H}}$. {\bf
     recuerdo!}
     \label{fig:error}}
 \end{figure*}
+
+
+The method we use to generate the mock halos is based on the
+integrated mass profile.  
+We start by fixing the desired concentration $c$ and total number of
+particles $N$ in the mock halo.  
+With these values we define the mass element as $\delta m = 1/M$, corresponding
+to the mass of each particle such that the total mass is one.   
+Then for each particle, $i=1,\ldots,N$, we find the value of $r_i$
+such that the difference 
+% 
+\begin{equation}
+m(<r_i;c) - i \cdot \delta m
+\end{equation}
+%
+is zero using Ridders' method.
+
+The value of $r_i$ is the radius of the $i$-th particle of the mock
+halo.  
+Then we generate random polar and azimuthal angles $\theta$ and
+$\phi$ for each particle to ensure spherical symmetry.  
+Finally these three spherical coordinates are transformed into
+Cartesian coordinates $(r,\theta,\phi) \rightarrow (x,y,z)$.
+
+We generate in total $400$ mock halos split into four different groups
+of $100$ halos each.  The four groups differ in the total number of
+particles for their halos: $20$, $200$, $2000$ and $20000$.  
+Inside each group the halos have random concentration values in the range
+$1<c<20$ with a uniform distribution.  
+For all these halos we find  the concentration values using the
+density, velocity and integrated mass methods described in the
+previous section.   
+
+
+We quantify the difference between the expected $c_{in}$ and measured
+$c_{out}$ values by 
+%
+\begin{equation}
+D=(c_{in}-c_{out})/c_{in},
+\label{eq:D}
+\end{equation}
+%
+and
+%
+\begin{equation}
+\avg{|D|}=\frac{1}{\left|{\cal{H}}\right|}\sum_{{\cal{H}}} |D|,
+\end{equation}
+%
+where ${\cal{H}}$ corresponds to a set of mock halos, and
+$\left|{\cal{H}}\right|$ is the number of haloes in ${\cal{H}}$. 
+  The larger the value of $\avg{|D|}$, the larger the discrepace of
+  the concentrations obtained for that method.
+
+
+
 
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
 halo particle number for the three different methods to estimate the
