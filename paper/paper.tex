@@ -106,7 +106,8 @@
 %=========================================================================
 %		FRONT MATTER
 %=========================================================================
-\title{Estimating dark matter halo concentration from the integrated mass profile}
+\title{Estimating dark matter halo concentration using the integrated
+  mass profile} 
 \author[C. Poveda, J.E. Forero-Romero, J.C. Mu\~noz-Cuartas]{
 \parbox[t]{\textwidth}{\raggedright 
   C. Poveda \thanks{cn.poveda542@uniandes.edu.co}$^{1}$
@@ -124,31 +125,42 @@ $^2$Instituto de F\'{\i}sica - FCEN, Universidad de Antioquia, Calle
 
 \begin{abstract}
 
+In a dark matter dominated Universe galaxy properties are driven by
+dark matter halo characteristics. 
+One of the key structural halo properties is the concentration. 
+[EN QUE MODELOS IMPORTA LA CONCENTRACION?]
+For these reasons there has been a lot of effort to have a reliable
+concentration estimate from N-body simulations.
 Here we show that the concentration parameter in dark matter halos from
 N-body simulations can be reliably estimated from the radially integrated mass
 profile.
-The main advantage of this method is that it uses the full
-particle information without any binning, {\bf which makes it very
-  switable in cases when resolution becomes important}. We test our
-method both on mock and N-body halos to compare it against two popular
-methods to find concentrations: maximum radial velocity measurements
-and radial particle binning to {\bf fit the density profile}. Tests on
-the mock halos show that the accuracy of our method to recover input
-concentrations varies with the halo {\bf resolution}. For halos
+The main advantage of this approach is that it uses the full
+particle information without any binning, which makes it reliable in
+cases when low numerical resolution becomes a limitation for other
+methods.   
+We show the good performance of this method by estimating halo
+concentration both on mock and N-body halos. 
+We compare these results against two other methods:
+maximum radial velocity measurements and radial particle binning to
+fit the density profile. 
+Tests on  the mock halos show that the accuracy of our method to recover input
+concentrations varies with halo resolution. For halos
 sampled with $20$ particles our method recovers the input
-concentration with $10\%$ accuracy. {\bf For the maximum radial
-  velocity method it is on the order of $20\%$ while density profile
-  methods perform worst at the low resolution limit since they require
-  at least 200 particles inside the virial radius to make a reliable
-  estimate of the density profile}. For halos with $2\times 10^4$
-particles our method achieves an accuracy of $0.01\%$ while the
-velocity and density profile methods achieve $0.1\%$ and $1\%$,
-respectively. We measure the mass-concentration relationship on N-body
+concentration with $10\%$ accuracy. 
+For the maximum radial velocity method it is on the order of $20\%$
+while density profile methods perform worst at the low resolution
+limit since they require at least 200 particles inside the virial
+radius to make a reliable estimate of the density profile. 
+For halos with $2\times 10^4$ particles our method achieves an
+accuracy of $0.01\%$ while the velocity and density profile methods
+achieve $0.1\%$ and $1\%$, respectively. 
+We measure the mass-concentration relationship on N-body
 data taking care of using halos sampled with at least $200$
 particles. We find that at low masses $10^{12}\hMsun <
 M<10^{13}\hMsun$ our method yields median concentration values lower
 by a $15\%-20\%$ compared to the velocity and density methods ({\bf
-  why?}).  At higher masses $3\times 10^{13}\hMsun < M < 2\times
+  why?}).  
+At higher masses $3\times 10^{13}\hMsun < M < 2\times
 10^{14}\hMsun$ the three methods give similar results.
 \end{abstract}
 
