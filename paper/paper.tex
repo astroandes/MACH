@@ -135,10 +135,10 @@ This has motivated the development of different algorithms to estimate
 the concentraion in N-body halos.
 Here we present a new algorithm to estimate the concentration
 based on the radially integrated mass profile
-The main advantage of this approach is that it uses the full
-particle information without any binning, which makes it reliable in
+The algorithm is easy to implement. It main advantages is that uses the full
+particle information without any binning, making it realiable in
 cases when low numerical resolution becomes a limitation for other
-methods.   
+methods. 
 We show the good performance of this method by estimating halo
 concentration both on mock and N-body halos. 
 We compare these results against two other methods:
@@ -263,9 +263,8 @@ performance both on mock halos and N-body halos.
 \label{sec:basics}
 
 Let us review first the basic properties of the NFW density profile.
-This shall help us to define our notation and review the important
-assumptions of the two different methods commonly used to measure the
-concentration to finally present the new method.
+This shall help us to define our notation.
+
 
 \subsection{Density profile}
 
@@ -281,7 +280,7 @@ is the Hubble constant, $G$ and the universal gravitational constant,
 $\delta_c$ is the halo dimensionless characteristic density and $r_s$
 is the scale radius. 
 This radius marks the point where the logarithmic slope of the density
-profile is equal to -2, marking the transition between the power law
+profile is equal to -2, the transition between the power law
 scaling $\rho\propto r^{-1}$ for $r<r_s$ and $\rho\propto r^{-3}$ for
 $r>r_s$. 
 
@@ -293,8 +292,8 @@ $M_{v} = \frac{4\pi}{3}\bar{\rho}\Delta_h r_v^3$.
 From these virial quantities we define new dimensionless variables for
 the radius and mass $x\equiv r/r_v$ and $m\equiv M(<r)/M_v$. 
 
-In this paper we use $\Delta_h=740$ roughly corresponding to 200 times
-the critical density at redshift z=0.
+In this paper we use $\Delta_h=740$, a number roughly corresponding to
+200 times the critical density at redshift z=0.
 
 
 \subsection{Integrated mass profile}
@@ -361,6 +360,9 @@ correspondes to the definition in Eq. (\ref{eq:f_NFW}).
 
 \section{Methods to estimate the concentration from N-body simulations}
 \label{sec:method}
+
+We now review the key assumptions of the different methods used
+to estimate the concentration. 
 
 \subsection{Estimates from the density and velocity profiles}
 
