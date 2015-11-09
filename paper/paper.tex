@@ -126,30 +126,24 @@ $^2$Instituto de F\'{\i}sica - FCEN, Universidad de Antioquia, Calle
 \begin{abstract}
 
 
-Galaxy properties are coupled to the structural of its dark
-matter halo host. 
-One of the key quantities is the halo density profile which, assuming
-a  Navarro-Frenk-White parameterization, can be described by the
-concentration.
-This has motivated the development of different algorithms to estimate
-the concentraion in N-body halos.
-Here we present a new algorithm to estimate the concentration
-based on the radially integrated mass profile
-The algorithm is easy to implement. It main advantages is that uses the full
-particle information without any binning, making it realiable in
-cases when low numerical resolution becomes a limitation for other
-methods. 
-We show the good performance of this method by estimating halo
+We present a new algorithm to estimate the concentration of N-body
+dark matter halos based on the radially integrated mass profile
+Its main advantage is that it uses the full particle information
+without any binning, making it realiable in  cases when low numerical
+resolution becomes a limitation for other methods.  Additionally, the
+algorithm is straightforward to implement.  
+We test the performance of this method by estimating halo
 concentration both on mock and N-body halos. 
 We compare these results against two other methods:
 maximum radial velocity measurements and radial particle binning to
 fit the density profile. 
 Tests on  the mock halos show that the accuracy of our method to recover input
-concentrations varies with halo resolution. For halos
+concentrations varies with halo resolution, outperforming the other
+two methods. For halos
 sampled with $20$ particles our method recovers the input
 concentration with $10\%$ accuracy. 
 For the maximum radial velocity method it is on the order of $20\%$
-while density profile methods perform worst at the low resolution.
+while density profile methods fail at the $100\%$ level.
 For halos with $2\times 10^4$ particles our method achieves an
 accuracy of $0.01\%$ while the velocity and density profile methods
 achieve $0.1\%$ and $1\%$, respectively. 
@@ -175,22 +169,21 @@ Methods: data analysis - numerical - N-body simulations
 In the current structure formation paradigm the properties of galaxies
 are coupled to the evolution of their dark matter (DM) hosting halo.
 This dependence has motivated the detailed study of dark matter halo
-properties defining its formation history and internal structure. 
-In particular, the DM distribution inside a halo is key to
-understand the sizes and dynamics of galaxies.
+properties such as its formation history and internal structure. 
+In particular, the sizes and dynamics of galaxies are determined by
+the DM distribution inside a halo.
 
-
-The internal matter distribution is parameterized through the density
+The internal DM distribution is parameterized through the density
 profile. 
 In a first approximation this profile is spherically symmetric and
 its density only dependens on the radial coordinate. 
 One the most popular parameterizations for DM halo radial
 density distribution is the Navarro-Frenk-White (NFW) profile
 \citep{NFW}.   
-Furthermore, if one is not interested in the very central region of the
+If one is not interested in the very central region of the
 dark matter halo (where galaxy formation takes place, and where the
 effects of baryon physics on dark matter distribution is still an
-unknown), one can assume that this profile is universal.
+unknown) one can also assume that this profile is universal.
 \citep{Navarro2010}.  
  This profile is a double power law in radius, where the transition
 break happens at the so-called scale radius, $r_s$.  
@@ -198,16 +191,15 @@ The ratio between the scale radius and the virial radius $R_v$ is
 known as the concentration $c=R_v/r_s$. 
 
 
-The NFW profile parameterization thus provides the conceptual
+The concentration of the NFW profile provides the conceptual
 framework to study simulated dark matter halos as a function of
 redshift and cosmological parameters.
-Here the central quantity is the concentration. 
 In these studies 
 \citep{Neto2007,Maccio2008,Duffy2008,Munoz2011,Prada2012,Ludlow2014} 
 the results are summarized through the
 mass-concentration relationship; that is the distribution of
 concentration values at a fixed halo mass and redshift.
-The biggest challenge in such numerical experiments is having a
+A big challenge in such numerical experiments is having a
 reliable algorithm to estimate the concentration. 
 Such an algorithm should provide unbiased results and must be robust
 when applied to simulations of different numerical resolution.  
@@ -253,7 +245,7 @@ no need to tune numerical parameters, providing a new independent
 method to estimate the concentration parameter. 
 Here we provide a detailed description of this method and a
 comparison against the two traditional methods by measuring its
-performance both on mock halos and N-body halos.
+performance both on mock and N-body halos.
 
 
 
@@ -362,20 +354,20 @@ correspondes to the definition in Eq. (\ref{eq:f_NFW}).
 \label{sec:method}
 
 We now review the key assumptions of the different methods used
-to estimate the concentration. 
+to estimate the concentration before presenting our proposal.
 
 \subsection{Estimates from the density and velocity profiles}
 
 To date, there are two standard methods to estimate concentrations in
 dark matter halos extracted from N-body simulations. 
-
 The first method tries to directly estimate the density profile.  
 It takes all the particles in the halo and bins them in the logarithm of
 the radial coordinate from the halo center.  
 Then, it estimates the density in each logarithmic bin counting the
 particles and dividing by the corresponding shell volume.  
-At this point is possible to make a direct fit to the density as a function of the radial coordinate.
-This method has been used broadly for more than two decades to study
+At this point is possible to make a direct fit to the density as a
+function of the radial coordinate. 
+This method has been broadly used for more than two decades to study
 the mass-concentration-redshift relation of dark matter halos.
  
 A second method uses the circular velocity profile.  
@@ -390,8 +382,10 @@ Simulation Suite.
 
 \subsection{Our proposal: estimate from the integrated mass profile}
 
-Our method uses the integrated mass profile.  
-First we define the center of the halo to be at the position of the
+Our method uses the integrated mass profile defined in
+Eq. (\ref{eq:profile}).
+To build it from N-body data we follow the next steps.
+First, we define the center of the halo to be at the position of the
 particle with the lowest gravitational potential.  
 Then we rank the particles by their increasing radial distance from
 the center. 
@@ -443,9 +437,9 @@ and also estimate the impact on the mass-concentration relationship.
 
 \subsection{Mock halo sample}
 
-\begin{figure*}
+\begin{figure}
 \begin{center}
-  \includegraphics[width=0.70\textwidth]{error.pdf}
+  \includegraphics[width=0.50\textwidth]{error.pdf}
 \end{center}
 \caption{Average value of the relative error in the concentration
   estimate, $\avg{|D|}$, as a function of the particle number $N$ in
@@ -455,7 +449,25 @@ and also estimate the impact on the mass-concentration relationship.
     pregunta. Yo ajusté los perfiles con menos de 200 partulas? no
     recuerdo!}
     \label{fig:error}}
+\end{figure}
+
+
+
+\label{sec:data}
+\begin{figure*}
+  \begin{center}
+    \includegraphics[width=0.32\textwidth]{conc_mass_vel.pdf}
+    \includegraphics[width=0.32\textwidth]{conc_mass_dens.pdf}
+    \includegraphics[width=0.32\textwidth]{conc_dens_vel.pdf}
+  \end{center}
+  \caption{Comparison between the concentrations measured by our
+    method and the maximum velocity (left) and density (middle)
+    methods. The line indicates the equal value between the two
+    techniques. The right panel compares the results of the maximum
+    velocity and density methods.
+  \label{fig:mdv}}
 \end{figure*}
+
 
 
 The method we use to generate the mock halos is based on the
@@ -510,6 +522,15 @@ $\left|{\cal{H}}\right|$ is the number of haloes in ${\cal{H}}$.
   the concentrations obtained for that method.
 
 
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.50\textwidth]{concentration.pdf}
+\end{center}
+\caption{Mass-concentration relationship for the three different
+  methods used on the same cosmological N-body data. 
+  The lines correspond to the median concentration values in each bin.
+  \label{fig:concentration}}
+\end{figure}
 
 
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
@@ -540,20 +561,6 @@ particle halos and $0.5\%$ for $20000$ particle halos. {\bf The method
 \subsection{Halos from a cosmological simulation}
 
 
-\label{sec:data}
-\begin{figure*}
-  \begin{center}
-    \includegraphics[width=0.33\textwidth]{conc_mass_vel.pdf}
-    \includegraphics[width=0.33\textwidth]{conc_mass_dens.pdf}
-    \includegraphics[width=0.33\textwidth]{conc_dens_vel.pdf}
-  \end{center}
-  \caption{Comparison between the concentrations measured by our
-    method and the maximum velocity (left) and density (middle)
-    methods. The line indicates the equal value between the two
-    techniques. The right panel compares the results of the maximum
-    velocity and density methods.
-  \label{fig:mdv}}
-\end{figure*}
 
 
 {\bf The results presented in the previous section show that in an
@@ -600,33 +607,24 @@ only report results from overdensities with at least $200$ particles.
 Figure \ref{fig:concentration} shows the results of the
 mass-concentration relationship.
 
-\begin{figure*}
-\begin{center}
-  \includegraphics[width=0.75\textwidth]{concentration.pdf}
-\end{center}
-\caption{Mass-concentration relationship for the three different
-  methods used on the same cosmological N-body data. 
-  The lines correspond to the median concentration values in each bin.
-  \label{fig:concentration}}
-\end{figure*}
 
 
-{\em Aqui hay algo importante que hay que entender antes de discutir
-  esta gráfica , y es la razón por la cual el metodo del perfil de
-  masa da valores de concentración tan bajos a baja masa y comparables
-  a los de los otros dos métodos a alta masa. Es importante entender
-  la razón de esto!.  Se me ocurren unas preguntas para tratar de
-  entender. \\ 1) La grafica de c-M \ref{fig:concentration} usa todos
-  los halos o solo los halos relajados? La inclusión de halos no
-  relajados introduce in bias en la mediana en Cvir, así que vale la
-  pena inclusive agregar una linea mas a la gráfica con los halos
-  relajados y sin ellos. Para los otros dos métodos ya se sabe que
-  hace la población de halos no relajados en la medida así que no creo
-  necesario agregarlas para esos métodos. \\ Hay que explicar un poco
-  mas la gráfica en el sentido de que se grafica y como se
-  calculó. mean concentration?, Median concentrations? o mean in
-  logscale?  Mas bins de cuanto? Mínimo cuantos halos por mass bin?,
-  Halos relajados en todos los casos, o indistintos?}
+%{\em Aqui hay algo importante que hay que entender antes de discutir
+%  esta gráfica , y es la razón por la cual el metodo del perfil de
+%  masa da valores de concentración tan bajos a baja masa y comparables
+%  a los de los otros dos métodos a alta masa. Es importante entender
+%  la razón de esto!.  Se me ocurren unas preguntas para tratar de
+%  entender. \\ 1) La grafica de c-M \ref{fig:concentration} usa todos
+%  los halos o solo los halos relajados? La inclusión de halos no
+%  relajados introduce in bias en la mediana en Cvir, así que vale la
+%  pena inclusive agregar una linea mas a la gráfica con los halos
+%  relajados y sin ellos. Para los otros dos métodos ya se sabe que
+%  hace la población de halos no relajados en la medida así que no creo
+%  necesario agregarlas para esos métodos. \\ Hay que explicar un poco
+%  mas la gráfica en el sentido de que se grafica y como se
+%  calculó. mean concentration?, Median concentrations? o mean in
+%  logscale?  Mas bins de cuanto? Mínimo cuantos halos por mass bin?,
+%  Halos relajados en todos los casos, o indistintos?}
 
 
 
