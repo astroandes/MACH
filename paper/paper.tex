@@ -492,14 +492,14 @@ Finally these three spherical coordinates are transformed into
 Cartesian coordinates $(r,\theta,\phi) \rightarrow (x,y,z)$.
 
 We generate in total $400$ mock halos split into four different groups
-of $100$ halos each.  The four groups differ in the total number of
-particles for their halos: $20$, $200$, $2000$ and $20000$.  
+of $100$ halos each.  
+The four groups differ in the total number of particles for their
+halos: $20$, $200$, $2000$ and $20000$.   
 Inside each group the halos have random concentration values in the range
 $1<c<20$ with a uniform distribution.  
-For all these halos we find  the concentration values using the
+We find the concentration values for all these halos using the
 density, velocity and integrated mass methods described in the
-previous section.   
-
+previous section.    
 
 We quantify the difference between the expected $c_{in}$ and measured
 $c_{out}$ values by 
@@ -517,9 +517,8 @@ and
 %
 where ${\cal{H}}$ corresponds to a set of mock halos, and
 $\left|{\cal{H}}\right|$ is the number of haloes in ${\cal{H}}$. 
-  The larger the value of $\avg{|D|}$, the larger the discrepace of
-  the concentrations obtained for that method.
-
+A large discrepacy between the estimated and input concentrations are
+quantified by a large $\avg{|D|}$.
 
 \begin{figure}
 \begin{center}
@@ -533,80 +532,85 @@ $\left|{\cal{H}}\right|$ is the number of haloes in ${\cal{H}}$.
 
 
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
-halo particle number for the three different methods to estimate the
-concentration.
+halo particle number for the three different methods.
 
 At fixed particle numbers our method always shows the lowest
-$\avg{|D|}$ values compared to the other two methods.  Its accuracy is
-on the order of $10\%$ for $20$ particles in the halo, going down to
-$0.01\%$ for halos with $20000$ particles.  The dependence of
-$\avg{|D|}$ with the particle number $N$ goes approximately as
-$\avg{|D|}\propto N^{-1/2}$, hinting that the accuracy of the method
-is related to a decrease of Poisson noise.
+$\avg{|D|}$ values compared to the other two.
+Its accuracy is on the order of $10\%$ for $20$ particles in the halo,
+decreasing to $0.01\%$ for halos with $20000$ particles.  
+The dependence of $\avg{|D|}$ with the particle number $N$
+goesapproximately as $\avg{|D|}\propto N^{-1/2}$.   
+This hints that the accuracy of the method could be due to a decrease
+of Poisson noise. 
 
 The method based on the maximum of the circular velocity shows a
-similar behaviour $\avg{|D|}\propto N^{-1/2}$.  Its accuracy is $2-5$
-times less than in our method, on the order of $20\%$ for $20$
-particle halos and $0.5\%$ for $20000$ particle halos. {\bf The method
-  based on the direct density fit shows the lowest accuracy for a low
-  particle number. As it is discussed in \citep{Munoz2011}, density
-  binning for halos with particle numbers below $\sim200$ leads to a
-  biased estimation of the mass density profile, and therefore to a
-  biased estimation of the concentration parameter. This behaviour is
-  evident in the large values of $\avg{|D|}$ for halos with number of
-  particles below ~200 and an intermediate accuracy between the other
-  two methods for a high particle number.}
+similar behaviour $\avg{|D|}\propto N^{-1/2}$.  
+Its accuracy is $2-5$ times lower than in our method, on the order of
+$20\%$ for $20$  particle halos and $0.5\%$ for $20000$ particle
+halos. 
+The method  based on the direct density fit shows the lowest accuracy for a low
+  particle number. 
+  As it is discussed in \citep{Munoz2011}, density binning for halos
+  with particle numbers below $\sim200$ leads to a biased estimation
+  of the mass density profile, and therefore to a biased estimation of
+  the concentration parameter. 
+This behaviour is evident in the large values of $\avg{|D|}$ for halos
+with number of particles below ~200 and an intermediate accuracy
+between the other two methods for a high particle number. 
 
 \subsection{Halos from a cosmological simulation}
 
+The results presented in the previous section show that in an
+idealized setup (pure NFW desity profiles, perfect spherical halos in
+total isolation) our method performs better than the other two
+methods commonly used in the literature.
 
-
-
-{\bf The results presented in the previous section show that in an
-  idealized setup (perfect spherical halos, pure NFW desity profiles,
-  total isolation) our method of the mass profile performs better than
-  the other two methods commonly used to measure concentrations in
-  simulated dark matter haos. However, actual simulated dark matter
-  halos are much more complex. They are not isolated, many of them
-  experience mergers that take them out of the equilibrium. Halos may
-  have also plenty of substructure, etc. All these effects disturb the
-  mass density profile, taking it away from the ideal NFW profile we
-  assume in this wok. In order to see the real performance of our new
-  method use it to estimate the concentration parameter in dark matter
-  halos obtained from a cosmological Nbody simulation and compare with
-  the other two calsical methods.}
+However, simulated dark matter halos in a cosmological context are
+complex. 
+They are not isolated, many of them  experience mergers that take them
+out of the equilibrium. 
+Halos may have also plenty of substructure, etc. All these effects
+disturb the mass density profile, taking it  away from the ideal NFW
+profile. 
+In order to see the completeley explore performance of our method, we use
+it to estimate the  concentration parameter in dark matter halos
+obtained from a cosmological N-body simulation and compare with the
+other two classical methods.   
+ 
 
 We use data from the MultiDark cosmological simulation that follows
 the non-linear evolution of a dark matter density field sampled with
-$2048^3$ particles over a cubic box of $1000\ \hMpc$ on a side.  The
-data is publicly available through \url{http://www.cosmosim.org/}.
+$2048^3$ particles over a cubic box of $1000\ \hMpc$ on a side.  
+The data is publicly available at \url{http://www.cosmosim.org/}.
 More details about the structure of the database and the simulation
 can be found in \citep{2013AN....334..691R}.
 
-We build a sample of all halos located in a cubic sub-volume of $100$
-\hMpc on a side centered on the most massive halo in the simulation at
-$z=0$ which corresponds to the \texttt{miniMDR1} tables in the
-database.  From this sample we select all the halos at $z=0$ detected
+%%%%%%%
+
+We use a halo sample containing all the halos located in a cubic
+sub-volume of $100$ \hMpc on a side centered on the most massive halo
+in the simulation at $z=0$  which corresponds to the \texttt{miniMDR1}
+table in the  database.  
+From this sample we select all the halos at $z=0$ detected
 with a Friends-of-Friends (FoF) algorithm with masses in the interval
-$10^{12}\leq M_{\rm FoF}/\hMsun \leq 10^{15}$.  The FoF algorithm used
-with a linking length of $0.17$ times the {\bf mean} inter-particle
-distance. This choice translates into an overdensity $\Delta_h\sim
-400-700$ dependent on the halo concentration \citep{More2011}.
+$10^{12}\leq M_{\rm FoF}/\hMsun \leq 10^{14}$.  
+The FoF algorithm used a linking length of $0.17$ times the mean
+inter-particle distance. This choice translates into an overdensity
+$\Delta_h\sim  400-700$ dependent on the halo concentration \citep{More2011}.
 Finally, we select from the database all the particles that belong to
 each FoF group.
 
 From this set of particles we follow the procedure spelled out in
 Section \ref{sec:method} with $\Delta_h=740$ (corresponding to $200$
 times the critical density) to select an spherical region that we
-redefine to be our halo.  This choice makes that our overdensities are
-fully included inside the original FoF particle group.  On the
-interest of providing a fair comparison against the density method we
-only report results from overdensities with at least $200$ particles.
+redefine to be our halo.  
+This choice makes that our overdensities are fully included inside the
+original FoF particle group.   
+On the interest of providing a fair comparison against the density method we
+only report results from overdensities with at least $200$ particles. 
 
 Figure \ref{fig:concentration} shows the results of the
 mass-concentration relationship.
-
-
 
 %{\em Aqui hay algo importante que hay que entender antes de discutir
 %  esta gráfica , y es la razón por la cual el metodo del perfil de
