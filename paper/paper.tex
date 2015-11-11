@@ -106,8 +106,8 @@
 %=========================================================================
 %		FRONT MATTER
 %=========================================================================
-\title{Estimating dark matter halo concentration using the integrated
-  mass profile} 
+\title[Halo concentration from the mass profile]{Estimating dark matter
+  halo concentration using the integrated mass profile} 
 \author[C. Poveda, J.E. Forero-Romero, J.C. Mu\~noz-Cuartas]{
 \parbox[t]{\textwidth}{\raggedright 
   C. Poveda \thanks{cn.poveda542@uniandes.edu.co}$^{1}$
@@ -124,14 +124,14 @@ $^2$Instituto de F\'{\i}sica - FCEN, Universidad de Antioquia, Calle
 \maketitle
 
 \begin{abstract}
-
-
 We present a new algorithm to estimate the concentration of N-body
-dark matter halos based on the radially integrated mass profile
+dark matter halos.
+The method uses the integrated mass profile to find the optimal
+concentration value. 
 Its main advantage is that it uses the full particle information
 without any binning, making it realiable in  cases when low numerical
-resolution becomes a limitation for other methods.  Additionally, the
-algorithm is straightforward to implement.  
+resolution becomes a limitation for other methods.  
+Additionally, the algorithm is straightforward to implement.  
 We test the performance of this method by estimating halo
 concentration both on mock and N-body halos. 
 We compare these results against two other methods:
@@ -141,19 +141,22 @@ Tests on  the mock halos show that the accuracy of our method to recover input
 concentrations varies with halo resolution, outperforming the other
 two methods. For halos
 sampled with $20$ particles our method recovers the input
-concentration with $10\%$ accuracy. 
-For the maximum radial velocity method it is on the order of $20\%$
-while density profile methods fail at the $100\%$ level.
-For halos with $2\times 10^4$ particles our method achieves an
+concentration with $10\%$ accuracy, while for the maximum radial
+velocity method it is on the order of $20\%$ 
+and density profile methods fail at the $100\%$ level.
+For halos with $2\times 10^4$ particles our method achieves a recovery
 accuracy of $0.01\%$ while the velocity and density profile methods
 achieve $0.1\%$ and $1\%$, respectively. 
-We measure the mass-concentration relationship on N-body
-data taking care of using halos sampled with at least $200$
-particles. We find that at low masses $10^{12}\hMsun <
-M<10^{13}\hMsun$ our method yields median concentration values lower
-by a $15\%-20\%$ compared to the velocity and density methods 
-At higher masses $3\times 10^{13}\hMsun < M < 2\times
-10^{14}\hMsun$ the three methods give similar results.
+We also measure the mass-concentration relationship on N-body
+data. We find that within the probed mass range ($10^{12}\hMsun <
+10^{14}\hMsun$) the three methods give consistent results within the
+statistical uncertainties.   
+We only find a small discrepancy at low masses, $M<10^{13}\hMsun$, where
+our method yields lower median concentration values by $15\%-20\%$
+compared to the velocity and density methods. 
+From these results we believe that the new method deserves to be
+included in a simulator's toolkit to probe the internal structure of
+dark matter halos.
 \end{abstract}
 
 \begin{keywords}
@@ -232,7 +235,7 @@ and above its maxima.
 Small fluctuations on the value of this maximum can yield large
 perturbations on the estimated concentration parameter.  
 
-In this paper we present a third alternative based on fitting the
+In this letter we present a third alternative based on fitting the
 integrated mass profile.
 This approach has two advantages with respect to the above mentioned
 methods.  
@@ -284,7 +287,7 @@ $M_{v} = \frac{4\pi}{3}\bar{\rho}\Delta_h r_v^3$.
 From these virial quantities we define new dimensionless variables for
 the radius and mass $x\equiv r/r_v$ and $m\equiv M(<r)/M_v$. 
 
-In this paper we use $\Delta_h=740$, a number roughly corresponding to
+In this letter we use $\Delta_h=740$, a number roughly corresponding to
 200 times the critical density at redshift z=0.
 
 
@@ -353,13 +356,11 @@ correspondes to the definition in Eq. (\ref{eq:f_NFW}).
 \section{Methods to estimate the concentration from N-body simulations}
 \label{sec:method}
 
-We now review the key assumptions of the different methods used
-to estimate the concentration before presenting our proposal.
-
 \subsection{Estimates from the density and velocity profiles}
 
 To date, there are two standard methods to estimate concentrations in
 dark matter halos extracted from N-body simulations. 
+
 The first method tries to directly estimate the density profile.  
 It takes all the particles in the halo and bins them in the logarithm of
 the radial coordinate from the halo center.  
@@ -384,21 +385,21 @@ Simulation Suite.
 
 Our method uses the integrated mass profile defined in
 Eq. (\ref{eq:profile}).
-To build it from N-body data we follow the next steps.
+We build it from N-body data following the next steps.
 First, we define the center of the halo to be at the position of the
 particle with the lowest gravitational potential.  
 Then we rank the particles by their increasing radial distance from
 the center. 
 From this ranked list of $i=1,N$ particles, the total mass at a radius
 $r_i$ is $M_i=i\times m_p$, where $r_i$ is the position of the $i$-th
-particle and $m_p$ is the mass of a single computational particle. In
-this process we discard the particle at the center. 
+particle and $m_p$ is the mass of a single computational particle. 
+In this process we discard the particle at the center. 
 
 We divide the enclosed mass mass $M_i$ and the radii $r_i$ by their
 virial values to obtain the dimensionless variables $m_i$ and $x_i$.
 Once the mass profile is expressed in dimensionless variables the
 concentration is the only free parameter. 
-We use an Affine Invariant Markov Chain Monte Carlo implemented in the
+We then use an Affine Invariant Markov Chain Monte Carlo implemented in the
 python module {\em emcee} \citep{emcee} to sample the likelihood
 function distribution defined by ${\cal L}(c)\propto
 \exp(-\chi^2(c)/2)$ where the $\chi^2(c)$ is 
@@ -414,25 +415,24 @@ the $i$ index sums over all the particles in the numerical profile.
 From the $\chi^2$ distribution we find the optimal value of the
 concentration and its associated uncertainty.
 
-The construction of the numerical integrated mass profile has two
-advantages with respect to the density and velocity methods, it does
-not involve any binning (unlike the density methods) and the sampling
-method uses the information from all the particles in the halo (unlike
-the velocity method).
-
 
 \section{Results}
 \label{sec:results}
 
-We now present the results of applying the three methods above
-mentione on two different halo samples.  The first sample is composed
-by mock halos generated to have known concentration values in perfect
-spherical symmetry following an NFW profile.  We use this sample to
-check that we can recover the expected values but also gauge the
-impact of the number of particles on the outcomes.  The second sample
-comes from a publicly available N-body cosmological simulation.  From
-this sample we quantify again the differences between all the methods
-and also estimate the impact on the mass-concentration relationship.
+We apply the three methods mentioned above on two different halo
+samples.
+The first sample is composed by mock halos generated to have known
+concentration values in perfect spherical symmetry following an NFW
+profile.    
+Using this sample we want to quantify the ability to recover the
+expected concentration as a function of particle numbe.
+The second sample comes from a publicly available N-body cosmological
+simulation.  
+In this way we test the new method on more realistic and complex
+data. 
+We summarize the results on this dataset by showing the impact on the
+mass-concentration relationship.
+
 
 
 \subsection{Mock halo sample}
@@ -631,10 +631,11 @@ mass-concentration relationship.
 \section{Conclusions}
 \label{sec:conclusions}
 
-In this paper, we presented a new method to estimate the concentration
-of dark matter halos in N-body simulations.  We tested our method on
-mock halo data to study the impact of total number of particles and
-input concentration on the retrieved values.  We compared these
+In this letter we presented a new method to estimate the concentration
+of dark matter halos in N-body simulations.  
+We tested our method on mock halo data to study the impact of total
+number of particles and input concentration on the retrieved values.  
+We compared these
 results against two other methods commonly used in the literature to
 estimate concentrations.  Finally, we applied our method to halos
 extracted from a cosmological N-body simulation to estimate the impact
