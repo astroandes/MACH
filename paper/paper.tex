@@ -444,9 +444,7 @@ mass-concentration relationship.
   estimate, $\avg{|D|}$, as a function of the particle number $N$ in
   the set of mock halos. Different symbols represent different
   methods. Our method provide the most accurate estimate at fixed
-  particle number $N$.  {\it Con respecto a esta figura tengo una
-    pregunta. Yo ajusté los perfiles con menos de 200 partulas? no
-    recuerdo!}
+  particle number $N$.  
     \label{fig:error}}
 \end{figure}
 
@@ -461,10 +459,10 @@ mass-concentration relationship.
   \end{center}
   \caption{Comparison between the concentrations measured by our
     method and the maximum velocity (left) and density (middle)
-    methods. The line indicates the equal value between the two
-    techniques. The right panel compares the results of the maximum
-    velocity and density methods.
-  \label{fig:mdv}}
+    methods. The solid line indicates the equal value between the two
+    techniques. The dashed line shows the upper 15 per cent difference
+    between two methods.
+  \label{fig:comparison}}
 \end{figure*}
 
 
@@ -614,7 +612,35 @@ original FoF particle group.
 On the interest of providing a fair comparison against the density method we
 only report results from overdensities with at least $200$ particles. 
 
-Figure \ref{fig:concentration} shows the results of the
+Figure \ref{fig:comparison} shows the comparison between the
+concentration values obtained by the three different methods. 
+The diagonal line marks a one-to-one correspondence if all the values
+were equal.
+The three methods show a broad general agreement. 
+The largest difference is present at high concentration $c>5$ where
+our method produces systematic lower values than the other two
+methods. Most of the differences are at the $20\%$ level, with some
+extreme cases for the highest concentration values with $50\%$
+differences.  The velocity and density methods produce consistent
+values within a $20\%$ scatter, only some halos with very high
+concentrations $c\sim 10$ have a $15\%$ lower concentration with the
+velocity method. 
+
+We explored halo shape and relaxation as a source of this
+differences. We found shape does not bias the concentration
+estimation; relaxation, quantified by the
+offset between the center of mass and minimum of the potential, can
+only explain at most $5\%$ of the offset between methods.  We note
+that the highest concentration values correspond to the smallest halos
+with $\sim 200$ particles, a regime where both the density and
+velocity methods are reliable only the $5\%$ in a perfect spherical
+halo.  From this we suggest that asserting with confidence the
+systematic difference between the different methods should be
+confirmed  a higher resolution simulation and larger statistics. We
+leave this comparison for future work.
+ 
+
+Figure \ref{fig:concentration} summarizes the previous results in the
 mass-concentration relationship.
 
 We find that the median concentraion can be fit by the following
@@ -626,25 +652,6 @@ c_{200} = 5.62 \left(\frac{M_{200}}{10^{12}\hMsun}\right)^{-0.061},
 which has a similar power value compared to the $-0.075$ reported by
 \citep{Prada2012}, while the normalization is $\sim 20\%$ lower
 compared to the $7.28$ value reported by the same authors. 
- 
-
-%{\em Aqui hay algo importante que hay que entender antes de discutir
-%  esta gráfica , y es la razón por la cual el metodo del perfil de
-%  masa da valores de concentración tan bajos a baja masa y comparables
-%  a los de los otros dos métodos a alta masa. Es importante entender
-%  la razón de esto!.  Se me ocurren unas preguntas para tratar de
-%  entender. \\ 1) La grafica de c-M \ref{fig:concentration} usa todos
-%  los halos o solo los halos relajados? La inclusión de halos no
-%  relajados introduce in bias en la mediana en Cvir, así que vale la
-%  pena inclusive agregar una linea mas a la gráfica con los halos
-%  relajados y sin ellos. Para los otros dos métodos ya se sabe que
-%  hace la población de halos no relajados en la medida así que no creo
-%  necesario agregarlas para esos métodos. \\ Hay que explicar un poco
-%  mas la gráfica en el sentido de que se grafica y como se
-%  calculó. mean concentration?, Median concentrations? o mean in
-%  logscale?  Mas bins de cuanto? Mínimo cuantos halos por mass bin?,
-%  Halos relajados en todos los casos, o indistintos?}
-
 
 
 \section{Conclusions}
@@ -654,11 +661,10 @@ In this letter we presented a new method to estimate the concentration
 of dark matter halos in N-body simulations.  
 We tested our method on mock halo data to study the impact of total
 number of particles and input concentration on the retrieved values.  
-We compared these
-results against two other methods commonly used in the literature to
-estimate concentrations.  Finally, we applied our method to halos
-extracted from a cosmological N-body simulation to estimate the impact
-of our method on the mass concentration relationship.
+We compared these results against two other methods commonly used in
+the literature to estimate concentrations.  Finally, we applied our
+method to halos extracted from a cosmological N-body simulation to
+estimate the impact of our method on the mass concentration relationship.
 
 
 The first benchmark was performed on mock halos generated with known
@@ -666,24 +672,12 @@ concentration values for different particle numbers.  For all methods,
 the accuracy in retrieveing the input concentration increases with the
 number of particles as summarized in Figure \ref{fig:error}.  Our
 method systematically shows smaller errors in the retrieved values
-compared to the other two methods, going from $10\%$ for halos with
-$20$ particles down to $0.01\%$ for halos with $2\times 10^4$
-particles.  In our method the average error on the retrieved values
-decreases with the number of particles as $\langle|D|\rangle\propto
-N^{-1}$.  The error in density method initially behaves as
-$\langle|D|\rangle\propto N^{-3/2}$ but at $N=2\times 10^3$ it
-saturates to $0.1\%$.  For the velocity method the error behaves
-closely to $\langle|D|\rangle\propto N^{-1/2}$.  We also gauged the
-effect of different concentration parameters at fixed particle
-numbers.  We found larger offsets for larger input concentrations.
-The offset goes in the sense that the measured concentration tends to
-be underestimated.  Nevertheless, the dominant effect on the
-measurement is the particle number.
+compared to the other two methods.
 
 We used a N-body cosmological simulation to test the impact of our
 method on the mass-concentration relationship.  Although the three
-methods are in general agreement there are noticeable differences in
-the mass concentration relationship.
+methods are in general agreement there are some noticeable differences
+in the mass concentration relationship.
 
 
 
