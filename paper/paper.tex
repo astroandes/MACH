@@ -127,21 +127,21 @@ $^2$Instituto de F\'{\i}sica - FCEN, Universidad de Antioquia, Calle
 We present a new algorithm to estimate the concentration of N-body
 dark matter halos using the integrated mass profile.
 The method uses the full particle information without any binning,
-making it realiable in cases when low numerical resolution becomes a
+making it reliable in cases when low numerical resolution becomes a
 limitation for other methods.   
 Additionally, the algorithm is straightforward to implement.  
 We test the performance of this method by estimating halo
 concentration both on mock and N-body halos. 
 We compare these results against two other methods:
 maximum radial velocity measurements and radial particle binning.
-Tests on the mock halos show that the accuracy of our method to
+Tests on the mock halos show that the accuracy of the new method to
 recover known input concentrations varies with halo resolution,
 outperforming the other two methods. 
-For halos sampled with $20$ particles our method recovers the input
+For halos sampled with $20$ particles the new method recovers the input
 concentration with $10\%$ accuracy, while for the maximum radial
 velocity method it is on the order of $20\%$ while density profile
 methods just fail at such low resolution limits.
-For halos with $2\times 10^4$ particles our method achieves a recovery
+For halos with $2\times 10^4$ particles the new method achieves a recovery
 accuracy of $0.01\%$ while the velocity and density profile methods
 achieve $0.1\%$ and $1\%$, respectively. 
 We also measure the mass-concentration relationship on N-body
@@ -150,7 +150,7 @@ We find that in the probed mass range ($10^{12}\hMsun <
 10^{14}\hMsun$) the three methods give consistent results within the
 statistical uncertainties.   
 We only find a small deviation at low masses, $M<10^{13}\hMsun$, where
-our method yields lower median concentration values by $20\%-30\%$
+the new method yields lower median concentration values by $20\%-30\%$
 compared to the velocity and density methods. 
 From these results we believe that the new method is a promising tool
 to probe the internal structure of dark matter halos.
@@ -175,7 +175,7 @@ a DM halo internal structure.
 The internal DM distribution in a halo can be parameterized through the density
 profile.  
 In a first approximation this profile is spherically symmetric and
-its density only dependens on the radial coordinate. 
+its density only depends on the radial coordinate. 
 One the most popular radial parameterizations is the
 Navarro-Frenk-White (NFW) profile 
 \citep{NFW}.   
@@ -227,7 +227,7 @@ concentration.
 The second method solves the two problems mentioned above.  
 It works with low particle numbers and does not involve data binning.  
 However, it effectively takes into account only a single data point and
-discards the behaviour of the ratio $V_{\rm circ}/V_{\rm vir}$ below
+discards the behavior of the ratio $V_{\rm circ}/V_{\rm vir}$ below
 and above its maxima.  
 Small fluctuations on the value of this maximum can yield large
 perturbations on the estimated concentration parameter.  
@@ -381,7 +381,7 @@ Simulation Suite.
 
 \subsection{Our proposal: estimate from the integrated mass profile}
 
-Our method uses the integrated mass profile defined in
+The new method uses the integrated mass profile defined in
 Eq. (\ref{eq:profile}).
 We build it from N-body data following the next steps.
 First, we define the center of the halo to be at the position of the
@@ -439,11 +439,12 @@ mass-concentration relationship.
 \begin{center}
   \includegraphics[width=0.50\textwidth]{error.pdf}
 \end{center}
+\vspace{-0.5cm}
 \caption{Average value of the relative error in the concentration
   estimate, $\avg{|D|}$, as a function of the particle number $N$ in
   the set of mock halos. Different symbols represent different
-  methods. Our method provide the most accurate estimate at fixed
-  particle number $N$.  
+  methods. The new method provides the most accurate estimate at fixed
+  particle number.  
     \label{fig:error}}
 \end{figure}
 
@@ -456,7 +457,8 @@ mass-concentration relationship.
     \includegraphics[width=0.32\textwidth]{conc_mass_dens.pdf}
     \includegraphics[width=0.32\textwidth]{conc_dens_vel.pdf}
   \end{center}
-  \caption{Comparison between the concentrations measured by our
+\vspace{-0.5cm}
+  \caption{Comparison between the concentrations measured by the new 
     method and the maximum velocity (left) and density (middle)
     methods. The solid line indicates the equal value between the two
     techniques. The dashed line shows the upper 15 per cent difference
@@ -514,20 +516,21 @@ and
 %
 where ${\cal{H}}$ corresponds to a set of mock halos, and
 $\left|{\cal{H}}\right|$ is the number of haloes in ${\cal{H}}$. 
-A large discrepacy between the estimated and input concentrations are
+A large discrepancy between the estimated and input concentrations are
 quantified by a large $\avg{|D|}$.
 
 \begin{figure}
 \begin{center}
   \includegraphics[width=0.50\textwidth]{concentration.pdf}
 \end{center}
+\vspace{-0.5cm}
 \caption{Mass-concentration relationship for the three different
   methods used on the same cosmological N-body data. 
   All halos are used regardless of their relaxation state.
   The lines correspond to the median concentration values in each mass bin.
   The shaded region presents 10 and 90 per cent spread.
   For clarity we only show the spread for the concentrations estimated
-  using our method. The other two methods have a similar spread. The
+  using the new method. The other two methods have a similar spread. The
   dotted line corresponds to fits reported by \citep{Prada2012}.
   \label{fig:concentration}}
 \end{figure}
@@ -536,7 +539,7 @@ quantified by a large $\avg{|D|}$.
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
 halo particle number for the three different methods.
 
-At fixed particle numbers our method always shows the lowest
+At fixed particle numbers the new method always shows the lowest
 $\avg{|D|}$ values compared to the other two.
 Its accuracy is on the order of $10\%$ for $20$ particles in the halo,
 decreasing to $0.01\%$ for halos with $20000$ particles.  
@@ -547,7 +550,7 @@ a decrease of Poisson noise.
 
 The method based on the maximum of the circular velocity shows a
 similar behaviour with $\avg{|D|}\propto N^{-1/3}$.  
-Its accuracy is $2-5$ times lower than in our method, on the order of
+Its accuracy is $2-5$ times lower than in the new method, on the order of
 $20\%$ for $20$ particle halos and $0.5\%$ for $20000$ particle
 halos. 
 The method  based on the direct density fit shows the lowest accuracy for a low
@@ -563,20 +566,20 @@ between the other two methods for a high particle number.
 \subsection{Halos from a cosmological simulation}
 
 The results presented in the previous section show that in an
-idealized setup (pure NFW desity profiles, perfect spherical halos in
-total isolation) our method performs better than the other two
+idealized setup (pure NFW density profiles, perfect spherical halos in
+total isolation) the new method performs better than the other two
 methods commonly used in the literature.
 
 However, simulated dark matter halos in a cosmological context are
 complex. 
 They are not isolated, many of them  experience mergers that take them
 out of the equilibrium. 
-Halos may have also plenty of substructure. All these effects
-disturb the mass density profile, taking it  away from the ideal NFW
-profile. 
-In order to explore the performance of our method in this setting, we
+Halos may have also plenty of substructure. 
+All these effects disturb the mass density profile, taking it  away
+from the ideal NFW profile. 
+In order to explore the performance of the new method in this setting, we
 use it to estimate the  concentration parameter in dark matter halos
-obtained from a cosmological N-body simulation and compare with the
+obtained from a cosmological N-body simulation and compare it with the
 other two classical methods.   
  
 We use data from the MultiDark cosmological simulation that follows
@@ -585,8 +588,6 @@ $2048^3$ particles over a cubic box of $1000\ \hMpc$ on a side.
 The data is publicly available at \url{http://www.cosmosim.org/}.
 More details about the structure of the database and the simulation
 can be found in \citep{2013AN....334..691R}.
-
-%%%%%%%
 
 We use a halo sample containing all the halos located in a cubic
 sub-volume of $100$ \hMpc\ on a side centered on the most massive halo
@@ -606,7 +607,7 @@ From this set of particles we follow the procedure spelled out in
 Section \ref{sec:method} with $\Delta_h=740$ (corresponding to $200$
 times the critical density) to select an spherical region that we
 redefine to be our halo.  
-This choice makes that our overdensities are fully included inside the
+This choice makes that the overdensities are fully included inside the
 original FoF particle group.   
 On the interest of providing a fair comparison against the density method we
 only report results from overdensities with at least $200$ particles. 
@@ -617,7 +618,7 @@ The diagonal line marks a one-to-one correspondence if all the values
 were equal.
 The three methods show a broad general agreement. 
 The largest difference is present at high concentration $c>5$ where
-our method produces systematic lower values than the other two
+the new method produces systematic lower values than the other two
 methods. Most of the differences are at the $20\%$ level, with some
 extreme cases for the highest concentration values with $50\%$
 differences.  The velocity and density methods produce consistent
@@ -626,24 +627,25 @@ concentrations $c\sim 10$ have a $15\%$ lower concentration with the
 velocity method. 
 
 We explored halo shape and relaxation as a source of this
-differences. We found shape does not bias the concentration
+differences. We found that shape does not bias the concentration
 estimation; relaxation, quantified by the
 offset between the center of mass and minimum of the potential, can
-only explain at most $5\%$ of the offset between methods.  We note
-that the highest concentration values correspond to the smallest halos
+only offset at most $5\%$ the median results between methods.  
+We note that the highest concentration values correspond to the smallest halos
 with $\sim 200$ particles, a regime where both the density and
 velocity methods are reliable only the $5\%$ in a perfect spherical
 halo.  
-This difference might actually signal a deviation from the NFW profile
-due to the low resolution in the simulation. From this we suggest that
-asserting with confidence the systematic difference between the
-different methods should be confirmed  a higher resolution simulation
-and larger statistics. We leave this comparison for future work. 
+
+The differences we find might signal a deviation from the NFW profile
+due to the low resolution of these halos. We suggest that asserting
+with confidence the systematic difference between the different
+methods should be confirmed  a higher resolution simulation and larger
+statistics. We leave this comparison for future work.  
   
 
 Figure \ref{fig:concentration} summarizes the previous results in the
 mass-concentration relationship. 
-We find that the median concentraion
+We find that the median concentration
 can be fit by the following relationship
 \begin{equation} c_{200} = 5.62 \left(\frac{M_{200}}{10^{12}\hMsun}\right)^{-0.061}, 
 \end{equation}
@@ -663,13 +665,13 @@ We compared these results against two other methods commonly used in
 the literature to estimate concentrations.  
 For all methods, the accuracy in retrieving the input concentration
 increases with the number of particles as summarized in Figure
-\ref{fig:error}.  Our method systematically overperforms the other two.
+\ref{fig:error}.  The new method systematically outperforms the other two.
 
 We also applied the method to halos extracted from a cosmological
 N-body simulation to estimate the impact on the mass concentration
 relationship. Although the three  methods are in broad agreement there
 are some noticeable differences in the mass concentration relationship
-at lower masses $<10^{13}\hMsun$ at the $20-30\% level$.
+at lower masses, $<10^{13}\hMsun$, at the $20-30\%$ level.
 
 These are encouraging results. They show that using the integrated
 mass profile to find the DM halo concentration is a tool deserving
@@ -680,7 +682,7 @@ new method.
 
 \vspace{0.5cm}
 
- The authors acknowldge the technical support from the new
+ The authors acknowledge the technical support from the new
  high-performance computing facility at Uniandes. JEF-R acknowledges
  financial support from Vicerrector\'ia de Investigaciones at Uniandes
  through a FAPA project. JCMC acknowledges financial support from
