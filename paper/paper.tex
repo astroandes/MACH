@@ -127,21 +127,20 @@ $^2$Instituto de F\'{\i}sica - FCEN, Universidad de Antioquia, Calle
 We present a new algorithm to estimate the concentration of N-body
 dark matter halos using the integrated mass profile.
 The method uses the full particle information without any binning,
-making it realiable in  cases when low numerical resolution becomes a
+making it realiable in cases when low numerical resolution becomes a
 limitation for other methods.   
 Additionally, the algorithm is straightforward to implement.  
 We test the performance of this method by estimating halo
 concentration both on mock and N-body halos. 
 We compare these results against two other methods:
-maximum radial velocity measurements and radial particle binning to
-fit the density profile. 
+maximum radial velocity measurements and radial particle binning.
 Tests on the mock halos show that the accuracy of our method to
 recover known input concentrations varies with halo resolution,
 outperforming the other two methods. 
 For halos sampled with $20$ particles our method recovers the input
 concentration with $10\%$ accuracy, while for the maximum radial
-velocity method it is on the order of $20\%$ and density profile
-methods fail at the $100\%$ level. 
+velocity method it is on the order of $20\%$ while density profile
+methods just fail at such low resolution limits.
 For halos with $2\times 10^4$ particles our method achieves a recovery
 accuracy of $0.01\%$ while the velocity and density profile methods
 achieve $0.1\%$ and $1\%$, respectively. 
@@ -151,15 +150,15 @@ We find that in the probed mass range ($10^{12}\hMsun <
 10^{14}\hMsun$) the three methods give consistent results within the
 statistical uncertainties.   
 We only find a small deviation at low masses, $M<10^{13}\hMsun$, where
-our method yields lower median concentration values by $15\%-20\%$
+our method yields lower median concentration values by $20\%-30\%$
 compared to the velocity and density methods. 
 From these results we believe that the new method is a promising tool
 to probe the internal structure of dark matter halos.
 \end{abstract}
 
 \begin{keywords}
-Cosmology: theory - large-scale structure of Universe -
-Methods: data analysis - numerical - N-body simulations
+Cosmology: theory, large-scale structure of Universe --
+Methods: data analysis, numerical 
 \end{keywords}
 
 
@@ -350,7 +349,7 @@ provided by
 \label{eq:max_v}
 \end{equation}
 where $x_{\rm max}=2.163$ \citep{Klypin2014} and the function $f(x)$
-correspondes to the definition in Eq. (\ref{eq:f_NFW}).
+corresponds to the definition in Eq. (\ref{eq:f_NFW}).
 
 \section{Methods to estimate the concentration from N-body simulations}
 \label{sec:method}
@@ -643,46 +642,50 @@ and larger statistics. We leave this comparison for future work.
   
 
 Figure \ref{fig:concentration} summarizes the previous results in the
-mass-concentration relationship.
-
-We find that the median concentraion can be fit by the following
-relationship
-\begin{equation}
-c_{200} = 5.62 \left(\frac{M_{200}}{10^{12}\hMsun}\right)^{-0.061}, 
+mass-concentration relationship. 
+We find that the median concentraion
+can be fit by the following relationship
+\begin{equation} c_{200} = 5.62 \left(\frac{M_{200}}{10^{12}\hMsun}\right)^{-0.061}, 
 \end{equation}
 %
 which has a similar power value compared to the $-0.075$ reported by
 \citep{Prada2012}, while the normalization is $\sim 20\%$ lower
 compared to the $7.28$ value reported by the same authors. 
 
-
 \section{Conclusions}
 \label{sec:conclusions}
 
 In this letter we presented a new method to estimate the concentration
 of dark matter halos in N-body simulations.  
-We tested our method on mock halo data to study the impact of total
+We tested the method on mock halo data to study the impact of total
 number of particles and input concentration on the retrieved values.  
 We compared these results against two other methods commonly used in
-the literature to estimate concentrations.  Finally, we applied our
-method to halos extracted from a cosmological N-body simulation to
-estimate the impact of our method on the mass concentration relationship.
+the literature to estimate concentrations.  
+For all methods, the accuracy in retrieving the input concentration
+increases with the number of particles as summarized in Figure
+\ref{fig:error}.  Our method systematically overperforms the other two.
 
+We also applied the method to halos extracted from a cosmological
+N-body simulation to estimate the impact on the mass concentration
+relationship. Although the three  methods are in broad agreement there
+are some noticeable differences in the mass concentration relationship
+at lower masses $<10^{13}\hMsun$ at the $20-30\% level$.
 
-The first benchmark was performed on mock halos generated with known
-concentration values for different particle numbers.  For all methods,
-the accuracy in retrieveing the input concentration increases with the
-number of particles as summarized in Figure \ref{fig:error}.  Our
-method systematically shows smaller errors in the retrieved values
-compared to the other two methods.
+These are encouraging results. They show that using the integrated
+mass profile to find the DM halo concentration is a tool deserving
+deeper scrutiny. Further tests with larger simulated volumes, varying
+numerical resolution and different density profiles are
+the next natural step to explore the full potential of this
+new method. 
 
-We used a N-body cosmological simulation to test the impact of our
-method on the mass-concentration relationship.  Although the three
-methods are in general agreement there are some noticeable differences
-in the mass concentration relationship.
+\vspace{0.5cm}
 
-\section*{Acknowledgemets}
- JCMC wants to thanks to ``Estrategia de sostenibilidad 2014-2015, Universidad de Antioquia''
+ The authors acknowldge the technical support from the new
+ high-performance computing facility at Uniandes. JEF-R acknowledges
+ financial support from Vicerrector\'ia de Investigaciones at Uniandes
+ through a FAPA project. JCMC acknowledges financial support from
+ ``Estrategia de  sostenibilidad 2014-2015, Universidad de
+ Antioquia''.    
 
 \bibliographystyle{mn2e}
 \bibliography{references}
