@@ -6,7 +6,7 @@ parser.add_argument("--verbose","-v",help="Turns on verbose mode", action="store
 parser.add_argument("--time", "-t", help="It measures the time of execution", action="store_true")
 parser.add_argument("--plot","-p",help="Exports useful plots for each halo", action="store_true")
 parser.add_argument("--output","-o",help="File output", type=str)
-
+parser.add_argument("--threads","-T",help="Number of threads (8 by default)", type=int)
 args = parser.parse_args()
 if args.dir == None:
     print("Please specify the path of the directory with the option -d\nUse --help for more information")
@@ -14,6 +14,13 @@ if args.dir == None:
 
 if args.output == None:
     print("Saving output on output.csv")
+
+if args.threads == None:
+    threads = 8;
+else:
+    threads = args.threads
+
+print("Working with %d threads" % threads)
 
 import numpy as np, emcee # For numerical computation and MCMC
 import os # For handling directories
@@ -81,7 +88,7 @@ def main():
 
             position = np.linspace(np.log(guess),np.log(2*guess),n_walkers).reshape((n_walkers,1))
 
-            sampler = emcee.EnsembleSampler(n_walkers, n_dimensions, log_likelihood, args=(log_r, log_m),threads=8)
+            sampler = emcee.EnsembleSampler(n_walkers, n_dimensions, log_likelihood, args=(log_r, log_m),threads=threads)
             sampler.run_mcmc(position, 500)
 
             chain = np.exp(sampler.flatchain).flatten()
