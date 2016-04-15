@@ -97,11 +97,14 @@ def main():
     print('{} points in total'.format(n_points))
 
 
-    n_factors = 16
-    downsample_factors = np.logspace(1.0, 3.0, n_factors)
+    n_factors = 7
+    downsample_factors = np.logspace(1.0, 3.0, n_factors)[::-1]
+
+
+    print(downsample_factors)
     id_list = np.arange(n_points)
 
-    n_iterations = 5
+    n_iterations = 100
 
     for i in range(n_factors):
         for j in range(n_iterations):
