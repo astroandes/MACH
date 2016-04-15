@@ -8,7 +8,28 @@ args = parser.parse_args()
 
 import numpy as np, emcee # For numerical computation and MCMC
 import os # For handling directories
+from scipy.optimize import fsolve
 
+# Defines the relation between the concentration and the greatest velocity
+def f(c,v_max):
+    return v_max - np.sqrt(0.216*c/(np.log(1+c)-c/(1+c)))
+
+def fit_data_vel(x,y,z):
+    r = np.sqrt(x*x+y*y+z*z)
+    r = np.sort(r)
+    r = np.delete(r,0)
+    r = r/r[-1]
+    del x,y,z
+    
+    n_particles = len(r)
+    
+    m = np.arange(n_particles)+1.0
+    m /= n_particles
+    
+    v = np.sqrt(m/r)
+    v_max = np.max(v)
+    c = fsolve(f,10.0,args=(v_max))[0]
+    return c
 
 # Navarro-Frenk-White mass profile with logarithmic scale on mass, radius and
 # concentration. It assumes the radius is normalized respect to the virial
@@ -78,17 +99,18 @@ def main():
     downsample_factors = np.logspace(1.0, 3.0, n_factors)
     id_list = np.arange(n_points)
 
-    n_selection = 5 
+    n_iterations = 5
 
     for i in range(n_factors):
-        for j in range(n_selection):
+        for j in range(n_iterations):
             factor = downsample_factors[i]
             n_select = int(n_points/factor)
             sample_id = np.random.choice(id_list, n_select)
 
             c_low, c_mid, c_high = fit_data(x[sample_id], y[sample_id], z[sample_id])
-            print('{} {} {} {} {}'.format(n_select, factor, c_low, c_mid, c_high))
-            fout.write('{} {} {} {} {}\n'.format(n_select, factor, c_low, c_mid, c_high))
+            c_vel = fit_data_vel(x[sample_id], y[sample_id], z[sample_id])
+            print('{} {} {} {} {} {}'.format(n_select, factor, c_low, c_mid, c_high, c_vel))
+            fout.write('{} {} {} {} {} {}\n'.format(n_select, factor, c_low, c_mid, c_high, c_vel))
         
     fout.close()
 
