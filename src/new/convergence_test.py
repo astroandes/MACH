@@ -65,7 +65,7 @@ def fit_data(x, y, z):
 
     position = np.linspace(np.log(guess),np.log(2*guess),n_walkers).reshape((n_walkers,1))
         
-    sampler = emcee.EnsembleSampler(n_walkers, n_dimensions, log_likelihood, args=(log_r, log_m), threads=4)
+    sampler = emcee.EnsembleSampler(n_walkers, n_dimensions, log_likelihood, args=(log_r, log_m))
     sampler.run_mcmc(position, 500)
 
     chain = np.exp(sampler.flatchain).flatten()
@@ -80,6 +80,8 @@ def main():
     halo_name =  filename.split('/')[-1]
     output_filename = args.outputdir+'/downsample_'+ halo_name
     fout = open(output_filename, 'w')
+    fout.write('#npart f_downsample c_low c_med c_up c_vel\n')
+
     print(output_filename)
 
 
