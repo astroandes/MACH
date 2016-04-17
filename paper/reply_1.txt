@@ -1,16 +1,24 @@
+Dear Editor,
 
-We thank the referee for very useful comments that have helped us to
+We thank the Referee for very useful comments that have helped us to
 improve the paper.
 
 In this version we have upgraded the data set used to test the method
 on N-body simulation. The new data set taken from the Bolshoi
-simulation allows us to probe 4 orders of magnitud in halo mass
+simulation allows us to probe 4 orders of magnitude in halo mass
 (instead of only 2 in the previous version) and increase by a factor
 of 40 the number of halos used to draw statistics (we went to 64K
 halos from 1.5K in the previous version). This allowed us to include
 new tests on the robustness of the method. 
 
-Below we give detailed answers to each one of the referee's concerns.
+We realize that the new tests have added one full page to the body of
+the paper, making it not suitable for publication as a Letter. 
+Therefore, we ask the Editor and the Referee to consider it for
+publication in the main journal, given that the text cannot be reduced
+without loss of clarity.
+ 
+Below we give detailed answers to each one of the original Referee's
+concerns. 
 
 The authors.
 
@@ -21,16 +29,16 @@ The authors.
 Referee: The first one concerns substance: the description of such method, and
 its comparison with other estimators, is overall a relatively minor
 contribution, which I would deem suitable for an appendix to a more
-substantive paper that exploits the scientifi value of the
+substantive paper that exploits the scientific value of the
 estimator. 
 
 
 Authors: we believe that methodological contributions in such a
 fundamental problem, such as the estimation of dark matter halo
-concentrations, deserves to take a protagonic role in the paper. 
+concentrations, deserves to take a protagonist role in the paper. 
 However, we understand the referee's concern and have now included
 more information on the possible biases of other methods in the
-estimationof the mass concentration relationship.
+estimation of the mass concentration relationship.
 
 
 Referee: For example, the authors report a rather strong departure
@@ -88,12 +96,12 @@ realistic confidence inte! rvals.
 
 
 
-Authors: Following the referee's recomendation we have prepared a new
+Authors: Following the referee's recommendation we have prepared a new
 figure 3. This figure shows the uncertainties from the MCMC method as a
-fuction of particle number. These uncertainties already take into
+fraction of particle number. These uncertainties already take into
 account the correlation between points, as they come directly from a
 set of points directly generated to be consistent with a given value
 for the concentration. These uncertainties are below the 1% level and
-are negligeable ompared to the uncertainties from fluctuations on the
+are negligible compared to the uncertainties from fluctuations on the
 halo particle number.
 
