@@ -1,10 +1,39 @@
 
+We thank the referee for very useful comments that have helped us to
+improve the paper.
 
-The first one concerns substance: the description of such method, and
+In this version we have upgraded the data set used to test the method
+on N-body simulation. The new data set taken from the Bolshoi
+simulation allows us to probe 4 orders of magnitud in halo mass
+(instead of only 2 in the previous version) and increase by a factor
+of 40 the number of halos used to draw statistics (we went to 64K
+halos from 1.5K in the previous version). This allowed us to include
+new tests on the robustness of the method. 
+
+Below we give detailed answers to each one of the referee's concerns.
+
+The authors.
+
+==========
+
+
+
+Referee: The first one concerns substance: the description of such method, and
 its comparison with other estimators, is overall a relatively minor
 contribution, which I would deem suitable for an appendix to a more
 substantive paper that exploits the scientifi value of the
-estimator. For example, the authors report a rather strong departure
+estimator. 
+
+
+Authors: we believe that methodological contributions in such a
+fundamental problem, such as the estimation of dark matter halo
+concentrations, deserves to take a protagonic role in the paper. 
+However, we understand the referee's concern and have now included
+more information on the possible biases of other methods in the
+estimationof the mass concentration relationship.
+
+
+Referee: For example, the authors report a rather strong departure
 in the mass-concentration relation derived by Prada et al (2012) on
 halo mass scales corresponding to L* galaxies. Such departure, if
 true, would be quite intriguing, since observations should, in
@@ -12,13 +41,16 @@ principle, allow for constraints to be placed on the values of the
 concentration on those scales. This issue, however, is not followed up
 in the current paper. 
 
-R./ To address this concern we have included in our analysis the
-comparison against data from the Bolshoi Simulation. This allows us to
-probe a mass interval around M* and test the robustness of the
-concentration departure between the different methods at lower
-masses. 
+Authors: The new data allowed us to get a more robust probe of the
+mass-concentration relationship. This time we show that there is
+discrepancy between our method and the velocity method advocated by
+Prada et al. 2012. We have included tests to show that the velocity
+method produces biased results for the concentration as particle
+number decreases. Please read the new subsection 4.2.1
+departure seen
 
-The second concern regards the method itself, as well as the detail
+
+Referee; The second concern regards the method itself, as well as the detail
 and exhaustiveness of the analysis. I would expect that any method to
 estimate concentrations should become increasingly inaccurate and
 possibly biased when the particle number is small. Furthermore, the
@@ -29,10 +61,16 @@ low (or high) values of c. The analysis as reported does not discuss
 any biases nor concentration dependence, a fairly significant omission
 that detracts from the completeness and interest of this work. 
 
-R./ We have included a new subsection showing the biases as a function
-of particle mass and concentration.
 
-Finally, a comment on the method itself, where particles are ranked by
+Authors: We tested possible concentration dependent biases on the mock data
+only to find that the particle number has the most noticeable
+effect. We do not include any plots but mention it in the body of the
+paper. The new subsection 4.2.1 goes deep into a bias study for our
+method compared to the velocity method. We find that our method is.
+robust against changes in the particle number.
+
+
+Referee: Finally, a comment on the method itself, where particles are ranked by
 radius and compared with a theoretical cumulative mass profile. This
 arrangement makes every point in the analysis dependent on the other,
 so it is unclear how to assess the uncertainties on the  concentration
@@ -48,7 +86,14 @@ prior, then the posterior distribution of Prob(c  given  r_i) could be
 then inferred from the joint probability of all r_i and used to derive
 realistic confidence inte! rvals.
 
-R./ We have included a subsection showing the posterior distributions
-for the concentration for different particle numbers and
-concentrations. We discuss in detail how the confidence intervals can
-be derived from these distributions.
+
+
+Authors: Following the referee's recomendation we have prepared a new
+figure 3. This figure shows the uncertainties from the MCMC method as a
+fuction of particle number. These uncertainties already take into
+account the correlation between points, as they come directly from a
+set of points directly generated to be consistent with a given value
+for the concentration. These uncertainties are below the 1% level and
+are negligeable ompared to the uncertainties from fluctuations on the
+halo particle number.
+
