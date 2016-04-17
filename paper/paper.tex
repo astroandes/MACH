@@ -543,28 +543,34 @@ different particle numbers.
 
 \begin{figure}
 \begin{center}
-  \includegraphics[width=0.47\textwidth]{avg_foff_bolshoi.pdf}
+  \includegraphics[width=0.49\textwidth]{avg_foff_bolshoi.pdf}
 \end{center}
 \vspace{-0.5cm}
-\caption{Average value of the relative error in the concentration
-  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
-  the set of mock halos. Different symbols represent different
-  methods. The new method provides the most accurate estimate at fixed
-  particle number.  
+\caption{Average value of the fractional offset ($f_{\rm off}$Eq. \ref{eq:f_off})
+  between the concentration in a halo at high resolution versus its
+  downsampled  versions. 
+  Each point is the result of 100 downsampling iterations.
+  The velocity method noticeably overestimates the
+  concentration up to a factor of $0.25$, while the new method only
+  underestimates the concentrations by up to a factor of $0.05$.
     \label{fig:downsampling}}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-  \includegraphics[width=0.45\textwidth]{error_conc_bolshoi.pdf}
+  \includegraphics[width=0.47\textwidth]{error_conc_bolshoi.pdf}
 \end{center}
 \vspace{-0.5cm}
-\caption{Average value of the relative error in the concentration
-  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
-  the set of mock halos. Different symbols represent different
-  methods. The new method provides the most accurate estimate at fixed
-  particle number.  
-    \label{fig:downsampling_err}}
+\caption{Uncertainties on different concentration estimates.
+  The large symbols show the standard deviation of the fractional
+  offset ($f_{\rm off}$ Eq. \ref{eq:f_off}) from the downsampling
+  experiments.  
+  The small dots correspond to the $1-\sigma$ uncertainty on the
+  concentration for each halo as estimated by the MCMC algorithm in
+  used for the new method.
+  Uncertainties from fluctuations on the halo particle number are
+  larger than the statistical uncertainties from the fitting process. 
+  \label{fig:downsampling_err}}
 \end{figure}
 
 
