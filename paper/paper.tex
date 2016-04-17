@@ -159,14 +159,14 @@ Methods: data analysis, numerical
 %*************************************************************************
 In the current structure formation paradigm the properties of galaxies
 are coupled to the evolution of their dark matter (DM) hosting halo.
-For instance, the sizes and dynamics of galaxies are determined by
-the DM distribution inside a halo. This motivates the detailed study
-a DM halo internal structure. 
+In this paradigm the sizes and dynamics of galaxies are driven by
+the DM distribution inside a halo. This has motivated the detailed study
+a DM halo internal structure in the last three decades. 
 
-The internal DM distribution in a halo can be parameterized through the density
-profile.  
-In a first approximation this profile is spherically symmetric and
-its density only depends on the radial coordinate. 
+The internal DM distribution in a halo is usually parameterized
+through the density profile.  
+In a first approximation this profile is spherically symmetric; the
+density only depends on the radial coordinate.  
 One the most popular radial parameterizations is the
 Navarro-Frenk-White (NFW) profile 
 \citep{NFW}.   
@@ -181,7 +181,7 @@ The ratio between the scale radius and the halo virial radius $R_v$ is
 known as the concentration $c=R_v/r_s$. 
 
 
-The concentration of the NFW profile provides the conceptual
+The concentration of the NFW profile provides a conceptual
 framework to study simulated dark matter halos as a function of
 redshift and cosmological parameters.
 In many numerical studies 
@@ -194,7 +194,7 @@ reliable algorithm to estimate the concentration.
 Such an algorithm should provide unbiased results and must be robust
 when applied to simulations of different numerical resolution.  
 
-There are two main algorithms to estimate the concentration parameter
+There are two stablished algorithms to estimate the concentration parameter
 of a N-body dark matter halo. 
 The first method takes the halo particles and bins them into
 logarithmic radii to estimate the density in each bin, then it 
@@ -233,14 +233,11 @@ This translates into a robust estimate even at low resolution/particle
 numbers.   
 Furthermore, since the method does not require any binning, there is
 no need to tune numerical parameters.
-This provides a new independent method to estimate the concentration
-parameter.   
+This method provides a new independent method to estimate the
+concentration parameter.   
 Here we provide a detailed description of the method and a
 comparison against the two traditional techniques by measuring its
 performance both on mock and N-body halos.
-
-
-
 
 
 \section{Basic properties of the NFW density profile}
@@ -248,7 +245,6 @@ performance both on mock and N-body halos.
 
 Let us review first the basic properties of the NFW density profile.
 This shall help us to define our notation.
-
 
 \subsection{Density profile}
 
@@ -283,7 +279,7 @@ In this letter we use $\Delta_h=740$, a number roughly corresponding to
 \subsection{Integrated mass profile}
 
 From these definitions we can compute the total mass enclosed inside a
-radius $r$:
+radius $r$: 
 \begin{equation}
 M(<r) = 4\pi\rho_c\delta_c  r_s^3\left[\ln \left
   (\frac{r_s+r}{r_s}\right) - \frac{r}{r_s+r}\right],
@@ -349,7 +345,6 @@ corresponds to the definition in Eq. (\ref{eq:f_NFW}).
 
 To date, there are two standard methods to estimate concentrations in
 dark matter halos extracted from N-body simulations. 
-
 The first method tries to directly estimate the density profile.  
 It takes all the particles in the halo and bins them in the logarithm of
 the radial coordinate from the halo center.  
@@ -413,18 +408,14 @@ samples.
 The first sample is composed by mock halos generated to have known
 concentration values in perfect spherical symmetry following an NFW
 profile.    
-Using this sample we want to quantify the ability to recover the
-expected concentration as a function of particle number.
+Using this sample we quantify the ability to recover the expected
+concentration as a function of particle number. 
 The second sample comes from a publicly available N-body cosmological
-simulation.  
-In this way we test the new method on more realistic and complex
-data. 
-We summarize the results on this dataset by showing the impact on the
-mass-concentration relationship.
+simulation to test the new method on more realistic and complex data
+to show the impact on the mass-concentration relationship.
 
 
-
-\subsection{Mock halo sample}
+\subsection{Retrieving known concentrations from a mock halo sample}
 
 \begin{figure}
 \begin{center}
@@ -439,19 +430,10 @@ mass-concentration relationship.
     \label{fig:error}}
 \end{figure}
 
-\begin{figure*}
-\begin{center}
-  \includegraphics[width=0.47\textwidth]{avg_foff_bolshoi.pdf}
-  \includegraphics[width=0.45\textwidth]{stddev_foff_bolshoi.pdf}
-\end{center}
-\vspace{-0.5cm}
-\caption{Average value of the relative error in the concentration
-  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
-  the set of mock halos. Different symbols represent different
-  methods. The new method provides the most accurate estimate at fixed
-  particle number.  
-    \label{fig:error}}
-\end{figure*}
+
+
+
+
 
 
 
@@ -470,8 +452,6 @@ mass-concentration relationship.
 %    between two methods.
 %  \label{fig:comparison}}
 %\end{figure*}
-
-
 
 The method we use to generate the mock halos is based on the
 integrated mass profile.  
@@ -525,7 +505,6 @@ A large discrepancy between the estimated and input concentrations are
 quantified by a large $\avg{|D|}$.
 
 
-
 Figure \ref{fig:error} shows the behaviour of $\avg{|D|}$ as a function of
 halo particle number for the three different methods.
 
@@ -534,9 +513,7 @@ $\avg{|D|}$ values compared to the other two.
 Its accuracy is on the order of $10\%$ for $20$ particles in the halo,
 decreasing to $0.01\%$ for halos with $20000$ particles.  
 The dependence of $\avg{|D|}$ with the particle number $N$
-goes approximately as $\avg{|D|}\propto N^{-1/2}$.   
-This hints that the increasing accuracy of the method could be due to
-a decrease of Poisson noise. 
+goes approximately as $\avg{|D|}\propto N^{-1}$.   
 
 The method based on the maximum of the circular velocity shows a
 similar behaviour with $\avg{|D|}\propto N^{-1/3}$.  
@@ -553,7 +530,39 @@ This behaviour is evident in the large values of $\avg{|D|}$ for halos
 with number of particles below $\sim 200$ and an intermediate accuracy
 between the other two methods for a high particle number. 
 
-\subsection{Halos from a cosmological simulation}
+We also find that the bias from different concentrations at fixed
+particle number is negligeable with respect to the effects induced by
+different particle numbers. 
+
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.47\textwidth]{avg_foff_bolshoi.pdf}
+\end{center}
+\vspace{-0.5cm}
+\caption{Average value of the relative error in the concentration
+  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
+  the set of mock halos. Different symbols represent different
+  methods. The new method provides the most accurate estimate at fixed
+  particle number.  
+    \label{fig:downsampling}}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.45\textwidth]{error_conc_bolshoi.pdf}
+\end{center}
+\vspace{-0.5cm}
+\caption{Average value of the relative error in the concentration
+  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
+  the set of mock halos. Different symbols represent different
+  methods. The new method provides the most accurate estimate at fixed
+  particle number.  
+    \label{fig:downsampling}}
+\end{figure}
+
+
+
+\subsection{Measuring the concentration in halos from a cosmological simulation}
 
 
 \begin{figure*}
@@ -591,26 +600,22 @@ use it to estimate the  concentration parameter in dark matter halos
 obtained from a cosmological N-body simulation and compare it with the
 other two classical methods.   
  
-We use data from the MultiDark cosmological simulation that follows
+We use data from the Bolshoi cosmological simulation that follows
 the non-linear evolution of a dark matter density field sampled with
-$2048^3$ particles over a cubic box of $1000\ \hMpc$ on a side.  
+$2048^3$ particles over a cubic box of $250\ \hMpc$ on a side.  
 The data is publicly available at \url{http://www.cosmosim.org/}.
 More details about the structure of the database and the simulation
 can be found in \citep{2013AN....334..691R}.
 
 We use a halo sample containing all the halos located in a cubic
-sub-volume of $100$ \hMpc\ on a side centered on the most massive halo
-in the simulation at $z=0$.
-This dataset corresponds to the \texttt{miniMDR1}
-table in the  database.  
+sub-volume of $100$ \hMpc\ on a side.
 From this sample we select all the halos at $z=0$ detected
-with a Friends-of-Friends (FoF) algorithm with masses in the interval
-$10^{12}\leq M_{\rm FoF}/\hMsun \leq 10^{14}$.  
+with a Friends-of-Friends (FoF) algorithm with more than 300
+particles, meaning that the masses are in the interval
+$4\times 10^{10}\leq M_{\rm FoF}/\hMsun \leq 10^{14}$.  
 The FoF algorithm used a linking length of $0.17$ times the mean
 inter-particle distance. This choice translates into an overdensity
 $\Delta_h\sim  400-700$ dependent on the halo concentration \citep{More2011}.
-Finally, we select from the database all the particles that belong to
-each FoF group.
 
 From this set of particles we follow the procedure spelled out in
 Section \ref{sec:method} with $\Delta_h=740$ (corresponding to $200$
@@ -619,45 +624,81 @@ redefine to be our halo.
 This choice makes that the overdensities are fully included inside the
 original FoF particle group.   
 On the interest of providing a fair comparison against the density method we
-only report results from overdensities with at least $200$ particles. 
+only report results from overdensities with at least $200$ particles
+($2.6\times 10^{10}$\hMsun). 
 
-Figure \ref{fig:comparison} shows the comparison between the
-concentration values obtained by the three different methods. 
-The diagonal line marks a one-to-one correspondence if all the values
-were equal.
-The three methods show a broad general agreement. 
-The largest difference is present at high concentration $c>5$ where
-the new method produces systematic lower values than the other two
-methods. Most of the differences are at the $20\%$ level, with some
-extreme cases for the highest concentration values with $50\%$
-differences.  The velocity and density methods produce consistent
-values within a $20\%$ scatter, only some halos with very high
-concentrations $c\sim 10$ have a $15\%$ lower concentration with the
-velocity method. 
+\subsubsection{Convergence Test using Downsampling}
 
-We explored halo shape and relaxation as a source of this
-differences. We found that shape does not bias the concentration
-estimation; relaxation, quantified by the
-offset between the center of mass and minimum of the potential, can
-only offset at most $5\%$ the median results between methods.  
-We note that the highest concentration values correspond to the smallest halos
-with $\sim 200$ particles, a regime where both the density and
-velocity methods are reliable only the $5\%$ in a perfect spherical
-halo.  
+We perform first a convergence test on the N-body data to find
+possible biases in the concentration estimates as a function of
+particle number. 
+We select $8$ halos from the simulation that have at least $3\times
+10^5$ particles. 
+We then downsample the total number of particles in each halo by
+factors of $10, 20, 45, 100, 215, 460, 1000$ to measure its
+concentration with both the integrated mass and the velocity method.
+each downsampling factor we repeat the operation $100$ times.   
 
-The differences we find might signal a deviation from the NFW profile
-due to the low resolution of these halos. We suggest that asserting
-with confidence the systematic difference between the different
-methods should be confirmed  a higher resolution simulation and larger
-statistics. We leave this comparison for future work.  
-  
+The average concentration value for the largest number of particles, $c_{N_{max}}$,
+provides with a baseline to compare all the other results.
+We use the following statistic
+\begin{equation}
+f_{\rm off} = c_{N} / c_{N_{max}} - 1,
+\end{equation}
+to account for the offset between the concentration at a given
+downsampled particle number $c_{N}$ and the baseline $c_{N_{max}}$.
+
+Figure \ref{fig:downsampling} summarizes our results. 
+The plot shows the average value of $f_{\rm off}$ as a function
+of the particle number.
+As expected for large enough sample particle numbers, $N_{s}>5\times
+10^3$, the results of the two algorithms coincide and $\langle f_{\rm
+  off}\rangle\sim 0$.  
+For lower number of particles, the results of the two algorithms
+deviate from the expected concentration value.  
+The velocity method overestimates by a factor $\langle f_{\rm 
+  off}\rangle\sim 0.25$ the concentration values for the lowest
+sample particle numbers, $N_{s}\sim 100$. 
+Around the same sampling scale, the new algorithm shows a more stable
+behaviour with an understimate by a factor of $\langle f_{\rm 
+  off}\rangle \sim 0.02$.  
+This shows that in the more complex setup of a cosmological setup our
+algorithm continues to be stable below the $5\%$ level for low 
+particle numbers.  
+
+The line on the same panel shows a fit to the data with the following
+functional form 
+\begin{equation}
+f_{\rm off} = \frac{A}{(1+\log_{10}N_s)^{B}}.
+\end{equation} 
+for the dataset shown in the panel we have $A=3385\pm 2065$, $B=7.99\pm0.48
+$ for the velocity method and $A=-110\pm 253$, $B=7.11\pm1.80$ for the
+new method, where the uncertainties are estimated from the covariance 
+matrix resulting from the non-linear optimization procedure. The lines
+on Figure \ref{fig:downsampling} are plotted using these best values. 
+
+
+Figure \ref{fig:downsampling} summarizes different uncertainty
+results. 
+Large symbols show the standard deviation on $f_{\rm off}$
+from the downsampling experiment.
+Small dots show the uncertainty on each individual concentration value
+as estimated by the MCMC algorithm.
+The line shows the $\propto N^{-1}$  locus.
+The first thing to notice is that statistical uncertainties are at
+least one order of magnitude than the uncertainty associated to
+downsampling experiment.   
+
+
+\subsubsection{Mass-Concentration Relationship}
+
 
 Figure \ref{fig:concentration} summarizes the previous results in the
 mass-concentration relationship. 
 We find that the median concentration
 can be fit by the following relationship
-\begin{equation} c_{200} = 5.62 \left(\frac{M_{200}}{10^{12}\hMsun}\right)^{-0.061}, 
-\end{equation}
+%\begin{equation} c_{200} = 5.62 \left(\frac{M_{200}}{10^{12}\hMsun}\right)^{-0.061}, 
+%\end{equation}
 %
 which has a similar power value compared to the $-0.075$ reported by
 \citep{Prada2012}, while the normalization is $\sim 20\%$ lower
