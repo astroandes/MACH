@@ -4,10 +4,10 @@ We thank the Referee for very useful comments that have helped us to
 improve the paper.
 
 In this version we have upgraded the data set used to test the method
-on N-body simulation. The new data set taken from the Bolshoi
-simulation allows us to probe 4 orders of magnitude in halo mass
-(instead of only 2 in the previous version) and increase by a factor
-of 40 the number of halos used to draw statistics (we went to 64K
+on the N-body simulation. The new data set is now taken from the Bolshoi
+simulation. This allows us to probe 4 orders of magnitude in halo mass
+(instead of only 2 in the previous version), increasing by a factor
+of 40 the number of halos used to derive statistics (we went to 64K
 halos from 1.5K in the previous version). This allowed us to include
 new tests on the robustness of the method. 
 

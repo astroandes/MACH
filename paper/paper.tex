@@ -135,21 +135,22 @@ maximum radial velocity measurements and radial particle binning.
 Tests on the mock halos show that the accuracy of the new method to
 recover known input concentrations varies with halo resolution,
 outperforming the other two methods. 
-Convergence tests by downsampling halos with high number of particles in
-the N-body simulation show that the new method is robust with respect
-to changes in halo particle number.
-However the velocity method overpredicts concentration values by a
+We design another simple test that can be used on any
+data-set to estimate and correct the biases when estimating the
+concentration at low particle numbers. 
+That test shows that the new method is robust with respect to changes
+in halo particle number. 
+However, the velocity method over-predicts concentration values by a
 factor of $25\%$ values for low particle numbers.
-We also measure the mass-concentration relationship on N-body
+Finally, we also measure the mass-concentration relationship on N-body
 data. 
 We find that in the probed mass range ($10^{10}\hMsun < M_{h} <
 10^{14}\hMsun$) the three methods give consistent results within the
 statistical uncertainties.   
-We find a small deviation at low masses, $M<10^{12}\hMsun$, where
+There is a small deviation at low masses, $M<10^{12}\hMsun$, where
 the new method yields lower median concentration values by $25\%$
-compared to the velocity methods. 
-We find that accounting for the bias
-in the velocity method brings the results into agreement.
+compared to the velocity methods; accounting for the bias in the
+velocity method brings the results into agreement.  
 From these results we believe that the new method is a promising tool
 to probe the internal structure of dark matter halos.
 \end{abstract}
@@ -197,7 +198,7 @@ concentration.  Such an algorithm should provide unbiased results and
 must be robust when applied to simulations of different numerical
 resolution.
 
-There are two stablished algorithms to estimate the concentration
+There are two established algorithms to estimate the concentration
 parameter of a N-body dark matter halo.  The first method takes the
 halo particles and bins them into logarithmic radii to estimate the
 density in each bin, then it proceeds to fit the density as a function
@@ -330,7 +331,7 @@ the NFW profile the maximum is provided by
       max})}{f(c)}},
 \label{eq:max_v}
 \end{equation}
-where $x_{\rm max}=2.163$ \citep{Klypin2014} and the function $f(x)$
+where $x_{\rm max}=2.163$ \citep{Klypin2016} and the function $f(x)$
 corresponds to the definition in Eq. (\ref{eq:f_NFW}).
 
 \section{Methods to estimate the concentration from N-body simulations}
@@ -353,7 +354,7 @@ A second method uses the circular velocity profile.  It finds the
 value of $x$ for which the normalized circular velocity $v(<x)$ shows
 a maximum.  Using this value it solves numerically for the
 corresponding value of the concentration using Eq. (\ref{eq:max_v}).
-This method has been most recently used by \cite{Klypin2014} to study
+This method has been most recently used by \cite{Klypin2016} to study
 the mass-concentration-redshift relation using the Multidark
 Simulation Suite.
 
@@ -412,7 +413,7 @@ impact on the mass-concentration relationship.
 \end{center}
 \vspace{-0.5cm}
 \caption{Average value of the relative error in the concentration
-  estimate, $\avg{|D|}$, as a function of the particle number $N$ in
+  estimate, $\avg{|D|}$, as a function of the particle number in
   the set of mock halos. Different symbols represent different
   methods. The new method provides the most accurate estimate at fixed
   particle number.
@@ -422,25 +423,6 @@ impact on the mass-concentration relationship.
 
 
 
-
-
-
-
-%\label{sec:data}
-%\begin{figure*}
-%  \begin{center}
-%    \includegraphics[width=0.32\textwidth]{conc_mass_vel.pdf}
-%    \includegraphics[width=0.32\textwidth]{conc_mass_dens.pdf}
-%    \includegraphics[width=0.32\textwidth]{conc_dens_vel.pdf}
-%  \end{center}
-%\vspace{-0.5cm}
-%  \caption{Comparison between the concentrations measured by the new 
-%    method and the maximum velocity (left) and density (middle)
-%    methods. The solid line indicates the equal value between the two
-%    techniques. The dashed line shows the upper 15 per cent difference
-%    between two methods.
-%  \label{fig:comparison}}
-%\end{figure*}
 
 The method we use to generate the mock halos is based on the
 integrated mass profile.  We start by fixing the desired concentration
@@ -474,7 +456,7 @@ We quantify the difference between the expected $c_{in}$ and measured
 $c_{out}$ values by
 %
 \begin{equation}
-D=(c_{in}-c_{out})/c_{in},
+D= c_{out}/c_{in}-1,
 \label{eq:D}
 \end{equation}
 %
@@ -514,7 +496,7 @@ particles below $\sim 200$ and an intermediate accuracy between the
 other two methods for a high particle number.
 
 We also find that the bias from different concentrations at fixed
-particle number is negligeable with respect to the effects induced by
+particle number is negligible with respect to the effects induced by
 different particle numbers. 
 
 \begin{figure}
@@ -539,25 +521,28 @@ different particle numbers.
 \vspace{-0.5cm}
 \caption{Uncertainties on different concentration estimates.  The
   large symbols show the standard deviation of the fractional offset
-  ($f_{\rm off}$ Eq. \ref{eq:f_off}) from the downsampling
-  experiments.  The small dots correspond to the $1-\sigma$
+  ($f_{\rm off}$ as defined in Eq. \ref{eq:f_off}) from the downsampling
+  experiments.  The small dots correspond to the $1\sigma$
   uncertainty on the concentration for each halo as estimated by the
-  MCMC algorithm {\bf delete ``in''} used for the new method.
-  Uncertainties from fluctuations on the halo particle number are
-  larger than the statistical uncertainties from the fitting
-  process. {\bf what is the solid line showing?}
+  MCMC algorithm used for the new method.
+  The solid lines shows the $1/N$ tendency, which also corresponds
+  to the particle number dependence of the $\langle|D|\rangle$ statistic
+  (i.e. the accuracy to retrieve a known concentration in mock halos)
+  of the new method.
+  Uncertainties due to particle number fluctuations are always larger
+  than the statistical uncertainties from the fitting process. 
   \label{fig:downsampling_err}}
 \end{figure}
 
 
 
 \subsection{Measuring the concentration in halos from a cosmological simulation}
-
+\label{subsec:cosmo}
 
 \begin{figure*}
 \begin{center}
-  \includegraphics[width=0.45\textwidth]{concentration_bolshoi.pdf}
-  \includegraphics[width=0.45\textwidth]{concentration_bolshoi_corrected.pdf}
+  \includegraphics[width=0.49\textwidth]{concentration_bolshoi.pdf}
+  \includegraphics[width=0.49\textwidth]{concentration_bolshoi_corrected.pdf}
 \end{center}
 \vspace{-0.5cm}
 \caption{Mass-concentration relationship for the three different
@@ -569,9 +554,9 @@ different particle numbers.
   other two methods have a similar spread. The dotted line corresponds
   to fits reported by \citep{Prada2012}.
   \label{fig:concentration}. The left panel shows the raw results
-  comming from each algorithm. The right panel introduces a
+  coming from each algorithm. The right panel introduces a
   correction on the velocity and integrated mass results. 
-  The corrections dependens on the number of particles following the
+  The corrections depends on the number of particles following the
   results of the downsampling experiments presented in Figure
   \ref{fig:downsampling}.} 
 \end{figure*}
@@ -622,18 +607,22 @@ only report results from overdensities with at least $200$ particles
 
 We perform first a convergence test on the N-body data to find
 possible biases in the concentration estimates as a function of
-particle number.  We select $8$ halos from the simulation that have at
-least $3\times 10^5$ particles.  We then {\bf randomly} downsample the
-total number of particles in each halo by factors of $10, 20, 45, 100,
-215, 460, 1000$ to measure its concentration with both the integrated
-mass and the velocity method. {\bf For each} downsampling factor we
-repeat the operation $100$ times.
+particle number.  
+We select $8$ halos from the simulation that have at
+least $3\times 10^5$ particles.  
+We then randomly downsample the total number of particles in each halo
+by factors of $10, 20, 45, 100, 215, 460, 1000$ to measure its
+concentration with both the integrated mass and the velocity
+method. For each downsampling factor we repeat the operation $100$
+times.  
 
 The average concentration value for the largest number of particles,
 $c_{N_{max}}$, provides with a baseline to compare all the other
-results.  We use the following statistic
+results.  
+We use the following statistic
 \begin{equation}
 f_{\rm off} = c_{N} / c_{N_{max}} - 1,
+\label{eq:f_off}
 \end{equation}
 to account for the offset between the concentration at a given
 downsampled particle number $c_{N}$ and the baseline $c_{N_{max}}$.
@@ -648,16 +637,16 @@ concentration value.  The velocity method overestimates by a factor
 $\langle f_{\rm off}\rangle\sim 0.25$ the concentration values for the
 lowest sample particle numbers, $N_{s}\sim 100$.  Around the same
 sampling scale, the new algorithm shows a more stable behaviour with
-an understimate by a factor of $\langle f_{\rm off}\rangle \sim 0.02$.
-This shows that in the more complex setup of a cosmological {\bf
-  simulation} our algorithm continues to be stable below the $5\%$
+an underestimate by a factor of $\langle f_{\rm off}\rangle \sim 0.02$.
+This shows that in the more complex setup of a cosmological 
+  simulation the new algorithm continues to be stable below the $5\%$
 level for low particle numbers.
 
 The line on the same panel shows a fit to the data with the following
 functional form 
 \begin{equation}
 f_{\rm off} = \frac{A}{(1+\log_{10}N_s)^{B}}.
-\label{eq:f_off}
+\label{eq:f_off_fit}
 \end{equation} 
 for the dataset shown in the panel we have $A=3385\pm 2065$, $B=7.99\pm0.48
 $ for the velocity method and $A=-110\pm 253$, $B=7.11\pm1.80$ for the
@@ -666,15 +655,16 @@ matrix resulting from the non-linear optimization procedure. The lines
 on Figure \ref{fig:downsampling} are plotted using these best values. 
 
 
-Figure \ref{fig:downsampling} {\bf Aca no iría una referencia Fig 3 en
-  lugar de Fig 2?} summarizes different uncertainty results.  Large
-symbols show the standard deviation on $f_{\rm off}$ from the
-downsampling experiment.  Small dots show the uncertainty on each
-individual concentration value as estimated by the MCMC algorithm.
-The line shows the $\propto N^{-1}$ locus.  This figure demonstrates
-that the statistical uncertainties are at least one order of magnitude
-{\bf smaller} than the uncertainty associated to downsampling
-experiment.
+Figure \ref{fig:downsampling_err} summarizes different uncertainty
+results.  
+Large symbols show the standard deviation on $f_{\rm off}$ from the
+downsampling experiment.  
+Small dots show the uncertainty on each individual concentration value
+as estimated by the MCMC algorithm. 
+The line shows the $\propto N^{-1}$ locus.  
+This figure demonstrates that the statistical uncertainties are at
+least one order of magnitude smaller than the uncertainty associated
+to downsampling experiment. 
 
 
 \subsubsection{Mass-Concentration Relationship}
@@ -687,31 +677,37 @@ algorithms, the thin dashed line marks the results by
 \citep{Prada2012}.
 
 We notice first that the results from the density method have a
-systematic $15\%$offset from the velocity methods.  This offset was
-already presented by \citep{Prada2012} for some concentrations and
-halo masses, although a more organized study in terms of the
-mass-concentration relationship has not been presented in the
-literature.
+systematic $15\%$offset from the velocity methods.  
+This offset was already presented by \citep{Prada2012} for low
+concentrations ($c<6$) and high ($M_h>10^{12}\hMsun$) halo masses.  
+Recently \citep{Klypin2016} summarized results for the
+mass-concentration relationship coming from different methods and
+datasets to show that similar systematic offsets are present.
+However, to the best of our knowledge, a systematic and modern study of
+the mass-concentration relationship spanning a wide range in mass,
+using a fixed dataset but different fitting methods has not been
+presented in the literature.
 
-We then notice that our {\bf method} follows closely the results of
+We then notice that the new method closely follows the results of
 the velocity method at higher masses, $M_h>10^{12}\hMsun$ or
-equivalently for $>5\times10^3$ particles.  For masses below that
-threshold our method saturates at a concentration value of $\sim 7$
-while the velocity method continues to give higher concentration
-values.
+equivalently for $>5\times10^3$ particles.  
+For masses below that threshold the new method saturates at a
+concentration value of $\sim 8$ while the velocity method continues to
+give higher concentration values. 
 
 We hypothesize that the increase in the results for the velocity
 method below $5\times 10^{4}$ particles come from the systematic bias
 described in the previous subsection.  To test the general consistency
-of this hypothesis {\bf we} correct the concentration values in the
+of this hypothesis we correct the concentration values in the
 velocity and integrated mass methods by a factor of $1/(1+f_{\rm
-  off})$, using the definition in Equation (\ref{eq:f_off}) and the
+  off})$, using the definition in Equation (\ref{eq:f_off}) and the 
 parameters obtained from the data presented in Figure
-(\ref{fig:downsampling}).  The correction brings into perfect
-agreement the results between the velocity and the integrated mass
-method.  This suggests that the concentration at lower masses might
-very well reach a plateu in the halo mass range $10^{10}< M_{h}/\hMsun
-< 10^{12}$ .
+(\ref{fig:downsampling}).  
+The correction brings into perfect agreement the results between the
+velocity and the integrated mass method.  
+This suggests that the concentration at lower masses might very well
+reach a plateau in the halo mass range $10^{10}< M_{h}/\hMsun <
+10^{12}$ . 
 
 
 \section{Conclusions}
@@ -731,33 +727,38 @@ We also applied the method to halos extracted from a cosmological
 N-body simulation.  Using this data we showed that the new method is
 robust with respect to a decreasing number of particles in the halos.
 On the other hand we showed that the velocity method has a systematic
-bias that overesimates the concentration for halos with a low particle
+bias that overestimates the concentration for halos with a low particle
 number up to a factor of $25\%$.
 
-{\bf So far no procedure could provide a direct way to measure the
-  bias in the estimated halo concentration at low particle numbers and
-  a way to use it to make corrections on the estimates. In section 4.2
-  it was shown a simple method that can be used on any dataset to
-  estimate the errors and correct them when estimating the
-  concentration at low particle numbers.}
+We provide for the first time in the literature a direct way to
+measure the bias in the estimated halo concentration at low particle numbers and
+a way to use it to make corrections on the estimates. 
+In Section \ref{subsec:cosmo} we presented a simple method that can be used on any
+dataset to estimate the errors and correct them when estimating the
+concentration at low particle numbers. 
 
 We also used the N-body simulation to estimate the impact on the mass
-concentration relationship.  Although the three methods are in broad
-agreement within their uncertainties there are some noticeable
-differences.  The first difference is that the density method produces
+concentration relationship.  
+Although the three methods are in broad agreement within their
+uncertainties there are some noticeable differences.  
+The first difference is that the density method produces
 systematically higher concentrations by a factor of $15\%$ compared to
-the velocity mehod.  The second difference is that the velocity and
-integrated mass methods start to differ for masses below
-$10^{12}\hMsun$.  We found that a correction of the results by the
-bias factor found using the same N-body data can bring these two
-methods into agreement.
+the velocity method.
+This systematic offset has been reported in different datasets and
+techniques to measure concentrations, without any conclusive
+explanation for its origin \citep{Klypin2016}.
+The second difference is that the velocity and integrated mass methods
+start to differ for masses below $10^{12}\hMsun$.  
+We found that a correction of the results by the bias factor found
+using the same N-body data can bring these two methods into
+agreement. 
 
-
-These are encouraging results.  They show that using the integrated
-mass profile to find the DM halo concentration is a tool deserving
-deeper scrutiny.  Further tests with larger simulated volumes, varying
-numerical resolution and different density profiles are the next
-natural step to explore the full potential of this new method.
+These are encouraging results.  
+They show that using the integrated mass profile to find the Dark
+Matter halo concentration is a tool deserving deeper scrutiny.  
+Further tests with larger simulated volumes, varying numerical
+resolution and different density profiles are the next natural step to
+explore the full potential of this new method. 
 
 \vspace{0.1cm}
 
@@ -769,7 +770,8 @@ natural step to explore the full potential of this new method.
  Antioquia''.    
 
 \bibliographystyle{mn2e}
-%\bibliography{references}
+\bibliography{references}
+
 \begin{thebibliography}{}
 
 \bibitem[\protect\citeauthoryear{{Duffy}, {Schaye}, {Kay} \& {Dalla
@@ -782,10 +784,10 @@ natural step to explore the full potential of this new method.
 {Foreman-Mackey} D.,  {Hogg} D.~W.,  {Lang} D.,    {Goodman} J.,  2013, \pasp,
   125, 306
 
-\bibitem[\protect\citeauthoryear{{Klypin}, {Yepes}, {Gottlober}, {Prada} \&
-  {Hess}}{{Klypin} et~al.}{2014}]{Klypin2014}
-{Klypin} A.,  {Yepes} G.,  {Gottlober} S.,  {Prada} F.,    {Hess} S.,  2014,
-  ArXiv e-prints
+\bibitem[\protect\citeauthoryear{{Klypin}, {Yepes}, {Gottl{\"o}ber}, {Prada} \&
+  {He{\ss}}}{{Klypin} et~al.}{2016}]{Klypin2016}
+{Klypin} A.,  {Yepes} G.,  {Gottl{\"o}ber} S.,  {Prada} F.,    {He{\ss}} S.,
+  2016, \mnras, 457, 4340
 
 \bibitem[\protect\citeauthoryear{{Ludlow}, {Navarro}, {Angulo},
   {Boylan-Kolchin}, {Springel}, {Frenk} \& {White}}{{Ludlow}
