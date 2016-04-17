@@ -20,6 +20,10 @@ without loss of clarity.
 Below we give detailed answers to each one of the original Referee's
 concerns. 
 
+For the Referee's convenience the differences between and the second
+version can be found here:
+https://github.com/astroandes/MACH/raw/master/paper/paper_diff.pdf
+
 The authors.
 
 ==========

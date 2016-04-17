@@ -19,7 +19,8 @@ $(MAIN)_diff.pdf: $(MAIN).tex
 	$(LATEX) $(MAIN)_diff.tex 
 
 tar : 
-	tar -czvf $(MAIN).tar.gz $(MAIN).tex mn2e.cls  mn2e.bst conc_dens_vel.pdf concentration.pdf conc_mass_dens.pdf conc_mass_vel.pdf error.pdf
+	tar -czvf $(MAIN).tar.gz $(MAIN).tex mn2e.cls  mn2e.bst error.pdf avg_foff_bolshoi.pdf  error_conc_bolshoi.pdf concentration_bolshoi.pdf concentration_bolshoi_corrected.pdf paper.pdf 
+
 
 clean:
 	rm -f $(MAIN).pdf $(MAIN).out $(MAIN).bbl $(MAIN).aux
