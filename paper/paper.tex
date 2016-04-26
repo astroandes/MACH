@@ -1,66 +1,21 @@
-\documentclass[a4,useAMS,usenatbib,usegraphicx]{mn2e} 
-%\documentclass{latex/emulateapj} 
-%External Packages and personalized macros
-%=========================================================================
-%		EXTERNAL PACKAGES
-%=========================================================================
-\usepackage{amsmath} 
-\usepackage{amssymb} 
-%\usepackage[section]{placeins}
+\documentclass{emulateapj}
+\submitted{{\it Submitted for publication in ApJ}}
+\usepackage{multirow,color,wrapfig,ulem}
 \usepackage {graphicx}
-%\usepackage{graphics}
+\usepackage{graphics}
 \usepackage[dvips]{epsfig}
-\usepackage{epsfig}  
-\usepackage{color}
-\usepackage[normalem]{ulem}
-\usepackage{hyperref}
-\usepackage{caption}
-%Non reposionated tables
-\usepackage{float}
-\restylefloat{table}
-%Multiple columns support for tables
-\usepackage{array}
-\usepackage{booktabs}
-\setlength{\heavyrulewidth}{1.5pt}
-\setlength{\abovetopsep}{4pt}
-\pdfminorversion=5
 
 %=========================================================================
 %		INTERNAL MACROS
 %=========================================================================
-\def\be{\begin{equation}}
-\def\ee{\end{equation}}
-\def\ba{\begin{eqnarray}}
-\def\ea{\end{eqnarray}}
 
-% To highlight comments 
-\definecolor{red}{rgb}{1,0.0,0.0}
-\newcommand{\red}{\color{red}}
-\definecolor{darkgreen}{rgb}{0.0,0.5,0.0}
-\newcommand{\SRK}[1]{\textcolor{darkgreen}{\bf SRK: \textit{#1}}}
-\newcommand{\SRKED}[1]{\textcolor{darkgreen}{\bf #1}}
-\newcommand{\before}[1]{\textcolor{red}{ #1}}
-\newcommand{\after}[1]{\textcolor{darkgreen}{ #1}}
+\newcommand{\avg}[1]{\langle{#1}\rangle}  
 
 \newcommand{\LCDM}{$\Lambda$CDM~}
 \newcommand{\beq}{\begin{eqnarray}}  
 \newcommand{\eeq}{\end{eqnarray}}  
 \newcommand{\zz}{$z\sim 3$} 
-\newcommand{\apj}{ApJ}  
-\newcommand{\jcap}{JCAP}  
-\newcommand{\apjs}{ApJS}  
-\newcommand{\apjl}{ApJL}  
-\newcommand{\aj}{AJ}  
-\newcommand{\mnras}{MNRAS}  
-\newcommand{\mnrassub}{MNRAS accepted}  
-\newcommand{\aap}{A\&A}  
-\newcommand{\aaps}{A\&AS}  
-\newcommand{\araa}{ARA\&A}  
-\newcommand{\nat}{Nature}  
-\newcommand{\physrep}{PhR}
-\newcommand{\pasp}{PASP}    
-\newcommand{\pasj}{PASJ}    
-\newcommand{\avg}[1]{\langle{#1}\rangle}  
+
 \newcommand{\ly}{{\ifmmode{{\rm Ly}\alpha}\else{Ly$\alpha$}\fi}}
 \newcommand{\hMpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc}\fi}}  
 \newcommand{\hGpc}{{\ifmmode{h^{-1}{\rm Gpc}}\else{$h^{-1}$Gpc}\fi}}  
@@ -103,24 +58,25 @@
 
 \begin{document}
 
+
 %=========================================================================
 %		FRONT MATTER
 %=========================================================================
-\title[Halo concentration via the integrated mass profile]{Estimating dark matter  halo concentration using the integrated mass profile} 
-\author[C.N. Poveda-Ruiz, J.E. Forero-Romero, J.C. Mu\~noz-Cuartas]{
-\parbox[t]{\textwidth}{\raggedright 
+\title{A less biased dark matter halo concentration using the integrated mass profile} 
+\author{
   C. N. Poveda-Ruiz \thanks{cn.poveda542@uniandes.edu.co}$^{1}$
   J. E. Forero-Romero \thanks{je.forero@uniandes.edu.co}$^{1}$
   J. C. Mu\~noz-Cuartas \thanks{juan.munozc@udea.edu.co}$^{2}$
 }
-\vspace*{6pt}\\
+
+\affil{
 $^1$Departamento de F\'{i}sica, Universidad de los Andes, Cra. 1
 No. 18A-10, Edificio Ip, Bogot\'a, Colombia\\
 $^2$Instituto de F\'{\i}sica - FCEN, Universidad de Antioquia, Calle
 67 No. 53-108, Medell\'{\i}n, Colombia
 }
 
-\maketitle
+
 
 \begin{abstract}
 We present a new algorithm to estimate the concentration of N-body
@@ -155,10 +111,10 @@ From these results we believe that the new method is a promising tool
 to probe the internal structure of dark matter halos.
 \end{abstract}
 
-\begin{keywords}
-Cosmology: theory, large-scale structure of Universe --
-Methods: data analysis, numerical 
-\end{keywords}
+\keywords{
+Galaxies: halos --- Galaxies: high-redshift --- Galaxies: statistics
+--- Dark Matter --- Methods: numerical 
+}
 
 
 %*************************************************************************
@@ -771,75 +727,6 @@ explore the full potential of this new method.
 
 \bibliographystyle{mn2e}
 \bibliography{references}
-
-\begin{thebibliography}{}
-
-\bibitem[\protect\citeauthoryear{{Duffy}, {Schaye}, {Kay} \& {Dalla
-  Vecchia}}{{Duffy} et~al.}{2008}]{Duffy2008}
-{Duffy} A.~R.,  {Schaye} J.,  {Kay} S.~T.,    {Dalla Vecchia} C.,  2008,
-  \mnras, 390, L64
-
-\bibitem[\protect\citeauthoryear{{Foreman-Mackey}, {Hogg}, {Lang} \&
-  {Goodman}}{{Foreman-Mackey} et~al.}{2013}]{emcee}
-{Foreman-Mackey} D.,  {Hogg} D.~W.,  {Lang} D.,    {Goodman} J.,  2013, \pasp,
-  125, 306
-
-\bibitem[\protect\citeauthoryear{{Klypin}, {Yepes}, {Gottl{\"o}ber}, {Prada} \&
-  {He{\ss}}}{{Klypin} et~al.}{2016}]{Klypin2016}
-{Klypin} A.,  {Yepes} G.,  {Gottl{\"o}ber} S.,  {Prada} F.,    {He{\ss}} S.,
-  2016, \mnras, 457, 4340
-
-\bibitem[\protect\citeauthoryear{{Ludlow}, {Navarro}, {Angulo},
-  {Boylan-Kolchin}, {Springel}, {Frenk} \& {White}}{{Ludlow}
-  et~al.}{2014}]{Ludlow2014}
-{Ludlow} A.~D.,  {Navarro} J.~F.,  {Angulo} R.~E.,  {Boylan-Kolchin} M.,
-  {Springel} V.,  {Frenk} C.,    {White} S.~D.~M.,  2014, \mnras, 441, 378
-
-\bibitem[\protect\citeauthoryear{{Macci{\`o}}, {Dutton} \& {van den
-  Bosch}}{{Macci{\`o}} et~al.}{2008}]{Maccio2008}
-{Macci{\`o}} A.~V.,  {Dutton} A.~A.,    {van den Bosch} F.~C.,  2008, \mnras,
-  391, 1940
-
-\bibitem[\protect\citeauthoryear{{More}, {Kravtsov}, {Dalal} \&
-  {Gottl{\"o}ber}}{{More} et~al.}{2011}]{More2011}
-{More} S.,  {Kravtsov} A.~V.,  {Dalal} N.,    {Gottl{\"o}ber} S.,  2011, \apjs,
-  195, 4
-
-\bibitem[\protect\citeauthoryear{{Mu{\~n}oz-Cuartas}, {Macci{\`o}},
-  {Gottl{\"o}ber} \& {Dutton}}{{Mu{\~n}oz-Cuartas} et~al.}{2011}]{Munoz2011}
-{Mu{\~n}oz-Cuartas} J.~C.,  {Macci{\`o}} A.~V.,  {Gottl{\"o}ber} S.,
-  {Dutton} A.~A.,  2011, \mnras, 411, 584
-
-\bibitem[\protect\citeauthoryear{{Navarro}, {Frenk} \& {White}}{{Navarro}
-  et~al.}{1997}]{NFW}
-{Navarro} J.~F.,  {Frenk} C.~S.,    {White} S.~D.~M.,  1997, \apj, 490, 493
-
-\bibitem[\protect\citeauthoryear{{Navarro}, {Ludlow}, {Springel}, {Wang},
-  {Vogelsberger}, {White}, {Jenkins}, {Frenk} \& {Helmi}}{{Navarro}
-  et~al.}{2010}]{Navarro2010}
-{Navarro} J.~F.,  {Ludlow} A.,  {Springel} V.,  {Wang} J.,  {Vogelsberger} M.,
-  {White} S.~D.~M.,  {Jenkins} A.,  {Frenk} C.~S.,    {Helmi} A.,  2010,
-  \mnras, 402, 21
-
-\bibitem[\protect\citeauthoryear{{Neto}, {Gao}, {Bett}, {Cole}, {Navarro},
-  {Frenk}, {White}, {Springel} \& {Jenkins}}{{Neto} et~al.}{2007}]{Neto2007}
-{Neto} A.~F.,  {Gao} L.,  {Bett} P.,  {Cole} S.,  {Navarro} J.~F.,  {Frenk}
-  C.~S.,  {White} S.~D.~M.,  {Springel} V.,    {Jenkins} A.,  2007, \mnras,
-  381, 1450
-
-\bibitem[\protect\citeauthoryear{{Prada}, {Klypin}, {Cuesta}, {Betancort-Rijo}
-  \& {Primack}}{{Prada} et~al.}{2012}]{Prada2012}
-{Prada} F.,  {Klypin} A.~A.,  {Cuesta} A.~J.,  {Betancort-Rijo} J.~E.,
-  {Primack} J.,  2012, \mnras, 423, 3018
-
-\bibitem[\protect\citeauthoryear{{Riebe}, {Partl}, {Enke}, {Forero-Romero},
-  {Gottl{\"o}ber}, {Klypin}, {Lemson}, {Prada}, {Primack}, {Steinmetz} \&
-  {Turchaninov}}{{Riebe} et~al.}{2013}]{2013AN....334..691R}
-{Riebe} K.,  {Partl} A.~M.,  {Enke} H.,  {Forero-Romero} J.,  {Gottl{\"o}ber}
-  S.,  {Klypin} A.,  {Lemson} G.,  {Prada} F.,  {Primack} J.~R.,  {Steinmetz}
-  M.,    {Turchaninov} V.,  2013, Astronomische Nachrichten, 334, 691
-
-\end{thebibliography}
 
 \end{document}
 
