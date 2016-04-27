@@ -10,4 +10,11 @@ ID = data[:,0]
 
 ii = (mass > 4E13) & (xoff<0.1)
 for i in ID[ii]:
-    print(int(i))
+    haloid = "%06d"%(int(i))
+    output_dir = "/srv/cosmusr/scratch/jforero/Bolshoi/downsample/{}/".format(haloid)
+    input_dir = "/srv/cosmusr/scratch/jforero/Bolshoi/particle_subset/code/CenteredHalos/largest/"
+    input_file = "{}/halo_{}.dat".format(input_dir, haloid)
+    command_a = "mkdir -p {}".format(output_dir)
+    command_b = "python downsample_halo.py -f {} -o {}".format(input_file, output_dir)
+    print(command_a)
+    print(command_b)
