@@ -62,7 +62,7 @@
 %=========================================================================
 %		FRONT MATTER
 %=========================================================================
-\title{A new method to estimate dark matter halo concentrations}
+\title{Avoiding biased estimates of dark matter halo concentrations}
 \author{
   C. N. Poveda-Ruiz \thanks{cn.poveda542@uniandes.edu.co}$^{1}$
   J. E. Forero-Romero \thanks{je.forero@uniandes.edu.co}$^{1}$
@@ -304,6 +304,22 @@ This method has been most recently used by \cite{Klypin2016} to study
 the mass-concentration-redshift relation using the Multidark
 Simulation Suite.
 
+\begin{figure*}
+\begin{center}
+  \includegraphics[width=0.80\textwidth]{avg_foff_bolshoi.pdf}
+\end{center}
+\vspace{-0.5cm}
+\caption{Average value of the fractional offset ($f_{\rm
+    off}$Eq. \ref{eq:f_off}) between the concentration in a halo at
+  high resolution versus its downsampled versions.  Each point is the
+  result of 100 downsampling iterations.  The velocity method
+  noticeably overestimates the concentration up to a factor of $0.25$,
+  while the new method only underestimates the concentrations by up to
+  a factor of $0.05$.
+    \label{fig:downsampling}}
+\end{figure*}
+
+
 
 \subsection{Our proposal: estimate from the integrated mass profile}
 
@@ -445,20 +461,6 @@ We also find that the bias from different concentrations at fixed
 particle number is negligible with respect to the effects induced by
 different particle numbers. 
 
-\begin{figure}
-\begin{center}
-  \includegraphics[width=0.49\textwidth]{avg_foff_bolshoi.pdf}
-\end{center}
-\vspace{-0.5cm}
-\caption{Average value of the fractional offset ($f_{\rm
-    off}$Eq. \ref{eq:f_off}) between the concentration in a halo at
-  high resolution versus its downsampled versions.  Each point is the
-  result of 100 downsampling iterations.  The velocity method
-  noticeably overestimates the concentration up to a factor of $0.25$,
-  while the new method only underestimates the concentrations by up to
-  a factor of $0.05$.
-    \label{fig:downsampling}}
-\end{figure}
 
 \begin{figure}
 \begin{center}
