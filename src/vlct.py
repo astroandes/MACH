@@ -2,9 +2,11 @@ import argparse # For parsing arguments
 
 parser = argparse.ArgumentParser(__file__, description="Velocity adjuster for concentration in halos")
 parser.add_argument("--dir", "-d", help="Path to the directory with the halos", type=str)
+parser.add_argument("--radius", "-r", help="Desired value for the virial radius. If empty the code takes the largest radius.", type=float)
 parser.add_argument("--verbose","-v",help="Turns on verbose mode", action="store_true")
 parser.add_argument("--time", "-t", help="It measures the time of execution", action="store_true")
 parser.add_argument("--output","-o",help="File output", type=str)
+parser.add_argument("--csv", "-c", help="Is input in csv format?")
 args = parser.parse_args()
 if args.dir == None:
     print("Please specify the path of the directory with the option -d\nUse --help for more information")
@@ -43,7 +45,11 @@ def main():
         for filename in directory_list:
             if args.time:
                 t_init = clock()
-            data = np.loadtxt(filename,delimiter=',')
+            if args.csv:
+                data = np.loadtxt(filename,delimiter=',')
+            else:
+                data = np.loadtxt(filename)
+
             x_center,y_center,z_center = 0,0,0
             data = np.transpose(data)
             x,y,z = data
@@ -56,7 +62,13 @@ def main():
             r = np.sqrt(x*x+y*y+z*z)
             r = np.sort(r)
             r = np.delete(r,0)
-            r = r/r[-1]
+
+            if args.radius == None:
+                virial_radius = r[-1]
+            else:
+                virial_radius = args.radius
+
+            r = r/virial_radius
             del x,y,z
 
             n_particles = len(r)
@@ -68,16 +80,17 @@ def main():
             v_max = np.max(v)
             c = fsolve(f,10.0,args=(v_max))[0]
             name = filename.split('/')[-1].split('.')[0]
+            name = name.split('_')[-1]
 
             if args.time:
                 interval = clock()-t_init
-                results.append([name,str(c),str(n_particles),str(interval)])
+                results.append([name,str(c),str(n_particles),str(virial_radius), str(interval)])
                 del interval
             else:
-                results.append([name,str(c),str(n_particles)])
+                results.append([name,str(c),str(n_particles),str(virial_radius)])
 
             if args.verbose:
-                print(name,c,n_particles)
+                print(name,c,n_particles, virial_radius)
 
             del name,c,n_particles
 
@@ -85,9 +98,9 @@ def main():
         print('writing results')
         results = [','.join(x) for x in results]
         if args.time:
-            results = ['haloID,c,n_particles,time'] + results
+            results = ['haloID,c,n_particles,virial_r,time'] + results
         else:
-            results = ['haloID,c,n_particles'] + results
+            results = ['haloID,c,n_particles,virial_r'] + results
         outfile.write('\n'.join(results))
         outfile.close()
 
