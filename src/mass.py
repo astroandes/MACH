@@ -7,6 +7,8 @@ parser.add_argument("--time", "-t", help="It measures the time of execution", ac
 parser.add_argument("--plot","-p",help="Exports useful plots for each halo", action="store_true")
 parser.add_argument("--output","-o",help="File output", type=str)
 parser.add_argument("--threads","-T",help="Number of threads (8 by default)", type=int)
+parser.add_argument("--radius", "-r", help="Desired value for the virial radius. If empty the code takes the largest radius.", type=float)
+parser.add_argument("--csv", "-c", help="Is input in csv format?")
 args = parser.parse_args()
 if args.dir == None:
     print("Please specify the path of the directory with the option -d\nUse --help for more information")
@@ -16,7 +18,7 @@ if args.output == None:
     print("Saving output on output.csv")
 
 if args.threads == None:
-    threads = 8;
+    threads = 1;
 else:
     threads = args.threads
 
@@ -51,6 +53,8 @@ def main():
         outfile = open(args.output,'w')
     try:
 
+
+
         root_path = args.dir
         directory_list = [root_path+'/'+x for x in os.listdir(root_path)]
         directory_list.sort()
@@ -62,7 +66,11 @@ def main():
         for filename in directory_list:
             if args.time:
                 t_init = clock()
-            data = np.loadtxt(filename,delimiter=',')
+            if args.csv:
+                data = np.loadtxt(filename,delimiter=',')
+            else:
+                data = np.loadtxt(filename)
+
             x_center,y_center,z_center = 0,0,0
             data = np.transpose(data)
             x,y,z = data
@@ -75,7 +83,11 @@ def main():
             r = np.sqrt(x*x+y*y+z*z)
             r = np.sort(r)
             r = np.delete(r,0)
-            r = r/r[-1]
+            if args.radius == None:
+                virial_radius = r[-1]
+            else:
+                virial_radius = args.radius
+            r = r/virial_radius
             del x,y,z
 
             n_particles = len(r)
@@ -96,6 +108,7 @@ def main():
             c_low,c_mid,c_high = np.percentile(chain,[16,50,84])
 
             name = filename.split('/')[-1].split('.')[0]
+            name = name.split('_')[-1]
 
             if args.plot:
                 x_min = c_mid - 2*(c_mid - c_low)
@@ -121,23 +134,23 @@ def main():
 
             if args.time:
                 interval = clock()-t_init
-                results.append([name,str(c_low),str(c_mid),str(c_high),str(n_particles),str(interval)])
+                results.append([name,str(c_low),str(c_mid),str(c_high),str(n_particles),str(virial_radius),str(interval)])
                 del interval
             else:
-                results.append([name,str(c_low),str(c_mid),str(c_high),str(n_particles)])
+                results.append([name,str(c_low),str(c_mid),str(c_high),str(n_particles),str(virial_radius)])
 
             if args.verbose:
-                print(name,c_low,c_mid,c_high,n_particles)
+                print(name,c_low,c_mid,c_high,n_particles,virial_radius)
 
-            del name,sampler,chain,c_low,c_mid,c_high,n_particles
+            del name,sampler,chain,c_low,c_mid,c_high,n_particles,virial_radius
 
     finally:
         print('writing results')
         results = [','.join(x) for x in results]
         if args.time:
-            results = ['haloID,c_low,c_mid,c_high,n_particles,time'] + results
+            results = ['haloID,c_low,c_mid,c_high,n_particles,virial_r,time'] + results
         else:
-            results = ['haloID,c_low,c_mid,c_high,n_particles'] + results
+            results = ['haloID,c_low,c_mid,c_high,n_particles,virial_r'] + results
         outfile.write('\n'.join(results))
         outfile.close()
 
