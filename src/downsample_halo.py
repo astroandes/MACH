@@ -52,7 +52,7 @@ def main():
         n_select = int(n_points/factor)
         sample_id = np.random.choice(id_list, n_select)
 
-        output_filename = args.outputdir+'/sample_{}_'.format(i_sample)+ halo_name    
+        output_filename = args.outputdir+'/sample_{:05d}.dat'.format(i_sample)
         print(output_filename, factor, n_select)
         data = x[sample_id], y[sample_id], z[sample_id]
         data = np.transpose(data)
