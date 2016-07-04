@@ -62,7 +62,7 @@
 %=========================================================================
 %		FRONT MATTER
 %=========================================================================
-\title{Finding and avoiding biases in dark matter halo concentrations estimates}
+\title{Finding and controling biases in dark matter halo concentrations estimates}
 \author{
   C. N. Poveda-Ruiz \thanks{cn.poveda542@uniandes.edu.co}$^{1}$
   J. E. Forero-Romero \thanks{je.forero@uniandes.edu.co}$^{1}$
@@ -79,26 +79,28 @@ $^2$Instituto de F\'{\i}sica - FCEN, Universidad de Antioquia, Calle
 
 
 \begin{abstract}
-We present a new algorithm to estimate the concentration of N-body
-dark matter halos using the integrated mass profile.
+We present a jacknife method to estimate the bias on the estimated
+concentration values as a function of particle number in the halo. 
+We find that algorithms based on the maximum radial velocity
+and radial particle binning show similar biases,
+overestimating concentrations by a factor of $15\%-20\%$ for
+halos sampled with $200$ particles.  
+To overcome this bias we propose a new concentration estimation
+algorithm that uses the integrated mass profile.
 The method uses the full particle information without any binning,
 making it reliable in cases when low numerical resolution becomes a
-limitation for other methods.   
-We compare the new algorithm against two other methods:
-maximum radial velocity measurements and radial particle binning.
-Tests on mock and N-body halos show that the accuracy of the new method to
-measure concentrations varies with halo resolution, outperforming the
-other two methods.  
-We also esteimate the mass-concentration relationship on N-body data. 
-We find that in the probed mass range ($10^{10}\hMsun < M_{h} <
-10^{14}\hMsun$) the three methods give consistent results within the
-statistical uncertainties.   
-There is a small deviation at low masses, $M<10^{12}\hMsun$, where
-the new method yields lower median concentration values by $25\%$
-compared to the velocity method; the difference is explained by the bias 
-that the velocity method introduces.
-From these results we believe that this new method is a promising tool
-to probe the internal structure of dark matter halos.
+limitation for other methods, reducing the bias to $2\%-3\%$ for halos
+sampled with $200$ particles. 
+To keep the biases of the velocity and density methods to the same
+low levels, dark matter halos should be sampled with at least $\sim
+1000$ particles.
+We also find that the mass-concentration relationship could be
+shallower than expected from numerical experiments that do not take
+into account this bias. 
+From these results we believe that jacknife downsampling and the
+concentration estimate based on the integral mass densities are
+promising tools to probe the internal structure of dark matter halos
+in numerical simulations.
 \end{abstract}
 
 \keywords{
