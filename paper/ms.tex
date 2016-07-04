@@ -79,27 +79,30 @@ $^2$Instituto de F\'{\i}sica - FCEN, Universidad de Antioquia, Calle
 
 
 \begin{abstract}
-We present a jacknife method to estimate the bias on the estimated
-concentration values as a function of particle number in the halo. 
+We use bootstrapping to estimate the bias of concentration
+estimates on N-body dark matter halos as a function of particle
+number. 
 We find that algorithms based on the maximum radial velocity
-and radial particle binning show similar biases,
-overestimating concentrations by a factor of $15\%-20\%$ for
-halos sampled with $200$ particles.  
-To overcome this bias we propose a new concentration estimation
-algorithm that uses the integrated mass profile.
+and radial particle binning have increaing biases with decreasing 
+particle numbers.
+For instance, these methods overestimate concentrations by 
+$15\%-20\%$ for halos sampled with $200$ particles.  
+To overcome this bias we propose a new algorithm based on the
+integrated mass profile. 
 The method uses the full particle information without any binning,
 making it reliable in cases when low numerical resolution becomes a
-limitation for other methods, reducing the bias to $2\%-3\%$ for halos
-sampled with $200$ particles. 
+limitation for other methods.
+This method reduces the bias to $2\%-3\%$ for halos sampled with
+$200$ particles.  
 To keep the biases of the velocity and density methods to the same
-low levels, dark matter halos should be sampled with at least $\sim
-1000$ particles.
-We also find that the mass-concentration relationship could be
-shallower than expected from numerical experiments that do not take
-into account this bias. 
-From these results we believe that jacknife downsampling and the
-concentration estimate based on the integral mass densities are
-promising tools to probe the internal structure of dark matter halos
+low levels as in the new method, dark matter halos should be sampled
+with at least $\sim 2000$ particles. 
+We also show that the mass-concentration relationship could be
+shallower than expected from numerical experiments once the biases 
+of the different concentration measurements are taken into account.
+From these results we believe that bootstrapping and the
+concentration estimation based on the integrated mass are
+valuable tools to probe the internal structure of dark matter halos
 in numerical simulations.
 \end{abstract}
 
@@ -122,16 +125,16 @@ a DM halo internal structure in the last three decades.
 The internal DM distribution in a halo is usually parameterized
 through the density profile.  In a first approximation this profile is
 spherically symmetric; the density only depends on the radial
-coordinate.  One {\bf of} the most popular radial parameterizations is
-the Navarro-Frenk-White (NFW) profile \citep{NFW}.  If one is not
-interested in the very central region of the dark matter halo (where
+coordinate.  One of the most popular radial parameterizations is
+the Navarro-Frenk-White (NFW) profile \citep{NFW}.  
+This profile can be considered as universal \citep{Navarro2010}, assuming that 
+one is not interested in the very central region of the dark matter halo where
 galaxy formation takes place, and where the effects of baryon physics
-on dark matter distribution are still unknown) one can also assume
-that this profile is universal.  \citep{Navarro2010}.  This profile is
-a double power law in radius, where the transition break happens at
-the so-called scale radius, $r_s$.  The ratio between the scale radius
-and the halo virial radius $R_v$ is known as the concentration
-$c=R_v/r_s$.
+on dark matter distribution are still unknown.
+This profile is a double power law in radius, where the transition
+break happens at the so-called scale radius, $r_s$.  The ratio between
+the scale radius and the halo virial radius $R_v$ is known as the
+concentration $c=R_v/r_s$.
 
 
 The concentration of the NFW profile provides a conceptual framework
@@ -159,30 +162,41 @@ algebraic equation dependent on this maximum value.
 The first method is straightforward to apply but presents two
 disadvantages.  First, it requires a large number of particles in
 order to have a proper density estimate in each bin.  This makes the
-method robust only for halos with at least $10^3$ particles.  The
+method robust only for halos with at least $10^2$ particles.  The
 second problem is that there is not a way to estimate the optimal
 radial bin size, different choices may produce different results for
 the concentration.
 
-The second method solves the two problems mentioned above.  It works
-with low particle numbers and does not involve data binning.  However,
+The second method solves the two problems mentioned above.  
+It works with low particle numbers and does not involve data binning.  
+However,
 it effectively takes into account only a single data point and
 discards the behavior of the ratio $V_{\rm circ}/V_{\rm vir}$ below
-and above its maxima.  Small fluctuations on the value of this maximum
+and above its maxima.  
+Small fluctuations on the value of this maximum
 can yield large perturbations on the estimated concentration
 parameter.
 
+
 In this paper we present a third alternative based on fitting the
-integrated mass profile.  This approach has two advantages with
-respect to the above mentioned methods.  It does not involve any data
-binning and does not throw away data points.  This translates into a
-robust estimate even at low resolution/particle numbers.  Furthermore,
-since the method does not require any binning, there is no need to
-tune numerical parameters.  This method provides a new independent
-method to estimate the concentration parameter.  Here we provide a
-detailed description of the method and a comparison against the two
-traditional techniques by measuring its performance both on mock and
-N-body halos.
+integrated mass profile.  
+This approach has two advantages with respect to the above mentioned methods.  
+It does not involve any data binning and does not throw away data points.  
+This translates into a robust estimate even at low resolution/particle numbers.  
+Furthermore, since the method does not require any binning, there is no need to
+tune numerical parameters.   
+This method provides a new independent method to estimate the
+concentration parameter.   
+
+In order to asses the quality of the three different methods we use
+bootstraping on halos that are sampled with $10^{5}$ particles.
+This allows us to estimate the bias and standard deviation on the
+concentration estimates as a function of particle number.
+
+
+
+
+
 
 
 \section{Basic properties of the NFW density profile}
@@ -355,6 +369,7 @@ at $x=x_i$ for a given value of the concentration parameter $c$ and
 the $i$ index sums over all the particles in the numerical profile.
 From the $\chi^2$ distribution we find the optimal value of the
 concentration and its associated uncertainty.
+
 
 
 \section{Results}
@@ -530,7 +545,11 @@ classical methods.
  
 We use data from the Bolshoi cosmological simulation that follows the
 non-linear evolution of a dark matter density field sampled with
-$2048^3$ particles over a cubic box of $250\ \hMpc$ on a side.  The
+$2048^3$ particles over a cubic box of $250\ \hMpc$ on a side.  
+The cosmological parameters use a Hubble parameter $h=0.73$, a matter density
+$\Omega_m=0.3071$ and a normalization of the power spectrum
+$\sigma_8=0.82$. 
+The
 data is publicly available at \url{http://www.cosmosim.org/}.  More
 details about the structure of the database and the simulation can be
 found in \citep{2013AN....334..691R}.
@@ -554,18 +573,37 @@ interest of providing a fair comparison against the density method we
 only report results from overdensities with at least $200$ particles
 ($2.6\times 10^{10}$\hMsun).
 
-\subsubsection{Convergence Test using Downsampling}
+We also use public data from the Via Lactea simulation project
+\citep{2008Natur.454..735D}.  
+This simulation was run for a single isolated halo with a virial mass
+of the order of $10^{12}$\hMsun using the parallel tree code PKDGRAV
+\citep{2001PhDT........21S}.  
+The simulation used $\sim 2\times 10^{8}$ particles to resolve this
+region.
+The cosmological parameters are diffferent from those in the Bolshoi
+simulation, with a Hubble parameter $h=0.73$, a matter density
+$\Omega_m=0.238$ and a normalization of the power spectrum
+$\sigma_8=0.74$. 
+The data available to the public corresponds to a downsampled set 
+of $10^5$ particles which corresponds to a particle mass of
+$2.24\times 10^{7}$\hMsun.  
 
-We perform first a convergence test on the N-body data to find
-possible biases in the concentration estimates as a function of
-particle number.  
-We select $8$ halos from the simulation that have at
-least $3\times 10^5$ particles.  
-We then randomly downsample the total number of particles in each halo
-by factors of $10, 20, 45, 100, 215, 460, 1000$ to measure its
-concentration with both the integrated mass and the velocity
-method. For each downsampling factor we repeat the operation $100$
-times.  
+
+We use a set of two very different simulations to demonstrate that the 
+results of our bootstraping tests are independent of the kind of
+parent simulation.
+
+
+\section{Bootstrapping to estimate biases}
+\label{sec:bootstrapping}
+
+Avoiding biases with varying simulation resolution is one of the most
+important goals of a robust method to estimate halo concentration. 
+We propose bootstraping individual high resolution halos to quantify these
+possible biases.
+In this experiment we take halos sampled with at least $10^{5}$
+particles and subsample each halo by factors of $2$ up to $10^{3}$ to
+measure the concentration every time the halo is resampled.
 
 The average concentration value for the largest number of particles,
 $c_{N_{max}}$, provides with a baseline to compare all the other
@@ -577,6 +615,18 @@ f_{\rm off} = c_{N} / c_{N_{max}} - 1,
 \end{equation}
 to account for the offset between the concentration at a given
 downsampled particle number $c_{N}$ and the baseline $c_{N_{max}}$.
+
+
+
+
+We select $8$ halos from the simulation that have at
+least $3\times 10^5$ particles.  
+We then randomly downsample the total number of particles in each halo
+by factors of $10, 20, 45, 100, 215, 460, 1000$ to measure its
+concentration with both the integrated mass and the velocity
+method. For each downsampling factor we repeat the operation $100$
+times.  
+
 
 Figure \ref{fig:downsampling} summarizes our results.  The plot shows
 the average value of $f_{\rm off}$ as a function of the particle
@@ -721,73 +771,8 @@ explore the full potential of this new method.
  Antioquia''.    
 
 \bibliographystyle{apj}
-%\bibliography{references}
-\begin{thebibliography}{12}
-\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\bibliography{references}
 
-\bibitem[{{Duffy} {et~al.}(2008){Duffy}, {Schaye}, {Kay}, \& {Dalla
-  Vecchia}}]{Duffy2008}
-{Duffy}, A.~R., {Schaye}, J., {Kay}, S.~T., \& {Dalla Vecchia}, C. 2008,
-  \mnras, 390, L64
-
-\bibitem[{{Foreman-Mackey} {et~al.}(2013){Foreman-Mackey}, {Hogg}, {Lang}, \&
-  {Goodman}}]{emcee}
-{Foreman-Mackey}, D., {Hogg}, D.~W., {Lang}, D., \& {Goodman}, J. 2013, \pasp,
-  125, 306
-
-\bibitem[{{Klypin} {et~al.}(2016){Klypin}, {Yepes}, {Gottl{\"o}ber}, {Prada},
-  \& {He{\ss}}}]{Klypin2016}
-{Klypin}, A., {Yepes}, G., {Gottl{\"o}ber}, S., {Prada}, F., \& {He{\ss}}, S.
-  2016, \mnras, 457, 4340
-
-\bibitem[{{Ludlow} {et~al.}(2014){Ludlow}, {Navarro}, {Angulo},
-  {Boylan-Kolchin}, {Springel}, {Frenk}, \& {White}}]{Ludlow2014}
-{Ludlow}, A.~D., {Navarro}, J.~F., {Angulo}, R.~E., {Boylan-Kolchin}, M.,
-  {Springel}, V., {Frenk}, C., \& {White}, S.~D.~M. 2014, \mnras, 441, 378
-
-\bibitem[{{Macci{\`o}} {et~al.}(2008){Macci{\`o}}, {Dutton}, \& {van den
-  Bosch}}]{Maccio2008}
-{Macci{\`o}}, A.~V., {Dutton}, A.~A., \& {van den Bosch}, F.~C. 2008, \mnras,
-  391, 1940
-
-\bibitem[{{More} {et~al.}(2011){More}, {Kravtsov}, {Dalal}, \&
-  {Gottl{\"o}ber}}]{More2011}
-{More}, S., {Kravtsov}, A.~V., {Dalal}, N., \& {Gottl{\"o}ber}, S. 2011, \apjs,
-  195, 4
-
-\bibitem[{{Mu{\~n}oz-Cuartas} {et~al.}(2011){Mu{\~n}oz-Cuartas}, {Macci{\`o}},
-  {Gottl{\"o}ber}, \& {Dutton}}]{Munoz2011}
-{Mu{\~n}oz-Cuartas}, J.~C., {Macci{\`o}}, A.~V., {Gottl{\"o}ber}, S., \&
-  {Dutton}, A.~A. 2011, \mnras, 411, 584
-
-\bibitem[{{Navarro} {et~al.}(1997){Navarro}, {Frenk}, \& {White}}]{NFW}
-{Navarro}, J.~F., {Frenk}, C.~S., \& {White}, S.~D.~M. 1997, \apj, 490, 493
-
-\bibitem[{{Navarro} {et~al.}(2010){Navarro}, {Ludlow}, {Springel}, {Wang},
-  {Vogelsberger}, {White}, {Jenkins}, {Frenk}, \& {Helmi}}]{Navarro2010}
-{Navarro}, J.~F., {Ludlow}, A., {Springel}, V., {Wang}, J., {Vogelsberger}, M.,
-  {White}, S.~D.~M., {Jenkins}, A., {Frenk}, C.~S., \& {Helmi}, A. 2010,
-  \mnras, 402, 21
-
-\bibitem[{{Neto} {et~al.}(2007){Neto}, {Gao}, {Bett}, {Cole}, {Navarro},
-  {Frenk}, {White}, {Springel}, \& {Jenkins}}]{Neto2007}
-{Neto}, A.~F., {Gao}, L., {Bett}, P., {Cole}, S., {Navarro}, J.~F., {Frenk},
-  C.~S., {White}, S.~D.~M., {Springel}, V., \& {Jenkins}, A. 2007, \mnras, 381,
-  1450
-
-\bibitem[{{Prada} {et~al.}(2012){Prada}, {Klypin}, {Cuesta}, {Betancort-Rijo},
-  \& {Primack}}]{Prada2012}
-{Prada}, F., {Klypin}, A.~A., {Cuesta}, A.~J., {Betancort-Rijo}, J.~E., \&
-  {Primack}, J. 2012, \mnras, 423, 3018
-
-\bibitem[{{Riebe} {et~al.}(2013){Riebe}, {Partl}, {Enke}, {Forero-Romero},
-  {Gottl{\"o}ber}, {Klypin}, {Lemson}, {Prada}, {Primack}, {Steinmetz}, \&
-  {Turchaninov}}]{2013AN....334..691R}
-{Riebe}, K., {Partl}, A.~M., {Enke}, H., {Forero-Romero}, J., {Gottl{\"o}ber},
-  S., {Klypin}, A., {Lemson}, G., {Prada}, F., {Primack}, J.~R., {Steinmetz},
-  M., \& {Turchaninov}, V. 2013, Astronomische Nachrichten, 334, 691
-
-\end{thebibliography}
 
 \end{document}
 
