@@ -467,16 +467,12 @@ parent simulation.
 \section{Results}
 \label{sec:results}
 
-
 \subsection{Bootstrapping to estimate biases}
 \label{sec:bootstrapping}
 
+We use bootstraping of individual high resolution halos to quantify
+biases for different methods used to esteimate concentrations. 
 
-
-Avoiding biases with varying simulation resolution is one of the most
-important goals of a robust method to estimate halo concentration. 
-We propose bootstraping individual high resolution halos to quantify these
-possible biases.
 In this experiment we take halos sampled with at least $10^{5}$
 particles and subsample each halo by factors of $2$ up to $10^{3}$ to
 measure the concentration every time the halo is resampled.
@@ -591,29 +587,31 @@ reach a plateau in the halo mass range $10^{10}< M_{h}/\hMsun <
 \section{Conclusions}
 \label{sec:conclusions}
 
-In this paper we presented a new method to estimate the concentration
-of dark matter halos in N-body simulations.  We tested the method on
-mock halo data to study the impact of total number of particles and
-input concentration on the retrieved values.  We compared these
-results against two other methods commonly used in the literature to
-estimate concentrations.  For all methods, the accuracy in retrieving
-the input concentration increases with the number of particles as
-summarized in Figure \ref{fig:error}.  The new method systematically
-outperforms the other two.
+In this paper we used bootstrapping on dark matter halos resolved with a
+large number of particles ($\sim 10^5$) in order to quantify biases on
+concentration estimates. 
+We found that methods commonly used in the literature present a large
+bias in the concentration by overestimating it by factors of
+$15\%-20\%$ for halos with $200$ particles. 
+The scaling of the bias as a function of particle number was found in
+two very different kinds of simulations, one cosmological and the
+other of an individual high resolution halo, suggesting its universal
+nature. 
 
-We also applied the method to halos extracted from a cosmological
-N-body simulation.  Using this data we showed that the new method is
-robust with respect to a decreasing number of particles in the halos.
-On the other hand we showed that the velocity method has a systematic
-bias that overestimates the concentration for halos with a low particle
-number up to a factor of $25\%$.
+This provided a motivation to introduce a new method to estimate the
+concentration that shows a lower bias.
+The method is based on the integrated mass profile. 
+We also implemented a fitting procedure based on a Markov Chain Monte Carlo
+algorithm.
+In the bootstrapping experiment this method showed a bias on the order
+of $2\%-3\%$ for halos with $200$ particles. 
+
+
+
 
 We provide for the first time in the literature a direct way to
 measure the bias in the estimated halo concentration at low particle numbers and
 a way to use it to make corrections on the estimates. 
-In Section \ref{subsec:cosmo} we presented a simple method that can be used on any
-dataset to estimate the errors and correct them when estimating the
-concentration at low particle numbers. 
 
 We also used the N-body simulation to estimate the impact on the mass
 concentration relationship.  
