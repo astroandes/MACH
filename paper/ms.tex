@@ -557,10 +557,12 @@ concentrations ($c<6$) and high ($M_h>10^{12}\hMsun$) halo masses.
 Recently \citep{Klypin2016} summarized results for the
 mass-concentration relationship coming from different methods and
 datasets to show that similar systematic offsets are present.
-However, to the best of our knowledge, a systematic and modern study of
-the mass-concentration relationship spanning a wide range in mass,
-using a fixed dataset but different fitting methods has not been
-presented in the literature.
+\citep{2014MNRAS.441.3359D} studied the mass-concentration
+relationship using the maximum velocity and density methods and did
+not report any significant difference. However, they implemented a
+modified version of the velocity algorithm that uses the data binning
+obtained for the density algorithm. 
+
 
 We then notice that the new method closely follows the results of
 the velocity method at higher masses, $M_h>10^{12}\hMsun$ or
@@ -591,49 +593,41 @@ In this paper we quantified biases on concentration numerical estimates by
 bootstrapping dark matter halos resolved with a  large number of
 particles ($\sim 10^5$).
 We found that methods commonly used in the literature present a large
-bias in the concentration by overestimating it by factors of
-$15\%$-$20\%$ for halos with $200$ particles, or $6\%$-$8\%$ for halos
-with $500$ particles. 
+bias by overestimating concentrations by factors of $13\%$-$20\%$ for
+halos with $200$ particles, or $7\%$-$10\%$ for halos with $500$
+particles.  
 This procedure is a new way to quantify the bias in concentration
-estimates.
+estimates with the advantage that it works without having to run new
+simulations. 
 
-The scaling of the bias as a function of particle number was found using
-two very different kinds of simulations, one cosmological and the
-other of an individual high resolution halo.
-
-This results motivated the introduction of a new method to estimate the
-concentration with a lower bias at low particle numbers.
-The method we presented is based on the integrated mass profile. 
-To show its performance on simulation data Ww also implemented a
-fitting procedure based on a Markov Chain Monte Carlo algorithm.
-In the bootstrapping experiment this method showed a bias on the order
-of $2\%-3\%$ for halos with $200$ particles and less than $1\%$ for
-halos with $500$ particles or more. 
+These results motivated us to introduction a method with a robust
+performace at low particle numbers.
+This method is based on the integrated mass profile. 
+The results of the algorithm on the same data sample showed a bias  of
+$2\%-3\%$ for halos with $200$ particles and less than $1\%$ for halos
+with $500$ particles or more.  
 
 
-We also used the N-body simulation to estimate the impact on the mass
-concentration relationship of the new method to estimate
-concentration.   
-Although the three methods are in broad agreement within their
-uncertainties there are some noticeable differences.  
+We also measured the mass concentration relationship. 
+The three methods are in broad agreement within the statistical
+uncertainties, although there are some noticeable differences.
 The first difference is that the density method produces
 systematically higher concentrations by a factor of $15\%$ compared to
 the velocity method.
-This systematic offset has been reported in different datasets and
-techniques to measure concentrations, without any conclusive
-explanation for its origin \citep{Klypin2016}.
+This systematic offset has been reported before with the same dataset 
+\citep{Prada2012} and with different simulations \citep{Klypin2016}
+without any conclusive explanation for its origin. 
 The second difference is that the velocity and integrated mass methods
 start to differ for masses below $10^{12}\hMsun$.  
-We found that a correction of the results by the bias factor found
-using the same N-body data can bring these two methods into
-agreement. 
+We found that correcting the mean concentration by the mean bias
+factor brings these two techniques into agreement
 
-These are encouraging results.  
-They show that using the integrated mass profile to find the Dark
-Matter halo concentration is a tool deserving deeper scrutiny.  
+These results show that using the integrated mass profile to find the
+Dark Matter halo concentration is a tool deserving deeper scrutiny.   
 Further tests with larger simulated volumes, varying numerical
 resolution and different density profiles are the next natural step to
 explore the full potential of this new method. 
+
 
 \vspace{0.1cm}
 
@@ -645,7 +639,84 @@ explore the full potential of this new method.
  Antioquia''.    
 
 \bibliographystyle{apj}
-\bibliography{references}
+%\bibliography{references}
+\begin{thebibliography}{15}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{{Diemand} {et~al.}(2008){Diemand}, {Kuhlen}, {Madau}, {Zemp},
+  {Moore}, {Potter}, \& {Stadel}}]{2008Natur.454..735D}
+{Diemand}, J., {Kuhlen}, M., {Madau}, P., {Zemp}, M., {Moore}, B., {Potter},
+  D., \& {Stadel}, J. 2008, \nat, 454, 735
+
+\bibitem[{{Duffy} {et~al.}(2008){Duffy}, {Schaye}, {Kay}, \& {Dalla
+  Vecchia}}]{Duffy2008}
+{Duffy}, A.~R., {Schaye}, J., {Kay}, S.~T., \& {Dalla Vecchia}, C. 2008,
+  \mnras, 390, L64
+
+\bibitem[{{Dutton} \& {Macci{\`o}}(2014)}]{2014MNRAS.441.3359D}
+{Dutton}, A.~A., \& {Macci{\`o}}, A.~V. 2014, \mnras, 441, 3359
+
+\bibitem[{{Foreman-Mackey} {et~al.}(2013){Foreman-Mackey}, {Hogg}, {Lang}, \&
+  {Goodman}}]{emcee}
+{Foreman-Mackey}, D., {Hogg}, D.~W., {Lang}, D., \& {Goodman}, J. 2013, \pasp,
+  125, 306
+
+\bibitem[{{Klypin} {et~al.}(2016){Klypin}, {Yepes}, {Gottl{\"o}ber}, {Prada},
+  \& {He{\ss}}}]{Klypin2016}
+{Klypin}, A., {Yepes}, G., {Gottl{\"o}ber}, S., {Prada}, F., \& {He{\ss}}, S.
+  2016, \mnras, 457, 4340
+
+\bibitem[{{Ludlow} {et~al.}(2014){Ludlow}, {Navarro}, {Angulo},
+  {Boylan-Kolchin}, {Springel}, {Frenk}, \& {White}}]{Ludlow2014}
+{Ludlow}, A.~D., {Navarro}, J.~F., {Angulo}, R.~E., {Boylan-Kolchin}, M.,
+  {Springel}, V., {Frenk}, C., \& {White}, S.~D.~M. 2014, \mnras, 441, 378
+
+\bibitem[{{Macci{\`o}} {et~al.}(2008){Macci{\`o}}, {Dutton}, \& {van den
+  Bosch}}]{Maccio2008}
+{Macci{\`o}}, A.~V., {Dutton}, A.~A., \& {van den Bosch}, F.~C. 2008, \mnras,
+  391, 1940
+
+\bibitem[{{More} {et~al.}(2011){More}, {Kravtsov}, {Dalal}, \&
+  {Gottl{\"o}ber}}]{More2011}
+{More}, S., {Kravtsov}, A.~V., {Dalal}, N., \& {Gottl{\"o}ber}, S. 2011, \apjs,
+  195, 4
+
+\bibitem[{{Mu{\~n}oz-Cuartas} {et~al.}(2011){Mu{\~n}oz-Cuartas}, {Macci{\`o}},
+  {Gottl{\"o}ber}, \& {Dutton}}]{Munoz2011}
+{Mu{\~n}oz-Cuartas}, J.~C., {Macci{\`o}}, A.~V., {Gottl{\"o}ber}, S., \&
+  {Dutton}, A.~A. 2011, \mnras, 411, 584
+
+\bibitem[{{Navarro} {et~al.}(1997){Navarro}, {Frenk}, \& {White}}]{NFW}
+{Navarro}, J.~F., {Frenk}, C.~S., \& {White}, S.~D.~M. 1997, \apj, 490, 493
+
+\bibitem[{{Navarro} {et~al.}(2010){Navarro}, {Ludlow}, {Springel}, {Wang},
+  {Vogelsberger}, {White}, {Jenkins}, {Frenk}, \& {Helmi}}]{Navarro2010}
+{Navarro}, J.~F., {Ludlow}, A., {Springel}, V., {Wang}, J., {Vogelsberger}, M.,
+  {White}, S.~D.~M., {Jenkins}, A., {Frenk}, C.~S., \& {Helmi}, A. 2010,
+  \mnras, 402, 21
+
+\bibitem[{{Neto} {et~al.}(2007){Neto}, {Gao}, {Bett}, {Cole}, {Navarro},
+  {Frenk}, {White}, {Springel}, \& {Jenkins}}]{Neto2007}
+{Neto}, A.~F., {Gao}, L., {Bett}, P., {Cole}, S., {Navarro}, J.~F., {Frenk},
+  C.~S., {White}, S.~D.~M., {Springel}, V., \& {Jenkins}, A. 2007, \mnras, 381,
+  1450
+
+\bibitem[{{Prada} {et~al.}(2012){Prada}, {Klypin}, {Cuesta}, {Betancort-Rijo},
+  \& {Primack}}]{Prada2012}
+{Prada}, F., {Klypin}, A.~A., {Cuesta}, A.~J., {Betancort-Rijo}, J.~E., \&
+  {Primack}, J. 2012, \mnras, 423, 3018
+
+\bibitem[{{Riebe} {et~al.}(2013){Riebe}, {Partl}, {Enke}, {Forero-Romero},
+  {Gottl{\"o}ber}, {Klypin}, {Lemson}, {Prada}, {Primack}, {Steinmetz}, \&
+  {Turchaninov}}]{2013AN....334..691R}
+{Riebe}, K., {Partl}, A.~M., {Enke}, H., {Forero-Romero}, J., {Gottl{\"o}ber},
+  S., {Klypin}, A., {Lemson}, G., {Prada}, F., {Primack}, J.~R., {Steinmetz},
+  M., \& {Turchaninov}, V. 2013, Astronomische Nachrichten, 334, 691
+
+\bibitem[{{Stadel}(2001)}]{2001PhDT........21S}
+{Stadel}, J.~G. 2001, PhD thesis, UNIVERSITY OF WASHINGTON
+
+\end{thebibliography}
 
 
 \end{document}
