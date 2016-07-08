@@ -86,7 +86,7 @@ We find that algorithms based on the maximum radial velocity
 and radial particle binning have increaing biases with decreasing 
 particle numbers.
 These methods overestimate the concentration by 
-$15\%-20\%$ for halos sampled with $200$ particles, and $7\%$-$8\%$
+$15\%-20\%$ for halos sampled with $200$ particles, and $7\%$-$10\%$
 for halos sampled with $500$ particles. 
 To control this bias level we propose a new algorithm based on the
 integrated mass profile. 
@@ -572,6 +572,8 @@ concentration.
  
 \subsection{Impact on the Mass-Concentration Relationship}
 
+We now turn to the question of quantifying the concentration results
+of the new algorithm and possible applications of the biases found. 
 
 Figure \ref{fig:concentration} shows the mass-concentration
 relationship for the density, velocity and integrated mass method.
@@ -579,41 +581,38 @@ The left panel shows the results as they are produced by each of the
 algorithms, the thin dashed line marks the results by
 \citep{Prada2012}.
 
-We notice first that the results from the density method have a
+We notice first that the results from the new algorithm follow very
+closely the velocity algorithm at high masses ($M_h>10^{12}\hMsun$ or
+equivalently for $>8\times10^3$ particles). 
+For lower masses there is a difference between the median of the two
+methods, but they are still consistent within the statistical
+uncertainties.
+
+We also notice that the results from the density method have a
 systematic $15\%$offset from the velocity methods.  
-This offset was already presented by \citep{Prada2012} for low
+This offset was already presented by \cite{Prada2012} for low
 concentrations ($c<6$) and high ($M_h>10^{12}\hMsun$) halo masses.  
 Recently \citep{Klypin2016} summarized results for the
 mass-concentration relationship coming from different methods and
 datasets to show that similar systematic offsets are present.
 \citep{2014MNRAS.441.3359D} studied the mass-concentration
 relationship using the maximum velocity and density methods and did
-not report any significant difference. However, they implemented a
-modified version of the velocity algorithm that uses the data binning
-obtained for the density algorithm. 
+not report any significant difference. 
+However, they implemented a modified version of the velocity algorithm
+that uses the data binning obtained for the density algorithm.  
 
-
-The new method closely follows the results of
-the velocity method at higher masses, $M_h>10^{12}\hMsun$ or
-equivalently for $>5\times10^3$ particles.  
-For masses below that threshold the new method saturates at a
-concentration value of $\sim 8$ while the velocity method continues to
-give higher concentration values. 
 
 We hypothesize that the increase in the results for the velocity
-method below $5\times 10^{4}$ particles come from the systematic bias
-described in the previous subsection.  To test the general consistency
-of this hypothesis we correct the concentration values in the
-velocity and integrated mass methods by a factor of $1/(1+f_{\rm
-  off})$, using the definition in Equation (\ref{eq:f_off}) and the 
+and density methods below $8\times 10^{3}$ particles come from the
+systematic bias described in the previous section.  
+To test the general consistency of this hypothesis we correct the
+concentration values in the velocity and integrated mass methods by a
+factor of $1/(1+f_{\rm  off})$, using the definition in Equation
+(\ref{eq:f_off}) and the  
 parameters obtained from the data presented in Figure
 (\ref{fig:downsampling}).  
 The correction brings into perfect agreement the results between the
-velocity and the integrated mass method.  
-This suggests that the concentration at lower masses might very well
-reach a plateau in the halo mass range $10^{10}< M_{h}/\hMsun <
-10^{12}$ . 
-
+velocity/density methods and the new algorithm.
 
 \section{Conclusions}
 \label{sec:conclusions}
@@ -622,7 +621,7 @@ In this paper we quantified biases on concentration numerical estimates by
 bootstrapping dark matter halos resolved with a  large number of
 particles ($\sim 10^5$).
 We found that methods commonly used in the literature present a large
-bias by overestimating concentrations by factors of $13\%$-$20\%$ for
+bias by overestimating concentrations by factors of $15\%$-$20\%$ for
 halos with $200$ particles, or $7\%$-$10\%$ for halos with $500$
 particles.  
 This procedure is a new way to quantify the bias in concentration
