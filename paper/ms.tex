@@ -88,21 +88,21 @@ particle numbers.
 These methods overestimate the concentration by 
 $15\%-20\%$ for halos sampled with $200$ particles, and $7\%$-$10\%$
 for halos sampled with $500$ particles. 
-To control this bias level we propose a new algorithm based on the
-integrated mass profile. 
+To control this bias level we propose a new algorithm to estimate halo
+concentrations based on the integrated mass profile. 
 The method uses the full particle information without any binning,
 making it reliable in cases when low numerical resolution becomes a
 limitation for other methods.
 This method reduces the bias to $2\%-3\%$ for halos sampled with
 $200$-$500$ particles.
 To keep the biases of the velocity and density methods to the same
-low levels as in the new method, only halos sampled
+low levels as in the integrated mass method, we find that only halos sampled
 with at least $\sim 4000$ particles should be used.
 We also show that the mass-concentration relationship could be
 shallower than expected from numerical experiments once the biases 
 of the different concentration measurements are taken into account.
 From these results we believe that bootstrapping and the
-concentration estimation based on the integrated mass are
+concentration estimation based on the integrated mass profile are
 valuable tools to probe the internal structure of dark matter halos
 in numerical simulations.
 \end{abstract}
