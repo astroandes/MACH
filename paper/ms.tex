@@ -1,5 +1,5 @@
 \documentclass{emulateapj}
-\submitted{{\it Submitted for publication in ApJ}}
+\submitted{{\it Submitted for publication in ApJL}}
 \usepackage{multirow,color,wrapfig,ulem}
 \usepackage {graphicx}
 \usepackage{graphics}
@@ -62,7 +62,7 @@
 %=========================================================================
 %		FRONT MATTER
 %=========================================================================
-\title{Finding and controling biases in dark matter halo concentration estimates}
+\title{Quantifying and controlling biases in dark matter halo concentration estimates}
 \author{
   C. N. Poveda-Ruiz \thanks{cn.poveda542@uniandes.edu.co}$^{1}$
   J. E. Forero-Romero \thanks{je.forero@uniandes.edu.co}$^{1}$
@@ -83,26 +83,25 @@ We use bootstrapping to estimate the bias of concentration
 estimates on N-body dark matter halos as a function of particle
 number. 
 We find that algorithms based on the maximum radial velocity
-and radial particle binning have increaing biases with decreasing 
-particle numbers.
-These methods overestimate the concentration by 
-$15\%-20\%$ for halos sampled with $200$ particles, and $7\%$-$10\%$
+and radial particle binning tend to overestimate the concentration by 
+$15\%-20\%$ for halos sampled with $200$ particles and by $7\%$-$10\%$
 for halos sampled with $500$ particles. 
-To control this bias level we propose a new algorithm to estimate halo
-concentrations based on the integrated mass profile. 
+To control this bias at low particle numbers we propose a new
+algorithm to estimate halo concentrations based on the integrated mass
+profile.   
 The method uses the full particle information without any binning,
 making it reliable in cases when low numerical resolution becomes a
 limitation for other methods.
-This method reduces the bias to $2\%-3\%$ for halos sampled with
+This method reduces the bias to $1\%-3\%$ for halos sampled with
 $200$-$500$ particles.
-To keep the biases of the velocity and density methods to the same
-low levels as in the integrated mass method, we find that only halos sampled
-with at least $\sim 4000$ particles should be used.
+The velocity and density methods have to use halos with least $\sim
+4000$ particles in order to keep the biases down to the same low
+level. 
 We also show that the mass-concentration relationship could be
 shallower than expected from numerical experiments once the biases 
 of the different concentration measurements are taken into account.
-From these results we believe that bootstrapping and the
-concentration estimation based on the integrated mass profile are
+These results show that bootstrapping and the
+concentration estimates based on the integrated mass profile are
 valuable tools to probe the internal structure of dark matter halos
 in numerical simulations.
 \end{abstract}
@@ -178,7 +177,7 @@ Small fluctuations on the value of this maximum
 can yield large perturbations on the estimated concentration
 parameter.
 
-In this paper we use bootstraping to estimate the bias and standard
+In this letter we use bootstrapping to estimate the bias and standard
 deviation on the concentration estimates as a function of particle
 number. 
 We show that the two standard methods to estimate concentrations have
@@ -231,7 +230,7 @@ r_v^3$.  From these virial quantities we define new dimensionless
 variables for the radius and mass $x\equiv r/r_v$ and $m\equiv
 M(<r)/M_v$.
 
-In this paper we use $\Delta_h=740$, a number roughly corresponding to
+In this letter we use $\Delta_h=740$, a number roughly corresponding to
 200 times the critical density at redshift z=0.
 
 
@@ -326,9 +325,9 @@ corresponds to the definition in Eq. (\ref{eq:f_NFW}).
   sampling. 
   To allow a fair comparison with $f_{\rm off}$, this uncertainty has
   been normalized by the preferred concentration value for each halo. 
-  In both cases (bootstrapping for individul halos and MCMC fit of a
+  In both cases (bootstrapping for individual halos and MCMC fit of a
   halo population) the $1\sigma$ is of the same order with a
-  decreasing behaviour as $1/\sqrt{N_s}$.
+  decreasing behavior as $1/\sqrt{N_s}$.
   \label{fig:downsampling}}
 \end{figure*}
 
@@ -395,7 +394,7 @@ concentration and its associated uncertainty.
 \section{Numerical Simulations and Halo Samples}
 
 We use two very different simulations to be sure that the results (bias,
-uncertainty on the bias) measured using bootstraping tests are
+uncertainty on the bias) measured using bootstrapping tests are
 independent of the kind of parent simulation.
 
 We use data from the Bolshoi cosmological simulation that follows the
@@ -435,7 +434,7 @@ of the order of $10^{12}$\hMsun using the parallel tree code PKDGRAV
 \citep{2001PhDT........21S}.  
 The simulation used $\sim 2\times 10^{8}$ particles to resolve this
 region.
-The cosmological parameters are diffferent from those in the Bolshoi
+The cosmological parameters are different from those in the Bolshoi
 simulation, with a Hubble parameter $h=0.73$, a matter density
 $\Omega_m=0.238$ and a normalization of the power spectrum
 $\sigma_8=0.74$. 
@@ -454,15 +453,12 @@ $2.24\times 10^{7}$\hMsun.
 \end{center}
 \vspace{-0.5cm}
 \caption{Mass-concentration relationship for the three different
-  methods used on the same cosmological N-body data.  
-  We only used relaxed halos.
-  All halos are
+  methods on the Bolshoi data using only relaxed halos.
   The lines correspond to the median concentration values in each mass
   bin.  
   The shaded region presents 10 and 90 per cent spread. 
-  For clarity we only show the spread for the concentrations estimated
-  using the new method.  
-  The other two methods have a similar spread. 
+  The three methods have a similar spread but for clarity we only show
+  the spread for the concentrations estimated using the new method.   
   The dotted line corresponds to fits reported by \citep{Prada2012}.
   \label{fig:concentration}. 
   The left panel shows the raw results coming from each algorithm. 
@@ -485,10 +481,13 @@ $10^{3}$ to measure the concentration every time the halo is
 resampled. 
 Every time we keep fixed the virial radius and the center found for
 the high resolution halo.
+We tested that leaving the virial radius and center free in each
+bootstrapping iteration has an effect lower than $1\%$ in the
+concentration. 
 We extract in total 10000 bootstrapping samples for the Bolshoi
 and the Via Lactea simulations.
 In the case of the Bolshoi simulation we select 14 massive halos and
-create 700 subsamples for each one. 
+create 700 subsamples for each halo. 
 For the Via Lactea simulation only one halo is subsampled 10000
 times. 
 
@@ -527,11 +526,13 @@ functional form
 f_{\rm off} = \frac{A}{(1+\log_{10}N_s)^{B}}.
 \label{eq:f_off_fit}
 \end{equation} 
-for the dataset shown in the panel we have $A=3385\pm 2065$, $B=7.99\pm0.48
-$ for the velocity method and $A=-110\pm 253$, $B=7.11\pm1.80$ for the
-new method, where the uncertainties are estimated from the covariance 
-matrix resulting from the non-linear optimization procedure. The lines
-on Figure \ref{fig:downsampling} are plotted using these best values. 
+for the dataset shown in the panel we have $A=2842\pm 1900$,
+$B=7.96\pm 0.54$ for the density method; $A=239\pm 131$,
+$B=6.23\pm 0.43$ for the velocity method; $A=-3.66\pm 5.22$,
+$B=4.65\pm 1.12$ for the integrated mass method.
+The uncertainties are estimated from the covariance  matrix resulting
+from the non-linear optimization procedure. The lines on Figure
+\ref{fig:downsampling} are plotted using these best values.  
 
 
 The right panel in \ref{fig:downsampling} shows different uncertainty
@@ -540,7 +541,7 @@ The lines show the difference between the 14 and 86 percentiles in the
 $f_{\rm off}$ distribution at fixed mass.
 Each line corresponds to the three different methods to estimate the
 concentration and the two simulations.
-This shows that the bootstraping technique can help us to assign a
+This shows that the bootstrapping technique can help us to assign a
 $1\sigma$ uncertainty to the concentration values at a fixed $N_s$. 
 This uncertainty is shown as normalized by the preferred value of the
 concentration, which in this case corresponds to $c_{N_{max}}$.  
@@ -549,9 +550,8 @@ estimated from the MCMC chains using the integrated mass method on all
 the relaxed halos in the Bolshoi simulation sample. 
 To allow for a fair comparison with the bootstrapping results, this
 uncertainty was normalized by the preferred concentration.
-The MCMC uncertainties follow the same trend as the bootstraping
-results. {\bf Hay algun significado profundo de esto o es lo que
-  deberiamos esperar?}.
+The MCMC uncertainties follow the same trend as the bootstrapping
+results. 
 
 From these results we defined a universal $1\sigma$ fractional
 uncertainty for the concentration as a function of the number of
@@ -561,14 +561,14 @@ particles $N_s$ as
 \sigma_{c} = \frac{0.40}{\sqrt{N_s/200}}.
 \end{equation}
 %
-An interesting application of this result is that $\sigma_c=1$ for
+An interesting consequence of this result is that $\sigma_c=1$ for
 $N_s=32$ particles, independent of the method used to estimate the
 concentration.  
 
  
 \subsection{Impact on the Mass-Concentration Relationship}
 
-We now compare the esults for the mass-concentration
+We now compare the results for the mass-concentration
 relationship obtained with the three different algorithms.
 This helps to compare the concentration results
 of the new algorithm and, more importantly, showcase a probable
@@ -589,7 +589,7 @@ methods, but they are still consistent within the statistical
 uncertainties.
 
 We also notice that the results from the density method have a
-systematic $15\%$offset from the velocity methods.  
+systematic $15\%$ offset from the velocity methods.  
 This offset was already presented by \cite{Prada2012} for low
 concentrations ($c<6$) and high ($M_h>10^{12}\hMsun$) halo masses.  
 Recently \citep{Klypin2016} summarized results for the
@@ -617,19 +617,18 @@ velocity/density methods and the new algorithm.
 \section{Conclusions}
 \label{sec:conclusions}
 
-In this paper we quantified biases on concentration numerical estimates by
-bootstrapping dark matter halos resolved with a  large number of
-particles ($\sim 10^5$).
+In this letter we used bootstrapping to quantify the biases on
+concentration estimates. 
 We found that methods commonly used in the literature present a large
 bias by overestimating concentrations by factors of $15\%$-$20\%$ for
 halos with $200$ particles, or $7\%$-$10\%$ for halos with $500$
 particles.  
-This procedure is a new way to quantify the bias in concentration
-estimates with the advantage that it works without having to run new
-simulations. 
+This procedure provides a robust technique to quantify the bias in
+concentration estimates with the advantage that it works without
+having to run new simulations. 
 
-These results motivated us to introduction a method with a robust
-performace at low particle numbers.
+These results motivated us to introduce a method with a robust
+performance at low particle numbers.
 This method is based on the integrated mass profile. 
 The results of the algorithm on the same data sample showed a bias  of
 $2\%-3\%$ for halos with $200$ particles and less than $1\%$ for halos
@@ -646,9 +645,11 @@ This systematic offset has been reported before with the same dataset
 \citep{Prada2012} and with different simulations \citep{Klypin2016}
 without any conclusive explanation for its origin. 
 A second difference is that the velocity and integrated mass methods
-start to differ for masses below $10^{12}\hMsun$.  
+start to differ for masses below $10^{12}\hMsun$ ($\sim 4000$
+particles).   
 We found that correcting the mean concentration by the mean bias
-factor brings these two techniques into agreement.
+factor found through bootstrapping brings these two techniques into
+agreement. 
 
 These results show that using the integrated mass profile to find the
 Dark Matter halo concentration is a tool deserving deeper scrutiny.   
