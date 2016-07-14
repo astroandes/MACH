@@ -43,8 +43,11 @@ def log_likelihood(log_c,log_r,log_m):
     n = 1.0*len(log_m)
     if log_c >= 0:
         s = np.sum(log_m-nfw_log_mass(log_r,log_c))
-        sigma2 = (1.0 - np.exp(log_r))/(np.exp(log_r)) * (n **1.15)/4500.0
-        return -0.5*s*s/sigma2
+        sigma2 = (1.0 - np.exp(log_r))/(np.exp(log_r)) * (n**1.15)/4500.0
+        if(np.any(sigma2<0.0)):
+            return -np.inf
+        else:
+            return -0.5*s*s/sigma2
     return -np.inf
 
 def main():
@@ -84,15 +87,16 @@ def main():
 
             r = np.sqrt(x*x+y*y+z*z)
             r = np.sort(r)
-            r = np.delete(r,0)
+            ii = r<1E-8
+            r  = np.delete(r,np.int_(ii))
             if args.radius == None:
                 virial_radius = r[-1]
             else:
                 virial_radius = args.radius
             r = r/virial_radius
 
-            r = np.delete(r,-1)
 
+            r = np.delete(r,-1)
             del x,y,z
 
             n_particles = len(r)
