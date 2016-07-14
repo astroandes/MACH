@@ -195,10 +195,6 @@ This method provides a new independent method to estimate the
 concentration parameter.   
 
 
-
-
-
-
 \section{Basic properties of the NFW density profile}
 \label{sec:basics}
 
@@ -375,18 +371,53 @@ We divide the enclosed mass mass $M_i$ and the radii $r_i$ by their
 virial values to obtain the dimensionless variables $m_i$ and $x_i$.
 Once the mass profile is expressed in dimensionless variables the
 concentration is the only free parameter.  
-We then use an Affine Invariant Markov Chain Monte Carlo implemented
-in the python module {\texttt{emcee}} \citep{emcee} to sample the
-likelihood function distribution defined by ${\cal L}(c)\propto
-\exp(-\chi^2(c)/2)$ where the $\chi^2(c)$ is written as 
+
+Using the bootstrapping data we find that at a given normalized
+radius, $x$, the logarithm of the normalized integrated mass, $m$, follows a 
+distribution that can approximated by a gaussian with variance
+\begin{equation}
+\sigma_x^2 = \frac{1-x}{x}\frac{1}{6N}.
+\label{eq:sigma}
+\end{equation}
+
+If the integrated mass values at different radii were independent from
+each other, this could be used as the basis to develop a simple
+bayesian likelihood to be sampled with Markov Chain Monte Carlo techniques where
+the likelihood could be then defined to be ${\cal L}(c)\propto
+\exp(-\chi^2(c)/2)$ with a $\chi^2(c)$ written as  
 
 \begin{equation}
-\chi^2(c)= \frac{1}{N}\sum_{i=1}^{N}[\log m_i - \log m(< x_i;c)]^2,
+\chi^2(c)= \sum_{i=2}^{N-1}\frac{[\log m_i - \log m(< x_i;c)]^2}{\sigma_i^2},
 \end{equation}
 %
-where $m(<x_i;c)$ corresponds to the values in Eq.(\ref{eq:profile})
-at $x=x_i$ for a given value of the concentration parameter $c$ and
-the $i$ index sums over all the particles in the numerical profile.
+where $\sigma_i^2=\sigma_x^2$, $m(<x_i;c)$ corresponds to the
+values in Eq.(\ref{eq:profile}) at $x=x_i$ for a given value of the
+concentration parameter $c$, and the $i$ index sums over all the
+particles in the numerical profile. 
+In this computation the particles $i=1$ and $i=N$ are discarded to
+avoid divergent terms in the sum.
+
+However, tests on the bootstrapping data show that the covariance
+matrix is not diagonal and using $\sigma_i^2=\sigma_x^2$ would grossly
+overestimate $\chi^2(c)$ providing too optimistic error bars.
+
+Given the high expense of computing a full covariance matrix for
+each desired number of particles $N$, we have calibrated an effective
+$\sigma_{\rm eff}^2$ such that it keeps the dependence on $x$ that we have
+discovered for the diagonal elements and also gives similar curves of
+$\chi^{2}(c)$-$c$ around the minimum as the full covariance matrix
+computation.
+
+We found that this effective $\sigma_{\rm eff}^2$ can be approximated as
+
+\begin{equation}
+\sigma_{\rm eff}^2 = \frac{1-x}{x}\frac{N^{1.15}}{4.5\times 10^3}.
+\end{equation}
+
+We then use $\sigma_i^2=\sigma_{\rm eff}^2$ to feed an Affine
+Invariant Markov Chain Monte Carlo implemented in the python module
+{\texttt{emcee}} \citep{emcee} to sample the likelihood function
+distribution.
 From the $\chi^2$ distribution we find the optimal value of the
 concentration and its associated uncertainty.
 
