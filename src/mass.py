@@ -40,9 +40,11 @@ def nfw_log_mass(log_r,log_c):
 # Loglikelihood using the chi squared. If the concentration is less than one it
 # returns -inf.
 def log_likelihood(log_c,log_r,log_m):
+    n = 1.0*len(log_m)
     if log_c >= 0:
         s = np.sum(log_m-nfw_log_mass(log_r,log_c))
-        return -.5*s*s
+        sigma2 = (1.0 - np.exp(log_r))/(np.exp(log_r)) * (n **1.15)/4500.0
+        return -0.5*s*s/sigma2
     return -np.inf
 
 def main():
@@ -88,6 +90,9 @@ def main():
             else:
                 virial_radius = args.radius
             r = r/virial_radius
+
+            r = np.delete(r,-1)
+
             del x,y,z
 
             n_particles = len(r)
