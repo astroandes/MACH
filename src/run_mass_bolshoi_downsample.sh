@@ -1,0 +1,14 @@
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/003438/ -o downsample_bolshoi/results_mass_003438.csv -v -r 5.78735232e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/004497/ -o downsample_bolshoi/results_mass_004497.csv -v -r 6.89785719e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/014976/ -o downsample_bolshoi/results_mass_014976.csv -v -r 5.75412631e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/019876/ -o downsample_bolshoi/results_mass_019876.csv -v -r 5.88606954e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/026975/ -o downsample_bolshoi/results_mass_026975.csv -v -r 6.02686644e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/030491/ -o downsample_bolshoi/results_mass_30491.csv -v -r 6.16504192e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/036320/ -o downsample_bolshoi/results_mass_036320.csv -v -r 5.77344954e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/055806/ -o downsample_bolshoi/results_mass_055806.csv -v -r 5.66279829e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/059095/ -o downsample_bolshoi/results_mass_059095.csv -v -r 5.77222586e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/059875/ -o downsample_bolshoi/results_mass_059875.csv -v -r 6.73682272e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/060662/ -o downsample_bolshoi/results_mass_060662.csv -v -r 6.18945062e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/069962/ -o downsample_bolshoi/results_mass_069962.csv -v -r 7.33929574e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/073222/ -o downsample_bolshoi/results_mass_073222.csv -v -r 5.76038122e-01 &
+nohup python mass.py --dir /scratch/jforero/Bolshoi/jcdownsample/halos/078002/ -o downsample_bolshoi/results_mass_078002.csv -v -r 5.66269815e-01 &
