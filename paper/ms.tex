@@ -390,7 +390,7 @@ the likelihood could be then defined to be ${\cal L}(c)\propto
 \chi^2(c)= \sum_{i=2}^{N-1}\frac{[\log m_i - \log m(< x_i;c)]^2}{\sigma_i^2},
 \end{equation}
 %
-where $\sigma_i^2=\sigma_x^2$, $m(<x_i;c)$ corresponds to the
+where $\sigma_i^2=\sigma_x^2(x_i)$, $m(<x_i;c)$ corresponds to the
 values in Eq.(\ref{eq:profile}) at $x=x_i$ for a given value of the
 concentration parameter $c$, and the $i$ index sums over all the
 particles in the numerical profile. 
@@ -398,7 +398,7 @@ In this computation the particles $i=1$ and $i=N$ are discarded to
 avoid divergent terms in the sum.
 
 However, tests on the bootstrapping data show that the covariance
-matrix is not diagonal and using $\sigma_i^2=\sigma_x^2$ would grossly
+matrix is not diagonal and using $\sigma_i^2=\sigma_x^2(x_i)$ would grossly
 overestimate $\chi^2(c)$ providing too optimistic error bars.
 
 Given the high expense of computing a full covariance matrix for
@@ -414,7 +414,7 @@ We found that this effective $\sigma_{\rm eff}^2$ can be approximated as
 \sigma_{\rm eff}^2 = \frac{1-x}{x}\frac{N^{1.15}}{4.5\times 10^3}.
 \end{equation}
 
-We then use $\sigma_i^2=\sigma_{\rm eff}^2$ to feed an Affine
+We then use $\sigma_i^2=\sigma_{\rm eff}^2(x_i)$ to feed an Affine
 Invariant Markov Chain Monte Carlo implemented in the python module
 {\texttt{emcee}} \citep{emcee} to sample the likelihood function
 distribution.
