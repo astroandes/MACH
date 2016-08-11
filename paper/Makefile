@@ -23,7 +23,7 @@ tar :
 
 
 clean:
-	rm -f $(MAIN).pdf $(MAIN).out $(MAIN).bbl $(MAIN).aux
+	rm -f $(MAIN).pdf $(MAIN).out $(MAIN).bbl $(MAIN).aux *~
 
 view: 
 	open $(MAIN).pdf &
