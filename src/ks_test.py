@@ -1,8 +1,6 @@
 import numpy as np
 from scipy import stats
 
-
-
 def make_ks_test(halo_id=0):
     n_samples = 700
     fileout = open('ks_test_p_values_{:06d}.dat'.format(halo_id), 'w')
