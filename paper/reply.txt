@@ -1,8 +1,25 @@
-In this reply we include first a brief summary of astrophysical concepts
-addressed to the statistician, which might help to clarify what we do in the paper.
+We found the statistician's comment difficult to unpack. Specialy the statement
+"Results are suspect.". This is because there are at least four new
+results in our paper, and the parts/statements that caused confusion to the
+statistician are not quoted in her/his comment. It's not clear which
+results are suspect and why.
 
-Only then we address what we believe are the points raised by the statistician, 
-which should also be forwarded to the science referee.
+We kindly request this reply to be forwarded both to the statistician
+and the referee on the science aspect of the paper. 
+
+The main results of our paper are.
+
+1) Use of bootstrapping to estimate biases in concentration estimates.
+2) Use of bootstrapping to estimate uncertainties in concentration estimates.
+3) Use the integrated mass profile to estimate concentration.
+4) Use of bootstrapping to approximate a covariance matrix in max likelihood computation.
+
+Only points 1), 2) and 4) use bootstrapping which seems to be the major point of concern.
+Here we argue why 1) and 2) should not be suspect, how 4) is suspect (as we acknowledge in the 
+papaer) and why 4) is irrelevant for computing 3).
+
+We also include a brief summary of astrophysical concepts addressed to
+the statistician, which might help to clarify what we do in the paper.  
 
 1. Basic astrophysical concepts.
 
