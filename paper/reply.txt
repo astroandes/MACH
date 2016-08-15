@@ -1,22 +1,29 @@
-We found the statistician's comment difficult to unpack. Specialy the statement
-"Results are suspect.". This is because there are at least four new
-results in our paper, and the parts/statements that caused confusion to the
-statistician are not quoted in her/his comment. It's not clear which
-results are suspect and why.
+We thank the Editor for seeking advice from a statistician and
+forwarding us his/her comments.
+However, we found the comments difficult to unpack. 
+
+Specially difficult to understand was the statement "Results are
+suspect.". This is because there are at least four new results in our
+paper, and the parts/statements that caused confusion to the
+statistician are not explicitly quoted in her/his comment to say which
+results are suspect. 
 
 We kindly request this reply to be forwarded both to the statistician
 and the referee on the science aspect of the paper. 
 
-The main results of our paper are.
+Let us first recall that the main results of our paper are:
 
 1) Use of bootstrapping to estimate biases in concentration estimates.
 2) Use of bootstrapping to estimate uncertainties in concentration estimates.
 3) Use the integrated mass profile to estimate concentration.
-4) Use of bootstrapping to approximate a covariance matrix in max likelihood computation.
+4) Use of bootstrapping to approximate a covariance matrix in a max
+likelihood computation. 
 
-Only points 1), 2) and 4) use bootstrapping which seems to be the major point of concern.
-Here we argue why 1) and 2) should not be suspect, how 4) is suspect (as we acknowledge in the 
-papaer) and why 4) is irrelevant for computing 3).
+Only points 1), 2) and 4) use bootstrapping which seems to be the
+major point of concern. 
+Here we argue why 1) and 2) should not be suspect, how 4) is difficult
+to do (as we acknowledge in the paper) and why 4) is anyway irrelevant to
+ensure that 3) is done correctly. 
 
 We also include a brief summary of astrophysical concepts addressed to
 the statistician, which might help to clarify what we do in the paper.  
@@ -24,55 +31,65 @@ the statistician, which might help to clarify what we do in the paper.
 1. Basic astrophysical concepts.
 
 Most astrophysicists believe that there is fluid permeating the whole Universe
-called dark matter.
-This fluid can be though as a continous density field.
+called dark matter. This fluid can be though as a continuous density field.
 Expensive Monte-Carlo computational simulations sample this density field
 with point mass particles.
-
-Astrophycisits have found that in the denseset regions this point mass distribution 
-can be can be seen as a) spherical and b) as coming from a parent radial mass density 
-distribution (RMDD) which can be characterized by a scalar parameter called the concentration, C. 
+Astrophysicists have found that in the densest regions this point mass
+distribution can be can be approximated as a) spherical and b) as coming from
+a parent radial mass  distribution (RMDD) which can be characterized
+by a scalar parameter called the concentration, C.  
 We are concerned with algorithms that estimate the concentration from
-a set of a set of radial measurements R=(r_1,...,r_N) of the point mass particles.
+a set of a set of radial measurements R=(r_1,...,r_N) of the point
+mass particles coming directly from the expensive Monte Carlo
+simulation.  
 
 2. Estimating biases using bootstrapping.
 
 Starting from a set R with large N (N=10^6) coming directly from the expensive 
 Monte-Carlo simulation we assume that it is a fair sample of the parent RMDD.
-Each point r_i we use is an independent measure other r_j. 
-That means that we do not ignore, add, or change r_i values depending on other r_j.
+Each point r_i we use is an independent measure of other r_j. 
+That means that we do not ignore, add, or change r_i values depending
+on other r_j. 
 That could happen if, for instance, we removed randomly very clustered
-r_i values around some r_j  (i.e. tried to smoothed out clumps).  
+r_i values around some r_j  (i.e. tried to smooth out clumps).  
    
-We bootstrap R, meaning that we select subsamples R* with N* points.
-We use a Kolmogorov-Smirnov to compare each R* with the parent R. 
-From this test we find a flat distribution of p-values indicating that we are doing a correct
-subsampling of the parent set R.
+We bootstrap R. We not each bootstrapped set of N* points as R*.
+We use a Kolmogorov-Smirnov to compare each of the hundreds of R* with
+the parent R.  From this test we find a flat distribution of p-values
+indicating that the R* subsets are a fair subsamples of R. 
 
-Then, we estimate the concentration on R and use this as the correct estimated value C.
+Then, we estimate the concentration on R and use this as the correct
+estimated value C. 
 Using the same estimator we get the concentrations C* on the R* samples.
 We define the bias as the average of the differences (C*-C). 
 
-We use this to show that two commonly used methods to estimate the concentration have
-a growing bias as the particle numbers decrease, while the new method
-we present has a bias close to zero (Figure 1).
+We use this to show that two commonly used methods to estimate the
+concentration have a growing bias as the particle numbers decreases,
+while the new method we present has a bias close to zero (Figure 1). 
 
 3. Covariance matrices in the new method to estimate the concentration.
 
-The new method to get the concentration from a set R uses an approximated diagonal 
-covariance matrix estimated from bootstrapping.
-This is probably the point the statistician is worried about.
-We are aware of the limitations of this method and mention that in the text.
+(This is probably the point the statistician is worried about.)
+The new method to get the concentration from a set R uses an
+approximated diagonal covariance matrix estimated from bootstrapping. 
+We know that the m_i are not independent (as the referee points out)
+and that's why we try to estimate the covariance matrix. 
 
-We can safely change the approximated diagonal covariance matrix to different 
-values and the estimated concentration values won't change as it only impacts the 
-derived uncertainty from the Markov Chain, i.e., the minimum of the
-chi^2 continues to be in the same place.
+But we do not bootstrap the (r_i, m_i) pairs! We bootstrap the r_i as
+we explained before.  If we did bootstrapping on the (r_i, m_i) we
+wouldn't find the variance in Eq. 8 as all the points for an given
+value of $r$ would fall on top on the same value of $m$.
+
+We stress in the text that the diagonal inverse covariance matrix we
+use is only an approximation. 
+The good news is that the choice for the variances sigma_i in Eq. 9 does
+not change the optimal result. They only change the size of the error
+bars. 
 
 For instance, if we use N (the number of points in R) as the variance in the
 chi^2 expression (Eq. 9) we find the same uncertainties as estimated
-by the bootstraping computations described in the part 2. of this
-reply (the continous lines in Fig 2). 
+by the bootstrapping computations described in the part 2. of this
+reply (the continuous lines in Fig 2). 
 
 
 
