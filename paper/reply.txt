@@ -67,7 +67,7 @@ We use this to show that two commonly used methods to estimate the
 concentration have a growing bias as the particle numbers decreases,
 while the new method we present has a bias close to zero (Figure 1). 
 
-We use the logic to find the variances (lines in Figure 2).
+We use the same logic to find the variances (lines in Figure 2).
 
 3. Covariance matrices in the new method to estimate the concentration.
 
