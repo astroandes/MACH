@@ -43,7 +43,7 @@ a set of a set of radial measurements R=(r_1,...,r_N) of the point
 mass particles coming directly from the expensive Monte Carlo
 simulation.  
 
-2. Estimating biases using bootstrapping.
+2. Estimating biases with bootstrapping.
 
 Starting from a set R with large N (N=10^6) coming directly from the expensive 
 Monte-Carlo simulation we assume that it is a fair sample of the parent RMDD.
@@ -66,6 +66,8 @@ We define the bias as the average of the differences (C*-C).
 We use this to show that two commonly used methods to estimate the
 concentration have a growing bias as the particle numbers decreases,
 while the new method we present has a bias close to zero (Figure 1). 
+
+We use the logic to find the variances (lines in Figure 2).
 
 3. Covariance matrices in the new method to estimate the concentration.
 
