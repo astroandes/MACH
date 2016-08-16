@@ -53,7 +53,7 @@ on other r_j.
 That could happen if, for instance, we removed randomly very clustered
 r_i values around some r_j  (i.e. tried to smooth out clumps).  
    
-We bootstrap R. We not each bootstrapped set of N* points as R*.
+We bootstrap R. We denote each bootstrapped set of N* points as R*.
 We use a Kolmogorov-Smirnov to compare each of the hundreds of R* with
 the parent R.  From this test we find a flat distribution of p-values
 indicating that the R* subsets are a fair subsamples of R. 
