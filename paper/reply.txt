@@ -5,7 +5,7 @@ However, we found the comments difficult to unpack.
 Specially difficult to understand was the statement "Results are
 suspect.". This is because there are at least four new results in our
 paper, and the parts/statements that caused confusion to the
-statistician are not explicitly quoted in her/his comment to say which
+statistician are not explicitly quoted in her/his comment to understand which
 results are suspect. 
 
 We kindly request this reply to be forwarded both to the statistician
