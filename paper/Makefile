@@ -11,7 +11,7 @@ $(MAIN).pdf: 	$(MAIN).tex
 
 diff:	$(MAIN)_diff.pdf
 
-$(MAIN)_diff.pdf: $(MAIN).tex
+$(MAIN)_diff.pdf: $(MAIN).tex $(MAIN)_old.tex
 	latexdiff $(MAIN)_old.tex $(MAIN).tex > $(MAIN)_diff.tex
 	$(LATEX) $(MAIN)_diff.tex 
 	bibtex $(MAIN)_diff
