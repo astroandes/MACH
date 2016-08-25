@@ -1,7 +1,7 @@
 \documentclass{emulateapj}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL ms_old.tex   Thu Aug 25 10:14:23 2016
-%DIF ADD ms.tex       Thu Aug 25 17:15:06 2016
+%DIF ADD ms.tex       Thu Aug 25 17:34:12 2016
 \submitted{{\it Submitted for publication in ApJL}}
 %DIF 3c3
 %DIF < \usepackage{multirow,color,wrapfig,ulem}
@@ -330,9 +330,10 @@ corresponds to the definition in Eq. (\ref{eq:f_NFW}).
   \includegraphics[width=0.48\textwidth]{sigma_foff_bolshoi.pdf}
 \end{center}
 \vspace{-0.5cm}
-\caption{\emph{Left panel}. Average value of the fractional offset ($f_{\rm
-    off}$ (Eq. \ref{eq:f_off}) between the concentration in a halo at 
-  high resolution and its bootstrapped versions. 
+\caption{\emph{Left panel}. \DIFdelbeginFL \DIFdelFL{Average value of the fractional offset ($f_{\rm
+    off}$ (Eq. \ref{eq:f_off}) between }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Bias estimated via bootstrapping on }\DIFaddendFL the
+  concentration \DIFdelbeginFL \DIFdelFL{in }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{as }\DIFaddendFL a \DIFdelbeginFL \DIFdelFL{halo at 
+  high resolution and its bootstrapped versions}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{function of particle number}\DIFaddendFL .
   Thick (thin) lines correspond to massive halos in the Bolshoi (Via
   Lactea) simulation.
   \DIFdelbeginFL \DIFdelFL{For each case close to $10000$ bootstrapping samples are used.
@@ -341,16 +342,17 @@ corresponds to the definition in Eq. (\ref{eq:f_NFW}).
   while the new method only underestimates the concentrations by less
   than $3\%$.
   \emph{Right panel.}
-  1$\sigma$ uncertainties on the offset and the concentration
-  estimates from the integrated mass method.  
+  1$\sigma$ uncertainties on the \DIFdelbeginFL \DIFdelFL{offset }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{bootrsapped halos (lines) }\DIFaddendFL and the \DIFaddbeginFL \DIFaddFL{MCMC
+  uncertainties on the }\DIFaddendFL concentration estimates \DIFdelbeginFL \DIFdelFL{from }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{for each halo using }\DIFaddendFL the
+  integrated mass method \DIFaddbeginFL \DIFaddFL{(circles)}\DIFaddendFL .   
   Lines show the width between the 14 and 86 percentiles
   of the $f_{\rm off}$ distribution at fixed particle number. 
-  The lines include the results for the three methods: maximum
+  The lines include the results for the three methods \DIFdelbeginFL \DIFdelFL{: maximum
   velocity, density and integrated mass.
   Grey symbols correspond to the $1\sigma$ uncertainty on each of
-  the halos in the Bolshoi Simulation as a result of the MCMC
-  sampling. 
-  To allow a fair comparison with $f_{\rm off}$, this uncertainty has
+  the halos in the }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{using }\DIFaddendFL Bolshoi \DIFdelbeginFL \DIFdelFL{Simulation as a result of the MCMC
+  sampling}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{data}\DIFaddendFL .
+  To allow a fair comparison \DIFdelbeginFL \DIFdelFL{with }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{agains }\DIFaddendFL $f_{\rm off}$, \DIFdelbeginFL \DIFdelFL{this }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the MCMC }\DIFaddendFL uncertainty has
   been normalized by the preferred concentration value for each halo. 
   \DIFdelbeginFL \DIFdelFL{The $1\sigma$ bootstrapping uncertainty follow a $1/\sqrt{N_s}$
   behaviour. 
@@ -448,9 +450,9 @@ $\sigma_i^2\approx \sigma_{\rm eff}^2(x_i)$.
 
 We impose two conditions on the approximate $\sigma_{\rm eff}^{2}$. It
 must keep the dependence on $x$ that we have discovered for the
-diagonal elements and must give similar curves of \DIFdelbegin \DIFdel{$\chi^{2}(c)$}\DIFdelend \DIFaddbegin \DIFadd{$\chi^{2}(c,x_i)$}\DIFaddend -$c$
-around the minimum as the full covariance matrix.
-We found that this effective $\sigma_{\rm eff}^2$ can be approximated
+diagonal elements and must give similar curves of \DIFdelbegin \DIFdel{$\chi^{2}(c)$-}\DIFdelend \DIFaddbegin \DIFadd{$\chi^{2}(c,x_i)$
+vs. }\DIFaddend $c$ around the minimum as the full covariance matrix.
+We found that \DIFdelbegin \DIFdel{this }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend effective $\sigma_{\rm eff}^2$ can be approximated
 as 
 
 \begin{equation}
