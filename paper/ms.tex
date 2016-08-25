@@ -138,7 +138,7 @@ concentration $c=R_v/r_s$.
 The concentration of the NFW profile provides a conceptual framework
 to study simulated dark matter halos as a function of redshift and
 cosmological parameters.  In many numerical studies
-\citep{Neto2007,Maccio2008,Duffy2008,Munoz2011,Prada2012,Ludlow2014}
+\citep{Neto2007,Maccio2008,Duffy2008,Munoz2011,Prada2012,Ludlow2014,Ludlow2016,Klypin2016}
 the results are summarized through the mass-concentration
 relationship; that is the distribution of concentration values at a
 fixed halo mass and redshift.  The success of such numerical
@@ -340,15 +340,17 @@ each logarithmic bin counting the particles and dividing by the
 corresponding shell volume.  At this point is possible to make a
 direct fit to the density as a function of the radial coordinate.
 This method has been broadly used for more than two decades to study
-the mass-concentration-redshift relation of dark matter halos.
+the mass-concentration-redshift relation of dark matter halos. A
+recent example is \citep{Ludlow2016}
  
 A second method uses the circular velocity profile.  It finds the
 value of $x$ for which the normalized circular velocity $v(<x)$ shows
 a maximum.  Using this value it solves numerically for the
 corresponding value of the concentration using Eq. (\ref{eq:max_v}).
-This method has been most recently used by \cite{Klypin2016} to study
-the mass-concentration-redshift relation using the Multidark
-Simulation Suite.
+A recent example of this methodology in cosmological simulation is
+given by \cite{Klypin2016}.
+
+
 
 
 \subsection{Estimate from the integrated mass profile}
@@ -504,12 +506,11 @@ $2.24\times 10^{7}$\hMsun.
 \subsection{Bootstrapping to estimate biases}
 \label{sec:bootstrapping}
 
-In our bootstrapping experiments we take halos sampled with at least
-$10^{5}$ particles and subsample each halo by factors of $2$ up to
-$10^{3}$ to measure the concentration every time the halo is
-resampled. 
+In our bootstrapping experiments we take halos with at least
+$10^{5}$ particles and subsample them by factors of $2$ up to
+$10^{3}$ to measure the concentration in every resampling.
 We use a two-sample Kolmogorov-Smirnov (KS) test to check that the
-bootstrapped sets are a fair subsample of the parent halo.
+bootstrapped sets are a fair subsample of its parent.
 Using the KS test we compare the list of radial distances from each
 subsample against that of its parent halo.
 We find that the resulting p-value distribution is flat.
@@ -643,6 +644,20 @@ parameters obtained from the data presented in Figure
 The correction brings into good agreement the results between the
 velocity/density methods and the new algorithm.
 
+How does this impact the most recent mass-concentration estimates? 
+\cite{Ludlow2016} and \cite{Klypin2016} estimated the mass-concentration
+relation over a suite of cosmological N-body simulations using the
+density and velocity methods, respectively. 
+Both used halos that had at least $5\times 10^{3}$ particles,
+so their results should not be affected by the bias we report here.
+However, Figure 16 in \cite{Klypin2016} seems to push the results
+below this particle limit for redshifts larger than $z=2.5$ where
+their simulations should not be able to reach the mass range
+$5\times 10^{10}$\hMsun - $5\times 10^{12}$\hMsun that they claim. 
+Consistent with this limitation \cite{Ludlow2016} only report results
+up to a redshift of $z=3$.  
+
+
 \section{Conclusions}
 \label{sec:conclusions}
 
@@ -695,12 +710,12 @@ explore the full potential of this new method.
  through a FAPA project. JCMC acknowledges financial support from
  ``Estrategia de  sostenibilidad 2014-2015, Universidad de
  Antioquia''. The authors also thank Tom\'as Verdugo, Stefan
- Gottloeber and Nelson Padilla for their comments on earlier version
+ Gottloeber and Nelson Padilla for their comments on earlier versions
  of this work.
 
 \bibliographystyle{apj}
 %\bibliography{references}
-\begin{thebibliography}{15}
+\begin{thebibliography}{16}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Diemand} {et~al.}(2008){Diemand}, {Kuhlen}, {Madau}, {Zemp},
@@ -725,6 +740,11 @@ explore the full potential of this new method.
   \& {He{\ss}}}]{Klypin2016}
 {Klypin}, A., {Yepes}, G., {Gottl{\"o}ber}, S., {Prada}, F., \& {He{\ss}}, S.
   2016, \mnras, 457, 4340
+
+\bibitem[{{Ludlow} {et~al.}(2016){Ludlow}, {Bose}, {Angulo}, {Wang},
+  {Hellwing}, {Navarro}, {Cole}, \& {Frenk}}]{Ludlow2016}
+{Ludlow}, A.~D., {Bose}, S., {Angulo}, R.~E., {Wang}, L., {Hellwing}, W.~A.,
+  {Navarro}, J.~F., {Cole}, S., \& {Frenk}, C.~S. 2016, \mnras, 460, 1214
 
 \bibitem[{{Ludlow} {et~al.}(2014){Ludlow}, {Navarro}, {Angulo},
   {Boylan-Kolchin}, {Springel}, {Frenk}, \& {White}}]{Ludlow2014}
@@ -777,6 +797,8 @@ explore the full potential of this new method.
 {Stadel}, J.~G. 2001, PhD thesis, UNIVERSITY OF WASHINGTON
 
 \end{thebibliography}
+
+
 
 
 \end{document}
