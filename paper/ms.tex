@@ -162,7 +162,7 @@ this maximum value.
 The first method is straightforward to apply but presents two
 disadvantages.  First, it requires a large number of particles in
 order to have a proper density estimate in each bin.  This makes the
-method robust only for halos with at least $10^3$ particles.  The
+method robust only for halos with at least $10^2$ particles.  The
 second problem is that there is not a way to estimate the optimal
 radial bin size, different choices may produce different results for
 the concentration.
@@ -404,6 +404,11 @@ as
 We then use an Affine Invariant Markov Chain Monte Carlo (MCMC)
 implemented in the python module {\texttt{emcee}} \citep{emcee} to sample the
 likelihood function distribution.
+This runs roughly proportional to $N$. Using a single 2.3Ghz CPU core with two
+walkers over 500 steps takes approximatly $0.5$ miliseconds per halo per
+particle in the halo, i.e. a halo with $N=2\times 10^{3}$ can be fit
+in one second approximately. 
+
 From the $\chi^2$ distribution we find the optimal value of the
 concentration and its associated uncertainty. 
 We stress that different choices for $\sigma^2_{\rm eff}$ do not
@@ -538,7 +543,7 @@ lowering numerical resolution on the same individual halos
 \citep{2008MNRAS.391.1685S} yielded similar values for the
 concentration across resolutions.  That work  explored a particle
 number range $>5\times 10^5$, completely consistent with our result that the
-bias can only be evident for particle numbers $<4\times 10^4$. 
+bias can only be evident for particle numbers $<4\times 10^3$. 
 
 
 The thin lines on the same panel show a fit to the function 
