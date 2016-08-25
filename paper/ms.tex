@@ -404,15 +404,17 @@ as
 We then use an Affine Invariant Markov Chain Monte Carlo (MCMC)
 implemented in the python module {\texttt{emcee}} \citep{emcee} to sample the
 likelihood function distribution.
-This runs roughly proportional to $N$. Using a single 2.3Ghz CPU core with two
-walkers over 500 steps takes approximatly $0.5$ miliseconds per halo per
-particle in the halo, i.e. a halo with $N=2\times 10^{3}$ can be fit
-in one second approximately. 
-
-From the $\chi^2$ distribution we find the optimal value of the
-concentration and its associated uncertainty. 
+From the $\chi^2$ distribution we find the optimal concentration value
+and its associated uncertainty.   
 We stress that different choices for $\sigma^2_{\rm eff}$ do not
 affect the optimal concentration value, only its uncertainty.
+
+Runtime is roughly proportional to $N$. Using a single 2.3Ghz CPU core with two
+walkers over 500 steps takes $\sim 0.5$ miliseconds per halo per
+particle in the halo, i.e. a halo with $N=2\times 10^{3}$ can be fit
+in one second. 
+
+
 
 
 \section{Numerical Simulations and Halo Samples}
@@ -686,17 +688,18 @@ agreement.
 These results show that using the integrated mass profile to estimate the
 DM halo concentrations is a tool deserving deeper scrutiny.   
 Further tests with larger simulated volumes, varying numerical
-resolution, stacked data and different density profiles are the next
-natural step to explore the full potential of this new method.  
+resolution, higher redshifts, stacked data and different density
+profiles are the next natural step to explore the full potential of
+this new method.   
 
 \vspace{0.1cm}
 
- We acknowledge technical and financial support from Uniandes
- and Universidad de Antioquia.
- We acknowledge discussions with Tom\'as Verdugo, Stefan Gottloeber and Nelson
- Padilla.
- We thank the anonymous referee for comments that helped us improve
- the presentation of these results. 
+ We acknowledge financial support from Uniandes
+ and Universidad de Antioquia. 
+ We thank Tom\'as Verdugo, Stefan Gottloeber and Nelson  Padilla for
+their feedback.
+We thank the anonymous referee for comments that improved
+the presentation of these results. 
 
 \bibliographystyle{apj}
 %\bibliography{references}
