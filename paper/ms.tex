@@ -1,6 +1,6 @@
 \documentclass{emulateapj}
 \submitted{{\it Submitted for publication in ApJL}}
-\usepackage{multirow,color,wrapfig,ulem}
+\usepackage{multirow,color,wrapfig}
 \usepackage {graphicx}
 \usepackage{graphics}
 \usepackage[dvips]{epsfig}
@@ -508,11 +508,19 @@ In our bootstrapping experiments we take halos sampled with at least
 $10^{5}$ particles and subsample each halo by factors of $2$ up to
 $10^{3}$ to measure the concentration every time the halo is
 resampled. 
-Every time we keep fixed the virial radius and the center found for
-the high resolution halo.
-We tested that leaving the virial radius and center free in each
-bootstrapping iteration has an effect smaller than $1\%$ in the
-concentration. 
+We use a two-sample Kolmogorov-Smirnov (KS) test to check that the
+bootstrapped sets are a fair subsample of the parent halo.
+Using the KS test we compare the list of radial distances from each
+subsample against that of its parent halo.
+We find that the resulting p-value distribution is flat.
+This confirms that the radial distribution of particles in the
+bootraped halo is consistent with coming from the distribution given
+by the parent halo. 
+
+For every subsample we keep fixed the virial radius and the center
+found for the high resolution halo.
+Leaving the virial radius and center free in each bootstrapping
+iteration has an effect smaller than $1\%$ in the concentration. 
 We extract in total 10000 bootstrapping samples for the Bolshoi
 and the Via Lactea simulations.
 In the Bolshoi simulation we select 14 massive halos and create 700
@@ -686,7 +694,9 @@ explore the full potential of this new method.
  financial support from Vicerrector\'ia de Investigaciones at Uniandes
  through a FAPA project. JCMC acknowledges financial support from
  ``Estrategia de  sostenibilidad 2014-2015, Universidad de
- Antioquia''.    
+ Antioquia''. The authors also thank Tom\'as Verdugo, Stefan
+ Gottloeber and Nelson Padilla for their comments on earlier version
+ of this work.
 
 \bibliographystyle{apj}
 %\bibliography{references}

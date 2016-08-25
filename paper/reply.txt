@@ -2,6 +2,63 @@ We thank the Editor for seeking advice from a statistician and
 forwarding us his/her comments.
 However, we found the comments difficult to unpack. 
 
+
+---------------------------------------------------------------------- 
+
+(1) The paper should include a clearer discussion on whether the
+authors think the detected bias in the standard concentration
+measurement methods has significantly affected the c(M) relations
+reported in the literature.
+
+(2) The new method proposed by the authors involves an MCMC approach
+to sample the likelihood function for the concentration value. More
+information about how this is done precisely and especially how long
+it takes in terms of CPU time needs to be included. I note that modern
+simulations involve millions of halos, especially of small size... It
+may easily become prohibitive to run a MCMC chain for each of them!
+(Especially using slow Python code.)
+
+(3) The authors make the assumption that the bias involved in the
+concentration measurements of simulation halos containing a low number
+of halos can be estimated by randomly down-sampling a well-resolved
+halo, and then seeing how this changes its concentration
+estimate. This implicitly makes the assumption that the halo structure
+of simulated halos with a few hundred particles can be "trusted",
+i.e. is equivalent to a downsampled version of the same halo in a
+simulation with many more particles. This is not really evident,
+however, because there could be other sources of numerical effects
+that spoil the convergence of halo structure at that level, and hence
+would introduce additional biases in the halo concentration. For
+example, two-body relaxation effects may change the concentration of
+halos composed of a few hundred particles. The authors should discuss
+this issue in detail. (I note that some comparisons of concentrations
+of the same halos at different resolution is for example contained in
+Springel et al. 2008, MNRAS, 391, 1685.)
+
+
+Reply to (3). We agree that it is difficult to see why the subsample
+with a lower particle number should be trusted. To be sure of it, we 
+performed a two-sample Kolmogorov-Smirnov test between the radial
+distances of the subsamples and its parent halo. This KS test returns
+a p-value which in turn can be used to build a p-value distribution
+using the results from all the subsamples. 
+
+We found that the p-value distribution is flat, meaning that the
+radial distribution of particles (our distribution of interest) for
+the bootstrapping subsets cannot be distiguished (in the statistical
+sense) from that of its parent halo distribution.
+
+We highligh that it is actually easy to get the subsampling wrong by,
+for instance, subsampling a list of radial distances that has already
+some correlation in it (i.e. it is ranked by radial distance or values
+of the gravitational potential). 
+
+We mention the KS test at the end of the first paragraph of Section
+5.1 "Bootsrapping to estimate biases". 
+
+
+
+
 Specially difficult to understand was the statement "Results are
 suspect.". This is because there are at least four new results in our
 paper, and the parts/statements that caused confusion to the
