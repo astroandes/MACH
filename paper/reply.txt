@@ -2,8 +2,8 @@ We thank the Editor for seeking advice from two referees, one for the
 science the other for the statistics. Below we attach our reply to
 both of them.  
 
-We also attach an updated version of the paper highlighting the places
-where changes were made.
+We also attach an updated version of the paper highlighting the
+changes from the previous version.
 
 Best regards,
 
@@ -15,38 +15,39 @@ The Authors.
 REPLY TO THE SCIENCE REFEREE
 ----------------------------
 
-(1) The paper should include a clearer discussion on whether the
+(1) "The paper should include a clearer discussion on whether the
 authors think the detected bias in the standard concentration
 measurement methods has significantly affected the c(M) relations
-reported in the literature.
+reported in the literature."
 
 Reply to (1). We have included that discussion at the end of section
 5.2 "Impact on the Mass-Concentration relationship". We only discuss
-two of the most recent results Ludlow+2016 and Klypin+2016. As a
-summary, they already have cuts on 5000 particles, so their results
+two of the most recent results Ludlow+2016 and Klypin+2016. They
+already have cuts on 5000 particles, so their results
 should be OK. However, because of the limitation on their simulations
-they cannot go below 10^12 Msun. Clearly, the result by Prada+2012
-that we use as a benchmark (given that we also use Bolshoi) are in
-disagreement as we highlight in the same section 5.2. 
+they cannot go below 10^12 Msun, leaving open the question about the
+flattening we suggest. Clearly, the result by Prada+2012 (that we use
+as a benchmark) are compromised at lower masses. We also mention that
+in Section 5.2.
 
-(2) The new method proposed by the authors involves an MCMC approach
+(2) "The new method proposed by the authors involves an MCMC approach
 to sample the likelihood function for the concentration value. More
 information about how this is done precisely and especially how long
 it takes in terms of CPU time needs to be included. I note that modern
 simulations involve millions of halos, especially of small size... It
 may easily become prohibitive to run a MCMC chain for each of them!
-(Especially using slow Python code.)
+(Especially using slow Python code.)"
 
 Reply to (2). It is rather slow. A halo of 2K particles takes 1 second
 to fit. We mention the timing results at the end of section 3.2
 "Estimate from the integrated mass profile".
-In spite of this, the fitting procedure is trivially parallel as it
-can run on different halos. Emcee can also take advantage of multicore
-architectures. So it should be possible to manage a large modern simulation
-with sufficient amount of cores. A fit to a simulation with 1 million
-halos could run under two days using 128 cores.  
+In spite of this, the fitting procedure is trivially parallel. Emcee
+can also take advantage of multicore architectures. So it should be
+possible to manage a large modern simulation with sufficient amount of
+cores. A fit to a simulation with 1 million halos could run under two
+days using 128 cores.   
 
-(3) The authors make the assumption that the bias involved in the
+(3) "The authors make the assumption that the bias involved in the
 concentration measurements of simulation halos containing a low number
 of halos can be estimated by randomly down-sampling a well-resolved
 halo, and then seeing how this changes its concentration
@@ -61,14 +62,24 @@ example, two-body relaxation effects may change the concentration of
 halos composed of a few hundred particles. The authors should discuss
 this issue in detail. (I note that some comparisons of concentrations
 of the same halos at different resolution is for example contained in
-Springel et al. 2008, MNRAS, 391, 1685.)
+Springel et al. 2008, MNRAS, 391, 1685.)"
 
 
-Reply to (3). We agree that it is difficult to see why the subsample
-with a lower particle number should be trusted. We can at least be
-sure of that in the statistical sense, which is the most relevant for
-us as it is a requirement to do bootstrapping. 
-As a check we perform a two-sample Kolmogorov-Smirnov test between the radial
+Reply to (3). 
+We agree that a simulation with lower resolution might
+have effects that change the halo structure. 
+That depends on thequality and care invested to perform the
+simulation, including technical decisions such as the choice of
+smoothing scales. 
+Had we used simulations at different resolutions it would be difficult
+to convince ourselves whether different concentration values come from
+artifacts in the simulation or a limitation in the concentration
+measurement. That's why we opt for the cleaner test presented in the paper.
+In that setup we can at least be sure that all the differences come from
+the methods to measure the concentration. To strenghten this
+conclusion we show how the boootstrapping samples follow the same
+radial particle distribution given by the high resolution halo.
+To do that we perform a two-sample Kolmogorov-Smirnov test between the radial
 distances of the subsamples and its parent halo. This KS test returns
 a p-value which in turn can be used to build a p-value distribution
 using the results from all the subsamples. 
@@ -78,15 +89,13 @@ the bootstrapping subsets cannot be distinguished (in the statistical
 sense) from that of its parent halo distribution.
 We now mention that at the beginning of Section 5.1 "Bootstraping to
 estimate biases". 
-We wish to highlight here (not in the paper) that it is actually easy
-to get the subsampling wrong by, for instance, subsampling a list of
-radial distances that has already some correlation in it (i.e. it is
-ranked by radial distance or values of the gravitational potential). 
-We also mention in the middle of Section 5.1 the approach by
-Springel+2008 of performing different simulations of the same halo. To
-summarize, they don't find any bias because their lowest resolution is
-close to 10^5 particles, well above the threshold of 4000 where we
-detect the differences. 
+We wish to highlight here that it is actually easy to get the
+subsampling wrong by, for instance, subsampling a list of radial
+distances that has already some correlation in it (i.e. it is ranked
+by radial distance or values of the gravitational potential).  
+We summarize this argument in the first paragraph of Section 5.1
+"Bootstrapping to estimate biases". 
+
 
 
 ----------------------------
@@ -94,7 +103,6 @@ REPLY TO THE STATISTICS REFEREE
 ----------------------------
 
 "It was very difficult to understand what was going on in this. 
-
 It is not clear what the authors meant by biases: 
 bias = expectation - estimate (statistical terms) or selection bias? 
 It looks like bootstrapping is used to estimate variance eq(8). 
@@ -159,12 +167,12 @@ the parent R.  From this test we find a flat distribution of p-values
 indicating that the R* subsets are a fair subsamples of R. 
 
 Then, we estimate the concentration on R and use this as the correct
-estimated value C. 
-Using the same estimator we get the concentrations C* on the R* samples.
-We define the bias as the average of the differences (C*-C). 
+estimated value C.  Using the same estimator we get the concentrations
+C* on the R* samples. We define the bias as the average of the
+differences (C*-C).  
 
 We use this to show that two commonly used methods to estimate the
-concentration have a growing bias as the particle numbers decreases,
+concentration have an increasing bias as the particle numbers decreases,
 while the new method we present has a bias close to zero (Figure 1). 
 
 We use the same logic to find the variances (lines in Figure 2).
@@ -177,7 +185,7 @@ approximated diagonal covariance matrix estimated from bootstrapping.
 We know that the m_i are not independent (as the referee points out)
 and that's why we try to estimate the covariance matrix. 
 
-But we do not bootstrap the (r_i, m_i) pairs! We bootstrap the r_i as
+But we do not bootstrap the (r_i, m_i) pairs, We bootstrap the r_i as
 we explained before.  If we did bootstrapping on the (r_i, m_i) we
 wouldn't find the variance in Eq. 8 as all the points for an given
 value of $r$ would fall on top of each other for the same value of $m$.
@@ -188,10 +196,10 @@ The good news is that the choice for the variances sigma_i in Eq. 9 does
 not change the optimal result. That only changes the size of the error
 bars. 
 
-For instance, if we use N (the number of points in R) as the variance in the
-chi^2 expression (Eq. 9) we find the same uncertainties as estimated
-by the bootstrapping computations described in the part 2. of this
-reply (the continuous lines in Fig 2). 
+For instance, if we use N (the number of points in the sample) as the
+variance in the chi^2 expression (Eq. 9) we find the same
+uncertainties as estimated by the bootstrapping computations described
+in the part 2. of this reply (the continuous lines in Fig 2). 
 
 
 
